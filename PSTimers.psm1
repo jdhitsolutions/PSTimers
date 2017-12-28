@@ -1,5 +1,7 @@
 #requires -version 5.1
 
+#TODO: Add WPF timer
+
 #region Main
 
 <#
@@ -169,58 +171,9 @@ Random - randomly cycle through a list of console colors
 
  
 Function Start-PSTimer {
-    <#
-	.Synopsis
-	 Initiates a countdown before running a command
     
-    .Description  
-     This is a variation on the Start-Countdown script from Josh Atwell
-     (http://www.vtesseract.com/post/21414227113/start-countdown-function-a-visual-for-start-sleep). 
-     It can be used instead of Start-Sleep and provides a visual countdown 
-     progress during "sleep" times. At the end of the countdown, your 
-     command will execute. Press the ESC key any time during the countdown
-     to abort. 
-     
-     USING START-COUNTDOWN IN THE POWERSHELL ISE
-     Results will vary slightly in the PowerShell ISE. If you use this in
-     the ISE, it is recommended to use -Clear. You also cannot use the ESC
-     key to abort the script if using the console. You'll need to press
-     Ctrl+C. If using the progress bar, there is a Stop button in the ISE.
-     If you abort in the ISE, you won't get the warning message.
-     
-     .Parameter Seconds
-     The number of seconds to countdown. The default is 10.
-     
-     .Parameter Scriptblock
-     A PowerShell scriptblock to execute at the end of the countdown.
-     
-     .Parameter ProgressBar
-     Use a progress bar instead of the console.
-     
-     .Parameter Clear
-     Clear the screen. Other wise, the countdown will use the current location.
-     
-     .Parameter Message
-     The message to be displayed at the end of the countdown before any scriptblock is executed.
-
-     .Parameter Title
-     The activity title, normally displayed at the top of the progress bar.
-     	 
-	.Example
-	 PS C:\> Start-PSTimer -Seconds 10 -clear
-	 
-	 This method will clear the screen and display descending seconds
-	
-	.Example
-	 PS C:\> Start-PSTimer -Seconds 30 -ProgressBar -scriptblock {get-service -comp (get-content computers.txt)}
-	 
-	 This method will display a progress bar on screen. At the end of the countdown the scriptblock will execute.
-	 	 
-     
-     .Link
-     Write-Progress
-	
-#>
+[cmdletbinding()]
+[OutputType("None","Results from specified scriptblock")]
     Param(
         [Parameter(Position = 0, HelpMessage = "Enter seconds to countdown from")]
         [Int]$Seconds = 10,
@@ -237,9 +190,6 @@ Function Start-PSTimer {
         
     If ($clear) {
         Clear-Host
-        #find the middle of the current window
-        # $Coordinate.X = [int]($host.ui.rawui.WindowSize.Width / 2)
-        # $Coordinate.Y = [int]($host.ui.rawui.WindowSize.Height / 2)
     }
     
     #get current cursor position
@@ -323,13 +273,243 @@ $(([string]$Seconds).Padright($pad))
     }
     
 } #close Start-PSTimer
+Function Start-MyTimer {
+
+    [cmdletbinding()]
+    [OutputType("None","[System.Management.Automation.PSVariable] when using -Passthru")]
+    Param(
+    [Parameter(Position = 0)]
+    [ValidateNotNullorEmpty()]
+    [string[]]$Name = "MyTimer",
+    [switch]$Passthru
+    )
+    
+    Write-Verbose "Starting: $($MyInvocation.Mycommand)"
+    #display PSBoundparameters formatted nicely for Verbose output  
+    [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
+    Write-Verbose "PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n" 
+    
+    $newParams = @{
+        Name = $null
+        Value = $null
+        Scope = 'Global' 
+        Option = 'ReadOnly'
+        ErrorAction = 'Stop'           
+    }
+    
+    If ($Passthru) {
+        $newParams.Add("Passthru",$True)
+    }
+    
+    foreach ($timer in $Name) {
+        #set a global variable
+        $newParams.Name = $timer
+        $newParams.Value = (Get-Date)    
+    
+        Try {
+            Write-Verbose "Creating timer $timer"
+            New-Variable @newParams
+    
+        }
+        Catch {
+            Write-Warning "Failed to create timer $timer. $($_.exception.message)"
+        }
+    } #foreach
+    
+    Write-Verbose "Ending: $($MyInvocation.Mycommand)"
+    
+    } #Start-MyTimer
+    
+    Function Stop-MyTimer {
+    
+    [cmdletbinding(SupportsShouldProcess)]
+    [OutputType([system.timespan],[system.string])]
+    Param(
+    [Parameter(Position = 0)]
+    [ValidateNotNullorEmpty()]
+    [string[]]$Name = "MyTimer",
+    [switch]$AsString
+    )
+    
+    Write-Verbose "Starting: $($MyInvocation.Mycommand)"
+    #display PSBoundparameters formatted nicely for Verbose output  
+    [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
+    Write-Verbose "PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n" 
+    
+    If (Test-Path -Path variable:$Name) {
+                
+        Write-Verbose "Calculating timespan"
+        $elapsed = (Get-Date) - (Get-Variable -Name $Name).Value
+        if ($AsString) {
+            Write-Verbose "Writing result as a string"
+            $elapsed.ToString()
+        }
+        else {
+            $elapsed
+        }
+        Write-Verbose "Removing timer $Name"
+        Remove-Variable -Name $Name -Scope Global -Force
+    }
+    else {
+        Write-Warning "Can't find a timer called $Name. You need to start the timer first."
+    }
+    
+    Write-Verbose "Ending: $($MyInvocation.Mycommand)"
+    } #Stop-MyTimer
+    
+    Function Get-MyTimer {
+    
+    [cmdletbinding()]
+    [OutputType([PSCustomObject[]])]
+    Param(
+    [Parameter(Position = 0,
+    ValueFromPipelineByPropertyName
+    )]
+    [ValidateNotNullorEmpty()]
+    [string[]]$Name
+    )
+    
+    Begin {
+        Write-Verbose "[BEGIN  ] Starting: $($MyInvocation.Mycommand)"
+    } #begin
+    
+    Process {
+    #display PSBoundparameters formatted nicely for Verbose output  
+    [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
+    Write-Verbose "[PROCESS] PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n" 
+    
+    if (-Not $Name) {
+        #find all timers if no name specified
+        $name = (Find-myTimer).Name
+    }
+    foreach ($timer in $Name) {
+        If (Test-Path -Path variable:$timer) {
+            Write-Verbose "[PROCESS] Getting current timer status"
+            $var = Get-Variable -Name $timer
+            $var | Select-Object -property Name,@{Name="Started";Expression = { $_.value}},
+            @{Name="Elapsed";Expression = { ((Get-Date) - $var.value) }}
+    
+        }
+        else {
+            Write-Warning "Can't find a timer with the name $timer"
+        }
+    } #foreach
+    
+    } #process
+    
+    End {
+        Write-Verbose "[END    ] Ending: $($MyInvocation.Mycommand)"
+    }
+    } #Get-MyTimer
+    
+    Function Find-MyTimer {
+    
+    [cmdletbinding()]
+    [OutputType([system.string[]])]
+    Param()
+    
+    Write-Verbose "Starting: $($MyInvocation.Mycommand)"
+    
+    (Get-Variable).where({$_.value -is [datetime] -AND $_.options -eq 'ReadOnly'}) | Select-Object -property Name
+    
+    Write-Verbose "Ending: $($MyInvocation.Mycommand)"
+    } #Find-MyTimer
+    
+    Function Export-MyTimer {
+    
+    [cmdletbinding(SupportsShouldProcess)]
+    [OutputType("None")]
+    Param(
+    [Parameter(Position = 0)]
+    [string]$Name,
+    
+    [Parameter(
+    Mandatory,
+    HelpMessage = "Enter the name and path of an XML file"
+    )]
+    [ValidateNotNullorEmpty()]
+    [string]$Path
+    )
+    
+    Write-Verbose "Starting: $($MyInvocation.Mycommand)"
+    #display PSBoundparameters formatted nicely for Verbose output  
+    [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
+    Write-Verbose "PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n" 
+    
+    if ($Name) {
+        Write-Verbose "Finding timer variable $Name"
+        $found = (Find-MyTimer).Where({$_.name -eq $Name})
+    }
+    else {
+        Write-Verbose "Finding all timer variables"
+        $found = Find-MyTimer
+    }
+    
+    If ($found) {
+        Try {
+            $found | Get-Variable | Select-Object -Property Name,Value,Options | 
+            Export-Clixml -Path $path -ErrorAction Stop
+        }
+        Catch {
+            Write-Error $_
+        }
+    }
+    else {
+        Write-Warning "No matching timer variables found."
+    }
+    
+    Write-Verbose "Ending: $($MyInvocation.Mycommand)"
+    } #Export-MyTimer
+    
+    Function Import-MyTimer {
+    
+    [cmdletbinding(SupportsShouldProcess)]
+    [OutputType([System.Management.Automation.PSVariable])]
+    Param(
+    [Parameter(
+    Position = 0,
+    Mandatory,
+    HelpMessage = "Enter the name and path of an XML file"
+    )]
+    [ValidateNotNullorEmpty()]
+    [ValidateScript({
+    if (Test-Path $_) {
+       $True
+    }
+    else {
+       Throw "Cannot validate path $_"
+    }
+    })]     
+    [string]$Path
+    )
+    
+    Write-Verbose "Starting: $($MyInvocation.Mycommand)"
+    #display PSBoundparameters formatted nicely for Verbose output  
+    [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
+    Write-Verbose "PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n" 
+    
+    Import-Clixml -Path $Path | foreach-object {
+        Write-Verbose "Importing $($_.name)"
+        New-Variable -Name $_.name -Value $_.value -force -Option ReadOnly -scope Global
+    }
+    
+    Write-Verbose "Ending: $($MyInvocation.Mycommand)"
+    } #Import-MyTimer
+    
 
 #endregion
 
-#define aliases
+#region define aliases
+$aliases=@()
+$aliases+= Set-Alias -Name ton -Value Start-MyTimer -PassThru 
+$aliases+= Set-Alias -Name toff -Value Stop-MyTimer -PassThru
+$aliases+= Set-Alias -Name spsc -Value Start-PSCountdown -PassThru
+$aliases+= Set-Alias -Name spst -Value Start-PSTimer -PassThru
+#endregion
 
+#region export members
+$functions = @('Start-PSCountdown', 'Start-PSTimer','Get-MyTimer', 'Start-MyTimer', 'Stop-MyTimer', 'Find-MyTimer',
+'Export-MyTimer','Import-MyTimer')
 
-Set-Alias -Name spsc -Value Start-PSCountdown
-Set-Alias -Name spst -Value Start-PSTimer
-
-Export-ModuleMember -Function 'Start-PSCountdown', 'Start-PSTimer' -Alias spsc,spst
+Export-ModuleMember -Function $functions -Alias $aliases.Name
+#endregion

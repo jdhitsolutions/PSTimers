@@ -1,4 +1,9 @@
 #Changelog for PSTimers
 
-v0.0.1
+v0.2.0
+Modified Start-PSCountdown take a datetime as a countdown target
+Modified Start-PSTimer to include title in text countdown
+Updated manifest
+
+v0.1.0
 initial files and functions

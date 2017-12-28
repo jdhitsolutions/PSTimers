@@ -11,12 +11,14 @@ The ProgressStyle parameter is dynamic and only appears if you are running the c
 #>
 
 Function Start-PSCountdown {
-    [cmdletbinding()]
+    [cmdletbinding(DefaultParameterSetName = "minutes")]
     [OutputType("None")]
     Param(
-        [Parameter(Position = 0, HelpMessage = "Enter the number of minutes to countdown (1-60). The default is 5.")]
+        [Parameter(Position = 0, HelpMessage = "Enter the number of minutes to countdown (1-60). The default is 5.", ParameterSetName = "minutes")]
         [ValidateRange(1, 60)]
         [int32]$Minutes = 5,
+        [Parameter(Position = 0, ParameterSetname = "time", HelpMessage = "Enter a datetime value as the countdown target.")]
+        [DateTime]$Time,
         [Parameter(HelpMessage = "Enter the text for the progress bar title.")]
         [ValidateNotNullorEmpty()]
         [string]$Title = "Counting Down ",
@@ -69,18 +71,9 @@ Random - randomly cycle through a list of console colors
         } #if
     } #dynamic parameter
     Begin {
-        if (Test-Path $Path) {
-            #import entries from list without a # comment and trim each one
-            $loading = Get-Content -path $Path | 
-            Where-Object {$_ -match "\w+" -AND $_ -notmatch '#'} | foreach-object {$_.Trim()}
-        }
-        else {
-            $loading = "Warming up the room","Charging batteries","Formatting C:"
-        }
-        if ($ClearHost) {
-            Clear-Host
-        }
-        $PSBoundParameters | out-string | Write-Verbose
+        Write-Verbose "Starting $($myinvocation.MyCommand)"
+        $PSBoundParameters | Out-String | Write-Verbose     
+
         if ($psboundparameters.ContainsKey('progressStyle')) { 
           
             if ($PSBoundParameters.Item('ProgressStyle') -ne 'default') {
@@ -90,8 +83,30 @@ Random - randomly cycle through a list of console colors
                 $host.PrivateData.progressBackgroundColor = $host.ui.RawUI.BackgroundColor
             }
         }
+        Write-Verbose "Using parameter set $($pscmdlet.ParameterSetName)"
+
+        if (Test-Path $Path) {
+            #import entries from list without a # comment and trim each one
+            Write-verbose "Loading task messages from $path"
+            $loading = Get-Content -path $Path | 
+                Where-Object {$_ -match "\w+" -AND $_ -notmatch '#'} | foreach-object {$_.Trim()}
+        }
+        else {
+            Write-Verbose "$Path not found. Using default values."
+            $loading = "Warming up the room", "Charging batteries", "Formatting C:"
+        }
+        if ($ClearHost) {
+            Clear-Host
+        }
         $startTime = Get-Date
-        $endTime = $startTime.AddMinutes($Minutes)
+        if ($pscmdlet.ParameterSetName -eq 'minutes') {      
+            Write-verbose "Adding $minutes minutes to start time"
+            $endTime = $startTime.AddMinutes($Minutes)
+        }
+        else {
+            Write-Verbose "Using Time value"
+            $endTime = $Time
+        }
         $totalSeconds = (New-TimeSpan -Start $startTime -End $endTime).TotalSeconds
 
         $totalSecondsChild = Get-Random -Minimum 4 -Maximum 30
@@ -154,7 +169,7 @@ Random - randomly cycle through a list of console colors
 
  
 Function Start-PSTimer {
-<#
+    <#
 	.Synopsis
 	 Initiates a countdown before running a command
     
@@ -186,7 +201,10 @@ Function Start-PSTimer {
      Clear the screen. Other wise, the countdown will use the current location.
      
      .Parameter Message
-     The message to be displayed at the end of the countdown before anyscriptblock is executed.
+     The message to be displayed at the end of the countdown before any scriptblock is executed.
+
+     .Parameter Title
+     The activity title, normally displayed at the top of the progress bar.
      	 
 	.Example
 	 PS C:\> Start-PSTimer -Seconds 10 -clear
@@ -203,72 +221,77 @@ Function Start-PSTimer {
      Write-Progress
 	
 #>
-Param(
-    [Parameter(Position=0,HelpMessage="Enter seconds to countdown from")]
-    [Int]$Seconds = 10,
-    [Parameter(Position=1,HelpMessage="Enter a scriptblock to execute at the end of the countdown")]
-    [scriptblock]$Scriptblock,
-    [Switch]$ProgressBar,
-    [Switch]$Clear,
-    [String]$Message = "Blast Off!"
+    Param(
+        [Parameter(Position = 0, HelpMessage = "Enter seconds to countdown from")]
+        [Int]$Seconds = 10,
+        [Parameter(Position = 1, HelpMessage = "Enter a scriptblock to execute at the end of the countdown")]
+        [scriptblock]$Scriptblock,
+        [Switch]$ProgressBar,
+        [string]$Title = "Countdown",
+        [Switch]$Clear,
+        [String]$Message
     )
     
     #save beginning value for total seconds
-    $TotalSeconds=$Seconds
-    
-    #get current cursor position
-    $Coordinate = New-Object System.Management.Automation.Host.Coordinates
-    $Coordinate.X=$host.ui.rawui.CursorPosition.X
-    $Coordinate.Y=$host.ui.rawui.CursorPosition.Y
-    
+    $TotalSeconds = $Seconds
+        
     If ($clear) {
         Clear-Host
         #find the middle of the current window
-        $Coordinate.X=[int]($host.ui.rawui.WindowSize.Width/2)
-        $Coordinate.Y=[int]($host.ui.rawui.WindowSize.Height/2)
+        # $Coordinate.X = [int]($host.ui.rawui.WindowSize.Width / 2)
+        # $Coordinate.Y = [int]($host.ui.rawui.WindowSize.Height / 2)
     }
     
+    #get current cursor position
+    $Coordinate = New-Object System.Management.Automation.Host.Coordinates
+    $Coordinate.X = $host.ui.rawui.CursorPosition.X
+    $Coordinate.Y = $host.ui.rawui.CursorPosition.Y
     #define the Escape key
     $ESCKey = 27
     
     #define a variable indicating if the user aborted the countdown
-    $Abort=$False
+    $Abort = $False
     
     while ($seconds -ge 1) {
     
-        if ($host.ui.RawUi.KeyAvailable)
-                {
-                $key = $host.ui.RawUI.ReadKey("NoEcho,IncludeKeyUp,IncludeKeyDown")
+        if ($host.ui.RawUi.KeyAvailable) {
+            $key = $host.ui.RawUI.ReadKey("NoEcho,IncludeKeyUp,IncludeKeyDown")
     
-                if ($key.VirtualKeyCode -eq $ESCkey)
-                    {
-                    #ESC was pressed so quit the countdown and set abort flag to True
-                    $Seconds = 0
-                    $Abort=$True 
-                    }
-                }
-    
-        If($ProgressBar){
+            if ($key.VirtualKeyCode -eq $ESCkey) {
+                #ESC was pressed so quit the countdown and set abort flag to True
+                $Seconds = 0
+                $Abort = $True 
+            }
+        }
+        if ($Clear) {
+            Clear-Host
+        } 
+        If ($ProgressBar) {
             #calculate percent time remaining, but in reverse so the progress bar
             #moves from left to right
-            $percent=100 - ($seconds/$TotalSeconds)*100
-            Write-Progress -Activity "Countdown" -SecondsRemaining $Seconds -Status "Time Remaining" -PercentComplete $percent
+            $percent = 100 - ($seconds / $TotalSeconds) * 100
+            Write-Progress -Activity $Title -SecondsRemaining $Seconds -Status "Time Remaining" -PercentComplete $percent
             Start-Sleep -Seconds 1
-        } Else {
-            if ($Clear) {
-              Clear-Host
-            } 
-            $host.ui.rawui.CursorPosition=$Coordinate
+        }
+        Else {
+
+            $host.ui.rawui.CursorPosition = $Coordinate
             #write the seconds with padded trailing spaces to overwrite any extra digits such
             #as moving from 10 to 9
-            $pad=($TotalSeconds -as [string]).Length
+            $pad = ($TotalSeconds -as [string]).Length
             if ($seconds -le 10) {
-                $color="Red"
+                $color = "Red"
             }
             else {
-                $color="Green"
+                $color = "Green"
             }
-            Write-Host "$(([string]$Seconds).Padright($pad))" -foregroundcolor $color
+            $msg = @"
+$Title
+$(([string]$Seconds).Padright($pad))
+"@
+
+            write-host $msg -ForegroundColor $color
+            
             Start-Sleep -Seconds 1
         }
         #decrement $Seconds
@@ -276,18 +299,18 @@ Param(
     } #while
     
     if ($Progress) {
-            #set progress to complete
-            Write-Progress -Completed
-        }
+        #set progress to complete
+        Write-Progress -Completed
+    }
     
     if (-Not $Abort) {
         
         if ($clear) {
             #if $Clear was used, center the message in the console
-            $Coordinate.X=$Coordinate.X - ([int]($message.Length)/2)
+            $Coordinate.X = $Coordinate.X - ([int]($message.Length) / 2)
         }
     
-        $host.ui.rawui.CursorPosition=$Coordinate
+        $host.ui.rawui.CursorPosition = $Coordinate
         
         Write-Host $Message -ForegroundColor Green
         #run the scriptblock if specified
@@ -309,4 +332,4 @@ Param(
 Set-Alias -Name spsc -Value Start-PSCountdown
 Set-Alias -Name spst -Value Start-PSTimer
 
-Export-ModuleMember -Function 'Start-PSCountdown','Start-PSTimer' -Alias spc
+Export-ModuleMember -Function 'Start-PSCountdown', 'Start-PSTimer' -Alias spsc,spst

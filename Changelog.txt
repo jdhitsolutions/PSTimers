@@ -1,5 +1,11 @@
 #Changelog for PSTimers
 
+v0.4.0
+corrected markdown in about_mytimer
+moved functions to separate file
+converted mytimer functions to using a class-based object
+Added Get-HistoryRuntime command
+
 v0.3.0
 Added MyTimer commands
 Created markdown help

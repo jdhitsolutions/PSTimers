@@ -19,59 +19,56 @@ If you need to persist timers across PowerShell sesssions you can export a singl
 
 # EXAMPLES
 Create a single timer:
-
-    PS C:\> Start-MyTimer -Name A
-
+```
+PS C:\> Start-MyTimer -Name A
+```
 Start multiple timers 
-
-    PS C:\> Start-Mytimer B,C
-
+```
+PS C:\> Start-Mytimer B,C
+```
 View status of all the timers
+```
+PS C:\> get-mytimer
 
-    PS C:\> get-mytimer
-    
-    Name Started              Elapsed         
-    ---- -------              -------         
-    A    1/12/2017 9:29:52 PM 00:13:31.6935991
-    B    1/12/2017 9:42:41 PM 00:00:41.9368038
-    C    1/12/2017 9:42:41 PM 00:00:41.9367725
-
+Name Started              Elapsed         
+---- -------              -------         
+A    1/12/2017 9:29:52 PM 00:13:31.6935991
+B    1/12/2017 9:42:41 PM 00:00:41.9368038
+C    1/12/2017 9:42:41 PM 00:00:41.9367725
+```
 Stop a timer:
+```
+PS C:\> stop-mytimer C
 
-    PS C:\> stop-mytimer C
-    
-    
-    Days              : 0
-    Hours             : 0
-    Minutes           : 1
-    Seconds           : 27
-    Milliseconds      : 773
-    Ticks             : 877731322
-    TotalDays         : 0.0010158927337963
-    TotalHours        : 0.0243814256111111
-    TotalMinutes      : 1.46288553666667
-    TotalSeconds      : 87.7731322
-    TotalMilliseconds : 87773.1322
 
+Days              : 0
+Hours             : 0
+Minutes           : 1
+Seconds           : 27
+Milliseconds      : 773
+Ticks             : 877731322
+TotalDays         : 0.0010158927337963
+TotalHours        : 0.0243814256111111
+TotalMinutes      : 1.46288553666667
+TotalSeconds      : 87.7731322
+TotalMilliseconds : 87773.1322
+```
 The result is a Timespan object. The variable C is removed. Or you can stop the timer and get the result as a string.
-
-    PS C:\> $t = stop-mytimer b -AsString
-    PS C:\> $t
-    00:03:09.8533324
-
+```
+PS C:\> $t = stop-mytimer b -AsString
+PS C:\> $t
+00:03:09.8533324
+```
 # NOTE
 When you stop a timer the original variable is removed. 
 
 It is recommended that you give your timers meaningful names.
 
-# TROUBLESHOOTING NOTE
-Please post any problems or questions on the project's Issues page on GitHub at https://github.com/jdhitsolutions/MyTimer/issues.
-
-
 # SEE ALSO
-Read the original blog post at http://bit.ly/29AlSPj
+Read the original blog post about these commands at http://bit.ly/29AlSPj
 
 # KEYWORDS
 - Timer
+
 - Timespan
 

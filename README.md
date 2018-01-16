@@ -7,4 +7,4 @@ A set of PowerShell functions to be used as timers and countdown tools.
 
 ## Start-PSTimer
 
-_last updated 12/07/2017 10:19:55_
+_last updated 28 December 2017_

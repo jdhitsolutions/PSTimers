@@ -1,34 +1,38 @@
 ---
 external help file: PSTimers-help.xml
 Module Name: PSTimers
-online version: 
+online version:
 schema: 2.0.0
 ---
 
 # Import-MyTimer
 
 ## SYNOPSIS
-Import a timer variable from XML
+
+Import a timer variable from an XML file.
 
 ## SYNTAX
 
-```
+```yaml
 Import-MyTimer [-Path] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
+
 If you exported a timer variable with Export-MyTimer you can use this command to import it into your current session. Any existing variables with the same name will be overwritten.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
-```
+### EXAMPLE 1
+
+```powershell
 PS C:\> Import-MyTimer -path c:\work\mytimers.xml
 ```
 
 ## PARAMETERS
 
 ### -Confirm
+
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
@@ -42,12 +46,13 @@ Accept wildcard characters: False
 ```
 
 ### -Path
+
 The file name for the XML file.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 0
@@ -57,6 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -WhatIf
+
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
@@ -70,6 +76,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
@@ -81,10 +88,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### [System.Management.Automation.PSVariable]
 
 ## NOTES
+
 Learn more about PowerShell:
 http://jdhitsolutions.com/blog/essential-powershell-resources/
 
 ## RELATED LINKS
 
-[Export-MyTimer]()
+[Export-MyTimer](Export-MyTimer.md)
 

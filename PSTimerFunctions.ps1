@@ -6,6 +6,7 @@ Class MyTimer {
     hidden[datetime]$End
     [timespan]$Duration
     [boolean]$Running
+    [string]$Description
 
     [mytimer]StopTimer() {
         $this.End = Get-Date
@@ -20,11 +21,12 @@ Class MyTimer {
         return $current        
     }
     
-    MyTimer([string]$Name) {
+    MyTimer([string]$Name, [string]$Description) {
         Write-Verbose "Creating a myTimer object by name: $name"
         $this.Name = $Name
         $this.Start = Get-Date
         $this.Running = $True
+        $this.Description = $Description
 
         Try {
             Get-Variable myTimerCollection -Scope global -ErrorAction Stop | Out-Null
@@ -42,16 +44,16 @@ Class MyTimer {
             Write-Verbose "Adding new timer $($this.name)"
             $global:mytimercollection.add($this.name, $this)
         }
-
     }
 
     #used for importing
-    MyTimer([string]$Name, [datetime]$Start, [datetime]$End, [timespan]$Duration, [boolean]$Running) {
+    MyTimer([string]$Name, [datetime]$Start, [datetime]$End, [timespan]$Duration, [boolean]$Running,[string]$Description) {
         $this.Name = $Name
         $this.start = $Start
         $this.end = $End
         $this.Duration = $Duration
         $this.running = $Running
+        $this.Description = $Description
 
         Try {
             Get-Variable myTimerCollection -Scope global -ErrorAction Stop | Out-Null
@@ -343,7 +345,8 @@ Function Start-MyTimer {
     Param(
         [Parameter(Position = 0)]
         [ValidateNotNullorEmpty()]
-        [string[]]$Name = "MyTimer"
+        [string[]]$Name = "MyTimer",
+        [string]$Description
     )
     
     Write-Verbose "Starting: $($MyInvocation.Mycommand)"
@@ -353,15 +356,15 @@ Function Start-MyTimer {
     foreach ($timer in $Name) {    
         Try {
             Write-Verbose "Creating timer $timer"
-            New-Object -TypeName MyTimer -ArgumentList $Name    
+            New-Object -TypeName MyTimer -ArgumentList $timer, $Description    
         }
         Catch {
             Write-Warning "Failed to create timer $timer. $($_.exception.message)"
         }
     } #foreach
-    
+
     Write-Verbose "Ending: $($MyInvocation.Mycommand)"
-    
+
 } #Start-MyTimer
 
 Function Remove-MyTimer {
@@ -369,16 +372,14 @@ Function Remove-MyTimer {
     [cmdletbinding(SupportsShouldProcess)]
     [OutputType("None")]
     Param(
-        [Parameter(Position = 0, ValueFromPipelineByPropertyName)]
+        [Parameter(Position = 0, Mandatory, ValueFromPipelineByPropertyName)]
         [ValidateNotNullorEmpty()]
-        [string[]]$Name = "MyTimer"
+        [string[]]$Name
     )
     Begin {
         Write-Verbose "Starting: $($MyInvocation.Mycommand)"
     }   #begin
-    Process {
-
-    
+    Process {  
         #display PSBoundparameters formatted nicely for Verbose output  
         [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
         Write-Verbose "PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n" 
@@ -393,7 +394,6 @@ Function Remove-MyTimer {
                         Write-Warning "Can't find a timer with the name $timer"
                     }
                 }
-            
             }
             Catch {
                 Write-Warning "Failed to remove timer $timer. $($_.exception.message)"
@@ -408,7 +408,7 @@ Function Remove-MyTimer {
 Function Stop-MyTimer {
     
     [cmdletbinding(SupportsShouldProcess)]
-    [OutputType([MyTimer])]
+    [OutputType([MyTimer])] 
     Param(
         [Parameter(Position = 0, ValueFromPipelineByPropertyName)]
         [ValidateNotNullorEmpty()]
@@ -453,7 +453,8 @@ Function Get-MyTimer {
     Param(
         [Parameter(Position = 0)]
         [ValidateNotNullorEmpty()]
-        [string]$Name
+        [string[]]$Name,
+        [switch]$All
     )
     
     Begin {
@@ -465,16 +466,25 @@ Function Get-MyTimer {
         [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
         Write-Verbose "[PROCESS] PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n" 
     
-        if (-Not $Name) {
-            #find all timers if no name specified
-            $timers = $global:myTimerCollection.Values | Sort-Object -Property Start
+        If ($all) {
+            Write-Verbose "[PROCESS] Getting all timers"
+            $timers = $global:myTimerCollection.Values 
+        }
+        elseif ($Name) {
+            Write-Verbose "[PROCESS] Getting timer $Name"
+            $timers = foreach ($item in $Name) {
+                ($global:myTimerCollection).Values.where( {$_.name -like $item}) 
+            }
         }
         else {
-            $timers = ($global:myTimerCollection).Values.where( {$_.name -match $name}) | Sort-Object -Property Start
+            #find all running timers by default
+            Write-Verbose "[PROCESS] Getting all running timers"
+            $timers = ($global:myTimerCollection.Values).where({$_.running}) 
         }
+
         Write-Verbose "[PROCESS] Getting current timer status"
-        if ($timers) {
-            foreach ($timer in $timers) {
+        if ($timers.count -ge 1) {
+            foreach ($timer in ($timers | Sort-Object -Property Start)) {
                 if ($timer.running) {
                     #set the duration to the current value
                     $timer.duration = $timer.Getstatus()
@@ -489,7 +499,7 @@ Function Get-MyTimer {
             }#foreach
         } #if $timers
         else {
-            Write-Warning "Can't find a timer with the name $name"
+            Write-Warning "Can't find any matching timer objects."
         }    
     } #process
     
@@ -498,6 +508,59 @@ Function Get-MyTimer {
     }
 } #Get-MyTimer
     
+Function Set-MyTimer {
+    
+    [cmdletbinding(SupportsShouldProcess)]
+    [OutputType([MyTimer[]])]
+    Param(
+        [Parameter(Position = 0, Mandatory, ValueFromPipelineByPropertyName)]
+        [ValidateNotNullorEmpty()]
+        [string]$Name,
+        [string]$NewName,
+        [datetime]$Start,
+        [string]$Description,
+        [switch]$Passthru
+    )
+    
+    Begin {
+        Write-Verbose "[BEGIN  ] Starting: $($MyInvocation.Mycommand)"
+    } #begin
+    
+    Process {
+        #display PSBoundparameters formatted nicely for Verbose output  
+        [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
+        Write-Verbose "[PROCESS] PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n" 
+    
+        $timers = ($global:myTimerCollection).Values.where( {$_.name -like $name}) 
+        
+        if ($timers.count -ge 1) {
+            foreach ($timer in $timers) {
+                Write-Verbose "[PROCESS] Setting timer $($timer.name)"
+                if ($PSCmdlet.ShouldProcess($Name)) {
+                    if ($Description) {
+                        $timer.description = $Description
+                    }   
+                    if ($NewName) {
+                        $timer.Name = $NewName
+                    } 
+                    if ($start) {
+                        $timer.start = $Start
+                    }
+                    if ($Passthru) {
+                        $timer
+                    }
+                }
+            } #foreach
+    } #if $timers
+    else {
+        Write-Warning "Can't find a matching timer object"
+    }    
+} #process
+    
+End {
+    Write-Verbose "[END    ] Ending: $($MyInvocation.Mycommand)"
+}
+} #Set-MyTimer
     
 Function Export-MyTimer {
     
@@ -574,7 +637,8 @@ Function Import-MyTimer {
     Import-Clixml -Path $Path | foreach-object {
         if ($PSCmdlet.ShouldProcess($_.name)) {
             Write-Verbose "Importing $($_.name)"
-            New-Object -TypeName MyTimer -ArgumentList $_.name, $_.start, $_.end, $_.duration, $_.running
+            New-Object -TypeName MyTimer -ArgumentList $_.name, $_.start, $_.end, $_.duration, $_.running,$_.description | Out-Null
+            Get-Mytimer -name $_.name
         }
     }
     
@@ -583,80 +647,6 @@ Function Import-MyTimer {
    
 
 Function Get-HistoryRuntime {
-
-    <#
-    .SYNOPSIS
-    Get a history runtime object
-    .DESCRIPTION
-    Use this command to see how long something took to run in PowerShell.
-    .PARAMETER ID
-    Enter a history item ID. The default is the last command executed.
-    .PARAMETER History
-    Pass a history object to this command.
-    .PARAMETER Detail
-    Include history detail in the result.
-    .EXAMPLE
-    PS C:\> Get-HistoryRuntime
-    
-    ID RunTime         
-    -- -------         
-    99 00:00:48.2156090
-    
-    .EXAMPLE
-    PS C:\> Get-HistoryRuntime 25
-    
-    ID RunTime         
-    -- -------         
-    25 00:00:00.3127817
-    .EXAMPLE
-    PS C:\> Get-History -count 10 | Get-HistoryRuntime 
-    
-    ID RunTime         
-     -- -------         
-     91 00:00:00.0380001
-     92 00:00:00.0079856
-     93 00:00:00.0839858
-     94 00:00:00.0469834
-     95 00:00:00.0539842
-     96 00:00:00.0390021
-     97 00:00:00.1570075
-     98 00:00:00.0279998
-     99 00:00:48.2156090
-    100 00:00:00.0280011
-    
-    .EXAMPLE
-    PS C:\> Get-History -count 5 | Get-HistoryRuntime -detail
-    
-    ID RunTime             Status Command                                          
-     -- -------             ------ -------                                          
-    105 00:01:10.9210044 Completed get-service -comp chi-dc01,chi-dc02,chi-core01...
-    106 00:00:00.4872217 Completed get-service -comp chi-dc01,chi-dc02,chi-p50 | ...
-    107 00:00:03.2367861 Completed get-ciminstance -comp chi-dc01,chi-p50,chi-dc0...
-    108 00:00:00.3980214 Completed ps                                               
-    109 00:00:00.1019850 Completed get-ciminstance -comp chi-dc01,chi-p50,chi-dc0...
-    .NOTES
-    NAME        :  Get-HistoryRuntime
-    VERSION     :  1.0   
-    LAST UPDATED:  4/29/2016
-    AUTHOR      :  Jeff Hicks
-    
-    Learn more about PowerShell:
-    http://jdhitsolutions.com/blog/essential-powershell-resources/
-    
-      ****************************************************************
-      * DO NOT USE IN A PRODUCTION ENVIRONMENT UNTIL YOU HAVE TESTED *
-      * THOROUGHLY IN A LAB ENVIRONMENT. USE AT YOUR OWN RISK.  IF   *
-      * YOU DO NOT UNDERSTAND WHAT THIS SCRIPT DOES OR HOW IT WORKS, *
-      * DO NOT USE IT OUTSIDE OF A SECURE, TEST SETTING.             *
-      ****************************************************************
-    .LINK
-    Get-History
-    .INPUTS
-    [Int] or [Microsoft.PowerShell.Commands.HistoryInfo]
-    .OUTPUTS
-    [PSCustomObject}
-    #>
-    
     
     [cmdletbinding(DefaultParameterSetName = "ID")]
     [OutputType([PSCustomObject])]

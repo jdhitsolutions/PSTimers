@@ -1,14 +1,11 @@
 #requires -version 5.1
 
 #TODO: Add WPF timer
-
-#region Main
-
+#TODO: Test for v6
+#TODO: Add format file
 
 #dot source file with function definitions
 . $PSScriptRoot\PSTimerFunctions.ps1
-
-#endregion
 
 #region define aliases
 
@@ -23,10 +20,9 @@ $aliases+= Set-Alias -Name ghr -Value Get-HistoryRuntime -PassThru
 
 #region export members
 
-$functions = @('Start-PSCountdown', 'Start-PSTimer','Get-MyTimer', 'Start-MyTimer', 'Stop-MyTimer','Remove-MyTimer', 
+$functions = @('Start-PSCountdown', 'Start-PSTimer','Get-MyTimer', 'Start-MyTimer', 'Set-MyTimer',
+'Stop-MyTimer','Remove-MyTimer', 
 'Export-MyTimer','Import-MyTimer','Get-HistoryRunTime')
-
-
 
 Export-ModuleMember -Function $functions -Alias $aliases.Name 
 

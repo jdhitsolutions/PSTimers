@@ -2,72 +2,89 @@
 ## about_MyTimer
 
 # SHORT DESCRIPTION
+
 This module contains several commands designed to work with a very simple timer.
 
 The commands are based on an extremely basic principal: how much time has elapsed between two events? You can easily do this now with New-Timespan or simply subtracting one datetime from another. This module takes the simplest approach possible: save the current date and time to a read-only variable and when you are ready, calculate a timespan from that variable. Even though the commands reference a timer object there really isn't anything fancy or complicated. It is simply a variable that you can name, that has a datetime value.
 
 # LONG DESCRIPTION
-There's no .NET magic or anything complicated. The module commands are designed to make it easier to manage all of this. You can even create multiple timers at the same time in case you want to stop them at different intervals. When you are ready to stop a timer, run Stop-Mytimer and specify the timer name. The result will be a Timespan object.
 
-Note that 
-If you forget what names you've given your timers, you can use the Find-MyTimer or Get-MyTimer commands.
+There's no .NET magic or anything complicated. The module commands are designed to make it easier to manage all of this. You can even create multiple timers at the same time in case you want to stop them at different intervals. When you are ready to stop a timer, run Stop-Mytimer and specify the timer name. The result will be a Timespan object.
 
 Use Get-myTimer to view the status of all your timers but without stopping them.
 
 ## Exporting and Importing
-If you need to persist timers across PowerShell sesssions you can export a single timer or all timers with Export-MyTimer. Timers will be exported to an XML file using Export-Clixml. In the other PowerShell session use Import-MyTimer to recreate them in the current session. The running time will continue from when they were first created.
+
+If you need to persist timers across PowerShell sessions you can export a single timer or all timers with Export-MyTimer. Timers will be exported to an XML file using Export-Clixml. In the other PowerShell session use Import-MyTimer to recreate them in the current session. The running time will continue from when they were first created.
 
 # EXAMPLES
+
 Create a single timer:
-```
+
+```powershell
 PS C:\> Start-MyTimer -Name A
 ```
-Start multiple timers 
-```
+
+Start multiple timers:
+
+```powershell
 PS C:\> Start-Mytimer B,C
 ```
-View status of all the timers
+
+Start a timer with a description:
+
+```powershell
+PS C:\> Start-Mytimer D -description "work stuff"
 ```
+
+View status of all running timers:
+
+```powershell
 PS C:\> get-mytimer
 
-Name Started              Elapsed         
----- -------              -------         
-A    1/12/2017 9:29:52 PM 00:13:31.6935991
-B    1/12/2017 9:42:41 PM 00:00:41.9368038
-C    1/12/2017 9:42:41 PM 00:00:41.9367725
+
+Name        : a
+Start       : 7/17/2018 11:58:29 AM
+Duration    : 00:01:35.8207599
+Running     : True
+Description : 
+
+Name        : b
+Start       : 7/17/2018 11:58:48 AM
+Duration    : 00:01:17.2018209
+Running     : True
+Description : 
+
+Name        : c
+Start       : 7/17/2018 11:58:48 AM
+Duration    : 00:01:17.2028212
+Running     : True
+Description : 
+
+Name        : D
+Start       : 7/17/2018 11:59:33 AM
+Duration    : 00:00:32.2026901
+Running     : True
+Description : work stuff
 ```
+
 Stop a timer:
-```
+
+```powershell
+
 PS C:\> stop-mytimer C
 
-
-Days              : 0
-Hours             : 0
-Minutes           : 1
-Seconds           : 27
-Milliseconds      : 773
-Ticks             : 877731322
-TotalDays         : 0.0010158927337963
-TotalHours        : 0.0243814256111111
-TotalMinutes      : 1.46288553666667
-TotalSeconds      : 87.7731322
-TotalMilliseconds : 87773.1322
+Name        : c
+Start       : 7/17/2018 11:58:48 AM
+Duration    : 00:01:40.4864091
+Running     : False
+Description :
 ```
-The result is a Timespan object. The variable C is removed. Or you can stop the timer and get the result as a string.
-```
-PS C:\> $t = stop-mytimer b -AsString
-PS C:\> $t
-00:03:09.8533324
-```
-# NOTE
-When you stop a timer the original variable is removed. 
 
-It is recommended that you give your timers meaningful names.
-
-# SEE ALSO
-Read the original blog post about these commands at http://bit.ly/29AlSPj
+You can also export and import timers if you need them to persist across PowerShell sessions. Otherwise the timers are removed when your PowerShell session ends.
 
 # KEYWORDS
+
 - Timer
 
 - Timespan

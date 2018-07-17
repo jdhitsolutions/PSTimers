@@ -157,7 +157,7 @@
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Find-MyTimer</maml:linkText>
+        <maml:linkText>Get-MyTimer</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -168,26 +168,112 @@
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Find-MyTimer</command:name>
-      <command:verb>Find</command:verb>
-      <command:noun>MyTimer</command:noun>
+      <command:name>Get-HistoryRuntime</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>HistoryRuntime</command:noun>
       <maml:description>
-        <maml:para>Find likely timer variables</maml:para>
+        <maml:para>Get a history runtime object</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Use this command when you have forgotten the names of timers you created with Start-MyTimer. The command will search variables looking for any that have a datetime value and are Read-Only.</maml:para>
+      <maml:para>Use this command to see how long something took to run in PowerShell.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Find-MyTimer</maml:name>
+        <maml:name>Get-HistoryRuntime</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>ID</maml:name>
+          <maml:Description>
+            <maml:para>Enter a history item ID. The default is the last command executed.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>(Get-History -count 1).ID</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Detail</maml:name>
+          <maml:Description>
+            <maml:para>Include history detail in the result.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-HistoryRuntime</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="named" aliases="none">
+          <maml:name>History</maml:name>
+          <maml:Description>
+            <maml:para>Pass a history object to this command.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">HistoryInfo</command:parameterValue>
+          <dev:type>
+            <maml:name>HistoryInfo</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Detail</maml:name>
+          <maml:Description>
+            <maml:para>Include history detail in the result.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
-    <command:parameters />
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>ID</maml:name>
+        <maml:Description>
+          <maml:para>Enter a history item ID. The default is the last command executed.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>(Get-History -count 1).ID</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="named" aliases="none">
+        <maml:name>History</maml:name>
+        <maml:Description>
+          <maml:para>Pass a history object to this command.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">HistoryInfo</command:parameterValue>
+        <dev:type>
+          <maml:name>HistoryInfo</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Detail</maml:name>
+        <maml:Description>
+          <maml:para>Include history detail in the result.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
     <command:inputTypes>
       <command:inputType>
         <dev:type>
-          <maml:name>none</maml:name>
+          <maml:name>[Int] or [Microsoft.PowerShell.Commands.HistoryInfo]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -197,7 +283,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>[System.String[]]</maml:name>
+          <maml:name>[PSCustomObject}</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -212,40 +298,65 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Find-MyTimer
+        <dev:code>PS C:\&gt; Get-HistoryRuntime
 
-Name
-----
-A   
-B   
-C   
-T2</dev:code>
+ID RunTime         
+-- -------         
+99 00:00:48.2156090</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Find-MyTimer | Get-MyTimer
+        <dev:code>PS C:\&gt; Get-HistoryRuntime 25
 
-Name Started             Elapsed         
----- -------             -------         
-A    7/8/2017 9:11:21 AM 00:27:25.1536622
-B    7/8/2017 9:11:21 AM 00:27:25.1806823
-C    7/8/2017 9:11:21 AM 00:27:25.1886816
-T2   7/8/2017 8:30:46 AM 01:08:00.5404410</dev:code>
+ID RunTime         
+-- -------         
+25 00:00:00.3127817</dev:code>
         <dev:remarks>
-          <maml:para>Discover current timer variables and get their status.</maml:para>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-History -count 10 | Get-HistoryRuntime
+
+ID RunTime         
+ -- -------         
+ 91 00:00:00.0380001
+ 92 00:00:00.0079856
+ 93 00:00:00.0839858
+ 94 00:00:00.0469834
+ 95 00:00:00.0539842
+ 96 00:00:00.0390021
+ 97 00:00:00.1570075
+ 98 00:00:00.0279998
+ 99 00:00:48.2156090
+100 00:00:00.0280011</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
+        <dev:code>Get-History -count 5 | Get-HistoryRuntime -detail
+
+ID RunTime             Status Command                                          
+ -- -------             ------ -------                                          
+105 00:01:10.9210044 Completed get-service -comp chi-dc01,chi-dc02,chi-core01...
+106 00:00:00.4872217 Completed get-service -comp chi-dc01,chi-dc02,chi-p50 | ...
+107 00:00:03.2367861 Completed get-ciminstance -comp chi-dc01,chi-p50,chi-dc0...
+108 00:00:00.3980214 Completed ps                                               
+109 00:00:00.1019850 Completed get-ciminstance -comp chi-dc01,chi-p50,chi-dc0...</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Start-MyTimer</maml:linkText>
-        <maml:uri></maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>Get-MyTimer</maml:linkText>
+        <maml:linkText>Get-History</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -265,32 +376,55 @@ T2   7/8/2017 8:30:46 AM 01:08:00.5404410</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-MyTimer</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="true" pipelineInput="False" position="0" aliases="none">
           <maml:name>Name</maml:name>
           <maml:Description>
             <maml:para>The name for your timer.</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
-            <maml:name>String[]</maml:name>
+            <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>All</maml:name>
+          <maml:Description>
+            <maml:para>Get all timers.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="true" pipelineInput="False" position="0" aliases="none">
         <maml:name>Name</maml:name>
         <maml:Description>
           <maml:para>The name for your timer.</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
-          <maml:name>String[]</maml:name>
+          <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>All</maml:name>
+        <maml:Description>
+          <maml:para>Get all timers.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes>
@@ -352,7 +486,7 @@ T2   7/8/2017 8:30:46 AM 00:30:15.3344369</dev:code>
       <command:verb>Import</command:verb>
       <command:noun>MyTimer</command:noun>
       <maml:description>
-        <maml:para>Import a timer variable from XML</maml:para>
+        <maml:para>Import a timer variable from an XML file.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -478,6 +612,379 @@ T2   7/8/2017 8:30:46 AM 00:30:15.3344369</dev:code>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Remove-MyTimer</command:name>
+      <command:verb>Remove</command:verb>
+      <command:noun>MyTimer</command:noun>
+      <maml:description>
+        <maml:para>Remove a myTimer object</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>MyTimer objects remain even after they have been stopped. Used this command to remove the timer object. It doesn't matter if the timer is running or not.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Remove-MyTimer</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Name</maml:name>
+          <maml:Description>
+            <maml:para>The name of your timer object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:Description>
+            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
+          <maml:Description>
+            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+        <maml:name>Confirm</maml:name>
+        <maml:Description>
+          <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <maml:name>Name</maml:name>
+        <maml:Description>
+          <maml:para>The name of your timer object.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+        <maml:name>WhatIf</maml:name>
+        <maml:Description>
+          <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Remove-MyTimer alpha</dev:code>
+        <dev:remarks>
+          <maml:para>Remove the alpha timer.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; get-mytimer -all | where {-not $_.running} | remove-mytimer</dev:code>
+        <dev:remarks>
+          <maml:para>Remove all stopped timers.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Stop-MyTimer</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-MyTimer</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Set-MyTimer</command:name>
+      <command:verb>Set</command:verb>
+      <command:noun>MyTimer</command:noun>
+      <maml:description>
+        <maml:para>Modify a MyTimer object</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Use this command to modify an existing timer.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Set-MyTimer</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Name</maml:name>
+          <maml:Description>
+            <maml:para>Enter the name of the object to modify.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:Description>
+            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Description</maml:name>
+          <maml:Description>
+            <maml:para>Enter a new description for the timer object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>NewName</maml:name>
+          <maml:Description>
+            <maml:para>Enter a new name for the timer object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Passthru</maml:name>
+          <maml:Description>
+            <maml:para>Write the updated object to the pipeline.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Start</maml:name>
+          <maml:Description>
+            <maml:para>Update the start time for your timer object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+          <dev:type>
+            <maml:name>DateTime</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
+          <maml:Description>
+            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+        <maml:name>Confirm</maml:name>
+        <maml:Description>
+          <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Description</maml:name>
+        <maml:Description>
+          <maml:para>Enter a new description for the timer object.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <maml:name>Name</maml:name>
+        <maml:Description>
+          <maml:para>Enter the name of the object to modify.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>NewName</maml:name>
+        <maml:Description>
+          <maml:para>Enter a new name for the timer object.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Passthru</maml:name>
+        <maml:Description>
+          <maml:para>Write the updated object to the pipeline.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Start</maml:name>
+        <maml:Description>
+          <maml:para>Update the start time for your timer object.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+        <dev:type>
+          <maml:name>DateTime</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+        <maml:name>WhatIf</maml:name>
+        <maml:Description>
+          <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>MyTimer[]</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; set-mytimer T1 -description "updating module"</dev:code>
+        <dev:remarks>
+          <maml:para>Modify the T1 timer with a new description</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; get-mytimer foo | set-mytimer -newName Work1 -Start "7/17/18 9:00AM"</dev:code>
+        <dev:remarks>
+          <maml:para>Get the timer called foo and give it a new name and start time.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-MyTimer</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Start-MyTimer</command:name>
       <command:verb>Start</command:verb>
       <command:noun>MyTimer</command:noun>
@@ -486,7 +993,7 @@ T2   7/8/2017 8:30:46 AM 00:30:15.3344369</dev:code>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>This command starts a simple timer. You start it, which captures the current date and time, and stores the result in a global variable. You have the option of naming your timer which will allow you to have multiple timers running at the same time.</maml:para>
+      <maml:para>This command starts a simple timer. You start it, which captures the current date and time, and stores the result in a global variable. You have the option of naming your timer which will allow you to have multiple timers running at the same time. You can also add a brief description.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -504,15 +1011,16 @@ T2   7/8/2017 8:30:46 AM 00:30:15.3344369</dev:code>
           <dev:defaultValue>MyTimer</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Passthru</maml:name>
+          <maml:name>Description</maml:name>
           <maml:Description>
-            <maml:para>Pass the timer variable to the pipeline.</maml:para>
+            <maml:para>Enter an optional description for this timer.</maml:para>
           </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
-            <maml:name>SwitchParameter</maml:name>
+            <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>none</dev:defaultValue>
+          <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
@@ -530,22 +1038,22 @@ T2   7/8/2017 8:30:46 AM 00:30:15.3344369</dev:code>
         <dev:defaultValue>MyTimer</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>Passthru</maml:name>
+        <maml:name>Description</maml:name>
         <maml:Description>
-          <maml:para>Pass the timer variable to the pipeline.</maml:para>
+          <maml:para>Enter an optional description for this timer.</maml:para>
         </maml:Description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
-          <maml:name>SwitchParameter</maml:name>
+          <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>none</dev:defaultValue>
+        <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
         <dev:type>
-          <maml:name>[string]</maml:name>
+          <maml:name>None</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -555,7 +1063,7 @@ T2   7/8/2017 8:30:46 AM 00:30:15.3344369</dev:code>
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>[System.Management.Automation.PSVariable] when using -Passthru</maml:name>
+          <maml:name>[MyTimer]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -577,26 +1085,54 @@ T2   7/8/2017 8:30:46 AM 00:30:15.3344369</dev:code>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Start-MyTimer Timer2 -passthru
+        <dev:code>PS C:\&gt; Start-MyTimer Timer2
 
-Name                           Value
-----                           -----
-Timer2                         7/8/2016 8:44:35 AM</dev:code>
+Name        : timer2
+Start       : 7/17/2018 11:14:23 AM
+Duration    : 00:00:00
+Running     : True
+Description :</dev:code>
         <dev:remarks>
           <maml:para>Create a second timer called Timer2 and pass the object to the pipeline.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Start-MyTimer A,B,C -Passthru
+        <dev:code>PS C:\&gt; start-mytimer Z -Description "work stuff"
 
-Name                           Value
-----                           -----
-A                              7/8/2016 9:11:21 AM
-B                              7/8/2016 9:11:21 AM
-C                              7/8/2016 9:11:21 AM</dev:code>
+
+Name        : Z
+Start       : 7/17/2018 11:18:02 AM
+Duration    : 00:00:00
+Running     : True
+Description : work stuff</dev:code>
         <dev:remarks>
-          <maml:para>Create 3 timers at once. They can be stopped separately.</maml:para>
+          <maml:para>Create a new timer with a description.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; start-mytimer alpha,bravo,charlie
+
+Name        : alpha
+Start       : 7/17/2018 11:23:49 AM
+Duration    : 00:00:00
+Running     : True
+Description :
+
+Name        : bravo
+Start       : 7/17/2018 11:23:49 AM
+Duration    : 00:00:00
+Running     : True
+Description :
+
+Name        : charlie
+Start       : 7/17/2018 11:23:49 AM
+Duration    : 00:00:00
+Running     : True
+Description :</dev:code>
+        <dev:remarks>
+          <maml:para>Create multiple timers at once.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -617,11 +1153,13 @@ C                              7/8/2016 9:11:21 AM</dev:code>
       <command:verb>Start</command:verb>
       <command:noun>PSCountdown</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Start a graphical countdown display</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
+      <maml:para>This command will display countdown progress bar using Write-Progress. You can set the timer for a specific time or number of minutes. The countdown includes humorous items to indicate time passing. These items are drawn from an included list but you can specify a path to custom items.</maml:para>
+      <maml:para>Start-PSCountdown is inspired from code originally published at:  https://github.com/Windos/powershell-depot/blob/master/livecoding.tv/StreamCountdown/StreamCountdown.psm1</maml:para>
+      <maml:para>This command should work in Windows PowerShell and PowerShell Core, although not in VS Code. The ProgressStyle parameter is dynamic and only appears if you are running the command in a Windows console.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -676,7 +1214,7 @@ C                              7/8/2016 9:11:21 AM</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="style">
           <maml:name>ProgressStyle</maml:name>
           <maml:Description>
-            <maml:para>Select a progress bar style. This only applies when using the PowerShell console or ISE.</maml:para>
+            <maml:para>Select a progress bar style. This only applies when using the Windows PowerShell console or ISE.</maml:para>
             <maml:para>Default - use the current value of $host.PrivateData.ProgressBarBackgroundColor</maml:para>
             <maml:para>Transparent - set the progress bar background color to the same as the console</maml:para>
             <maml:para>Random - randomly cycle through a list of console colors</maml:para>
@@ -758,7 +1296,7 @@ C                              7/8/2016 9:11:21 AM</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="style">
           <maml:name>ProgressStyle</maml:name>
           <maml:Description>
-            <maml:para>Select a progress bar style. This only applies when using the PowerShell console or ISE.</maml:para>
+            <maml:para>Select a progress bar style. This only applies when using the Windows PowerShell console or ISE.</maml:para>
             <maml:para>Default - use the current value of $host.PrivateData.ProgressBarBackgroundColor</maml:para>
             <maml:para>Transparent - set the progress bar background color to the same as the console</maml:para>
             <maml:para>Random - randomly cycle through a list of console colors</maml:para>
@@ -841,7 +1379,7 @@ C                              7/8/2016 9:11:21 AM</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="style">
         <maml:name>ProgressStyle</maml:name>
         <maml:Description>
-          <maml:para>Select a progress bar style. This only applies when using the PowerShell console or ISE.</maml:para>
+          <maml:para>Select a progress bar style. This only applies when using the Windows PowerShell console or ISE.</maml:para>
           <maml:para>Default - use the current value of $host.PrivateData.ProgressBarBackgroundColor</maml:para>
           <maml:para>Transparent - set the progress bar background color to the same as the console</maml:para>
           <maml:para>Random - randomly cycle through a list of console colors</maml:para>
@@ -905,10 +1443,17 @@ C                              7/8/2016 9:11:21 AM</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>Example 1</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Start-PSCountdown -minutes 5</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Start a countdown display set to expire in 5 minutes.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Start-PSCountdown -time 9:00AM -title "Welcome Back" -message "Review your class notes and have questions ready" -clearhost -progressStyle random</dev:code>
+        <dev:remarks>
+          <maml:para>Start a countdown timer to 9:00AM. The screen will be cleared and the progress bar color will cycle through a random set of colors.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -929,8 +1474,9 @@ C                              7/8/2016 9:11:21 AM</dev:code>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>This is a variation on the Start-Countdown script from Josh Atwell (http://www.vtesseract.com/post/21414227113/start-countdown-function-a-visual-for-start-sleep).  It can be used instead of Start-Sleep and provides a visual countdown  progress during "sleep" times. At the end of the countdown, your  command will execute. Press the ESC key any time during the countdown to abort. </maml:para>
-      <maml:para>USING START-COUNTDOWN IN THE POWERSHELL ISE Results will vary slightly in the PowerShell ISE. If you use this in the ISE, it is recommended to use -Clear. You also cannot use the ESC key to abort the script if using the console. You'll need to press Ctrl+C. If using the progress bar, there is a Stop button in the ISE. If you abort in the ISE, you won't get the warning message.</maml:para>
+      <maml:para>This is a variation on the Start-Countdown script from Josh Atwell (http://www.vtesseract.com/post/21414227113/start-countdown-function-a-visual-for-start-sleep).  It can be used instead of Start-Sleep and provides a visual countdown progress during "sleep" times. At the end of the countdown, your command will execute. Press the ESC key any time during the countdown to abort. </maml:para>
+      <maml:para>USING START-COUNTDOWN IN THE POWERSHELL ISE</maml:para>
+      <maml:para>Results will vary slightly in the PowerShell ISE. If you use this in the ISE, it is recommended to use -Clear.  You also cannot use the ESC key to abort the script if using the console. You'll need to press Ctrl+C. If using the progress bar, there is a Stop button in the ISE. If you abort in the ISE, you won't get the warning message.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -938,7 +1484,7 @@ C                              7/8/2016 9:11:21 AM</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Seconds</maml:name>
           <maml:Description>
-            <maml:para>The number of seconds to countdown. The default is 10.</maml:para>
+            <maml:para>The number of seconds to countdown.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
@@ -1011,7 +1557,7 @@ C                              7/8/2016 9:11:21 AM</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>Seconds</maml:name>
         <maml:Description>
-          <maml:para>The number of seconds to countdown. The default is 10.</maml:para>
+          <maml:para>The number of seconds to countdown.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -1109,7 +1655,7 @@ C                              7/8/2016 9:11:21 AM</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Start-PSTimer -Seconds 10 -clear</dev:code>
+        <dev:code>PS C:\&gt; Start-PSTimer -Seconds 10 -clear</dev:code>
         <dev:remarks>
           <maml:para>This method will clear the screen and display descending seconds</maml:para>
         </dev:remarks>
@@ -1148,28 +1694,17 @@ C                              7/8/2016 9:11:21 AM</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Stop-MyTimer</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
           <maml:name>Name</maml:name>
           <maml:Description>
             <maml:para>The name for your timer.</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
-            <maml:name>String[]</maml:name>
+            <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>MyTimer</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>AsString</maml:name>
-          <maml:Description>
-            <maml:para>Display the timespan as a string.</maml:para>
-          </maml:Description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>none</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
           <maml:name>Confirm</maml:name>
@@ -1196,18 +1731,6 @@ C                              7/8/2016 9:11:21 AM</dev:code>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>AsString</maml:name>
-        <maml:Description>
-          <maml:para>Display the timespan as a string.</maml:para>
-        </maml:Description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>none</dev:defaultValue>
-      </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
         <maml:name>Confirm</maml:name>
         <maml:Description>
@@ -1220,14 +1743,14 @@ C                              7/8/2016 9:11:21 AM</dev:code>
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
         <maml:name>Name</maml:name>
         <maml:Description>
           <maml:para>The name for your timer.</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
-          <maml:name>String[]</maml:name>
+          <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>MyTimer</dev:defaultValue>

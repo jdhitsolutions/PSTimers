@@ -1,5 +1,8 @@
 #Changelog for PSTimers
 
+v0.5.1
+Added format type extension for mytimer
+
 v0.5.0
 Added Description property to mytimer
 Added Set-Mytimer to modify a timer object

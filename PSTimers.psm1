@@ -2,7 +2,6 @@
 
 #TODO: Add WPF timer
 #TODO: Test for v6
-#TODO: Add format file
 
 #dot source file with function definitions
 . $PSScriptRoot\PSTimerFunctions.ps1

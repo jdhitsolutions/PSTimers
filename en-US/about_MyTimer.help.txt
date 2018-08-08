@@ -85,6 +85,6 @@ EXAMPLES
     session ends.
 
 KEYWORDS
-    - Timer
+- Timer
 - Timespan
 

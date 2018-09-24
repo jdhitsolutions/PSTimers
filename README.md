@@ -8,7 +8,7 @@ This module is available from the PowerShell Gallery. On Windows PowerShell you 
 Install-Module PSTimers
 ```
 
-Of on PowerShell Core:
+And on PowerShell Core:
 
 ```powershell
 Install-Module PSTimers -Scope CurrentUser

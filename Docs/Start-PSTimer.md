@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Initiates a countdown before running a command
+Initiates a countdown before running a command.
 
 ## SYNTAX
 
@@ -36,7 +36,7 @@ Results will vary slightly in the PowerShell ISE. If you use this in the ISE, it
 PS C:\> Start-PSTimer -Seconds 10 -clear
 ```
 
-This method will clear the screen and display descending seconds
+This method will clear the screen and display descending seconds.
 
 ### EXAMPLE 2
 
@@ -154,7 +154,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### Results from specified scriptblock
+### None
+
+### [PSObject]
 
 ## NOTES
 

@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Modify a MyTimer object
+Modify a MyTimer object.
 
 ## SYNTAX
 

@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Remove a myTimer object
+Remove a myTimer object.
 
 ## SYNTAX
 
@@ -98,11 +98,9 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ### System.String[]
 
-
 ## OUTPUTS
 
 ### None
-
 
 ## NOTES
 

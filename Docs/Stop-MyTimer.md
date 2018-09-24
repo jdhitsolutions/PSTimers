@@ -125,7 +125,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### [System.Timespan] or [System.String]
+### [System.Timespan]
+
+### [System.String]
 
 ## NOTES
 

@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Start a graphical countdown display
+Start a graphical countdown display.
 
 ## SYNTAX
 

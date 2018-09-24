@@ -82,8 +82,8 @@ Start       : 7/17/2018 11:23:49 AM
 Duration    : 00:00:00
 Running     : True
 Description :
-
 ```
+
 Create multiple timers at once.
 
 ## PARAMETERS
@@ -132,7 +132,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### [MyTimer] 
+### [MyTimer]
 
 ## NOTES
 

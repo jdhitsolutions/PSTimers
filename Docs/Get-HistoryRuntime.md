@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Get a history runtime object
+Get a history runtime object.
 
 ## SYNTAX
 
@@ -36,8 +36,8 @@ Use this command to see how long something took to run in PowerShell.
 ```powershell
 PS C:\> Get-HistoryRuntime
 
-ID RunTime         
--- -------         
+ID RunTime
+-- -------
 99 00:00:48.2156090
 ```
 
@@ -46,8 +46,8 @@ ID RunTime
 ```powershell
 PS C:\> Get-HistoryRuntime 25
 
-ID RunTime         
--- -------         
+ID RunTime
+-- -------
 25 00:00:00.3127817
 ```
 
@@ -56,8 +56,8 @@ ID RunTime
 ```powershell
 PS C:\> Get-History -count 10 | Get-HistoryRuntime
 
-ID RunTime         
- -- -------         
+ID RunTime
+ -- -------
  91 00:00:00.0380001
  92 00:00:00.0079856
  93 00:00:00.0839858
@@ -75,12 +75,12 @@ ID RunTime
 ```powershell
 Get-History -count 5 | Get-HistoryRuntime -detail
 
-ID RunTime             Status Command                                          
- -- -------             ------ -------                                          
+ID RunTime             Status Command
+ -- -------             ------ -------
 105 00:01:10.9210044 Completed get-service -comp chi-dc01,chi-dc02,chi-core01...
 106 00:00:00.4872217 Completed get-service -comp chi-dc01,chi-dc02,chi-p50 | ...
 107 00:00:03.2367861 Completed get-ciminstance -comp chi-dc01,chi-p50,chi-dc0...
-108 00:00:00.3980214 Completed ps                                               
+108 00:00:00.3980214 Completed ps
 109 00:00:00.1019850 Completed get-ciminstance -comp chi-dc01,chi-p50,chi-dc0...
 ```
 

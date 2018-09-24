@@ -1,23 +1,23 @@
 # MyTimer
 ## about_MyTimer
 
-# SHORT DESCRIPTION
+## SHORT DESCRIPTION
 
 This module contains several commands designed to work with a very simple timer.
 
 The commands are based on an extremely basic principal: how much time has elapsed between two events? You can easily do this now with New-Timespan or simply subtracting one datetime from another. This module takes the simplest approach possible: save the current date and time to a read-only variable and when you are ready, calculate a timespan from that variable. Even though the commands reference a timer object there really isn't anything fancy or complicated. It is simply a variable that you can name, that has a datetime value.
 
-# LONG DESCRIPTION
+## LONG DESCRIPTION
 
 There's no .NET magic or anything complicated. The module commands are designed to make it easier to manage all of this. You can even create multiple timers at the same time in case you want to stop them at different intervals. When you are ready to stop a timer, run Stop-Mytimer and specify the timer name. The result will be a Timespan object.
 
 Use Get-myTimer to view the status of all your timers but without stopping them.
 
-## Exporting and Importing
+### Exporting and Importing
 
 If you need to persist timers across PowerShell sessions you can export a single timer or all timers with Export-MyTimer. Timers will be exported to an XML file using Export-Clixml. In the other PowerShell session use Import-MyTimer to recreate them in the current session. The running time will continue from when they were first created.
 
-# EXAMPLES
+## EXAMPLES
 
 Create a single timer:
 
@@ -83,7 +83,7 @@ Description :
 
 You can also export and import timers if you need them to persist across PowerShell sessions. Otherwise the timers are removed when your PowerShell session ends.
 
-# KEYWORDS
+## KEYWORDS
 
 - Timer
 

@@ -92,5 +92,4 @@ http://jdhitsolutions.com/blog/essential-powershell-resources/
 
 [Stop-MyTimer](Stop-MyTimer.md)
 
-[Find-MyTimer]()
 

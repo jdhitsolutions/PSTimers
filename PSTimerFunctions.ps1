@@ -47,7 +47,7 @@ Class MyTimer {
     }
 
     #used for importing
-    MyTimer([string]$Name, [datetime]$Start, [datetime]$End, [timespan]$Duration, [boolean]$Running,[string]$Description) {
+    MyTimer([string]$Name, [datetime]$Start, [datetime]$End, [timespan]$Duration, [boolean]$Running, [string]$Description) {
         $this.Name = $Name
         $this.start = $Start
         $this.end = $End
@@ -81,6 +81,8 @@ The ProgressStyle parameter is dynamic and only appears if you are running the c
 Function Start-PSCountdown {
     [cmdletbinding(DefaultParameterSetName = "minutes")]
     [OutputType("None")]
+    [Alias("spsc")]
+
     Param(
         [Parameter(Position = 0, HelpMessage = "Enter the number of minutes to countdown (1-60). The default is 5.", ParameterSetName = "minutes")]
         [ValidateRange(1, 60)]
@@ -238,7 +240,9 @@ Random - randomly cycle through a list of console colors
 Function Start-PSTimer {
     
     [cmdletbinding()]
-    [OutputType("None", "Results from specified scriptblock")]
+    [OutputType("None", "PSObject")]
+    [Alias("spst")]
+
     Param(
         [Parameter(Position = 0, HelpMessage = "Enter seconds to countdown from")]
         [Int]$Seconds = 10,
@@ -342,6 +346,8 @@ Function Start-MyTimer {
 
     [cmdletbinding()]
     [OutputType([MyTimer])]
+    [Alias("ton")]
+
     Param(
         [Parameter(Position = 0)]
         [ValidateNotNullorEmpty()]
@@ -366,7 +372,6 @@ Function Start-MyTimer {
     Write-Verbose "Ending: $($MyInvocation.Mycommand)"
 
 } #Start-MyTimer
-
 Function Remove-MyTimer {
 
     [cmdletbinding(SupportsShouldProcess)]
@@ -409,6 +414,8 @@ Function Stop-MyTimer {
     
     [cmdletbinding(SupportsShouldProcess)]
     [OutputType([MyTimer])] 
+    [Alias("toff")]
+
     Param(
         [Parameter(Position = 0, ValueFromPipelineByPropertyName)]
         [ValidateNotNullorEmpty()]
@@ -479,7 +486,7 @@ Function Get-MyTimer {
         else {
             #find all running timers by default
             Write-Verbose "[PROCESS] Getting all running timers"
-            $timers = ($global:myTimerCollection.Values).where({$_.running}) 
+            $timers = ($global:myTimerCollection.Values).where( {$_.running}) 
         }
 
         Write-Verbose "[PROCESS] Getting current timer status"
@@ -551,15 +558,15 @@ Function Set-MyTimer {
                     }
                 }
             } #foreach
-    } #if $timers
-    else {
-        Write-Warning "Can't find a matching timer object"
-    }    
-} #process
+        } #if $timers
+        else {
+            Write-Warning "Can't find a matching timer object"
+        }    
+    } #process
     
-End {
-    Write-Verbose "[END    ] Ending: $($MyInvocation.Mycommand)"
-}
+    End {
+        Write-Verbose "[END    ] Ending: $($MyInvocation.Mycommand)"
+    }
 } #Set-MyTimer
     
 Function Export-MyTimer {
@@ -637,7 +644,7 @@ Function Import-MyTimer {
     Import-Clixml -Path $Path | foreach-object {
         if ($PSCmdlet.ShouldProcess($_.name)) {
             Write-Verbose "Importing $($_.name)"
-            New-Object -TypeName MyTimer -ArgumentList $_.name, $_.start, $_.end, $_.duration, $_.running,$_.description | Out-Null
+            New-Object -TypeName MyTimer -ArgumentList $_.name, $_.start, $_.end, $_.duration, $_.running, $_.description | Out-Null
             Get-Mytimer -name $_.name
         }
     }
@@ -645,11 +652,12 @@ Function Import-MyTimer {
     Write-Verbose "Ending: $($MyInvocation.Mycommand)"
 } #Import-MyTimer
    
-
 Function Get-HistoryRuntime {
     
     [cmdletbinding(DefaultParameterSetName = "ID")]
     [OutputType([PSCustomObject])]
+    [Alias("ghr")]
+
     Param(
         [Parameter(
             Position = 0,

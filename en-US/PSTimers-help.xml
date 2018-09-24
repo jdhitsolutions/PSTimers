@@ -172,7 +172,7 @@
       <command:verb>Get</command:verb>
       <command:noun>HistoryRuntime</command:noun>
       <maml:description>
-        <maml:para>Get a history runtime object</maml:para>
+        <maml:para>Get a history runtime object.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -300,8 +300,8 @@
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-HistoryRuntime
 
-ID RunTime         
--- -------         
+ID RunTime
+-- -------
 99 00:00:48.2156090</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
@@ -311,8 +311,8 @@ ID RunTime
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-HistoryRuntime 25
 
-ID RunTime         
--- -------         
+ID RunTime
+-- -------
 25 00:00:00.3127817</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
@@ -322,8 +322,8 @@ ID RunTime
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-History -count 10 | Get-HistoryRuntime
 
-ID RunTime         
- -- -------         
+ID RunTime
+ -- -------
  91 00:00:00.0380001
  92 00:00:00.0079856
  93 00:00:00.0839858
@@ -342,12 +342,12 @@ ID RunTime
         <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
         <dev:code>Get-History -count 5 | Get-HistoryRuntime -detail
 
-ID RunTime             Status Command                                          
- -- -------             ------ -------                                          
+ID RunTime             Status Command
+ -- -------             ------ -------
 105 00:01:10.9210044 Completed get-service -comp chi-dc01,chi-dc02,chi-core01...
 106 00:00:00.4872217 Completed get-service -comp chi-dc01,chi-dc02,chi-p50 | ...
 107 00:00:03.2367861 Completed get-ciminstance -comp chi-dc01,chi-p50,chi-dc0...
-108 00:00:00.3980214 Completed ps                                               
+108 00:00:00.3980214 Completed ps
 109 00:00:00.1019850 Completed get-ciminstance -comp chi-dc01,chi-p50,chi-dc0...</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
@@ -472,10 +472,6 @@ T2   7/8/2017 8:30:46 AM 00:30:15.3344369</dev:code>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Stop-MyTimer</maml:linkText>
-        <maml:uri></maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>Find-MyTimer</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -616,7 +612,7 @@ T2   7/8/2017 8:30:46 AM 00:30:15.3344369</dev:code>
       <command:verb>Remove</command:verb>
       <command:noun>MyTimer</command:noun>
       <maml:description>
-        <maml:para>Remove a myTimer object</maml:para>
+        <maml:para>Remove a myTimer object.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -757,7 +753,7 @@ T2   7/8/2017 8:30:46 AM 00:30:15.3344369</dev:code>
       <command:verb>Set</command:verb>
       <command:noun>MyTimer</command:noun>
       <maml:description>
-        <maml:para>Modify a MyTimer object</maml:para>
+        <maml:para>Modify a MyTimer object.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -1153,7 +1149,7 @@ Description :</dev:code>
       <command:verb>Start</command:verb>
       <command:noun>PSCountdown</command:noun>
       <maml:description>
-        <maml:para>Start a graphical countdown display</maml:para>
+        <maml:para>Start a graphical countdown display.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -1470,7 +1466,7 @@ Description :</dev:code>
       <command:verb>Start</command:verb>
       <command:noun>PSTimer</command:noun>
       <maml:description>
-        <maml:para>Initiates a countdown before running a command</maml:para>
+        <maml:para>Initiates a countdown before running a command.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -1640,7 +1636,15 @@ Description :</dev:code>
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>Results from specified scriptblock</maml:name>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>[PSObject]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -1657,7 +1661,7 @@ Description :</dev:code>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Start-PSTimer -Seconds 10 -clear</dev:code>
         <dev:remarks>
-          <maml:para>This method will clear the screen and display descending seconds</maml:para>
+          <maml:para>This method will clear the screen and display descending seconds.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
@@ -1781,7 +1785,15 @@ Description :</dev:code>
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>[System.Timespan] or [System.String]</maml:name>
+          <maml:name>[System.Timespan]</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>[System.String]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>

@@ -1,6 +1,19 @@
-# PSTimers #
+# PSTimers
 
 A set of PowerShell functions to be used as timers and countdown tools.
+
+This module is available from the PowerShell Gallery. On Windows PowerShell you can install it from a prompt:
+
+```powershell
+Install-Module PSTimers
+```
+
+Of on PowerShell Core:
+
+```powershell
+Install-Module PSTimers -Scope CurrentUser
+```
+I use several of these tools on a regular basis.
 
 * [Export-MyTimer](docs/Export-MyTimer.md)
 * [Get-HistoryRuntime](docs/Get-HistoryRuntime.md)
@@ -13,4 +26,6 @@ A set of PowerShell functions to be used as timers and countdown tools.
 * [Start-PSTimer](docs/Start-PSTimer.md)
 * [Stop-MyTimer](docs/Stop-MyTimer.md)
 
-_last updated 17 July 2018_
+The commands should also work on PowerShell Core cross-platform, although there may be a few artifacts on non-Windows systems.
+
+_last updated 24 September 2018_

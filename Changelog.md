@@ -1,5 +1,11 @@
 # Changelog for PSTimers
 
+## v0.6.1
+
++ file cleanup for the PowerShell Gallery
++ updated license
++ added additional entries to PSCountdowntasks.txt
+
 ## v0.6.0
 
 + Added alias definitions to functions

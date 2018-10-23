@@ -18,6 +18,7 @@ LONG DESCRIPTION
     multiple timers at the same time in case you want to stop them at different
     intervals. When you are ready to stop a timer, run Stop-Mytimer and specify
     the timer name. The result will be a Timespan object.
+    
     Use Get-myTimer to view the status of all your timers but without stopping
     them.
 

@@ -13,6 +13,7 @@ And on PowerShell Core:
 ```powershell
 Install-Module PSTimers -Scope CurrentUser
 ```
+
 I use several of these tools on a regular basis.
 
 * [Export-MyTimer](docs/Export-MyTimer.md)
@@ -28,4 +29,4 @@ I use several of these tools on a regular basis.
 
 The commands should also work on PowerShell Core cross-platform, although there may be a few artifacts on non-Windows systems.
 
-_last updated 24 September 2018_
+_last updated 23 October 2018_

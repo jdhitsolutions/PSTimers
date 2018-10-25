@@ -31,11 +31,9 @@ Start-PSCountdown [[-Time] <DateTime>] [-Title <String>] [[-Message] <String>] [
 
 This command will display countdown progress bar using Write-Progress. You can set the timer for a specific time or number of minutes. The countdown includes humorous items to indicate time passing. These items are drawn from an included list but you can specify a path to custom items.
 
-Start-PSCountdown is inspired from code originally published at: 
-https://github.com/Windos/powershell-depot/blob/master/livecoding.tv/StreamCountdown/StreamCountdown.psm1
+Start-PSCountdown is inspired from code originally published at: https://github.com/Windos/powershell-depot/blob/master/livecoding.tv/StreamCountdown/StreamCountdown.psm1
 
-This command should work in Windows PowerShell and PowerShell Core, although not in VS Code.
-The ProgressStyle parameter is dynamic and only appears if you are running the command in a Windows console.
+This command should work in Windows PowerShell and PowerShell Core, although not in VS Code. The ProgressStyle parameter is dynamic and only appears if you are running the command in a Windows console.
 
 ## EXAMPLES
 

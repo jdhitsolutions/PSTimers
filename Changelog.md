@@ -1,5 +1,16 @@
 # Changelog for PSTimers
 
+## v0.7.0
+
++ fixed bug piping a myTimer to `Stop-MyTimer` (Issue #2)
++ Added `-Passthru` parameter to `Stop-MyTimer`
++ Made `-Name` parameter mandatory for `Stop-MyTimer`
++ MyTimer names must be unique
++ Updated about_MyTimer help documentation
++ Added auto completers for MyTimer commands
++ added additional entries to PSCountdowntasks.txt
++ Renamed `-GlobalBlock` parameter in `Start-PSTimer` to `-Scriptblock` but kept original name as a parameter alias.
+
 ## v0.6.1
 
 + file cleanup for the PowerShell Gallery

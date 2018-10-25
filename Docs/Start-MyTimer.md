@@ -19,7 +19,7 @@ Start-MyTimer [[-Name] <String[]>] [-Description <String>] [<CommonParameters>]
 
 ## DESCRIPTION
 
-This command starts a simple timer. You start it, which captures the current date and time, and stores the result in a global variable. You have the option of naming your timer which will allow you to have multiple timers running at the same time. You can also add a brief description.
+This command starts a simple timer. You start it, which captures the current date and time, and stores the result in a global variable. You have the option of naming your timer which will allow you to have multiple timers running at the same time. Timer names must be unique. You can also add a brief description.
 
 ## EXAMPLES
 
@@ -47,7 +47,7 @@ Create a second timer called Timer2 and pass the object to the pipeline.
 
 ### EXAMPLE 3
 
-```powershell 
+```powershell
 PS C:\> start-mytimer Z -Description "work stuff"
 
 

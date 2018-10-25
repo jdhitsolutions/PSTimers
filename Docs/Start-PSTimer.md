@@ -1,6 +1,6 @@
 ---
 external help file: PSTimers-help.xml
-Module Name: PSTimers
+Module Name: pstimers
 online version:
 schema: 2.0.0
 ---
@@ -13,16 +13,14 @@ Initiates a countdown before running a command.
 
 ## SYNTAX
 
-```yaml
+```
 Start-PSTimer [[-Seconds] <Int32>] [[-Scriptblock] <ScriptBlock>] [-ProgressBar] [-Title <String>] [-Clear]
  [-Message <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-This is a variation on the Start-Countdown script from Josh Atwell
-(http://www.vtesseract.com/post/21414227113/start-countdown-function-a-visual-for-start-sleep). 
-It can be used instead of Start-Sleep and provides a visual countdown progress during "sleep" times. At the end of the countdown, your command will execute. Press the ESC key any time during the countdown to abort. 
+This is a variation on the Start-Countdown script from Josh Atwell (http://www.vtesseract.com/post/21414227113/start-countdown-function-a-visual-for-start-sleep). It can be used instead of Start-Sleep and provides a visual countdown progress during "sleep" times. At the end of the countdown, your command will execute. Press the ESC key any time during the countdown to abort.
 
 USING START-COUNTDOWN IN THE POWERSHELL ISE
 
@@ -41,7 +39,7 @@ This method will clear the screen and display descending seconds.
 ### EXAMPLE 2
 
 ```powershell
-Start-PSTimer -Seconds 30 -ProgressBar -scriptblock {get-service -comp (get-content computers.txt)}
+PS C:\> Start-PSTimer -Seconds 30 -ProgressBar -scriptblock {get-service -computername (get-content computers.txt)}
 ```
 
 This method will display a progress bar on screen. At the end of the countdown the scriptblock will execute.
@@ -71,7 +69,7 @@ A PowerShell scriptblock to execute at the end of the countdown.
 ```yaml
 Type: ScriptBlock
 Parameter Sets: (All)
-Aliases:
+Aliases: globalblock, sb
 
 Required: False
 Position: 2
@@ -167,4 +165,3 @@ Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell
 [Write-Progress]()
 
 [Start-PSCountdown](Start-PSCountdown.md)
-

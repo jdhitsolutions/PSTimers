@@ -28,8 +28,8 @@ Use this command to get the current status of a timer created with Start-MyTimer
 ```powershell
 PS C:\> Get-MyTimer T2
 
-Name Started             Elapsed 
----- -------             ------- 
+Name Started             Elapsed
+---- -------             -------
 T2   7/8/2017 8:30:46 AM 00:30:15.3344369
 ```
 

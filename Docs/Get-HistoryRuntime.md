@@ -141,7 +141,9 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## INPUTS
 
-### [Int] or [Microsoft.PowerShell.Commands.HistoryInfo]
+### [Int]
+
+### [Microsoft.PowerShell.Commands.HistoryInfo]
 
 ## OUTPUTS
 

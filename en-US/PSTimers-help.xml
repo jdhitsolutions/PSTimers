@@ -273,7 +273,15 @@
     <command:inputTypes>
       <command:inputType>
         <dev:type>
-          <maml:name>[Int] or [Microsoft.PowerShell.Commands.HistoryInfo]</maml:name>
+          <maml:name>[Int]</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>[Microsoft.PowerShell.Commands.HistoryInfo]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -457,8 +465,8 @@ ID RunTime             Status Command
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-MyTimer T2
 
-Name Started             Elapsed 
----- -------             ------- 
+Name Started             Elapsed
+---- -------             -------
 T2   7/8/2017 8:30:46 AM 00:30:15.3344369</dev:code>
         <dev:remarks>
           <maml:para>Get the current status of a timer called T2.</maml:para>
@@ -989,7 +997,7 @@ T2   7/8/2017 8:30:46 AM 00:30:15.3344369</dev:code>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>This command starts a simple timer. You start it, which captures the current date and time, and stores the result in a global variable. You have the option of naming your timer which will allow you to have multiple timers running at the same time. You can also add a brief description.</maml:para>
+      <maml:para>This command starts a simple timer. You start it, which captures the current date and time, and stores the result in a global variable. You have the option of naming your timer which will allow you to have multiple timers running at the same time. Timer names must be unique. You can also add a brief description.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1154,7 +1162,7 @@ Description :</dev:code>
     </command:details>
     <maml:description>
       <maml:para>This command will display countdown progress bar using Write-Progress. You can set the timer for a specific time or number of minutes. The countdown includes humorous items to indicate time passing. These items are drawn from an included list but you can specify a path to custom items.</maml:para>
-      <maml:para>Start-PSCountdown is inspired from code originally published at:  https://github.com/Windos/powershell-depot/blob/master/livecoding.tv/StreamCountdown/StreamCountdown.psm1</maml:para>
+      <maml:para>Start-PSCountdown is inspired from code originally published at: https://github.com/Windos/powershell-depot/blob/master/livecoding.tv/StreamCountdown/StreamCountdown.psm1</maml:para>
       <maml:para>This command should work in Windows PowerShell and PowerShell Core, although not in VS Code. The ProgressStyle parameter is dynamic and only appears if you are running the command in a Windows console.</maml:para>
     </maml:description>
     <command:syntax>
@@ -1470,7 +1478,7 @@ Description :</dev:code>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>This is a variation on the Start-Countdown script from Josh Atwell (http://www.vtesseract.com/post/21414227113/start-countdown-function-a-visual-for-start-sleep).  It can be used instead of Start-Sleep and provides a visual countdown progress during "sleep" times. At the end of the countdown, your command will execute. Press the ESC key any time during the countdown to abort. </maml:para>
+      <maml:para>This is a variation on the Start-Countdown script from Josh Atwell (http://www.vtesseract.com/post/21414227113/start-countdown-function-a-visual-for-start-sleep). It can be used instead of Start-Sleep and provides a visual countdown progress during "sleep" times. At the end of the countdown, your command will execute. Press the ESC key any time during the countdown to abort.</maml:para>
       <maml:para>USING START-COUNTDOWN IN THE POWERSHELL ISE</maml:para>
       <maml:para>Results will vary slightly in the PowerShell ISE. If you use this in the ISE, it is recommended to use -Clear.  You also cannot use the ESC key to abort the script if using the console. You'll need to press Ctrl+C. If using the progress bar, there is a Stop button in the ISE. If you abort in the ISE, you won't get the warning message.</maml:para>
     </maml:description>
@@ -1489,7 +1497,7 @@ Description :</dev:code>
           </dev:type>
           <dev:defaultValue>10</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="globalblock, sb">
           <maml:name>Scriptblock</maml:name>
           <maml:Description>
             <maml:para>A PowerShell scriptblock to execute at the end of the countdown.</maml:para>
@@ -1562,7 +1570,7 @@ Description :</dev:code>
         </dev:type>
         <dev:defaultValue>10</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="globalblock, sb">
         <maml:name>Scriptblock</maml:name>
         <maml:Description>
           <maml:para>A PowerShell scriptblock to execute at the end of the countdown.</maml:para>
@@ -1666,7 +1674,7 @@ Description :</dev:code>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Start-PSTimer -Seconds 30 -ProgressBar -scriptblock {get-service -comp (get-content computers.txt)}</dev:code>
+        <dev:code>PS C:\&gt; Start-PSTimer -Seconds 30 -ProgressBar -scriptblock {get-service -computername (get-content computers.txt)}</dev:code>
         <dev:remarks>
           <maml:para>This method will display a progress bar on screen. At the end of the countdown the scriptblock will execute.</maml:para>
         </dev:remarks>
@@ -1698,7 +1706,7 @@ Description :</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Stop-MyTimer</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
           <maml:name>Name</maml:name>
           <maml:Description>
             <maml:para>The name for your timer.</maml:para>
@@ -1732,6 +1740,17 @@ Description :</dev:code>
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Passthru</maml:name>
+          <maml:Description>
+            <maml:para>By default, the command does not write an object to the pipeline. Use -Passthru to force an object through.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -1747,7 +1766,7 @@ Description :</dev:code>
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
         <maml:name>Name</maml:name>
         <maml:Description>
           <maml:para>The name for your timer.</maml:para>
@@ -1771,6 +1790,18 @@ Description :</dev:code>
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Passthru</maml:name>
+        <maml:Description>
+          <maml:para>By default, the command does not write an object to the pipeline. Use -Passthru to force an object through.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
@@ -1785,7 +1816,7 @@ Description :</dev:code>
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>[System.Timespan]</maml:name>
+          <maml:name>None</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -1793,7 +1824,7 @@ Description :</dev:code>
       </command:returnValue>
       <command:returnValue>
         <dev:type>
-          <maml:name>[System.String]</maml:name>
+          <maml:name>MyTimer</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -1808,35 +1839,18 @@ Description :</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Stop-MyTimer Timer2
+        <dev:code>PS C:\&gt; Stop-MyTimer Timer2 -passthru
 
-Days              : 0
-Hours             : 0
-Minutes           : 6
-Seconds           : 10
-Milliseconds      : 559
-Ticks             : 3705590189
-TotalDays         : 0.00428887753356481
-TotalHours        : 0.102933060805556
-TotalMinutes      : 6.17598364833333
-TotalSeconds      : 370.5590189
-TotalMilliseconds : 370559.0189</dev:code>
+Name            Start                  Duration         Running Description
+----            -----                  --------         ------- -----------
+t2              10/25/2018 9:37:18 AM  00:20:19.0345972   False</dev:code>
         <dev:remarks>
           <maml:para>Stop a timer called Timer2</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Stop-MyTimer -asString
-
-00:01:34.0002109</dev:code>
-        <dev:remarks>
-          <maml:para>Stop the timer using the default name of MyTimer and display the result as a string.</maml:para>
-        </dev:remarks>
-      </command:example>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; $report = import-csv s:\computers.csv | foreach -begin { Start-MyTimer T1 ; Write-Host "Starting the process" -foreground cyan } -process { Get-CimInstance win32_logicaldisk -computer $_.computername} -end { Write-Host "Finished! $(Stop-MyTimer T1 -asString)" -foreground cyan}
+        <dev:code>PS C:\&gt; $report = import-csv s:\computers.csv | foreach -begin { Start-MyTimer T1; Write-Host "Starting the process" -foreground cyan } -process { Get-CimInstance win32_logicaldisk -computer $_.computername} -end { Write-Host "Finished! $((Stop-MyTimer T1 -passthru).duration)" -foreground cyan}
 
 Starting the process
 Finished!

@@ -13,8 +13,8 @@ Class MyTimer {
         $this.End = Get-Date
         $this.Duration = $this.end - $this.start
         $this.Running = $False
-        $global:mytimercollection["$($this.name)"]= $this
-        }
+        $global:mytimercollection["$($this.name)"] = $this
+    }
 
     [timespan]GetStatus () {
         #temporarily set duration
@@ -23,11 +23,6 @@ Class MyTimer {
     }
     
     MyTimer([string]$Name, [string]$Description) {
-        Write-Verbose "Creating a myTimer object by name: $name"
-        $this.Name = $Name
-        $this.Start = Get-Date
-        $this.Running = $True
-        $this.Description = $Description
 
         Try {
             Get-Variable myTimerCollection -Scope global -ErrorAction Stop | Out-Null
@@ -38,10 +33,16 @@ Class MyTimer {
         } 
 
         #timer names must be unique
-        if ($global:myTimerCollection.ContainsKey("$this.name")) {
-            Write-Warning "A timer with the name $($this.name) already exists. Please remove it first or create a timer with a new name."
+        if ($global:myTimerCollection.ContainsKey($Name)) {
+            Throw "A timer with the name $name already exists. Please remove it first or create a timer with a new name."
         }
         else {
+            Write-Verbose "Creating a myTimer object by name: $name"
+            $this.Name = $Name
+            $this.Start = Get-Date
+            $this.Running = $True
+            $this.Description = $Description
+
             Write-Verbose "Adding new timer $($this.name)"
             $global:mytimercollection.add($this.name, $this)
         }
@@ -248,7 +249,7 @@ Function Start-PSTimer {
         [Parameter(Position = 0, HelpMessage = "Enter seconds to countdown from")]
         [Int]$Seconds = 10,
         [Parameter(Position = 1, HelpMessage = "Enter a scriptblock to execute at the end of the countdown")]
-        [alias("globalblock","sb")]
+        [alias("globalblock", "sb")]
         [scriptblock]$Scriptblock,
         [Switch]$ProgressBar,
         [string]$Title = "Countdown",
@@ -363,13 +364,14 @@ Function Start-MyTimer {
     Write-Verbose "PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n" 
     foreach ($timer in $Name) {    
 
-           Try {
-                Write-Verbose "Creating timer $timer"
-                New-Object -TypeName MyTimer -ArgumentList $timer, $Description    
-            }
-            Catch {
-                Write-Warning "Failed to create timer $timer. $($_.exception.message)"
-            }
+        Try {
+            Write-Verbose "Creating timer $timer"
+            New-Object -TypeName MyTimer -ArgumentList $timer, $Description -ErrorAction stop   
+        }
+        Catch {
+           # Write-Warning "Failed to create timer $timer. $($_.exception.message)"
+           Throw $_
+        }
 
     } #foreach
 
@@ -417,11 +419,11 @@ Function Remove-MyTimer {
 Function Stop-MyTimer {
     
     [cmdletbinding(SupportsShouldProcess)]
-    [OutputType("None","MyTimer")] 
+    [OutputType("None", "MyTimer")] 
     [Alias("toff")]
 
     Param(
-        [Parameter(Position = 0, Mandatory,ValueFromPipelineByPropertyName)]
+        [Parameter(Position = 0, Mandatory, ValueFromPipelineByPropertyName)]
         [ValidateNotNullorEmpty()]
         [string]$Name,
         [switch]$Passthru
@@ -435,7 +437,7 @@ Function Stop-MyTimer {
     }
     Process {
         Write-Verbose "Getting timer $name"
-        $timers = ($global:myTimerCollection).Values.where({$_.name -like $name}) 
+        $timers = ($global:myTimerCollection).Values.where( {$_.name -like $name}) 
         if ($timers) {
             Foreach ($timer in $timers) {
                 write-verbose "Processing $( $timer | Out-string)"
@@ -443,9 +445,9 @@ Function Stop-MyTimer {
                     if ($PSCmdlet.ShouldProcess($timer.name)) {
                         $timer.stopTimer()
                        
-                       if ($passthru) {
-                        $global:mytimercollection["$($timer.name)"]
-                       }
+                        if ($passthru) {
+                            $global:mytimercollection["$($timer.name)"]
+                        }
                     } #should process
                 }
                 else {

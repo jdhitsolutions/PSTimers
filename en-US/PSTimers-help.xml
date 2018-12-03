@@ -1157,7 +1157,7 @@ Description :</dev:code>
       <command:verb>Start</command:verb>
       <command:noun>PSCountdown</command:noun>
       <maml:description>
-        <maml:para>Start a graphical countdown display.</maml:para>
+        <maml:para>Start a graphical countdown display using Write-Progress</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -1192,10 +1192,10 @@ Description :</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cls">
           <maml:name>ClearHost</maml:name>
           <maml:Description>
-            <maml:para>Use this parameter to clear the screen prior to starting the countdown.</maml:para>
+            <maml:para>Use this parameter to clear the screen prior to starting the countdown. The paramter has an alias of cls.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -1206,7 +1206,7 @@ Description :</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Path</maml:name>
           <maml:Description>
-            <maml:para>The path to a text list of pseudo-tasks</maml:para>
+            <maml:para>The path to a text list of pseudo-tasks. By default the command will use the list provided with the module but you can specify your own list. One item per list. Prefix a line with a # to comment it out.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1222,6 +1222,7 @@ Description :</dev:code>
             <maml:para>Default - use the current value of $host.PrivateData.ProgressBarBackgroundColor</maml:para>
             <maml:para>Transparent - set the progress bar background color to the same as the console</maml:para>
             <maml:para>Random - randomly cycle through a list of console colors</maml:para>
+            <maml:para>The parameter has an alias of style.</maml:para>
           </maml:Description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Default</command:parameterValue>
@@ -1274,10 +1275,10 @@ Description :</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cls">
           <maml:name>ClearHost</maml:name>
           <maml:Description>
-            <maml:para>Use this parameter to clear the screen prior to starting the countdown.</maml:para>
+            <maml:para>Use this parameter to clear the screen prior to starting the countdown. The paramter has an alias of cls.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -1288,7 +1289,7 @@ Description :</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Path</maml:name>
           <maml:Description>
-            <maml:para>The path to a text list of pseudo-tasks</maml:para>
+            <maml:para>The path to a text list of pseudo-tasks. By default the command will use the list provided with the module but you can specify your own list. One item per list. Prefix a line with a # to comment it out.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1304,6 +1305,7 @@ Description :</dev:code>
             <maml:para>Default - use the current value of $host.PrivateData.ProgressBarBackgroundColor</maml:para>
             <maml:para>Transparent - set the progress bar background color to the same as the console</maml:para>
             <maml:para>Random - randomly cycle through a list of console colors</maml:para>
+            <maml:para>The parameter has an alias of style.</maml:para>
           </maml:Description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Default</command:parameterValue>
@@ -1332,10 +1334,10 @@ Description :</dev:code>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cls">
         <maml:name>ClearHost</maml:name>
         <maml:Description>
-          <maml:para>Use this parameter to clear the screen prior to starting the countdown.</maml:para>
+          <maml:para>Use this parameter to clear the screen prior to starting the countdown. The paramter has an alias of cls.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -1371,7 +1373,7 @@ Description :</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Path</maml:name>
         <maml:Description>
-          <maml:para>The path to a text list of pseudo-tasks</maml:para>
+          <maml:para>The path to a text list of pseudo-tasks. By default the command will use the list provided with the module but you can specify your own list. One item per list. Prefix a line with a # to comment it out.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1387,6 +1389,7 @@ Description :</dev:code>
           <maml:para>Default - use the current value of $host.PrivateData.ProgressBarBackgroundColor</maml:para>
           <maml:para>Transparent - set the progress bar background color to the same as the console</maml:para>
           <maml:para>Random - randomly cycle through a list of console colors</maml:para>
+          <maml:para>The parameter has an alias of style.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1450,7 +1453,7 @@ Description :</dev:code>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Start-PSCountdown -minutes 5</dev:code>
         <dev:remarks>
-          <maml:para>Start a countdown display set to expire in 5 minutes.</maml:para>
+          <maml:para>Start a countdown display set to expire in 5 minutes. This will use the default values for Title and Message.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
@@ -1464,6 +1467,10 @@ Description :</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Start-PSTimer</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Write-Progress</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>

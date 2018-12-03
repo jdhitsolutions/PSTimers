@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Start a graphical countdown display.
+Start a graphical countdown display using Write-Progress
 
 ## SYNTAX
 
@@ -43,7 +43,7 @@ This command should work in Windows PowerShell and PowerShell Core, although not
 PS C:\> Start-PSCountdown -minutes 5
 ```
 
-Start a countdown display set to expire in 5 minutes.
+Start a countdown display set to expire in 5 minutes. This will use the default values for Title and Message.
 
 ### Example 2
 
@@ -57,12 +57,12 @@ Start a countdown timer to 9:00AM. The screen will be cleared and the progress b
 
 ### -ClearHost
 
-Use this parameter to clear the screen prior to starting the countdown.
+Use this parameter to clear the screen prior to starting the countdown. The paramter has an alias of cls.
 
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: cls
 
 Required: False
 Position: Named
@@ -105,7 +105,7 @@ Accept wildcard characters: False
 
 ### -Path
 
-The path to a text list of pseudo-tasks
+The path to a text list of pseudo-tasks. By default the command will use the list provided with the module but you can specify your own list. One item per list. Prefix a line with a # to comment it out.
 
 ```yaml
 Type: String
@@ -128,6 +128,8 @@ Default - use the current value of $host.PrivateData.ProgressBarBackgroundColor
 Transparent - set the progress bar background color to the same as the console
 
 Random - randomly cycle through a list of console colors
+
+The parameter has an alias of style.
 
 ```yaml
 Type: String
@@ -193,3 +195,5 @@ Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell
 ## RELATED LINKS
 
 [Start-PSTimer](Start-PSTimer.md)
+
+[Write-Progress]()

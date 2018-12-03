@@ -1,5 +1,12 @@
 # Changelog for PSTimers
 
+## v0.7.1
+
++ fixed bug with `-ProgressStyle` parameter on `Start-PSCountdown`
++ added additional tasks to `PScountdowntask.txt`
++ added an alias of `cls` for the `-ClearHost` parameter on `Start-PSCountdown`
++ Minor help updates
+
 ## v0.7.0
 
 + fixed bug piping a myTimer to `Stop-MyTimer` (Issue #2)

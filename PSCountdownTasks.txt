@@ -1,6 +1,6 @@
 #This is a list of entries for Start-PSCountdown
 #enter each entry on its own line.
-#Comment out with the # symbol.
+#Comment out items with the # symbol.
 Waiting for someone to press enter
 Warming up processors 
 Downloading Twitter
@@ -63,3 +63,16 @@ Playing a game of Monopoly
 Searching for the Golden Fleece
 Destroying the last horcrux
 Waiting for flying cars and personal jet packs
+Quitting Facebook
+Backing up and clearing event logs
+Deleting Active Directory
+Setting up a Sharepoint farm. Don't ask.
+Installing a 3 node SQL Server failover cluster
+Buying a copy of the PowerShell Practice Primer
+Brewing a pot of coffee
+Detecting local IP addresses and adding to botnet
+Updating PowerShell modules
+Installing the latest version of PowerShell Core
+Upgrading to the latest version of VS Code
+Deciding - Coke vs Pepsi
+Waiting for the final season of Game of Thrones

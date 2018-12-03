@@ -98,6 +98,7 @@ Function Start-PSCountdown {
         [ValidateNotNullorEmpty()]
         [string]$Message = "Starting soon.",
         [Parameter(HelpMessage = "Use this parameter to clear the screen prior to starting the countdown.")]
+        [alias("cls")]
         [switch]$ClearHost,
         [Parameter(HelpMessage = "The path to a text list of pseudo-tasks")]
         [ValidateNotNullOrEmpty()]
@@ -105,7 +106,7 @@ Function Start-PSCountdown {
     )
     DynamicParam {
         #this doesn't appear to work in PowerShell core on Linux
-        if ($host.globalData.ProgressBackgroundColor -And ( $PSVersionTable.Platform -eq 'Win32NT' -OR $PSEdition -eq 'Desktop')) {
+        if ($host.privatedata.ProgressBackgroundColor -And ( $PSVersionTable.Platform -eq 'Win32NT' -OR $PSEdition -eq 'Desktop')) {
     
             #define a parameter attribute object
             $attributes = New-Object System.Management.Automation.ParameterAttribute
@@ -114,7 +115,7 @@ Function Start-PSCountdown {
             $attributes.HelpMessage = @"
 Select a progress bar style. This only applies when using the PowerShell console or ISE.           
 
-Default - use the current value of `$host.globalData.ProgressBarBackgroundColor
+Default - use the current value of `$host.privatedata.ProgressBarBackgroundColor
 Transparent - set the progress bar background color to the same as the console
 Random - randomly cycle through a list of console colors
 "@
@@ -149,10 +150,10 @@ Random - randomly cycle through a list of console colors
         if ($psboundparameters.ContainsKey('progressStyle')) { 
           
             if ($PSBoundParameters.Item('ProgressStyle') -ne 'default') {
-                $saved = $host.globalData.ProgressBackgroundColor 
+                $saved = $host.privateData.ProgressBackgroundColor 
             }
             if ($PSBoundParameters.Item('ProgressStyle') -eq 'transparent') {
-                $host.globalData.progressBackgroundColor = $host.ui.RawUI.BackgroundColor
+                $host.privateData.progressBackgroundColor = $host.ui.RawUI.BackgroundColor
             }
         }
         Write-Verbose "Using parameter set $($pscmdlet.ParameterSetName)"
@@ -233,7 +234,7 @@ Random - randomly cycle through a list of console colors
     End {
         if ($saved) {
             #restore value if it has been changed
-            $host.globalData.ProgressBackgroundColor = $saved
+            $host.privateData.ProgressBackgroundColor = $saved
         }
     } #end
 

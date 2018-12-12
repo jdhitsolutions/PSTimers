@@ -14,31 +14,34 @@ Stop your simple timer.
 ## SYNTAX
 
 ```yaml
-Stop-MyTimer [-Name] <String> [-Passthru] [-WhatIf] [-Confirm] [<CommonParameters>]
+Stop-MyTimer [-Name] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-This command will stop any timer created with Start-MyTimer. When executed it which will calculate a timespan and remove the timer variable. You can also opt to get the timespan as a string.
+This command will stop any timer created with Start-MyTimer. When executed it which will calculate a final duration timespan, mark the timer as no longer running and remove the timer variable. Although you can still get the timer with Get-Timer by name or using its -All parameter.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
 ```powershell
-PS C:\> Stop-MyTimer Timer2 -passthru
+PS C:\> Stop-MyTimer Timer2
 
-Name            Start                  Duration         Running Description
-----            -----                  --------         ------- -----------
-t2              10/25/2018 9:37:18 AM  00:20:19.0345972   False
+
+Name        : timer2
+Start       : 12/12/2018 11:09:25 AM
+End         : 12/12/2018 11:17:34 AM
+Duration    : 00:08:08.6042323
+Description :
 ```
 
-Stop a timer called Timer2
+Stop a timer called Timer2.
 
 ### EXAMPLE 2
 
 ```powershell
-PS C:\> $report = import-csv s:\computers.csv | foreach -begin { Start-MyTimer T1; Write-Host "Starting the process" -foreground cyan } -process { Get-CimInstance win32_logicaldisk -computer $_.computername} -end { Write-Host "Finished! $((Stop-MyTimer T1 -passthru).duration)" -foreground cyan}
+PS C:\> $report = import-csv s:\company.csv | foreach -begin { Start-MyTimer T10; Write-Host "Starting the process" -foreground cyan } -process { Get-CimInstance win32_logicaldisk -computer $_.computername} -end { Write-Host "Finished! $((Stop-MyTimer T10).duration.toString())" -foreground cyan}
 
 Starting the process
 Finished!
@@ -97,22 +100,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Passthru
-
-By default, the command does not write an object to the pipeline. Use -Passthru to force an object through.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -122,8 +109,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### None
 
 ## OUTPUTS
-
-### None
 
 ### MyTimer
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+
+Any changes made to this file may be overwritten in future module updates
+
+-->
+
+<Types>
+    <Type>
+        <Name>MyTimer</Name>
+        <Members>
+            <PropertySet>
+                <Name>History</Name>
+                <ReferencedProperties>
+                    <Name>Name</Name>
+                    <Name>Start</Name>
+                    <Name>End</Name>
+                    <Name>Duration</Name>
+                    <Name>Description</Name>
+                </ReferencedProperties>
+            </PropertySet>
+        </Members>
+    </Type>
+</Types>

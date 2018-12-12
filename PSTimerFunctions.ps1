@@ -4,7 +4,7 @@
 Class MyTimer {
     [string]$Name
     [datetime]$Start
-    hidden[datetime]$End
+    [datetime]$End
     [timespan]$Duration
     [boolean]$Running
     [string]$Description
@@ -416,39 +416,36 @@ Function Remove-MyTimer {
         Write-Verbose "Ending: $($MyInvocation.Mycommand)"
     } #end
 } #Remove-MyTimer
-
 Function Stop-MyTimer {
     
     [cmdletbinding(SupportsShouldProcess)]
-    [OutputType("None", "MyTimer")] 
+    [OutputType("MyTimer")] 
     [Alias("toff")]
 
     Param(
         [Parameter(Position = 0, Mandatory, ValueFromPipelineByPropertyName)]
         [ValidateNotNullorEmpty()]
-        [string]$Name,
-        [switch]$Passthru
+        [string]$Name
     )
     Begin {
-        Write-Verbose "Starting: $($MyInvocation.Mycommand)"
+        Write-Verbose "[BEGIN  ] Starting: $($MyInvocation.Mycommand)"
         #display PSBoundparameters formatted nicely for Verbose output  
         [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
-        Write-Verbose "PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n" 
+        Write-Verbose "[BEGIN  ] PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n" 
     
     }
     Process {
-        Write-Verbose "Getting timer $name"
+        Write-Verbose "[PROCESS] Getting timer $name"
         $timers = ($global:myTimerCollection).Values.where( {$_.name -like $name}) 
         if ($timers) {
             Foreach ($timer in $timers) {
-                write-verbose "Processing $( $timer | Out-string)"
+                write-verbose "[PROCESS] Processing $( $timer | Out-string)"
                 if ($timer.running) {
                     if ($PSCmdlet.ShouldProcess($timer.name)) {
                         $timer.stopTimer()
                        
-                        if ($passthru) {
-                            $global:mytimercollection["$($timer.name)"]
-                        }
+                        Get-MyTimer -name $timer.name | Select-Object -Property History
+
                     } #should process
                 }
                 else {
@@ -461,7 +458,7 @@ Function Stop-MyTimer {
         }
     }    
     End {
-        Write-Verbose "Ending: $($MyInvocation.Mycommand)"
+        Write-Verbose "[END    ] Ending: $($MyInvocation.Mycommand)"
     }
 } #Stop-MyTimer
     
@@ -470,7 +467,7 @@ Function Get-MyTimer {
     [cmdletbinding()]
     [OutputType([MyTimer[]])]
     Param(
-        [Parameter(Position = 0)]
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName)]
         [ValidateNotNullorEmpty()]
         [string[]]$Name,
         [switch]$All

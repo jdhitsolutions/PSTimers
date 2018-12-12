@@ -1,6 +1,6 @@
 ---
 external help file: PSTimers-help.xml
-Module Name: PSTimers
+Module Name: pstimers
 online version:
 schema: 2.0.0
 ---
@@ -13,8 +13,8 @@ Get the current status of a simple timer.
 
 ## SYNTAX
 
-```yaml
-Get-MyTimer [[-Name] <String>] [-All] [<CommonParameters>]
+```
+Get-MyTimer [[-Name] <String[]>] [-All] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,14 +26,14 @@ Use this command to get the current status of a timer created with Start-MyTimer
 ### EXAMPLE 1
 
 ```powershell
-PS C:\> Get-MyTimer T2
+PS C:\> Get-MyTimer Timer2
 
-Name Started             Elapsed
----- -------             -------
-T2   7/8/2017 8:30:46 AM 00:30:15.3344369
+Name            Start                  Stop                   Duration         Running Description
+----            -----                  ----                   --------         ------- -----------
+timer2          12/12/2018 11:09:25 AM                        00:02:31.7254040    True
 ```
 
-Get the current status of a timer called T2.
+Get the current status of a timer called timer2.
 
 ## PARAMETERS
 
@@ -42,14 +42,14 @@ Get the current status of a timer called T2.
 The name for your timer.
 
 ```yaml
-Type: String
+Type: String[]
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 0
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: True
 ```
 

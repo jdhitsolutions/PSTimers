@@ -14,6 +14,8 @@ There's no .NET magic or anything complicated. The module commands are designed 
 
 Use `Get-MyTimer` to view the status of all your timers but without stopping them. Use `Set-MyTimer` if you want to modify a setting such as description.
 
+All timer variables are stored in a global variable called myTimerCollection. You can use `Remove-MyTimer` to delete items from the collection.
+
 ### Exporting and Importing
 
 If you need to persist timers across PowerShell sessions you can export a single timer or all timers with `Export-MyTimer`. Timers will be exported to an XML file using `Export-Clixml`. In the other PowerShell session use `Import-MyTimer` to recreate them in the current session. The running time will continue from when they were first created.
@@ -24,18 +26,31 @@ Create a single timer:
 
 ```powershell
 PS C:\> Start-MyTimer -Name A
+
+Name     Start                  Stop          Duration    Running Description
+----     -----                  ----          --------    ------- -----------
+a        12/12/2018 11:34:25 AM               00:00:00       True
 ```
 
 Start multiple timers:
 
 ```powershell
 PS C:\> Start-Mytimer B,C
+
+Name     Start                  Stop          Duration    Running Description
+----     -----                  ----          --------    ------- -----------
+B        12/12/2018 11:34:51 AM               00:00:00       True
+C        12/12/2018 11:34:51 AM               00:00:00       True
 ```
 
 Start a timer with a description:
 
 ```powershell
 PS C:\> Start-Mytimer D -description "work stuff"
+
+Name     Start                  Stop          Duration     Running Description
+----     -----                  ----          --------     ------- -----------
+D        12/12/2018 11:35:12 AM               00:00:00         True work stuff
 ```
 
 Note that timer names must be unique.  You can view status of all running timers:
@@ -43,24 +58,25 @@ Note that timer names must be unique.  You can view status of all running timers
 ```powershell
 PS C:\> get-mytimer
 
-Name            Start                  Duration         Running Description
-----            -----                  --------         ------- -----------
-A               10/25/2018 9:59:03 AM  00:01:36.3290476    True
-B               10/25/2018 9:59:09 AM  00:01:29.9847060    True
-C               10/25/2018 9:59:09 AM  00:01:29.9837050    True
-D               10/25/2018 9:59:50 AM  00:00:49.5655160    True work stuff
+Name     Start                  Stop          Duration         Running Description
+----     -----                  ----          --------         ------- -----------
+a        12/12/2018 11:34:25 AM               00:01:38.0954883    True
+B        12/12/2018 11:34:51 AM               00:01:12.5691189    True
+C        12/12/2018 11:34:51 AM               00:01:12.5621210    True
+D        12/12/2018 11:35:12 AM               00:00:51.8095814    True work stuff
 ```
 
-Stopping a timer will not write anything to the pipeline unless you use -Passthru.
+Stopping a timer will update the duration and mark it as no longer running.
 
 ```powershell
 
-PS C:\> stop-mytimer C -passthru
+PS C:\> stop-mytimer C
 
-Name            Start                  Duration         Running Description
-----            -----                  --------         ------- -----------
-C               10/25/2018 9:59:09 AM  00:02:33.6885171   False
-```
+Name        : C
+Start       : 12/12/2018 11:34:51 AM
+End         : 12/12/2018 11:37:10 AM
+Duration    : 00:02:19.3153311
+Description :```
 
 You can also export and import timers if you need them to persist across PowerShell sessions. Otherwise the timers are removed when your PowerShell session ends.
 

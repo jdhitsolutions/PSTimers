@@ -1,5 +1,14 @@
 # Changelog for PSTimers
 
+## v0.8.0
+
++ Added property set called History for MyTimer to display End value (Issue #4)
++ Updated `mytimer.format.ps1xml` to include End value
++ Modified `Stop-MyTimer` to write result to pipeline. Removed `-Passthru` (Issue #3)
++ Modified myTimer class to not hide `End` property.
++ Modified `Get-MyTimer` to take pipeline input for Name by property name
++ help and documentation updates
+
 ## v0.7.1
 
 + fixed bug with `-ProgressStyle` parameter on `Start-PSCountdown`
@@ -15,14 +24,14 @@
 + MyTimer names must be unique
 + Updated about_MyTimer help documentation
 + Added auto completers for MyTimer commands
-+ added additional entries to PSCountdowntasks.txt
++ added additional entries to `PSCountdowntasks.txt`
 + Renamed `-GlobalBlock` parameter in `Start-PSTimer` to `-Scriptblock` but kept original name as a parameter alias.
 
 ## v0.6.1
 
 + file cleanup for the PowerShell Gallery
 + updated license
-+ added additional entries to PSCountdowntasks.txt
++ added additional entries to `PSCountdowntasks.txt`
 
 ## v0.6.0
 

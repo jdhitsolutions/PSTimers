@@ -23,6 +23,11 @@ Any changes made to this file may be overwritten in future module updates
                         <Width>22</Width>
                         <Alignment>Left</Alignment>
                     </TableColumnHeader>
+                     <TableColumnHeader>
+                        <Label>Stop</Label>
+                        <Width>22</Width>
+                        <Alignment>Left</Alignment>
+                    </TableColumnHeader>
                     <TableColumnHeader>
                         <Label>Duration</Label>
                         <Width>16</Width>
@@ -48,6 +53,16 @@ Any changes made to this file may be overwritten in future module updates
                             </TableColumnItem>
                             <TableColumnItem>
                                 <PropertyName>Start</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <ScriptBlock>
+                                if ($_.Running) {
+                                  $null
+                                }
+                                else {
+                                 $_.end
+                                }
+                                </ScriptBlock>
                             </TableColumnItem>
                               <TableColumnItem>
                                 <PropertyName>Duration</PropertyName>

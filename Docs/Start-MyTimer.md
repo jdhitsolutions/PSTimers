@@ -1,6 +1,6 @@
 ---
 external help file: PSTimers-help.xml
-Module Name: PSTimers
+Module Name: pstimers
 online version:
 schema: 2.0.0
 ---
@@ -36,14 +36,12 @@ Start the timer with the default name of MyTimer.
 ```powershell
 PS C:\> Start-MyTimer Timer2
 
-Name        : timer2
-Start       : 7/17/2018 11:14:23 AM
-Duration    : 00:00:00
-Running     : True
-Description :
+Name            Start                  Stop                   Duration         Running Description
+----            -----                  ----                   --------         ------- -----------
+timer2          12/12/2018 11:09:25 AM                        00:00:00            True
 ```
 
-Create a second timer called Timer2 and pass the object to the pipeline.
+Create a second timer called Timer2.
 
 ### EXAMPLE 3
 
@@ -51,11 +49,9 @@ Create a second timer called Timer2 and pass the object to the pipeline.
 PS C:\> start-mytimer Z -Description "work stuff"
 
 
-Name        : Z
-Start       : 7/17/2018 11:18:02 AM
-Duration    : 00:00:00
-Running     : True
-Description : work stuff
+Name            Start                  Stop                   Duration         Running Description
+----            -----                  ----                   --------         ------- -----------
+Z               12/12/2018 11:10:16 AM                        00:00:00            True work stuff
 ```
 
 Create a new timer with a description.
@@ -65,23 +61,12 @@ Create a new timer with a description.
 ```powershell
 PS C:\> start-mytimer alpha,bravo,charlie
 
-Name        : alpha
-Start       : 7/17/2018 11:23:49 AM
-Duration    : 00:00:00
-Running     : True
-Description :
 
-Name        : bravo
-Start       : 7/17/2018 11:23:49 AM
-Duration    : 00:00:00
-Running     : True
-Description :
-
-Name        : charlie
-Start       : 7/17/2018 11:23:49 AM
-Duration    : 00:00:00
-Running     : True
-Description :
+Name            Start                  Stop                   Duration         Running Description
+----            -----                  ----                   --------         ------- -----------
+a               12/12/2018 11:11:10 AM                        00:00:00            True
+b               12/12/2018 11:11:10 AM                        00:00:00            True
+c               12/12/2018 11:11:10 AM                        00:00:00            True
 ```
 
 Create multiple timers at once.

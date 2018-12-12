@@ -384,14 +384,14 @@ ID RunTime             Status Command
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-MyTimer</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="true" pipelineInput="False" position="0" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="true" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
           <maml:name>Name</maml:name>
           <maml:Description>
             <maml:para>The name for your timer.</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
-            <maml:name>String</maml:name>
+            <maml:name>String[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -410,14 +410,14 @@ ID RunTime             Status Command
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="true" pipelineInput="False" position="0" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="true" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
         <maml:name>Name</maml:name>
         <maml:Description>
           <maml:para>The name for your timer.</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
-          <maml:name>String</maml:name>
+          <maml:name>String[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -463,13 +463,13 @@ ID RunTime             Status Command
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-MyTimer T2
+        <dev:code>PS C:\&gt; Get-MyTimer Timer2
 
-Name Started             Elapsed
----- -------             -------
-T2   7/8/2017 8:30:46 AM 00:30:15.3344369</dev:code>
+Name            Start                  Stop                   Duration         Running Description
+----            -----                  ----                   --------         ------- -----------
+timer2          12/12/2018 11:09:25 AM                        00:02:31.7254040    True</dev:code>
         <dev:remarks>
-          <maml:para>Get the current status of a timer called T2.</maml:para>
+          <maml:para>Get the current status of a timer called timer2.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1091,13 +1091,11 @@ T2   7/8/2017 8:30:46 AM 00:30:15.3344369</dev:code>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Start-MyTimer Timer2
 
-Name        : timer2
-Start       : 7/17/2018 11:14:23 AM
-Duration    : 00:00:00
-Running     : True
-Description :</dev:code>
+Name            Start                  Stop                   Duration         Running Description
+----            -----                  ----                   --------         ------- -----------
+timer2          12/12/2018 11:09:25 AM                        00:00:00            True</dev:code>
         <dev:remarks>
-          <maml:para>Create a second timer called Timer2 and pass the object to the pipeline.</maml:para>
+          <maml:para>Create a second timer called Timer2.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
@@ -1105,11 +1103,9 @@ Description :</dev:code>
         <dev:code>PS C:\&gt; start-mytimer Z -Description "work stuff"
 
 
-Name        : Z
-Start       : 7/17/2018 11:18:02 AM
-Duration    : 00:00:00
-Running     : True
-Description : work stuff</dev:code>
+Name            Start                  Stop                   Duration         Running Description
+----            -----                  ----                   --------         ------- -----------
+Z               12/12/2018 11:10:16 AM                        00:00:00            True work stuff</dev:code>
         <dev:remarks>
           <maml:para>Create a new timer with a description.</maml:para>
         </dev:remarks>
@@ -1118,23 +1114,12 @@ Description : work stuff</dev:code>
         <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
         <dev:code>PS C:\&gt; start-mytimer alpha,bravo,charlie
 
-Name        : alpha
-Start       : 7/17/2018 11:23:49 AM
-Duration    : 00:00:00
-Running     : True
-Description :
 
-Name        : bravo
-Start       : 7/17/2018 11:23:49 AM
-Duration    : 00:00:00
-Running     : True
-Description :
-
-Name        : charlie
-Start       : 7/17/2018 11:23:49 AM
-Duration    : 00:00:00
-Running     : True
-Description :</dev:code>
+Name            Start                  Stop                   Duration         Running Description
+----            -----                  ----                   --------         ------- -----------
+a               12/12/2018 11:11:10 AM                        00:00:00            True
+b               12/12/2018 11:11:10 AM                        00:00:00            True
+c               12/12/2018 11:11:10 AM                        00:00:00            True</dev:code>
         <dev:remarks>
           <maml:para>Create multiple timers at once.</maml:para>
         </dev:remarks>
@@ -1708,7 +1693,7 @@ Description :</dev:code>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>This command will stop any timer created with Start-MyTimer. When executed it which will calculate a timespan and remove the timer variable. You can also opt to get the timespan as a string.</maml:para>
+      <maml:para>This command will stop any timer created with Start-MyTimer. When executed it which will calculate a final duration timespan, mark the timer as no longer running and remove the timer variable. Although you can still get the timer with Get-Timer by name or using its -All parameter.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1740,17 +1725,6 @@ Description :</dev:code>
           <maml:name>WhatIf</maml:name>
           <maml:Description>
             <maml:para>Using this parameter will display what the final value would be but not actually stop it.</maml:para>
-          </maml:Description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Passthru</maml:name>
-          <maml:Description>
-            <maml:para>By default, the command does not write an object to the pipeline. Use -Passthru to force an object through.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -1797,18 +1771,6 @@ Description :</dev:code>
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>Passthru</maml:name>
-        <maml:Description>
-          <maml:para>By default, the command does not write an object to the pipeline. Use -Passthru to force an object through.</maml:para>
-        </maml:Description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
@@ -1821,14 +1783,6 @@ Description :</dev:code>
       </command:inputType>
     </command:inputTypes>
     <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>None</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
       <command:returnValue>
         <dev:type>
           <maml:name>MyTimer</maml:name>
@@ -1846,18 +1800,21 @@ Description :</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Stop-MyTimer Timer2 -passthru
+        <dev:code>PS C:\&gt; Stop-MyTimer Timer2
 
-Name            Start                  Duration         Running Description
-----            -----                  --------         ------- -----------
-t2              10/25/2018 9:37:18 AM  00:20:19.0345972   False</dev:code>
+
+Name        : timer2
+Start       : 12/12/2018 11:09:25 AM
+End         : 12/12/2018 11:17:34 AM
+Duration    : 00:08:08.6042323
+Description :</dev:code>
         <dev:remarks>
-          <maml:para>Stop a timer called Timer2</maml:para>
+          <maml:para>Stop a timer called Timer2.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; $report = import-csv s:\computers.csv | foreach -begin { Start-MyTimer T1; Write-Host "Starting the process" -foreground cyan } -process { Get-CimInstance win32_logicaldisk -computer $_.computername} -end { Write-Host "Finished! $((Stop-MyTimer T1 -passthru).duration)" -foreground cyan}
+        <dev:code>PS C:\&gt; $report = import-csv s:\company.csv | foreach -begin { Start-MyTimer T10; Write-Host "Starting the process" -foreground cyan } -process { Get-CimInstance win32_logicaldisk -computer $_.computername} -end { Write-Host "Finished! $((Stop-MyTimer T10).duration.toString())" -foreground cyan}
 
 Starting the process
 Finished!

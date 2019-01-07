@@ -2,8 +2,8 @@
 
 ## v0.8.0
 
-+ Added property set called History for MyTimer to display End value (Issue #4)
-+ Updated `mytimer.format.ps1xml` to include End value
++ Added property set called `History` for MyTimer object to display End value (Issue #4)
++ Updated `mytimer.format.ps1xml` to include `End` value
 + Modified `Stop-MyTimer` to write result to pipeline. Removed `-Passthru` (Issue #3)
 + Modified myTimer class to not hide `End` property.
 + Modified `Get-MyTimer` to take pipeline input for Name by property name

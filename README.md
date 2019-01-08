@@ -29,4 +29,4 @@ I use several of these tools on a regular basis.
 
 The commands should also work on PowerShell Core cross-platform, although there may be a few artifacts on non-Windows systems.
 
-_last updated 7 January 2019_
+_last updated 8 January 2019_

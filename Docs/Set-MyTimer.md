@@ -35,7 +35,7 @@ Modify the T1 timer with a new description
 ### Example 2
 
 ```powershell
-PS C:\> get-mytimer foo | set-mytimer -newName Work1 -Start "7/17/18 9:00AM" 
+PS C:\> get-mytimer foo | set-mytimer -newName Work1 -Start "12/17/18 9:00AM"
 ```
 
 Get the timer called foo and give it a new name and start time.
@@ -173,3 +173,5 @@ Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell
 ## RELATED LINKS
 
 [Get-MyTimer](Get-MyTimer.md)
+
+[Start-MyTimer](Start-MyTimer.md)

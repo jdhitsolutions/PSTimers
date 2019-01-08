@@ -1,6 +1,6 @@
 ---
 external help file: PSTimers-help.xml
-Module Name: pstimers
+Module Name: PSTimers
 online version:
 schema: 2.0.0
 ---
@@ -13,8 +13,8 @@ Get the current status of a simple timer.
 
 ## SYNTAX
 
-```
-Get-MyTimer [[-Name] <String[]>] [-All] [<CommonParameters>]
+```yaml
+Get-MyTimer [[-Name] <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,14 +26,28 @@ Use this command to get the current status of a timer created with Start-MyTimer
 ### EXAMPLE 1
 
 ```powershell
-PS C:\> Get-MyTimer Timer2
+PS C:\> Get-MyTimer
 
 Name            Start                  Stop                   Duration         Running Description
 ----            -----                  ----                   --------         ------- -----------
-timer2          12/12/2018 11:09:25 AM                        00:02:31.7254040    True
+foo             1/8/2019 10:03:05 AM   1/8/2019 10:03:46 AM   00:00:41.4660786   False something
+test            1/8/2019 10:03:13 AM   1/8/2019 10:03:59 AM   00:00:46.9185655   False
+test2           1/8/2019 10:03:13 AM                          00:01:07.5290466    True
 ```
 
-Get the current status of a timer called timer2.
+Get the all timers
+
+### EXAMPLE 2
+
+```powershell
+PS C:\> Get-MyTimer test2
+
+Name            Start                  Stop                   Duration         Running Description
+----            -----                  ----                   --------         ------- -----------
+test2           1/8/2019 10:03:13 AM                          00:01:37.5283112    True
+```
+
+Get a single timer.
 
 ## PARAMETERS
 
@@ -53,22 +67,6 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: True
 ```
 
-### -All
-
-Get all timers.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -79,7 +77,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### [System.Management.Automation.PSObject[]]
+### MyTimer[]
 
 ## NOTES
 

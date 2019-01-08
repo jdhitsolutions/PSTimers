@@ -19,9 +19,9 @@ Class MyTimer {
     [timespan]GetStatus () {
         #temporarily set duration
         $current = (Get-Date) - $this.Start
-        return $current        
+        return $current
     }
-    
+
     MyTimer([string]$Name, [string]$Description) {
 
         Try {
@@ -30,7 +30,7 @@ Class MyTimer {
         Catch {
             Write-Verbose "Creating myTimerCollection hashtable"
             New-Variable -Scope global -Name myTimerCollection -value @{}
-        } 
+        }
 
         #timer names must be unique
         if ($global:myTimerCollection.ContainsKey($Name)) {
@@ -62,7 +62,7 @@ Class MyTimer {
         }
         Catch {
             New-Variable -Scope global -Name myTimerCollection -value @{}
-        } 
+        }
         #reuse existing timers if found
         if ($global:mytimercollection.ContainsKey($this.name)) {
             $global:mytimercollection[$this.name] = $this
@@ -74,7 +74,7 @@ Class MyTimer {
 }
 
 <#
-Start-PSCountdown is inspired from code originally published at: 
+Start-PSCountdown is inspired from code originally published at:
 https://github.com/Windos/powershell-depot/blob/master/livecoding.tv/StreamCountdown/StreamCountdown.psm1
 
 This should work in Windows PowerShell and PowerShell Core, although not in VS Code.
@@ -107,13 +107,13 @@ Function Start-PSCountdown {
     DynamicParam {
         #this doesn't appear to work in PowerShell core on Linux
         if ($host.privatedata.ProgressBackgroundColor -And ( $PSVersionTable.Platform -eq 'Win32NT' -OR $PSEdition -eq 'Desktop')) {
-    
+
             #define a parameter attribute object
             $attributes = New-Object System.Management.Automation.ParameterAttribute
             $attributes.ValueFromPipelineByPropertyName = $False
             $attributes.Mandatory = $false
             $attributes.HelpMessage = @"
-Select a progress bar style. This only applies when using the PowerShell console or ISE.           
+Select a progress bar style. This only applies when using the PowerShell console or ISE.
 
 Default - use the current value of `$host.privatedata.ProgressBarBackgroundColor
 Transparent - set the progress bar background color to the same as the console
@@ -130,27 +130,27 @@ Random - randomly cycle through a list of console colors
             #add an alias
             $alias = [System.Management.Automation.AliasAttribute]::new("style")
             $attributeCollection.Add($alias)
-    
+
             #define the dynamic param
             $dynParam1 = New-Object -Type System.Management.Automation.RuntimeDefinedParameter("ProgressStyle", [string], $attributeCollection)
             $dynParam1.Value = "Default"
-    
+
             #create array of dynamic parameters
             $paramDictionary = New-Object -Type System.Management.Automation.RuntimeDefinedParameterDictionary
             $paramDictionary.Add("ProgressStyle", $dynParam1)
             #use the array
-            return $paramDictionary     
-    
+            return $paramDictionary
+
         } #if
     } #dynamic parameter
     Begin {
         Write-Verbose "Starting $($myinvocation.MyCommand)"
-        $PSBoundParameters | Out-String | Write-Verbose     
+        $PSBoundParameters | Out-String | Write-Verbose
 
-        if ($psboundparameters.ContainsKey('progressStyle')) { 
-          
+        if ($psboundparameters.ContainsKey('progressStyle')) {
+
             if ($PSBoundParameters.Item('ProgressStyle') -ne 'default') {
-                $saved = $host.privateData.ProgressBackgroundColor 
+                $saved = $host.privateData.ProgressBackgroundColor
             }
             if ($PSBoundParameters.Item('ProgressStyle') -eq 'transparent') {
                 $host.privateData.progressBackgroundColor = $host.ui.RawUI.BackgroundColor
@@ -161,7 +161,7 @@ Random - randomly cycle through a list of console colors
         if (Test-Path $Path) {
             #import entries from list without a # comment and trim each one
             Write-verbose "Loading task messages from $path"
-            $loading = Get-Content -path $Path | 
+            $loading = Get-Content -path $Path |
                 Where-Object {$_ -match "\w+" -AND $_ -notmatch '#'} | foreach-object {$_.Trim()}
         }
         else {
@@ -172,7 +172,7 @@ Random - randomly cycle through a list of console colors
             Clear-Host
         }
         $startTime = Get-Date
-        if ($pscmdlet.ParameterSetName -eq 'minutes') {      
+        if ($pscmdlet.ParameterSetName -eq 'minutes') {
             Write-verbose "Adding $minutes minutes to start time"
             $endTime = $startTime.AddMinutes($Minutes)
         }
@@ -198,7 +198,7 @@ Random - randomly cycle through a list of console colors
             #bail out
             Return
         }
-        Do {   
+        Do {
             $now = Get-Date
             $secondsElapsed = (New-TimeSpan -Start $startTime -End $now).TotalSeconds
             $secondsRemaining = $totalSeconds - $secondsElapsed
@@ -241,7 +241,7 @@ Random - randomly cycle through a list of console colors
 } #close Start-PSCountdown
 
 Function Start-PSTimer {
-    
+
     [cmdletbinding()]
     [OutputType("None", "PSObject")]
     [Alias("spst")]
@@ -257,38 +257,38 @@ Function Start-PSTimer {
         [Switch]$Clear,
         [String]$Message
     )
-    
+
     #save beginning value for total seconds
     $TotalSeconds = $Seconds
-        
+
     If ($clear) {
         Clear-Host
     }
-    
+
     #get current cursor position
     $Coordinate = New-Object System.Management.Automation.Host.Coordinates
     $Coordinate.X = $host.ui.rawui.CursorPosition.X
     $Coordinate.Y = $host.ui.rawui.CursorPosition.Y
     #define the Escape key
     $ESCKey = 27
-    
+
     #define a variable indicating if the user aborted the countdown
     $Abort = $False
-    
+
     while ($seconds -ge 1) {
-    
+
         if ($host.ui.RawUi.KeyAvailable) {
             $key = $host.ui.RawUI.ReadKey("NoEcho,IncludeKeyUp,IncludeKeyDown")
-    
+
             if ($key.VirtualKeyCode -eq $ESCkey) {
                 #ESC was pressed so quit the countdown and set abort flag to True
                 $Seconds = 0
-                $Abort = $True 
+                $Abort = $True
             }
         }
         if ($Clear) {
             Clear-Host
-        } 
+        }
         If ($ProgressBar) {
             #calculate percent time remaining, but in reverse so the progress bar
             #moves from left to right
@@ -314,37 +314,37 @@ $(([string]$Seconds).Padright($pad))
 "@
 
             write-host $msg -ForegroundColor $color
-            
+
             Start-Sleep -Seconds 1
         }
         #decrement $Seconds
         $Seconds--
     } #while
-    
+
     if ($Progress) {
         #set progress to complete
         Write-Progress -Completed
     }
-    
+
     if (-Not $Abort) {
-        
+
         if ($clear) {
             #if $Clear was used, center the message in the console
             $Coordinate.X = $Coordinate.X - ([int]($message.Length) / 2)
         }
-    
+
         $host.ui.rawui.CursorPosition = $Coordinate
-        
+
         Write-Host $Message -ForegroundColor Green
         #run the scriptblock if specified
-        if ($scriptblock) {    
+        if ($scriptblock) {
             Invoke-Command -ScriptBlock $scriptblock
         }
     }
     else {
         Write-Warning "Countdown aborted"
     }
-    
+
 } #close Start-PSTimer
 Function Start-MyTimer {
 
@@ -358,20 +358,20 @@ Function Start-MyTimer {
         [string[]]$Name = "MyTimer",
         [string]$Description
     )
-    
+
     Write-Verbose "Starting: $($MyInvocation.Mycommand)"
-    #display PSBoundparameters formatted nicely for Verbose output  
+    #display PSBoundparameters formatted nicely for Verbose output
     [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
-    Write-Verbose "PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n" 
-    foreach ($timer in $Name) {    
+    Write-Verbose "PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n"
+    foreach ($timer in $Name) {
 
         Try {
             Write-Verbose "Creating timer $timer"
-            New-Object -TypeName MyTimer -ArgumentList $timer, $Description -ErrorAction stop   
+            New-Object -TypeName MyTimer -ArgumentList $timer, $Description -ErrorAction stop
         }
         Catch {
-           # Write-Warning "Failed to create timer $timer. $($_.exception.message)"
-           Throw $_
+            # Write-Warning "Failed to create timer $timer. $($_.exception.message)"
+            Throw $_
         }
 
     } #foreach
@@ -391,11 +391,11 @@ Function Remove-MyTimer {
     Begin {
         Write-Verbose "Starting: $($MyInvocation.Mycommand)"
     }   #begin
-    Process {  
-        #display PSBoundparameters formatted nicely for Verbose output  
+    Process {
+        #display PSBoundparameters formatted nicely for Verbose output
         [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
-        Write-Verbose "PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n" 
-        foreach ($timer in $Name) {    
+        Write-Verbose "PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n"
+        foreach ($timer in $Name) {
             Try {
                 if ($PSCmdlet.ShouldProcess($timer)) {
                     Write-Verbose "Removing timer $timer"
@@ -417,9 +417,9 @@ Function Remove-MyTimer {
     } #end
 } #Remove-MyTimer
 Function Stop-MyTimer {
-    
+
     [cmdletbinding(SupportsShouldProcess)]
-    [OutputType("MyTimer")] 
+    [OutputType("MyTimer")]
     [Alias("toff")]
 
     Param(
@@ -429,21 +429,21 @@ Function Stop-MyTimer {
     )
     Begin {
         Write-Verbose "[BEGIN  ] Starting: $($MyInvocation.Mycommand)"
-        #display PSBoundparameters formatted nicely for Verbose output  
+        #display PSBoundparameters formatted nicely for Verbose output
         [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
-        Write-Verbose "[BEGIN  ] PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n" 
-    
+        Write-Verbose "[BEGIN  ] PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n"
+
     }
     Process {
         Write-Verbose "[PROCESS] Getting timer $name"
-        $timers = ($global:myTimerCollection).Values.where( {$_.name -like $name}) 
+        $timers = ($global:myTimerCollection).Values.where( {$_.name -like $name})
         if ($timers) {
             Foreach ($timer in $timers) {
                 write-verbose "[PROCESS] Processing $( $timer | Out-string)"
                 if ($timer.running) {
                     if ($PSCmdlet.ShouldProcess($timer.name)) {
                         $timer.stopTimer()
-                       
+
                         Get-MyTimer -name $timer.name | Select-Object -Property History
 
                     } #should process
@@ -456,46 +456,41 @@ Function Stop-MyTimer {
         else {
             Write-Warning "Can't find a timer called $Name. You need to start the timer first."
         }
-    }    
+    }
     End {
         Write-Verbose "[END    ] Ending: $($MyInvocation.Mycommand)"
     }
 } #Stop-MyTimer
-    
+
 Function Get-MyTimer {
-    
+
     [cmdletbinding()]
     [OutputType([MyTimer[]])]
     Param(
         [Parameter(Position = 0, ValueFromPipelineByPropertyName)]
         [ValidateNotNullorEmpty()]
-        [string[]]$Name,
-        [switch]$All
+        [string[]]$Name
     )
-    
+
     Begin {
         Write-Verbose "[BEGIN  ] Starting: $($MyInvocation.Mycommand)"
     } #begin
-    
+
     Process {
-        #display PSBoundparameters formatted nicely for Verbose output  
+        #display PSBoundparameters formatted nicely for Verbose output
         [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
-        Write-Verbose "[PROCESS] PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n" 
-    
-        If ($all) {
-            Write-Verbose "[PROCESS] Getting all timers"
-            $timers = $global:myTimerCollection.Values 
-        }
-        elseif ($Name) {
+        Write-Verbose "[PROCESS] PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n"
+
+        if ($Name) {
             Write-Verbose "[PROCESS] Getting timer $Name"
             $timers = foreach ($item in $Name) {
-                ($global:MytimerCollection).Values.where( {$_.name -like $item}) 
+                ($global:MytimerCollection).Values.where( {$_.name -like $item})
             }
         }
         else {
             #find all running timers by default
-            Write-Verbose "[PROCESS] Getting all running timers"
-            $timers = ($global:myTimerCollection.Values).where( {$_.running}) 
+            Write-Verbose "[PROCESS] Getting all timers"
+            $timers = $global:myTimerCollection.Values
         }
 
         Write-Verbose "[PROCESS] Getting current timer status"
@@ -507,7 +502,7 @@ Function Get-MyTimer {
                     $timer
                     #set duration back to 0
                     $timer.duration = 0
-                }   
+                }
                 else {
                     #update Duration value if timer is stopped and it hasn't been updated
                     if ($timer.duration.seconds -eq 0) {
@@ -515,22 +510,28 @@ Function Get-MyTimer {
                         $timer.Duration = $timer.end - $timer.start
                     }
                     $timer
-                }     
-                
+                }
+
             }#foreach
         } #if $timers
         else {
-            Write-Warning "Can't find any matching timer objects."
-        }    
+            if ($name) {
+                $warn = "Can't find any matching timer objects with the name $Name."
+            }
+            else {
+                $warn = "No defined timers found. Use Start-MyTimer to create one."
+            }
+            Write-Warning $warn
+        }
     } #process
-    
+
     End {
         Write-Verbose "[END    ] Ending: $($MyInvocation.Mycommand)"
     }
 } #Get-MyTimer
-    
+
 Function Set-MyTimer {
-    
+
     [cmdletbinding(SupportsShouldProcess)]
     [OutputType([MyTimer[]])]
     Param(
@@ -542,28 +543,28 @@ Function Set-MyTimer {
         [string]$Description,
         [switch]$Passthru
     )
-    
+
     Begin {
         Write-Verbose "[BEGIN  ] Starting: $($MyInvocation.Mycommand)"
     } #begin
-    
+
     Process {
-        #display PSBoundparameters formatted nicely for Verbose output  
+        #display PSBoundparameters formatted nicely for Verbose output
         [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
-        Write-Verbose "[PROCESS] PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n" 
-    
-        $timers = ($global:myTimerCollection).Values.where( {$_.name -like $name}) 
-        
+        Write-Verbose "[PROCESS] PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n"
+
+        $timers = ($global:myTimerCollection).Values.where( {$_.name -like $name})
+
         if ($timers.count -ge 1) {
             foreach ($timer in $timers) {
                 Write-Verbose "[PROCESS] Setting timer $($timer.name)"
                 if ($PSCmdlet.ShouldProcess($Name)) {
                     if ($Description) {
                         $timer.description = $Description
-                    }   
+                    }
                     if ($NewName) {
                         $timer.Name = $NewName
-                    } 
+                    }
                     if ($start) {
                         $timer.start = $Start
                     }
@@ -575,22 +576,22 @@ Function Set-MyTimer {
         } #if $timers
         else {
             Write-Warning "Can't find a matching timer object"
-        }    
+        }
     } #process
-    
+
     End {
         Write-Verbose "[END    ] Ending: $($MyInvocation.Mycommand)"
     }
 } #Set-MyTimer
-    
+
 Function Export-MyTimer {
-    
+
     [cmdletbinding(SupportsShouldProcess)]
     [OutputType("None")]
     Param(
         [Parameter(Position = 0)]
         [string]$Name,
-    
+
         [Parameter(
             Mandatory,
             HelpMessage = "Enter the name and path of an XML file"
@@ -598,12 +599,12 @@ Function Export-MyTimer {
         [ValidateNotNullorEmpty()]
         [string]$Path
     )
-    
+
     Write-Verbose "Starting: $($MyInvocation.Mycommand)"
-    #display PSBoundparameters formatted nicely for Verbose output  
+    #display PSBoundparameters formatted nicely for Verbose output
     [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
-    Write-Verbose "PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n" 
-    
+    Write-Verbose "PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n"
+
     if ($Name) {
         Write-Verbose "Finding timer variable $Name"
         $found = $global:mytimercollection["$name"]
@@ -612,7 +613,7 @@ Function Export-MyTimer {
         Write-Verbose "Finding all timer variables"
         $found = $global:mytimercollection.values
     }
-    
+
     If ($found) {
         Try {
             Write-Verbose "Exporting timers to $Path"
@@ -625,14 +626,14 @@ Function Export-MyTimer {
     else {
         Write-Warning "No matching timers found."
     }
-    
+
     Write-Verbose "Ending: $($MyInvocation.Mycommand)"
 } #Export-MyTimer
-    
+
 Function Import-MyTimer {
-    
+
     [cmdletbinding(SupportsShouldProcess)]
-    [OutputType([System.Management.Automation.PSVariable])]
+    [OutputType("MyTimer[]")]
     Param(
         [Parameter(
             Position = 0,
@@ -647,15 +648,15 @@ Function Import-MyTimer {
                 else {
                     Throw "Cannot validate path $_"
                 }
-            })]     
+            })]
         [string]$Path
     )
-    
+
     Write-Verbose "Starting: $($MyInvocation.Mycommand)"
-    #display PSBoundparameters formatted nicely for Verbose output  
+    #display PSBoundparameters formatted nicely for Verbose output
     [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
-    Write-Verbose "PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n" 
-    
+    Write-Verbose "PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n"
+
     Import-Clixml -Path $Path | foreach-object {
         if ($PSCmdlet.ShouldProcess($_.name)) {
             Write-Verbose "Importing $($_.name)"
@@ -663,12 +664,12 @@ Function Import-MyTimer {
             Get-Mytimer -name $_.name
         }
     }
-    
+
     Write-Verbose "Ending: $($MyInvocation.Mycommand)"
 } #Import-MyTimer
-   
+
 Function Get-HistoryRuntime {
-    
+
     [cmdletbinding(DefaultParameterSetName = "ID")]
     [OutputType([PSCustomObject])]
     [Alias("ghr")]
@@ -684,25 +685,25 @@ Function Get-HistoryRuntime {
         [Microsoft.PowerShell.Commands.HistoryInfo]$History,
         [Switch]$Detail
     )
-    
+
     Begin {
-        Write-Verbose "[BEGIN  ] Starting: $($MyInvocation.Mycommand)"  
+        Write-Verbose "[BEGIN  ] Starting: $($MyInvocation.Mycommand)"
         Write-Verbose "[BEGIN  ] Using parameter set $($PSCmdlet.parameterSetName)"
     } #begin
-    
+
     Process {
-        
+
         Try {
             If ($PSCmdlet.ParameterSetName -eq "ID") {
                 $History = Get-History -Id $ID -ErrorAction Stop
             }
-            Write-Verbose "[PROCESS] Calculating runtime for id $($history.ID)"    
-    
+            Write-Verbose "[PROCESS] Calculating runtime for id $($history.ID)"
+
             $propHash = [Ordered]@{
                 ID      = $history.ID
                 RunTime = $history.EndExecutionTime - $history.StartExecutionTime
             }
-    
+
             if ($Detail) {
                 Write-Verbose "[PROCESS] Adding history detail"
                 $prophash.Add("Status", $History.ExecutionStatus)
@@ -710,17 +711,17 @@ Function Get-HistoryRuntime {
             }
             #create an object
             New-Object -TypeName PSObject -Property $propHash
-    
+
         } #Try
         Catch {
             Write-Warning "Failed to find history with an ID of $ID"
         }
-    
+
     } #process
-    
+
     End {
         Write-Verbose "[END    ] Ending: $($MyInvocation.Mycommand)"
     } #end
-    
+
 } #close function
-    
+

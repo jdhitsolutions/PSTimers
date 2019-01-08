@@ -34,7 +34,7 @@ Remove the alpha timer.
 ### Example 2
 
 ```powershell
-PS C:\> get-mytimer -all | where {-not $_.running} | remove-mytimer
+PS C:\> get-mytimer  | where {-not $_.running} | remove-mytimer
 ```
 
 Remove all stopped timers.
@@ -97,6 +97,8 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## INPUTS
 
 ### System.String[]
+
+### MyTimer[]
 
 ## OUTPUTS
 

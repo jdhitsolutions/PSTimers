@@ -396,17 +396,6 @@ ID RunTime             Status Command
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>All</maml:name>
-          <maml:Description>
-            <maml:para>Get all timers.</maml:para>
-          </maml:Description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -422,18 +411,6 @@ ID RunTime             Status Command
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>All</maml:name>
-        <maml:Description>
-          <maml:para>Get all timers.</maml:para>
-        </maml:Description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
@@ -448,7 +425,7 @@ ID RunTime             Status Command
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>[System.Management.Automation.PSObject[]]</maml:name>
+          <maml:name>MyTimer[]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -463,13 +440,26 @@ ID RunTime             Status Command
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-MyTimer Timer2
+        <dev:code>PS C:\&gt; Get-MyTimer
 
 Name            Start                  Stop                   Duration         Running Description
 ----            -----                  ----                   --------         ------- -----------
-timer2          12/12/2018 11:09:25 AM                        00:02:31.7254040    True</dev:code>
+foo             1/8/2019 10:03:05 AM   1/8/2019 10:03:46 AM   00:00:41.4660786   False something
+test            1/8/2019 10:03:13 AM   1/8/2019 10:03:59 AM   00:00:46.9185655   False
+test2           1/8/2019 10:03:13 AM                          00:01:07.5290466    True</dev:code>
         <dev:remarks>
-          <maml:para>Get the current status of a timer called timer2.</maml:para>
+          <maml:para>Get the all timers</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-MyTimer test2
+
+Name            Start                  Stop                   Duration         Running Description
+----            -----                  ----                   --------         ------- -----------
+test2           1/8/2019 10:03:13 AM                          00:01:37.5283112    True</dev:code>
+        <dev:remarks>
+          <maml:para>Get a single timer.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -586,7 +576,7 @@ timer2          12/12/2018 11:09:25 AM                        00:02:31.7254040  
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>[System.Management.Automation.PSVariable]</maml:name>
+          <maml:name>MyTimer[]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -712,6 +702,14 @@ timer2          12/12/2018 11:09:25 AM                        00:02:31.7254040  
           <maml:para></maml:para>
         </maml:description>
       </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>MyTimer[]</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
     </command:inputTypes>
     <command:returnValues>
       <command:returnValue>
@@ -738,7 +736,7 @@ timer2          12/12/2018 11:09:25 AM                        00:02:31.7254040  
       </command:example>
       <command:example>
         <maml:title>-------------------------- Example 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; get-mytimer -all | where {-not $_.running} | remove-mytimer</dev:code>
+        <dev:code>PS C:\&gt; get-mytimer  | where {-not $_.running} | remove-mytimer</dev:code>
         <dev:remarks>
           <maml:para>Remove all stopped timers.</maml:para>
         </dev:remarks>
@@ -974,7 +972,7 @@ timer2          12/12/2018 11:09:25 AM                        00:02:31.7254040  
       </command:example>
       <command:example>
         <maml:title>-------------------------- Example 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; get-mytimer foo | set-mytimer -newName Work1 -Start "7/17/18 9:00AM"</dev:code>
+        <dev:code>PS C:\&gt; get-mytimer foo | set-mytimer -newName Work1 -Start "12/17/18 9:00AM"</dev:code>
         <dev:remarks>
           <maml:para>Get the timer called foo and give it a new name and start time.</maml:para>
         </dev:remarks>
@@ -983,6 +981,10 @@ timer2          12/12/2018 11:09:25 AM                        00:02:31.7254040  
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Get-MyTimer</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Start-MyTimer</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -1693,7 +1695,7 @@ c               12/12/2018 11:11:10 AM                        00:00:00          
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>This command will stop any timer created with Start-MyTimer. When executed it which will calculate a final duration timespan, mark the timer as no longer running and remove the timer variable. Although you can still get the timer with Get-Timer by name or using its -All parameter.</maml:para>
+      <maml:para>This command will stop any timer created with Start-MyTimer. When executed it which will calculate a final duration timespan, mark the timer as no longer running and remove the timer variable. Although you can still get the timer with Get-Timer.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>

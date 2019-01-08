@@ -1,5 +1,11 @@
 # Changelog for PSTimers
 
+## v0.9.0
+
++ Removed -All parameter from `Get-MyTimer` (Issue #6). **This is a breaking change**.
++ Updated warning messages in `Get-MyTimer` (Issue #5)
++ help updates
+
 ## v0.8.0
 
 + Added property set called `History` for MyTimer object to display End value (Issue #4)

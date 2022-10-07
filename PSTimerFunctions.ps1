@@ -216,7 +216,7 @@ Random - randomly cycle through a list of console colors
 
             if ($percentDoneChild -ge 100 -and $percentDone -le 98) {
                 if ($PSBoundParameters.ContainsKey('ProgressStyle') -AND $PSBoundParameters.Item('ProgressStyle') -eq 'random') {
-                    $host.globalData.progressBackgroundColor = ($progcolors | Get-Random)
+                    $host.privateData.progressBackgroundColor = ($progcolors | Get-Random)
                 }
                 $totalSecondsChild = Get-Random -Minimum 4 -Maximum 30
                 $startTimeChild = $now

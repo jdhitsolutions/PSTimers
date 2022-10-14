@@ -1,7 +1,7 @@
 ---
 external help file: PSTimers-help.xml
 Module Name: PSTimers
-online version:
+online version: https://bit.ly/3T2wiJx
 schema: 2.0.0
 ---
 
@@ -16,15 +16,13 @@ Start a graphical countdown display using Write-Progress
 ### minutes (Default)
 
 ```yaml
-Start-PSCountdown [[-Minutes] <Int32>] [-Title <String>] [[-Message] <String>] [-ClearHost] [-Path <String>]
- [-ProgressStyle <String>] [<CommonParameters>]
+Start-PSCountdown [[-Minutes] <Int32>] [-Title <String>] [[-Message] <String>] [-ClearHost]  [-ProgressStyle <String>] [-Path <String>] [<CommonParameters>]
 ```
 
 ### time
 
 ```yaml
-Start-PSCountdown [[-Time] <DateTime>] [-Title <String>] [[-Message] <String>] [-ClearHost] [-Path <String>]
- [-ProgressStyle <String>] [<CommonParameters>]
+Start-PSCountdown [[-Time] <DateTime>] [-Title <String>] [[-Message] <String>] [-ClearHost] [-ProgressStyle <String>] [-Path <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -33,7 +31,7 @@ This command will display countdown progress bar using Write-Progress. You can s
 
 Start-PSCountdown is inspired from code originally published at: https://github.com/Windos/powershell-depot/blob/master/livecoding.tv/StreamCountdown/StreamCountdown.psm1
 
-This command should work in Windows PowerShell and PowerShell Core, although not in VS Code. The ProgressStyle parameter is dynamic and only appears if you are running the command in a Windows console.
+This command should work in Windows PowerShell and PowerShell Core, although not in VS Code. If you are running this on a non-Windows platform, you should be running at least PowerShell 7.2
 
 ## EXAMPLES
 
@@ -52,6 +50,17 @@ PS C:\> Start-PSCountdown -time 9:00AM -title "Welcome Back" -message "Review yo
 ```
 
 Start a countdown timer to 9:00AM. The screen will be cleared and the progress bar color will cycle through a random set of colors.
+
+### Example 3
+
+```powershell
+PS C:\> $psstyle.progress.view = "Classic"
+PS C:\> $host.PrivateData.ProgressForegroundColor = "yellow"
+PS C:\> Start-PSCountdown -minutes 1 -title "Bathrooom break" -Message "Hurry Back" -progressStyle Random
+PS C:\> $psstyle.progress.view = "Minimal"
+```
+
+In PowerShell 7 using the $PSStyle feature, if you want to revert back to the classic progress view, you can set the view style to Classic. When this is set, then the $host.PrivateData values are used. You might need to change the foreground color, especially when using a random or transparent style.
 
 ## PARAMETERS
 
@@ -121,15 +130,15 @@ Accept wildcard characters: False
 
 ### -ProgressStyle
 
-Select a progress bar style. This only applies when using the Windows PowerShell console or ISE.
+Select a progress bar style.
 
 Default - use the current value of $host.PrivateData.ProgressBarBackgroundColor
 
-Transparent - set the progress bar background color to the same as the console
+Transparent - set the progress bar background color to the same as the console. This has no effect in PowerShell 7 when using PSStyle settings unless you switch the view to Classic.
 
-Random - randomly cycle through a list of console colors
+Random - randomly cycle through a list of console colors. This has no practical effect on Linux platforms when the $PSStyle.Progress.View is set to Classic.
 
-The parameter has an alias of style.
+The parameter has an alias of style. Note that the final effect may depend on a combination of your platform and console. Running this in a traditional console vs Windows Terminal may yield different results. Running on non-Windows may add another factor.
 
 ```yaml
 Type: String
@@ -178,7 +187,7 @@ Accept wildcard characters: False
 
 ### CommonParameters
 
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -196,4 +205,4 @@ Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell
 
 [Start-PSTimer](Start-PSTimer.md)
 
-[Write-Progress]()
+[Start-PSCountdownTimer](Start-PSCountdownTimer.md)

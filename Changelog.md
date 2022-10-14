@@ -1,5 +1,18 @@
 # Changelog for PSTimers
 
+## v1.0.0
+
++ Merged [Pull Request #7](https://github.com/jdhitsolutions/PSTimers/pull/7) and [Pull Request #8](https://github.com/jdhitsolutions/PSTimers/pull/8). Thank you @joshua-russell
++ Added online help links.
++ Updated PSCountdown tasks.
++ Reorganized module layout.
++ Changed `-ProgessStyle` parameter in `Start-PSCountdown` from a dynamic parameter to a standard parameter since the original blocker on non-Windows platforms has been resolved.
++ Updated `Start-PSCountdown` to use `$PSStyle` settings if detected.  [Issue #10](https://github.com/jdhitsolutions/PSTimers/issues/10)
++ Added `Start-PSCountdownTimer`. [Issue #1](https://github.com/jdhitsolutions/PSTimers/issues/1)
++ Added `Stop-PSCountdownTimer`.
++ Updated help.
++ Updated `README.md`.
+
 ## v0.9.0
 
 + Removed -All parameter from `Get-MyTimer` (Issue #6). **This is a breaking change**.

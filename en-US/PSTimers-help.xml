@@ -1819,6 +1819,10 @@ PS C:\&gt; $psCountDownClock.Color="darkgreen"</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://bit.ly/3T5ntz1</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
         <maml:linkText>Start-PSCountdownTimer</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
@@ -2311,6 +2315,10 @@ Finished!
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://bit.ly/3CZJgmn</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Start-PSCountdownTimer</maml:linkText>
         <maml:uri></maml:uri>

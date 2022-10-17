@@ -93,11 +93,12 @@ Write-Host "Are you ready for some PowerShell?" -ForegroundColor magenta -Backgr
 
 Add-Type –AssemblyName PresentationCore
 $filename = "c:\work\01-Start.mp3"
-#the media player launches with no UI. Use the object's methods to control it.
+
 $global:mediaplayer = New-Object system.windows.media.mediaplayer
-$global:mediaPlayer.Open($filename)
+$global:mediaplayer.Open($filename)
 $global:mediaplayer.Play()
 
+#the media player launches with no UI. Use the object's methods to control it.
 # mediaplayer.stop()
 # $mediaplayer.close()
 ```

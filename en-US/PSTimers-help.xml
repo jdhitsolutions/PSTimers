@@ -1515,7 +1515,7 @@ PS C:\&gt; $psstyle.progress.view = "Minimal"</dev:code>
     </command:details>
     <maml:description>
       <maml:para>Use this command to display a WPF-based countdown timer, running in a background runspace.  The timer will be displayed in the center of the screen. You can click and drag the timer to reposition using the left mouse button. You might have to try a few times to "grab" the timer. You can close the clock with a right-click of the mouse, or run Stop-PSCountdownTimer in the same session where you started the timer.</maml:para>
-      <maml:para>The timer color will change to yellow at 20 seconds and red at 10 seconds.</maml:para>
+      <maml:para>The timer has alert and warning settings. At the alert level of 50, the font color will change to yellow at and at 30 seconds, the warning level, it will turn to red. You can customize this behavior with parameters.</maml:para>
       <maml:para>The countdown timer runs in a separate runspace launched from your PowerShell session. If you close the session, the countdown timer will also be closed. The timer uses a synchronized hashtable. You can modify settings in $PSCountdownClock and they will be reflected in the timer. Set $PSCountdownclock.Running to $False to cancel the timer.</maml:para>
       <maml:para>This command requires a Windows platform.</maml:para>
     </maml:description>
@@ -1607,7 +1607,7 @@ PS C:\&gt; $psstyle.progress.view = "Minimal"</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Message</maml:name>
           <maml:description>
-            <maml:para>Specify a short message prefix like 'Starting in'</maml:para>
+            <maml:para>Specify a short message prefix like 'Starting in: '</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1638,6 +1638,54 @@ PS C:\&gt; $psstyle.progress.view = "Minimal"</dev:code>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Alert</maml:name>
+          <maml:description>
+            <maml:para>Specify the number of seconds remaining to switch to alert coloring.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>50</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>AlertColor</maml:name>
+          <maml:description>
+            <maml:para>Specify alert coloring.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>Yellow</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Warning</maml:name>
+          <maml:description>
+            <maml:para>Specify the number of seconds remaining to switch to warning coloring.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>30</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>WarningColor</maml:name>
+          <maml:description>
+            <maml:para>Specify warning coloring.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>Red</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
@@ -1705,7 +1753,7 @@ PS C:\&gt; $psstyle.progress.view = "Minimal"</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Message</maml:name>
         <maml:description>
-          <maml:para>Specify a short message prefix like 'Starting in'</maml:para>
+          <maml:para>Specify a short message prefix like 'Starting in: '</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1749,6 +1797,54 @@ PS C:\&gt; $psstyle.progress.view = "Minimal"</dev:code>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Alert</maml:name>
+        <maml:description>
+          <maml:para>Specify the number of seconds remaining to switch to alert coloring.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>50</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>AlertColor</maml:name>
+        <maml:description>
+          <maml:para>Specify alert coloring.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>Yellow</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Warning</maml:name>
+        <maml:description>
+          <maml:para>Specify the number of seconds remaining to switch to warning coloring.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>30</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>WarningColor</maml:name>
+        <maml:description>
+          <maml:para>Specify warning coloring.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>Red</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes>

@@ -14,14 +14,14 @@ Start a WPF-based countdown timer.
 ## SYNTAX
 
 ```yaml
-Start-PSCountdownTimer [[-Seconds] <Int32>] [-Message <String>] [-FontSize <Int32>] [-FontStyle <String>] [-FontWeight <String>] [-Color <String>] [-FontFamily <String>] [-OnTop] [-Position <Int32[]>] [<CommonParameters>]
+Start-PSCountdownTimer [[-Seconds] <Int32>] [-Message <String>] [-FontSize <Int32>] [-FontStyle <String>] [-FontWeight <String>] [-Color <String>] [-FontFamily <String>] [-OnTop] [-Position <Int32[]>] [-Alert <Int32>] [-AlertColor <String>] [-Warning <Int32>] [-WarningColor <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
 Use this command to display a WPF-based countdown timer, running in a background runspace.  The timer will be displayed in the center of the screen. You can click and drag the timer to reposition using the left mouse button. You might have to try a few times to "grab" the timer. You can close the clock with a right-click of the mouse, or run Stop-PSCountdownTimer in the same session where you started the timer.
 
-The timer color will change to yellow at 20 seconds and red at 10 seconds.
+The timer has alert and warning settings. At the alert level of 50, the font color will change to yellow at and at 30 seconds, the warning level, it will turn to red. You can customize this behavior with parameters.
 
 The countdown timer runs in a separate runspace launched from your PowerShell session. If you close the session, the countdown timer will also be closed. The timer uses a synchronized hashtable. You can modify settings in $PSCountdownClock and they will be reflected in the timer. Set $PSCountdownclock.Running to $False to cancel the timer.
 
@@ -132,7 +132,7 @@ Accept wildcard characters: False
 
 ### -Message
 
-Specify a short message prefix like 'Starting in'
+Specify a short message prefix like 'Starting in: '
 
 ```yaml
 Type: String
@@ -190,6 +190,70 @@ Aliases:
 Required: False
 Position: 60
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Alert
+
+Specify the number of seconds remaining to switch to alert coloring.
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: 50
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AlertColor
+
+Specify alert coloring.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: Yellow
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Warning
+
+Specify the number of seconds remaining to switch to warning coloring.
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: 30
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WarningColor
+
+Specify warning coloring.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: Red
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

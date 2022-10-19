@@ -1,5 +1,12 @@
 # Changelog for PSTimers
 
+## v1.0.1
+
++ Added missing online help links.
++ Help updates
++ reorganized module layout.
++ Modified `Start-PSCountdownTimer` to let the user specify the alert and warning time intervals and corresponding color.
+
 ## v1.0.0
 
 + Merged [Pull Request #7](https://github.com/jdhitsolutions/PSTimers/pull/7) and [Pull Request #8](https://github.com/jdhitsolutions/PSTimers/pull/8). Thank you @joshua-russell

@@ -77,11 +77,11 @@ FontSize                       64
 PS C:\> $pscountdownclock.OnTop = $False
 ```
 
-At 20 seconds the color will change to yellow and then to red at 10 seconds.
+At 50 seconds the color will change to yellow and then to red at 30 seconds.
 
 You can stop the clock by right-clicking on the form, setting the `Running` hashtable value to `$False` or run `Stop-PSCountdownTimer`. This is the recommended way. The WPF countdown runs in a separate runspace. If you close the PowerShell session where you started the countdown, the timer will terminate.
 
-If you would like to create automation around the countdown timer, you could create a PowerShell script like this.
+Because the timer runs in a separate runspace, the timer itself cannot initiate an action at the end of timer. If you would like to create automation around the countdown timer, you could create a PowerShell script like this.
 
 ```powershell
 Start-PSCountdownTimer -seconds 60 -message "The PowerShell magic begins in " -FontSize 64 -Color SpringGreen
@@ -91,6 +91,7 @@ Do {
 Clear-Host
 Write-Host "Are you ready for some PowerShell?" -ForegroundColor magenta -BackgroundColor gray
 
+#play a startup song
 Add-Type –AssemblyName PresentationCore
 $filename = "c:\work\01-Start.mp3"
 
@@ -102,7 +103,6 @@ $global:mediaplayer.Play()
 # mediaplayer.stop()
 # $mediaplayer.close()
 ```
-
 
 ## Related Tools
 

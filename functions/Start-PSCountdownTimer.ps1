@@ -6,7 +6,7 @@ Function Start-PSCountdownTimer {
         [Parameter(Position = 0, HelpMessage = "Enter seconds to countdown from")]
         [Int]$Seconds = 60,
 
-        [Parameter(HelpMessage = "Specify a short message prefix like 'Starting in")]
+        [Parameter(HelpMessage = "Specify a short message prefix like 'Starting in: '")]
         [string]$Message,
 
         [Parameter(ValueFromPipelineByPropertyName)]
@@ -38,7 +38,23 @@ Function Start-PSCountdownTimer {
 
         [Parameter(HelpMessage = "Specify the clock position as an array of left and top values.", ValueFromPipelineByPropertyName)]
         [ValidateCount(2, 2)]
-        [Int32[]]$Position
+        [Int32[]]$Position,
+
+        [Parameter(HelpMessage = "Specify the number of seconds remaining to switch to alert coloring")]
+        [ValidateScript({$_ -ge 1})]
+        [int]$Alert = 50,
+
+        [Parameter(HelpMessage = "Specify alert coloring")]
+        [ValidateNotNullOrEmpty()]
+        [string]$AlertColor = "Yellow",
+
+        [Parameter(HelpMessage = "Specify the number of seconds remaining to switch to warning coloring")]
+        [ValidateScript({$_ -ge 1})]
+        [int]$Warning = 30,
+
+        [Parameter(HelpMessage = "Specify warning coloring")]
+        [ValidateNotNullOrEmpty()]
+        [string]$WarningColor = "Red"
     )
 
     Begin {
@@ -99,6 +115,10 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
                 CurrentPosition  = $Null
                 Seconds          = $seconds
                 Message          = $Message
+                Alert            = $alert
+                Warning          = $Warning
+                AlertColor       = $AlertColor
+                WarningColor     = $WarningColor
             })
         Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] $($global:PSCountDownClock | Out-String)"
         #Run the clock in a runspace
@@ -178,28 +198,28 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
                 #press + to increase the size and - to decrease
                 #the clock needs to refresh to see the result
                 $form.Add_KeyDown({
-                        switch ($_.key) {
-                            { 'Add', 'OemPlus' -contains $_ } {
-                                If ( $PSCountDownClock.fontSize -ge 8) {
-                                    $PSCountDownClock.fontSize++
-                                    $form.UpdateLayout()
-                                }
-                            }
-                            { 'Subtract', 'OemMinus' -contains $_ } {
-                                If ($PSCountDownClock.FontSize -ge 8) {
-                                    $PSCountDownClock.FontSize--
-                                    $form.UpdateLayout()
-                                }
+                    switch ($_.key) {
+                        { 'Add', 'OemPlus' -contains $_ } {
+                            If ( $PSCountDownClock.fontSize -ge 8) {
+                                $PSCountDownClock.fontSize++
+                                $form.UpdateLayout()
                             }
                         }
-                    })
+                        { 'Subtract', 'OemMinus' -contains $_ } {
+                            If ($PSCountDownClock.FontSize -ge 8) {
+                                $PSCountDownClock.FontSize--
+                                $form.UpdateLayout()
+                            }
+                        }
+                    }
+                })
 
                 #fail safe to remove flag file
                 $form.Add_Unloaded({
-                        if (Test-Path $env:temp\pscountdown-flag.txt) {
-                            Remove-Item $env:temp\pscountdown-flag.txt
-                        }
-                    })
+                    if (Test-Path $env:temp\pscountdown-flag.txt) {
+                        Remove-Item $env:temp\pscountdown-flag.txt
+                    }
+                })
 
                 $stack = New-Object System.Windows.Controls.StackPanel
 
@@ -227,11 +247,11 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
                         $script:i--
                         if ($PSCountDownClock.Running -AND ($script:i -gt 0)) {
                             #set the font to yellow at 20 seconds and red at 10 seconds
-                            if ($script:i -le 10) {
-                                $label.Foreground = "Red"
+                            if ($script:i -le $PSCountDownClock.Warning) {
+                                $label.Foreground = $PSCountDownClock.WarningColor
                             }
-                            elseif ($script:i -le 20) {
-                                $label.foreground = "Yellow"
+                            elseif ($script:i -le $PSCountDownClock.Alert) {
+                                $label.foreground = $PSCountDownClock.AlertColor
                             }
                             else {
                                 $label.Foreground = $PSCountDownClock.Color

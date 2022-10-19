@@ -96,7 +96,7 @@ Clear-Host
 Write-Host "Are you ready for some PowerShell?" -ForegroundColor magenta -BackgroundColor gray
 
 #play a startup song
-Add-Type –AssemblyName PresentationCore
+Add-Type -AssemblyName PresentationCore
 $filename = "c:\work\01-Start.mp3"
 
 $global:mediaplayer = New-Object system.windows.media.mediaplayer

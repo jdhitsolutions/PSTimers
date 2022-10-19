@@ -73,6 +73,10 @@ Message                        The PowerShell magic begins in
 FontStyle                      Normal
 Started                        10/14/2022 4:21:13 PM
 FontSize                       64
+AlertColor                     Yellow
+WarningColor                   Red
+Alert                          50
+Warning                        30
 
 PS C:\> $pscountdownclock.OnTop = $False
 ```

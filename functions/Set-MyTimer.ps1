@@ -43,7 +43,18 @@ Function Set-MyTimer {
             } #foreach
         } #if $timers
         else {
-            Write-Warning "Can't find a matching timer object"
+            Write-Warning "Can't find a matching timer object. Would you like to create it?"
+            Switch (Read-Host  "y / n") {
+                y {
+                    Write-Verbose "[PROCESS] Creating timer $Name"
+                    $new = Start-MyTimer -Name $Name -Description $Description
+                    if ($start) {
+                        Write-Verbose "[PROCESS] Setting timer $Name start to $Start"
+                        Set-MyTimer -Name $Name -Start $Start
+                    }
+                    Get-MyTimer -Name $Name
+                }
+            }
         }
     } #process
 

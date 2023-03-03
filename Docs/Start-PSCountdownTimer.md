@@ -23,7 +23,7 @@ Use this command to display a WPF-based countdown timer, running in a background
 
 The timer has alert and warning settings. At the alert level of 50, the font color will change to yellow at and at 30 seconds, the warning level, it will turn to red. You can customize this behavior with parameters.
 
-The countdown timer runs in a separate runspace launched from your PowerShell session. If you close the session, the countdown timer will also be closed. The timer uses a synchronized hashtable. You can modify settings in $PSCountdownClock and they will be reflected in the timer. Set $PSCountdownclock.Running to $False to cancel the timer.
+The countdown timer runs in a separate runspace launched from your PowerShell session. If you close the session, the countdown timer will also be closed. The timer uses a synchronized hashtable. You can modify settings in $PSCountdownClock and they will be reflected in the timer. Set $PSCountdownClock.Running to $False to cancel the timer.
 
 This command requires a Windows platform.
 
@@ -44,7 +44,7 @@ PS C:\> Start-PSCountdownTimer -seconds 600 -message "We are resuming in:" -OnTo
 PS C:\> $psCountDownClock.Color="darkgreen"
 ```
 
-The first command starts a 10 minute countdown with a messdage prefix. The display will always be on top of other windows. The second command uses the syncrhonized hashtable to change the font color.
+The first command starts a 10 minute countdown with a message prefix. The display will always be on top of other windows. The second command uses the synchronized hashtable to change the font color.
 
 ## PARAMETERS
 
@@ -285,3 +285,5 @@ Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell
 [Start-PSCountdownTimer](Start-PSCountdownTimer.md)
 
 [Start-PSCountdown](Start-PSCountdown.md)
+
+[Start-PSTimer](Start-PSTimer.md)

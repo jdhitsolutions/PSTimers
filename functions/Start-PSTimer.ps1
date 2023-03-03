@@ -25,8 +25,8 @@ Function Start-PSTimer {
 
     #get current cursor position
     $Coordinate = New-Object System.Management.Automation.Host.Coordinates
-    $Coordinate.X = $host.ui.rawui.CursorPosition.X
-    $Coordinate.Y = $host.ui.rawui.CursorPosition.Y
+    $Coordinate.X = $host.UI.RawUI.CursorPosition.X
+    $Coordinate.Y = $host.UI.RawUI.CursorPosition.Y
     #define the Escape key
     $ESCKey = 27
 
@@ -35,8 +35,8 @@ Function Start-PSTimer {
 
     while ($seconds -ge 1) {
 
-        if ($host.ui.RawUi.KeyAvailable) {
-            $key = $host.ui.RawUI.ReadKey("NoEcho,IncludeKeyUp,IncludeKeyDown")
+        if ($host.UI.RawUI.KeyAvailable) {
+            $key = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyUp,IncludeKeyDown")
 
             if ($key.VirtualKeyCode -eq $ESCkey) {
                 #ESC was pressed so quit the countdown and set abort flag to True
@@ -56,7 +56,7 @@ Function Start-PSTimer {
         }
         Else {
 
-            $host.ui.rawui.CursorPosition = $Coordinate
+            $host.UI.RawUI.CursorPosition = $Coordinate
             #write the seconds with padded trailing spaces to overwrite any extra digits such
             #as moving from 10 to 9
             $pad = ($TotalSeconds -as [string]).Length
@@ -68,7 +68,7 @@ Function Start-PSTimer {
             }
             $msg = @"
 $Title
-$(([string]$Seconds).Padright($pad))
+$(([string]$Seconds).PadRight($pad))
 "@
 
             write-host $msg -ForegroundColor $color
@@ -91,7 +91,7 @@ $(([string]$Seconds).Padright($pad))
             $Coordinate.X = $Coordinate.X - ([int]($message.Length) / 2)
         }
 
-        $host.ui.rawui.CursorPosition = $Coordinate
+        $host.UI.RawUI.CursorPosition = $Coordinate
 
         Write-Host $Message -ForegroundColor Green
         #run the scriptblock if specified

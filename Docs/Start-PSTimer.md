@@ -13,9 +13,8 @@ Initiates a countdown before running a command.
 
 ## SYNTAX
 
-```
-Start-PSTimer [[-Seconds] <Int32>] [[-Scriptblock] <ScriptBlock>] [-ProgressBar] [-Title <String>] [-Clear]
- [-Message <String>] [<CommonParameters>]
+```yaml
+Start-PSTimer [[-Seconds] <Int32>] [[-Scriptblock] <ScriptBlock>] [-ProgressBar] [-Title <String>] [-Clear] [-Message <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -165,3 +164,5 @@ Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell
 [Write-Progress]()
 
 [Start-PSCountdown](Start-PSCountdown.md)
+
+[Start-PSCountdownTimer](Start-PSCountdownTimer.md)

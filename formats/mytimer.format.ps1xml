@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- 
-
+<!--
 Any changes made to this file may be overwritten in future module updates
-
 -->
 <Configuration>
     <ViewDefinitions>
@@ -12,6 +10,7 @@ Any changes made to this file may be overwritten in future module updates
                 <TypeName>MyTimer</TypeName>
             </ViewSelectedBy>
                <TableControl>
+               <AutoSize/>
                 <TableHeaders>
                     <TableColumnHeader>
                         <Label>Name</Label>
@@ -77,6 +76,6 @@ Any changes made to this file may be overwritten in future module updates
                     </TableRowEntry>
                 </TableRowEntries>
             </TableControl>
-        </View>    
+        </View>
      </ViewDefinitions>
 </Configuration>

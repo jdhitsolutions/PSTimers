@@ -6,19 +6,19 @@ Function Stop-MyTimer {
 
     Param(
         [Parameter(Position = 0, Mandatory, ValueFromPipelineByPropertyName)]
-        [ValidateNotNullorEmpty()]
+        [ValidateNotNullOrEmpty()]
         [string]$Name
     )
     Begin {
-        Write-Verbose "[BEGIN  ] Starting: $($MyInvocation.Mycommand)"
-        #display PSBoundparameters formatted nicely for Verbose output
+        Write-Verbose "[BEGIN  ] Starting: $($MyInvocation.MyCommand)"
+        #display PSBoundParameters formatted nicely for Verbose output
         [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
-        Write-Verbose "[BEGIN  ] PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n"
+        Write-Verbose "[BEGIN  ] PSBoundParameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n"
 
     }
     Process {
         Write-Verbose "[PROCESS] Getting timer $name"
-        $timers = ($global:myTimerCollection).Values.where( {$_.name -like $name})
+        $timers = ($global:MyTimerCollection).Values.where( {$_.name -like $name})
         if ($timers) {
             Foreach ($timer in $timers) {
                 write-verbose "[PROCESS] Processing $( $timer | Out-string)"
@@ -40,6 +40,6 @@ Function Stop-MyTimer {
         }
     }
     End {
-        Write-Verbose "[END    ] Ending: $($MyInvocation.Mycommand)"
+        Write-Verbose "[END    ] Ending: $($MyInvocation.MyCommand)"
     }
 }

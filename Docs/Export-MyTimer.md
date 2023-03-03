@@ -28,7 +28,7 @@ The default behavior is to export all timer variables or you can select specific
 ### EXAMPLE 1
 
 ```powershell
-PS C:\> Export-MyTimer -path c:\work\mytimers.xml
+PS C:\> Export-MyTimer -path c:\work\MyTimers.xml
 ```
 
 Export all timers to the specified file.
@@ -124,4 +124,3 @@ Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell
 [Get-MyTimer](Get-MyTimer.md)
 
 [Import-MyTimer](Import-MyTimer.md)
-

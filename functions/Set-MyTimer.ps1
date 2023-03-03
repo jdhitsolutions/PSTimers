@@ -1,27 +1,27 @@
 Function Set-MyTimer {
 
     [cmdletbinding(SupportsShouldProcess)]
-    [OutputType([MyTimer[]])]
+    [OutputType("MyTimer")]
     Param(
         [Parameter(Position = 0, Mandatory, ValueFromPipelineByPropertyName)]
-        [ValidateNotNullorEmpty()]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [string]$NewName,
         [datetime]$Start,
         [string]$Description,
-        [switch]$Passthru
+        [switch]$PassThru
     )
 
     Begin {
-        Write-Verbose "[BEGIN  ] Starting: $($MyInvocation.Mycommand)"
+        Write-Verbose "[BEGIN  ] Starting: $($MyInvocation.MyCommand)"
     } #begin
 
     Process {
-        #display PSBoundparameters formatted nicely for Verbose output
+        #display PSBoundParameters formatted nicely for Verbose output
         [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
-        Write-Verbose "[PROCESS] PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n"
+        Write-Verbose "[PROCESS] PSBoundParameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n"
 
-        $timers = ($global:myTimerCollection).Values.where( {$_.name -like $name})
+        $timers = ($global:MyTimerCollection).Values.where( {$_.name -like $name})
 
         if ($timers.count -ge 1) {
             foreach ($timer in $timers) {
@@ -36,7 +36,7 @@ Function Set-MyTimer {
                     if ($start) {
                         $timer.start = $Start
                     }
-                    if ($Passthru) {
+                    if ($PassThru) {
                         $timer
                     }
                 }
@@ -48,6 +48,6 @@ Function Set-MyTimer {
     } #process
 
     End {
-        Write-Verbose "[END    ] Ending: $($MyInvocation.Mycommand)"
+        Write-Verbose "[END    ] Ending: $($MyInvocation.MyCommand)"
     }
 }

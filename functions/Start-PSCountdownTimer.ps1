@@ -58,7 +58,7 @@ Function Start-PSCountdownTimer {
     )
 
     Begin {
-        Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Starting $($myinvocation.mycommand)"
+        Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
     } #begin
     Process {
         Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Validating"
@@ -294,7 +294,7 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
 
     } #process
     End {
-        Write-Verbose "[$((Get-Date).TimeofDay) END    ] Ending $($myinvocation.mycommand)"
+        Write-Verbose "[$((Get-Date).TimeofDay) END    ] Ending $($MyInvocation.MyCommand)"
     } #end
 
 } #close function

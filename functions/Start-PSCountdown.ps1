@@ -10,10 +10,10 @@ Function Start-PSCountdown {
         [Parameter(Position = 0, ParameterSetname = "time", HelpMessage = "Enter a datetime value as the countdown target.")]
         [DateTime]$Time,
         [Parameter(HelpMessage = "Enter the text for the progress bar title.")]
-        [ValidateNotNullorEmpty()]
+        [ValidateNotNullOrEmpty()]
         [string]$Title = "Counting Down ",
         [Parameter(Position = 1, HelpMessage = "Enter a primary message to display in the parent window.")]
-        [ValidateNotNullorEmpty()]
+        [ValidateNotNullOrEmpty()]
         [string]$Message = "Starting soon.",
         [Parameter(HelpMessage = "Use this parameter to clear the screen prior to starting the countdown.")]
         [alias("cls")]
@@ -26,10 +26,10 @@ Function Start-PSCountdown {
         [string]$Path = "$PSScriptRoot\PSCountdownTasks.txt"
     )
     Begin {
-        Write-Verbose "Starting $($myinvocation.MyCommand)"
+        Write-Verbose "Starting $($MyInvocation.MyCommand)"
         $PSBoundParameters | Out-String | Write-Verbose
 
-        if ($psboundparameters.ContainsKey('progressStyle')) {
+        if ($PSBoundParameters.ContainsKey('progressStyle')) {
 
             if ($PSBoundParameters.Item('ProgressStyle') -ne 'default') {
                 if ($PSStyle) {
@@ -41,7 +41,7 @@ Function Start-PSCountdown {
             }
             if ($PSBoundParameters.Item('ProgressStyle') -eq 'transparent' -AND ($PSedition -eq 'Desktop' -OR $PSStyle.Progress.view -eq 'classic')) {
                 #This only works for Windows PowerShell
-                $host.privateData.progressBackgroundColor = $host.ui.RawUI.BackgroundColor
+                $host.privateData.progressBackgroundColor = $host.UI.RawUI.BackgroundColor
             }
         }
         Write-Verbose "Using parameter set $($pscmdlet.ParameterSetName)"

@@ -30,8 +30,8 @@ PS C:\> Stop-MyTimer Timer2
 
 
 Name        : timer2
-Start       : 12/12/2018 11:09:25 AM
-End         : 12/12/2018 11:17:34 AM
+Start       : 12/12/2022 11:09:25 AM
+End         : 12/12/2022 11:17:34 AM
 Duration    : 00:08:08.6042323
 Description :
 ```

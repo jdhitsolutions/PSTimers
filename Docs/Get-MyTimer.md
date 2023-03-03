@@ -30,9 +30,9 @@ PS C:\> Get-MyTimer
 
 Name            Start                  Stop                   Duration         Running Description
 ----            -----                  ----                   --------         ------- -----------
-foo             1/8/2019 10:03:05 AM   1/8/2019 10:03:46 AM   00:00:41.4660786   False something
-test            1/8/2019 10:03:13 AM   1/8/2019 10:03:59 AM   00:00:46.9185655   False
-test2           1/8/2019 10:03:13 AM                          00:01:07.5290466    True
+foo             1/8/2023 10:03:05 AM   1/8/2023 10:03:46 AM   00:00:41.4660786   False something
+test            1/8/2023 10:03:13 AM   1/8/2023 10:03:59 AM   00:00:46.9185655   False
+test2           1/8/2023 10:03:13 AM                          00:01:07.5290466    True
 ```
 
 Get the all timers
@@ -44,7 +44,7 @@ PS C:\> Get-MyTimer test2
 
 Name            Start                  Stop                   Duration         Running Description
 ----            -----                  ----                   --------         ------- -----------
-test2           1/8/2019 10:03:13 AM                          00:01:37.5283112    True
+test2           1/8/2023 10:03:13 AM                          00:01:37.5283112    True
 ```
 
 Get a single timer.

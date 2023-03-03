@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Remove a myTimer object.
+Remove a MyTimer object.
 
 ## SYNTAX
 
@@ -34,7 +34,7 @@ Remove the alpha timer.
 ### Example 2
 
 ```powershell
-PS C:\> get-mytimer  | where {-not $_.running} | remove-mytimer
+PS C:\> Get-MyTimer  | where {-not $_.running} | Remove-MyTimer
 ```
 
 Remove all stopped timers.

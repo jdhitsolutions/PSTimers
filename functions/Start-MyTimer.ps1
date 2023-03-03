@@ -1,20 +1,20 @@
 Function Start-MyTimer {
 
     [cmdletbinding()]
-    [OutputType([MyTimer])]
+    [OutputType("MyTimer")]
     [Alias("ton")]
 
     Param(
         [Parameter(Position = 0)]
-        [ValidateNotNullorEmpty()]
+        [ValidateNotNullOrEmpty()]
         [string[]]$Name = "MyTimer",
         [string]$Description
     )
 
-    Write-Verbose "Starting: $($MyInvocation.Mycommand)"
-    #display PSBoundparameters formatted nicely for Verbose output
+    Write-Verbose "Starting: $($MyInvocation.MyCommand)"
+    #display PSBoundParameters formatted nicely for Verbose output
     [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
-    Write-Verbose "PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n"
+    Write-Verbose "PSBoundParameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n"
     foreach ($timer in $Name) {
 
         Try {
@@ -28,6 +28,6 @@ Function Start-MyTimer {
 
     } #foreach
 
-    Write-Verbose "Ending: $($MyInvocation.Mycommand)"
+    Write-Verbose "Ending: $($MyInvocation.MyCommand)"
 
 }

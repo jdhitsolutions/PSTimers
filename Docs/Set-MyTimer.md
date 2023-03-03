@@ -14,8 +14,7 @@ Modify a MyTimer object.
 ## SYNTAX
 
 ```yaml
-Set-MyTimer [-Name] <String> [-NewName <String>] [-Start <DateTime>] [-Description <String>] [-Passthru]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+Set-MyTimer [-Name] <String> [-NewName <String>] [-Start <DateTime>] [-Description <String>] [-PassThru] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -27,7 +26,7 @@ Use this command to modify an existing timer.
 ### Example 1
 
 ```powershell
-PS C:\> set-mytimer T1 -description "updating module"
+PS C:\> Set-MyTimer T1 -description "updating module"
 ```
 
 Modify the T1 timer with a new description
@@ -35,7 +34,7 @@ Modify the T1 timer with a new description
 ### Example 2
 
 ```powershell
-PS C:\> get-mytimer foo | set-mytimer -newName Work1 -Start "12/17/18 9:00AM"
+PS C:\> Get-MyTimer foo | Set-MyTimer -newName Work1 -Start "12/17/22 9:00AM"
 ```
 
 Get the timer called foo and give it a new name and start time.
@@ -106,7 +105,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Passthru
+### -PassThru
 
 Write the updated object to the pipeline.
 

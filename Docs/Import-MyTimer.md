@@ -26,7 +26,7 @@ If you exported a timer variable with Export-MyTimer you can use this command to
 ### EXAMPLE 1
 
 ```powershell
-PS C:\> Import-MyTimer -path c:\work\mytimers.xml
+PS C:\> Import-MyTimer -path c:\work\MyTimers.xml
 ```
 
 ## PARAMETERS

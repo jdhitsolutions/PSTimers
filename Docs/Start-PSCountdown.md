@@ -54,10 +54,10 @@ Start a countdown timer to 9:00AM. The screen will be cleared and the progress b
 ### Example 3
 
 ```powershell
-PS C:\> $psstyle.progress.view = "Classic"
+PS C:\> $PSStyle.progress.view = "Classic"
 PS C:\> $host.PrivateData.ProgressForegroundColor = "yellow"
-PS C:\> Start-PSCountdown -minutes 1 -title "Bathrooom break" -Message "Hurry Back" -progressStyle Random
-PS C:\> $psstyle.progress.view = "Minimal"
+PS C:\> Start-PSCountdown -minutes 1 -title "Bathroom break" -Message "Hurry Back" -progressStyle Random
+PS C:\> $PSStyle.progress.view = "Minimal"
 ```
 
 In PowerShell 7 using the $PSStyle feature, if you want to revert back to the classic progress view, you can set the view style to Classic. When this is set, then the $host.PrivateData values are used. You might need to change the foreground color, especially when using a random or transparent style.
@@ -66,7 +66,7 @@ In PowerShell 7 using the $PSStyle feature, if you want to revert back to the cl
 
 ### -ClearHost
 
-Use this parameter to clear the screen prior to starting the countdown. The paramter has an alias of cls.
+Use this parameter to clear the screen prior to starting the countdown. The parameter has an alias of cls.
 
 ```yaml
 Type: SwitchParameter

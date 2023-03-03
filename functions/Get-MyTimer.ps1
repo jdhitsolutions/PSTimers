@@ -1,32 +1,31 @@
 Function Get-MyTimer {
-
     [cmdletbinding()]
-    [OutputType([MyTimer[]])]
+    [OutputType("MyTimer")]
     Param(
         [Parameter(Position = 0, ValueFromPipelineByPropertyName)]
-        [ValidateNotNullorEmpty()]
+        [ValidateNotNullOrEmpty()]
         [string[]]$Name
     )
 
     Begin {
-        Write-Verbose "[BEGIN  ] Starting: $($MyInvocation.Mycommand)"
+        Write-Verbose "[BEGIN  ] Starting: $($MyInvocation.MyCommand)"
     } #begin
 
     Process {
-        #display PSBoundparameters formatted nicely for Verbose output
+        #display PSBoundParameters formatted nicely for Verbose output
         [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
-        Write-Verbose "[PROCESS] PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n"
+        Write-Verbose "[PROCESS] PSBoundParameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n"
 
         if ($Name) {
             Write-Verbose "[PROCESS] Getting timer $Name"
             $timers = foreach ($item in $Name) {
-                ($global:MytimerCollection).Values.where( {$_.name -like $item})
+                ($global:MyTimerCollection).Values.where( {$_.name -like $item})
             }
         }
         else {
             #find all running timers by default
             Write-Verbose "[PROCESS] Getting all timers"
-            $timers = $global:myTimerCollection.Values
+            $timers = $global:MyTimerCollection.Values
         }
 
         Write-Verbose "[PROCESS] Getting current timer status"
@@ -34,7 +33,7 @@ Function Get-MyTimer {
             foreach ($timer in ($timers | Sort-Object -Property Start)) {
                 if ($timer.running) {
                     #set the duration to the current value
-                    $timer.duration = $timer.Getstatus()
+                    $timer.duration = $timer.GetStatus()
                     $timer
                     #set duration back to 0
                     $timer.duration = 0
@@ -62,6 +61,6 @@ Function Get-MyTimer {
     } #process
 
     End {
-        Write-Verbose "[END    ] Ending: $($MyInvocation.Mycommand)"
+        Write-Verbose "[END    ] Ending: $($MyInvocation.MyCommand)"
     }
 }

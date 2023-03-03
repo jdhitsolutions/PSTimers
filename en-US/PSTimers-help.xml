@@ -142,7 +142,7 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Export-MyTimer -path c:\work\mytimers.xml</dev:code>
+        <dev:code>PS C:\&gt; Export-MyTimer -path c:\work\MyTimers.xml</dev:code>
         <dev:remarks>
           <maml:para>Export all timers to the specified file.</maml:para>
         </dev:remarks>
@@ -352,7 +352,7 @@ ID RunTime
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
-        <dev:code>Get-History -count 5 | Get-HistoryRuntime -detail
+        <dev:code>PS C:\&gt; Get-History -count 5 | Get-HistoryRuntime -detail
 
 ID RunTime             Status Command
  -- -------             ------ -------
@@ -452,9 +452,9 @@ ID RunTime             Status Command
 
 Name            Start                  Stop                   Duration         Running Description
 ----            -----                  ----                   --------         ------- -----------
-foo             1/8/2019 10:03:05 AM   1/8/2019 10:03:46 AM   00:00:41.4660786   False something
-test            1/8/2019 10:03:13 AM   1/8/2019 10:03:59 AM   00:00:46.9185655   False
-test2           1/8/2019 10:03:13 AM                          00:01:07.5290466    True</dev:code>
+foo             1/8/2023 10:03:05 AM   1/8/2023 10:03:46 AM   00:00:41.4660786   False something
+test            1/8/2023 10:03:13 AM   1/8/2023 10:03:59 AM   00:00:46.9185655   False
+test2           1/8/2023 10:03:13 AM                          00:01:07.5290466    True</dev:code>
         <dev:remarks>
           <maml:para>Get the all timers</maml:para>
         </dev:remarks>
@@ -465,7 +465,7 @@ test2           1/8/2019 10:03:13 AM                          00:01:07.5290466  
 
 Name            Start                  Stop                   Duration         Running Description
 ----            -----                  ----                   --------         ------- -----------
-test2           1/8/2019 10:03:13 AM                          00:01:37.5283112    True</dev:code>
+test2           1/8/2023 10:03:13 AM                          00:01:37.5283112    True</dev:code>
         <dev:remarks>
           <maml:para>Get a single timer.</maml:para>
         </dev:remarks>
@@ -603,7 +603,7 @@ test2           1/8/2019 10:03:13 AM                          00:01:37.5283112  
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Import-MyTimer -path c:\work\mytimers.xml</dev:code>
+        <dev:code>PS C:\&gt; Import-MyTimer -path c:\work\MyTimers.xml</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
@@ -626,7 +626,7 @@ test2           1/8/2019 10:03:13 AM                          00:01:37.5283112  
       <command:verb>Remove</command:verb>
       <command:noun>MyTimer</command:noun>
       <maml:description>
-        <maml:para>Remove a myTimer object.</maml:para>
+        <maml:para>Remove a MyTimer object.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -752,7 +752,7 @@ test2           1/8/2019 10:03:13 AM                          00:01:37.5283112  
       </command:example>
       <command:example>
         <maml:title>-------------------------- Example 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; get-mytimer  | where {-not $_.running} | remove-mytimer</dev:code>
+        <dev:code>PS C:\&gt; Get-MyTimer  | where {-not $_.running} | Remove-MyTimer</dev:code>
         <dev:remarks>
           <maml:para>Remove all stopped timers.</maml:para>
         </dev:remarks>
@@ -836,7 +836,7 @@ test2           1/8/2019 10:03:13 AM                          00:01:37.5283112  
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Passthru</maml:name>
+          <maml:name>PassThru</maml:name>
           <maml:description>
             <maml:para>Write the updated object to the pipeline.</maml:para>
           </maml:description>
@@ -921,7 +921,7 @@ test2           1/8/2019 10:03:13 AM                          00:01:37.5283112  
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>Passthru</maml:name>
+        <maml:name>PassThru</maml:name>
         <maml:description>
           <maml:para>Write the updated object to the pipeline.</maml:para>
         </maml:description>
@@ -985,14 +985,14 @@ test2           1/8/2019 10:03:13 AM                          00:01:37.5283112  
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; set-mytimer T1 -description "updating module"</dev:code>
+        <dev:code>PS C:\&gt; Set-MyTimer T1 -description "updating module"</dev:code>
         <dev:remarks>
           <maml:para>Modify the T1 timer with a new description</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- Example 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; get-mytimer foo | set-mytimer -newName Work1 -Start "12/17/18 9:00AM"</dev:code>
+        <dev:code>PS C:\&gt; Get-MyTimer foo | Set-MyTimer -newName Work1 -Start "12/17/22 9:00AM"</dev:code>
         <dev:remarks>
           <maml:para>Get the timer called foo and give it a new name and start time.</maml:para>
         </dev:remarks>
@@ -1119,33 +1119,33 @@ test2           1/8/2019 10:03:13 AM                          00:01:37.5283112  
 
 Name            Start                  Stop                   Duration         Running Description
 ----            -----                  ----                   --------         ------- -----------
-timer2          12/12/2018 11:09:25 AM                        00:00:00            True</dev:code>
+timer2          12/12/2022 11:09:25 AM                        00:00:00            True</dev:code>
         <dev:remarks>
           <maml:para>Create a second timer called Timer2.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; start-mytimer Z -Description "work stuff"
+        <dev:code>PS C:\&gt; Start-MyTimer Z -Description "work stuff"
 
 
 Name            Start                  Stop                   Duration         Running Description
 ----            -----                  ----                   --------         ------- -----------
-Z               12/12/2018 11:10:16 AM                        00:00:00            True work stuff</dev:code>
+Z               12/12/2022 11:10:16 AM                        00:00:00            True work stuff</dev:code>
         <dev:remarks>
           <maml:para>Create a new timer with a description.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; start-mytimer alpha,bravo,charlie
+        <dev:code>PS C:\&gt; Start-MyTimer alpha,bravo,charlie
 
 
 Name            Start                  Stop                   Duration         Running Description
 ----            -----                  ----                   --------         ------- -----------
-a               12/12/2018 11:11:10 AM                        00:00:00            True
-b               12/12/2018 11:11:10 AM                        00:00:00            True
-c               12/12/2018 11:11:10 AM                        00:00:00            True</dev:code>
+a               12/12/2022 11:11:10 AM                        00:00:00            True
+b               12/12/2022 11:11:10 AM                        00:00:00            True
+c               12/12/2022 11:11:10 AM                        00:00:00            True</dev:code>
         <dev:remarks>
           <maml:para>Create multiple timers at once.</maml:para>
         </dev:remarks>
@@ -1210,7 +1210,7 @@ c               12/12/2018 11:11:10 AM                        00:00:00          
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cls">
           <maml:name>ClearHost</maml:name>
           <maml:description>
-            <maml:para>Use this parameter to clear the screen prior to starting the countdown. The paramter has an alias of cls.</maml:para>
+            <maml:para>Use this parameter to clear the screen prior to starting the countdown. The parameter has an alias of cls.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -1293,7 +1293,7 @@ c               12/12/2018 11:11:10 AM                        00:00:00          
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cls">
           <maml:name>ClearHost</maml:name>
           <maml:description>
-            <maml:para>Use this parameter to clear the screen prior to starting the countdown. The paramter has an alias of cls.</maml:para>
+            <maml:para>Use this parameter to clear the screen prior to starting the countdown. The parameter has an alias of cls.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -1352,7 +1352,7 @@ c               12/12/2018 11:11:10 AM                        00:00:00          
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cls">
         <maml:name>ClearHost</maml:name>
         <maml:description>
-          <maml:para>Use this parameter to clear the screen prior to starting the countdown. The paramter has an alias of cls.</maml:para>
+          <maml:para>Use this parameter to clear the screen prior to starting the countdown. The parameter has an alias of cls.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -1482,7 +1482,7 @@ c               12/12/2018 11:11:10 AM                        00:00:00          
         <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; $psstyle.progress.view = "Classic"
 PS C:\&gt; $host.PrivateData.ProgressForegroundColor = "yellow"
-PS C:\&gt; Start-PSCountdown -minutes 1 -title "Bathrooom break" -Message "Hurry Back" -progressStyle Random
+PS C:\&gt; Start-PSCountdown -minutes 1 -title "Bathroom break" -Message "Hurry Back" -progressStyle Random
 PS C:\&gt; $psstyle.progress.view = "Minimal"</dev:code>
         <dev:remarks>
           <maml:para>In PowerShell 7 using the $PSStyle feature, if you want to revert back to the classic progress view, you can set the view style to Classic. When this is set, then the $host.PrivateData values are used. You might need to change the foreground color, especially when using a random or transparent style.</maml:para>
@@ -1909,7 +1909,7 @@ PS C:\&gt; $psstyle.progress.view = "Minimal"</dev:code>
         <dev:code>PS C:\&gt; Start-PSCountdownTimer -seconds 600 -message "We are resuming in:" -OnTop
 PS C:\&gt; $psCountDownClock.Color="darkgreen"</dev:code>
         <dev:remarks>
-          <maml:para>The first command starts a 10 minute countdown with a messdage prefix. The display will always be on top of other windows. The second command uses the syncrhonized hashtable to change the font color.</maml:para>
+          <maml:para>The first command starts a 10 minute countdown with a message prefix. The display will always be on top of other windows. The second command uses the synchronized hashtable to change the font color.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -2276,8 +2276,8 @@ PS C:\&gt; $psCountDownClock.Color="darkgreen"</dev:code>
 
 
 Name        : timer2
-Start       : 12/12/2018 11:09:25 AM
-End         : 12/12/2018 11:17:34 AM
+Start       : 12/12/2022 11:09:25 AM
+End         : 12/12/2022 11:17:34 AM
 Duration    : 00:08:08.6042323
 Description :</dev:code>
         <dev:remarks>

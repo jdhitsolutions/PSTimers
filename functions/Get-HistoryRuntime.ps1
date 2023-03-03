@@ -17,7 +17,7 @@ Function Get-HistoryRuntime {
     )
 
     Begin {
-        Write-Verbose "[BEGIN  ] Starting: $($MyInvocation.Mycommand)"
+        Write-Verbose "[BEGIN  ] Starting: $($MyInvocation.MyCommand)"
         Write-Verbose "[BEGIN  ] Using parameter set $($PSCmdlet.parameterSetName)"
     } #begin
 
@@ -50,7 +50,7 @@ Function Get-HistoryRuntime {
     } #process
 
     End {
-        Write-Verbose "[END    ] Ending: $($MyInvocation.Mycommand)"
+        Write-Verbose "[END    ] Ending: $($MyInvocation.MyCommand)"
     } #end
 
 }

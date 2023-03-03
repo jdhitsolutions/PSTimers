@@ -1,16 +1,10 @@
 # PSTimers
 
-[![PSGallery Version](https://img.shields.io/powershellgallery/v/PSTimers.png?style=for-the-badge&label=PowerShell%20Gallery)](https://www.powershellgallery.com/packages/PSTimers/) [![PSGallery Downloads](https://img.shields.io/powershellgallery/dt/PSTimers.png?style=for-the-badge&label=Downloads)](https://www.powershellgallery.com/packages/PSTimers/)
+## about_PSTimers
 
-A set of PowerShell functions to be used as timers and countdown tools.
+## SHORT DESCRIPTION
 
-This module is available from the PowerShell Gallery.
-
-```powershell
-Install-Module PSTimers
-```
-
-I use several of these tools regularly.
+This module contains a set of PowerShell functions to be used as timers and countdown tools.
 
 * [Export-MyTimer](Docs/Export-MyTimer.md)
 * [Get-HistoryRuntime](Docs/Get-HistoryRuntime.md)
@@ -27,7 +21,9 @@ I use several of these tools regularly.
 
 The commands should also work on PowerShell 7 cross-platform, although there may be a few artifacts on non-Windows systems. It is recommended that you run PowerShell 7.2 or later on non-Windows systems.
 
-## MyTimer
+## LONG DESCRIPTION
+
+### MyTimer
 
 This module incorporates commands from a previous module to create simple timer objects. The MyTimer object is defined in a private PowerShell class.
 
@@ -108,8 +104,6 @@ Although there are provisions for exporting and importing timers.
 
 The `Start-PSCountdown` command uses `Write-Progress` to display countdown information. PowerShell 7.2 uses a minimized progress display and a different set of color options based on `$PSStyle`.
 
-![PS7 PSCountdown](images/ps7-pscountdown.png)
-
 If you would like to use the legacy progress display in PowerShell 7, you should configure it before running `Start-PSCountdown`.
 
 ```powershell
@@ -122,13 +116,11 @@ Set it to `Minimal` to restore.
 
 ## PSCountdownTimer
 
-An alternative to `Start-PSCountdown` is [`Start-PSCountdowntimer`](Docs/Start-PSCountdownTimer.md).
+An alternative to `Start-PSCountdown` is [`Start-PSCountdownTimer`](Docs/Start-PSCountdownTimer.md).
 
 ```powershell
 Start-PSCountdownTimer -seconds 600 -message "The PowerShell magic begins in " -FontSize 64 -Color SpringGreen -OnTop
 ```
-
-![PSCountdownTimer](images/pscountdowntimer.png)
 
 This is a transparent WPF form that displays a countdown timer and an optional message. You can control it by changing values in the `$PSCountdownClock` synchronized hashtable.
 
@@ -160,12 +152,19 @@ PS C:\> $PSCountdownClock.OnTop = $False
 
 At 50 seconds the color will change to yellow and then to red at 30 seconds.
 
-You can stop the clock by right-clicking on the form, setting the `Running` hashtable value to `$False` or run `Stop-PSCountdownTimer`. This is the recommended way. The WPF countdown runs in a separate runspace. If you close the PowerShell session where you started the countdown, the timer will terminate.
+You can stop the clock by right-clicking on the form, setting the `Running` hashtable value to `$False`, or running `Stop-PSCountdownTimer`. This is the recommended way. The WPF countdown runs in a separate runspace. If you close the PowerShell session where you started the countdown, the timer will terminate.
 
 Because the timer runs in a separate runspace, the timer itself cannot initiate an action at the end of the timer. If you would like to create automation around the countdown timer, you could create a PowerShell script like this.
 
 ```powershell
-Start-PSCountdownTimer -seconds 60 -message "The PowerShell magic begins in " -FontSize 64 -Color SpringGreen
+    $splat = @{
+        Seconds = 60
+        Message = "The PowerShell magic begins in "
+        FontSize = 64
+        Color  = "SpringGreen"
+    }
+    Start-PSCountdownTimer @splat
+
 Do {
     Start-Sleep -Seconds 1
 } While ($PSCountdownClock.Running)
@@ -176,15 +175,20 @@ Write-Host "Are you ready for some PowerShell?" -ForegroundColor magenta -Backgr
 Add-Type -AssemblyName PresentationCore
 $filename = "c:\work\01-Start.mp3"
 
-$global:mediaplayer = New-Object system.windows.media.mediaplayer
-$global:mediaplayer.Open($filename)
-$global:mediaplayer.Play()
-
-#the media player launches with no UI. Use the object's methods to control it.
-# mediaplayer.stop()
-# $mediaplayer.close()
+$global:MediaPlayer = New-Object System.Windows.Media.MediaPlayer
+$global:MediaPlayer.Open($filename)
+$global:MediaPlayer.Play()
 ```
 
-## Related Tools
+The media player launches with no UI. Use the object's methods to control it.
 
-For a related project, take a look at the [PSClock](https://github.com/jdhitsolutions/PSClock) module.
+```powershell
+$MediaPlayer.stop()
+$MediaPlayer.close()
+```
+
+## KEYWORDS
+
+- Timer
+
+- Timespan

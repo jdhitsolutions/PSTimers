@@ -73,7 +73,7 @@ ID RunTime
 ### EXAMPLE 4
 
 ```powershell
-Get-History -count 5 | Get-HistoryRuntime -detail
+PS C:\> Get-History -count 5 | Get-HistoryRuntime -detail
 
 ID RunTime             Status Command
  -- -------             ------ -------

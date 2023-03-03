@@ -7,27 +7,27 @@ Function Start-PSCountdown {
         [Parameter(Position = 0, HelpMessage = "Enter the number of minutes to countdown (1-60). The default is 5.", ParameterSetName = "minutes")]
         [ValidateRange(1, 60)]
         [int32]$Minutes = 5,
-        [Parameter(Position = 0, ParameterSetname = "time", HelpMessage = "Enter a datetime value as the countdown target.")]
+        [Parameter(Position = 0, ParameterSetName = "time", HelpMessage = "Enter a datetime value as the countdown target.")]
         [DateTime]$Time,
         [Parameter(HelpMessage = "Enter the text for the progress bar title.")]
         [ValidateNotNullOrEmpty()]
-        [string]$Title = "Counting Down ",
+        [String]$Title = "Counting Down ",
         [Parameter(Position = 1, HelpMessage = "Enter a primary message to display in the parent window.")]
         [ValidateNotNullOrEmpty()]
-        [string]$Message = "Starting soon.",
+        [String]$Message = "Starting soon.",
         [Parameter(HelpMessage = "Use this parameter to clear the screen prior to starting the countdown.")]
         [alias("cls")]
-        [switch]$ClearHost,
+        [Switch]$ClearHost,
         [ValidateSet("Default", "Random", "Transparent")]
         [alias("style")]
-        [string]$ProgressStyle = "Default",
+        [String]$ProgressStyle = "Default",
         [Parameter(HelpMessage = "The path to a text list of pseudo-tasks")]
         [ValidateNotNullOrEmpty()]
-        [string]$Path = "$PSScriptRoot\PSCountdownTasks.txt"
+        [String]$Path = "$PSScriptRoot\PSCountdownTasks.txt"
     )
     Begin {
         Write-Verbose "Starting $($MyInvocation.MyCommand)"
-        $PSBoundParameters | Out-String | Write-Verbose
+        Write-Verbose "Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
 
         if ($PSBoundParameters.ContainsKey('progressStyle')) {
 

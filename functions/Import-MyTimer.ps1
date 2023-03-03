@@ -10,21 +10,18 @@ Function Import-MyTimer {
         )]
         [ValidateNotNullOrEmpty()]
         [ValidateScript( {
-                if (Test-Path $_) {
-                    $True
-                }
-                else {
-                    Throw "Cannot validate path $_"
-                }
-            })]
-        [string]$Path
+            if (Test-Path $_) {
+                $True
+            }
+            else {
+                Throw "Cannot validate path $_"
+            }
+        })]
+        [String]$Path
     )
 
     Write-Verbose "Starting: $($MyInvocation.MyCommand)"
-    #display PSBoundParameters formatted nicely for Verbose output
-    [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
-    Write-Verbose "PSBoundParameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n"
-
+    Write-Verbose "Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
     Import-Clixml -Path $Path | foreach-object {
         if ($PSCmdlet.ShouldProcess($_.name)) {
             Write-Verbose "Importing $($_.name)"

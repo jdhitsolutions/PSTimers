@@ -117,7 +117,7 @@
     <command:inputTypes>
       <command:inputType>
         <dev:type>
-          <maml:name>[string]</maml:name>
+          <maml:name>[String]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -1907,7 +1907,7 @@ PS C:\&gt; $PSStyle.progress.view = "Minimal"</dev:code>
       <command:example>
         <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Start-PSCountdownTimer -seconds 600 -message "We are resuming in:" -OnTop
-PS C:\&gt; $psCountDownClock.Color="darkgreen"</dev:code>
+PS C:\&gt; $PSCountdownClock.Color="darkgreen"</dev:code>
         <dev:remarks>
           <maml:para>The first command starts a 10 minute countdown with a message prefix. The display will always be on top of other windows. The second command uses the synchronized hashtable to change the font color.</maml:para>
         </dev:remarks>

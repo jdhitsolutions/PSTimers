@@ -7,7 +7,7 @@ Function Start-PSCountdownTimer {
         [Int]$Seconds = 60,
 
         [Parameter(HelpMessage = "Specify a short message prefix like 'Starting in: '")]
-        [string]$Message,
+        [String]$Message,
 
         [Parameter(ValueFromPipelineByPropertyName)]
         [ValidateScript({ $_ -gt 8 })]
@@ -17,24 +17,24 @@ Function Start-PSCountdownTimer {
         [Parameter(HelpMessage = "Specify a font style.", ValueFromPipelineByPropertyName)]
         [ValidateSet("Normal", "Italic", "Oblique")]
         [alias("style")]
-        [string]$FontStyle = "Normal",
+        [String]$FontStyle = "Normal",
 
         [Parameter(HelpMessage = "Specify a font weight.", ValueFromPipelineByPropertyName)]
         [ValidateSet("Normal", "Bold", "Light")]
         [alias("weight")]
-        [string]$FontWeight = "Normal",
+        [String]$FontWeight = "Normal",
 
         [Parameter(HelpMessage = "Specify a font color like Green or an HTML code like '#FF1257EA'", ValueFromPipelineByPropertyName)]
         [ValidateNotNullOrEmpty()]
-        [string]$Color = "White",
+        [String]$Color = "White",
 
         [Parameter(HelpMessage = "Specify a font family.", ValueFromPipelineByPropertyName)]
         [ValidateNotNullOrEmpty()]
         [alias("family")]
-        [string]$FontFamily = "Segoi UI",
+        [String]$FontFamily = "Segoi UI",
 
         [Parameter(HelpMessage = "Do you want the clock to always be on top?", ValueFromPipelineByPropertyName)]
-        [switch]$OnTop,
+        [Switch]$OnTop,
 
         [Parameter(HelpMessage = "Specify the clock position as an array of left and top values.", ValueFromPipelineByPropertyName)]
         [ValidateCount(2, 2)]
@@ -46,7 +46,7 @@ Function Start-PSCountdownTimer {
 
         [Parameter(HelpMessage = "Specify alert coloring")]
         [ValidateNotNullOrEmpty()]
-        [string]$AlertColor = "Yellow",
+        [String]$AlertColor = "Yellow",
 
         [Parameter(HelpMessage = "Specify the number of seconds remaining to switch to warning coloring")]
         [ValidateScript({$_ -ge 1})]
@@ -54,22 +54,23 @@ Function Start-PSCountdownTimer {
 
         [Parameter(HelpMessage = "Specify warning coloring")]
         [ValidateNotNullOrEmpty()]
-        [string]$WarningColor = "Red"
+        [String]$WarningColor = "Red"
     )
 
     Begin {
         Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
     } #begin
     Process {
+        Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
         Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Validating"
         if ($IsLinux -OR $isMacOS) {
             Write-Warning "This command requires a Windows platform."
             return
         }
 
-        if ($global:PSCountDownClock.Running) {
+        if ($global:PSCountdownClock.Running) {
             Write-Warning "You already have a clock running. You can only have one clock running at a time."
-            $PSCountDownClock
+            $PSCountdownClock
             Return
         }
 
@@ -104,7 +105,7 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
         }
 
         Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Building a synchronized hashtable"
-        $global:PSCountDownClock = [hashtable]::Synchronized(@{
+        $global:PSCountdownClock = [hashtable]::Synchronized(@{
                 FontSize         = $FontSize
                 FontStyle        = $FontStyle
                 FontWeight       = $FontWeight
@@ -120,16 +121,16 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
                 AlertColor       = $AlertColor
                 WarningColor     = $WarningColor
             })
-        Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] $($global:PSCountDownClock | Out-String)"
+        Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] $($global:PSCountdownClock | Out-String)"
         #Run the clock in a runspace
         $rs = [RunspaceFactory]::CreateRunspace()
         $rs.ApartmentState = "STA"
         $rs.ThreadOptions = "ReuseThread"
         $rs.Open()
 
-        $global:PSCountDownClock.add("Runspace", $rs)
+        $global:PSCountdownClock.add("Runspace", $rs)
 
-        $rs.SessionStateProxy.SetVariable("PSCountDownClock", $global:PSCountDownClock)
+        $rs.SessionStateProxy.SetVariable("PSCountdownClock", $global:PSCountdownClock)
 
         Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Defining the runspace command"
         $psCmd = [PowerShell]::Create().AddScript({
@@ -140,7 +141,7 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
 
                 # a private function to stop the clock and clean up
                 Function _QuitClock {
-                    $PSCountDownClock.Running = $False
+                    $PSCountdownClock.Running = $False
                     $timer.stop()
                     $timer.isenabled = $False
                     $form.close()
@@ -152,7 +153,7 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
                         $r.close()
                         $r.dispose()
                     }
-                    Start-ThreadJob -ScriptBlock $cmd -ArgumentList $PSCountDownClock.runspace.id
+                    Start-ThreadJob -ScriptBlock $cmd -ArgumentList $PSCountdownClock.runspace.id
 
                     #delete the flag file
                     if (Test-Path $env:temp\pscountdown-flag.txt) {
@@ -161,7 +162,7 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
                 }
 
                 $form = New-Object System.Windows.Window
-                [int]$script:i = $PSCountDownClock.seconds
+                [int]$script:i = $PSCountdownClock.seconds
                 <#
                 some of the form settings are irrelevant because it is transparent
                 but leaving them in the event I need to turn off transparency
@@ -173,15 +174,15 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
                 $form.Width = 400
                 $form.SizeToContent = "WidthAndHeight"
                 $form.AllowsTransparency = $True
-                $form.Topmost = $PSCountDownClock.Ontop
+                $form.Topmost = $PSCountdownClock.Ontop
 
                 $form.Background = "Transparent"
                 $form.borderthickness = "1,1,1,1"
                 $form.VerticalAlignment = "top"
 
-                if ($PSCountDownClock.StartingPosition) {
-                    $form.left = $PSCountDownClock.StartingPosition[0]
-                    $form.top = $PSCountDownClock.StartingPosition[1]
+                if ($PSCountdownClock.StartingPosition) {
+                    $form.left = $PSCountdownClock.StartingPosition[0]
+                    $form.top = $PSCountdownClock.StartingPosition[1]
                 }
                 else {
                     $form.WindowStartupLocation = "CenterScreen"
@@ -200,14 +201,14 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
                 $form.Add_KeyDown({
                     switch ($_.key) {
                         { 'Add', 'OemPlus' -contains $_ } {
-                            If ( $PSCountDownClock.fontSize -ge 8) {
-                                $PSCountDownClock.fontSize++
+                            If ( $PSCountdownClock.fontSize -ge 8) {
+                                $PSCountdownClock.fontSize++
                                 $form.UpdateLayout()
                             }
                         }
                         { 'Subtract', 'OemMinus' -contains $_ } {
-                            If ($PSCountDownClock.FontSize -ge 8) {
-                                $PSCountDownClock.FontSize--
+                            If ($PSCountdownClock.FontSize -ge 8) {
+                                $PSCountdownClock.FontSize--
                                 $form.UpdateLayout()
                             }
                         }
@@ -224,17 +225,17 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
                 $stack = New-Object System.Windows.Controls.StackPanel
 
                 $label = New-Object System.Windows.Controls.label
-                $ts = "{0} {1}" -f $PSCountDownClock.message,(New-TimeSpan -Seconds $script:i).ToString()
+                $ts = "{0} {1}" -f $PSCountdownClock.message,(New-TimeSpan -Seconds $script:i).ToString()
                 $label.Content = $ts.Trim()
                 #"Hello World"
-                #Get-Date -Format $PSCountDownClock.DateFormat
+                #Get-Date -Format $PSCountdownClock.DateFormat
 
                 $label.HorizontalContentAlignment = "Center"
-                $label.Foreground = $PSCountDownClock.Color
-                $label.FontStyle = $PSCountDownClock.FontStyle
-                $label.FontWeight = $PSCountDownClock.FontWeight
-                $label.FontSize = $PSCountDownClock.FontSize
-                $label.FontFamily = $PSCountDownClock.FontFamily
+                $label.Foreground = $PSCountdownClock.Color
+                $label.FontStyle = $PSCountdownClock.FontStyle
+                $label.FontWeight = $PSCountdownClock.FontWeight
+                $label.FontSize = $PSCountdownClock.FontSize
+                $label.FontFamily = $PSCountdownClock.FontFamily
 
                 $label.VerticalAlignment = "Top"
 
@@ -245,31 +246,31 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
                 $timer.Interval = [TimeSpan]"0:0:1.00"
                 $timer.Add_Tick({
                         $script:i--
-                        if ($PSCountDownClock.Running -AND ($script:i -gt 0)) {
+                        if ($PSCountdownClock.Running -AND ($script:i -gt 0)) {
                             #set the font to yellow at 20 seconds and red at 10 seconds
-                            if ($script:i -le $PSCountDownClock.Warning) {
-                                $label.Foreground = $PSCountDownClock.WarningColor
+                            if ($script:i -le $PSCountdownClock.Warning) {
+                                $label.Foreground = $PSCountdownClock.WarningColor
                             }
-                            elseif ($script:i -le $PSCountDownClock.Alert) {
-                                $label.foreground = $PSCountDownClock.AlertColor
+                            elseif ($script:i -le $PSCountdownClock.Alert) {
+                                $label.foreground = $PSCountdownClock.AlertColor
                             }
                             else {
-                                $label.Foreground = $PSCountDownClock.Color
+                                $label.Foreground = $PSCountdownClock.Color
                             }
-                            $label.FontStyle = $PSCountDownClock.FontStyle
-                            $label.FontWeight = $PSCountDownClock.FontWeight
-                            $label.FontSize = $PSCountDownClock.FontSize
-                            $label.FontFamily = $PSCountDownClock.FontFamily
-                            $ts = "{0} {1}" -f $PSCountDownClock.message,(New-TimeSpan -Seconds $script:i).ToString()
+                            $label.FontStyle = $PSCountdownClock.FontStyle
+                            $label.FontWeight = $PSCountdownClock.FontWeight
+                            $label.FontSize = $PSCountdownClock.FontSize
+                            $label.FontFamily = $PSCountdownClock.FontFamily
+                            $ts = "{0} {1}" -f $PSCountdownClock.message,(New-TimeSpan -Seconds $script:i).ToString()
                             $label.Content = $ts.Trim()
                             #"Hello World"
-                            #Get-Date -Format $PSCountDownClock.DateFormat
+                            #Get-Date -Format $PSCountdownClock.DateFormat
 
-                            $form.TopMost = $PSCountDownClock.OnTop
+                            $form.TopMost = $PSCountdownClock.OnTop
                             $form.UpdateLayout()
 
-                            #$PSCountDownClock.Window = $Form
-                            $PSCountDownClock.CurrentPosition = $form.left, $form.top
+                            #$PSCountdownClock.Window = $Form
+                            $PSCountdownClock.CurrentPosition = $form.left, $form.top
                         }
                         else {
                             _QuitClock
@@ -277,8 +278,8 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
                     })
                 $timer.Start()
 
-                $PSCountDownClock.Running = $True
-                $PSCountDownClock.Started = Get-Date
+                $PSCountdownClock.Running = $True
+                $PSCountdownClock.Started = Get-Date
 
                 #Show the clock form
                 [void]$form.ShowDialog()

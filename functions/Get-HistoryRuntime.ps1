@@ -1,5 +1,4 @@
 Function Get-HistoryRuntime {
-
     [cmdletbinding(DefaultParameterSetName = "ID")]
     [OutputType([PSCustomObject])]
     [Alias("ghr")]
@@ -22,7 +21,7 @@ Function Get-HistoryRuntime {
     } #begin
 
     Process {
-
+        Write-Verbose "[PROCESS] Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
         Try {
             If ($PSCmdlet.ParameterSetName -eq "ID") {
                 $History = Get-History -Id $ID -ErrorAction Stop

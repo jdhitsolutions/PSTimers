@@ -1,5 +1,3 @@
-
-
 Function Stop-PSCountdownTimer {
     [cmdletbinding(SupportsShouldProcess)]
     [OutputType("none")]
@@ -11,9 +9,9 @@ Function Stop-PSCountdownTimer {
     Process {
         Try {
             [void](Get-Variable -Name PSCountdownClock -Scope global -ErrorAction Stop)
-            If ($PSCmdlet.ShouldProcess("countdown timer started at $($global:PSCountdownclock.started)")) {
-                $rs = $global:pscountdownclock.runspace
-                $global:PSCountdownclock.running = $False
+            If ($PSCmdlet.ShouldProcess("countdown timer started at $($global:PSCountdownClock.started)")) {
+                $rs = $global:PSCountdownClock.runspace
+                $global:PSCountdownClock.running = $False
                 Remove-Variable -Name PSCountdownClock -Scope Global
                 Start-Sleep -Seconds 1
                 Remove-Runspace $rs
@@ -23,7 +21,7 @@ Function Stop-PSCountdownTimer {
         Catch {
             Write-Warning "Could not find `$PSCountdownClock in the global scope. Did you start a countdown timer?"
         }
-        Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Stopping PSCountDownClock"
+        Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Stopping PSCountdownClock"
     } #process
 
     End {

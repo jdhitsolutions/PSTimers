@@ -3,7 +3,11 @@ Function Remove-MyTimer {
     [cmdletbinding(SupportsShouldProcess)]
     [OutputType("None")]
     Param(
-        [Parameter(Position = 0, Mandatory, ValueFromPipelineByPropertyName)]
+        [Parameter(
+            Position = 0,
+            Mandatory,
+            ValueFromPipelineByPropertyName
+        )]
         [ValidateNotNullOrEmpty()]
         [string[]]$Name
     )
@@ -11,9 +15,7 @@ Function Remove-MyTimer {
         Write-Verbose "Starting: $($MyInvocation.MyCommand)"
     }   #begin
     Process {
-        #display PSBoundParameters formatted nicely for Verbose output
-        [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
-        Write-Verbose "PSBoundParameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n"
+        Write-Verbose "Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
         foreach ($timer in $Name) {
             Try {
                 if ($PSCmdlet.ShouldProcess($timer)) {

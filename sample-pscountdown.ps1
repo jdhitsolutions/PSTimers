@@ -6,7 +6,7 @@ Clear-Host
 Start-PSCountdownTimer -seconds 60 -message "The PowerShell magic begins in " -FontSize 64 -Color SpringGreen
 Do {
     Start-Sleep -Seconds 1
-} While ($PSCountDownClock.Running)
+} While ($PSCountdownClock.Running)
 
 Write-Host "Are you ready for some PowerShell?" -ForegroundColor magenta -BackgroundColor gray
 

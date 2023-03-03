@@ -12,10 +12,7 @@ Function Get-MyTimer {
     } #begin
 
     Process {
-        #display PSBoundParameters formatted nicely for Verbose output
-        [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
-        Write-Verbose "[PROCESS] PSBoundParameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n"
-
+        Write-Verbose "[PROCESS] Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
         if ($Name) {
             Write-Verbose "[PROCESS] Getting timer $Name"
             $timers = foreach ($item in $Name) {

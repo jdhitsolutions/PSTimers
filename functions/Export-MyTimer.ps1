@@ -1,24 +1,20 @@
 Function Export-MyTimer {
-
     [cmdletbinding(SupportsShouldProcess)]
     [OutputType("None")]
     Param(
         [Parameter(Position = 0)]
-        [string]$Name,
+        [String]$Name,
 
         [Parameter(
             Mandatory,
             HelpMessage = "Enter the name and path of an XML file"
         )]
         [ValidateNotNullOrEmpty()]
-        [string]$Path
+        [String]$Path
     )
 
     Write-Verbose "Starting: $($MyInvocation.MyCommand)"
-    #display PSBoundParameters formatted nicely for Verbose output
-    [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
-    Write-Verbose "PSBoundParameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n"
-
+    Write-Verbose "Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
     if ($Name) {
         Write-Verbose "Finding timer variable $Name"
         $found = $global:MyTimerCollection["$name"]

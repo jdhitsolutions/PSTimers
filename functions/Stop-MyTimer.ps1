@@ -7,16 +7,14 @@ Function Stop-MyTimer {
     Param(
         [Parameter(Position = 0, Mandatory, ValueFromPipelineByPropertyName)]
         [ValidateNotNullOrEmpty()]
-        [string]$Name
+        [String]$Name
     )
     Begin {
         Write-Verbose "[BEGIN  ] Starting: $($MyInvocation.MyCommand)"
-        #display PSBoundParameters formatted nicely for Verbose output
-        [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
-        Write-Verbose "[BEGIN  ] PSBoundParameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n"
-
     }
     Process {
+
+        Write-Verbose "[PROCESS] Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
         Write-Verbose "[PROCESS] Getting timer $name"
         $timers = ($global:MyTimerCollection).Values.where( {$_.name -like $name})
         if ($timers) {
@@ -31,7 +29,7 @@ Function Stop-MyTimer {
                     } #should process
                 }
                 else {
-                    write-warning "$($timer.name) is not running"
+                    Write-Warning "$($timer.name) is not running"
                 }
             }
         }

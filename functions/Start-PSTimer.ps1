@@ -11,7 +11,7 @@ Function Start-PSTimer {
         [alias("globalblock", "sb")]
         [scriptblock]$Scriptblock,
         [Switch]$ProgressBar,
-        [string]$Title = "Countdown",
+        [String]$Title = "Countdown",
         [Switch]$Clear,
         [String]$Message
     )
@@ -59,7 +59,7 @@ Function Start-PSTimer {
             $host.UI.RawUI.CursorPosition = $Coordinate
             #write the seconds with padded trailing spaces to overwrite any extra digits such
             #as moving from 10 to 9
-            $pad = ($TotalSeconds -as [string]).Length
+            $pad = ($TotalSeconds -as [String]).Length
             if ($seconds -le 10) {
                 $color = "Red"
             }
@@ -68,7 +68,7 @@ Function Start-PSTimer {
             }
             $msg = @"
 $Title
-$(([string]$Seconds).PadRight($pad))
+$(([String]$Seconds).PadRight($pad))
 "@
 
             write-host $msg -ForegroundColor $color

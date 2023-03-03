@@ -41,7 +41,7 @@ Start a 5 minute countdown.
 
 ```powershell
 PS C:\> Start-PSCountdownTimer -seconds 600 -message "We are resuming in:" -OnTop
-PS C:\> $psCountDownClock.Color="darkgreen"
+PS C:\> $PSCountdownClock.Color="darkgreen"
 ```
 
 The first command starts a 10 minute countdown with a message prefix. The display will always be on top of other windows. The second command uses the synchronized hashtable to change the font color.

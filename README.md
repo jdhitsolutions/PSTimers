@@ -122,7 +122,7 @@ Set it to `Minimal` to restore.
 
 ## PSCountdownTimer
 
-An alternative to `Start-PSCountdown` is [`Start-PSCountdowntimer`](Docs/Start-PSCountdownTimer.md).
+An alternative to `Start-PSCountdown` is [`Start-PSCountdownTimer`](Docs/Start-PSCountdownTimer.md).
 
 ```powershell
 Start-PSCountdownTimer -seconds 600 -message "The PowerShell magic begins in " -FontSize 64 -Color SpringGreen -OnTop
@@ -160,29 +160,29 @@ PS C:\> $PSCountdownClock.OnTop = $False
 
 At 50 seconds the color will change to yellow and then to red at 30 seconds.
 
-You can stop the clock by right-clicking on the form, setting the `Running` hashtable value to `$False` or run `Stop-PSCountdownTimer`. This is the recommended way. The WPF countdown runs in a separate runspace. If you close the PowerShell session where you started the countdown, the timer will terminate.
+You can stop the clock by right-clicking on the form, setting the `Running` hashtable value to `$False`, or running `Stop-PSCountdownTimer`. This is the recommended way. The WPF countdown runs in a separate runspace. If you close the PowerShell session where you started the countdown, the timer will terminate.
 
-Because the timer runs in a separate runspace, the timer itself cannot initiate an action at the end of the timer. If you would like to create automation around the countdown timer, you could create a PowerShell script like this.
+Because the timer runs in a separate runspace, the timer itself cannot initiate an action at the end of the timer. If you would like to create automation around the countdown timer, you could create a PowerShell script like this. The sample requires a Windows platform.
 
 ```powershell
+Clear-Host
 Start-PSCountdownTimer -seconds 60 -message "The PowerShell magic begins in " -FontSize 64 -Color SpringGreen
 Do {
     Start-Sleep -Seconds 1
 } While ($PSCountdownClock.Running)
-Clear-Host
 Write-Host "Are you ready for some PowerShell?" -ForegroundColor magenta -BackgroundColor gray
 
 #play a startup song
 Add-Type -AssemblyName PresentationCore
 $filename = "c:\work\01-Start.mp3"
 
-$global:mediaplayer = New-Object system.windows.media.mediaplayer
-$global:mediaplayer.Open($filename)
-$global:mediaplayer.Play()
+$global:MediaPlayer = New-Object System.Windows.Media.MediaPlayer
+$global:MediaPlayer.Open($filename)
+$global:MediaPlayer.Play()
 
 #the media player launches with no UI. Use the object's methods to control it.
-# mediaplayer.stop()
-# $mediaplayer.close()
+# MediaPlayer.stop()
+# $MediaPlayer.close()
 ```
 
 ## Related Tools

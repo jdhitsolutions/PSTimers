@@ -44,7 +44,7 @@ Function Start-PSCountdown {
                 $host.privateData.progressBackgroundColor = $host.UI.RawUI.BackgroundColor
             }
         }
-        Write-Verbose "Using parameter set $($pscmdlet.ParameterSetName)"
+        Write-Verbose "Using parameter set $($PSCmdlet.ParameterSetName)"
 
         if (Test-Path $Path) {
             #import entries from list without a # comment and trim each one
@@ -60,7 +60,7 @@ Function Start-PSCountdown {
             Clear-Host
         }
         $startTime = Get-Date
-        if ($pscmdlet.ParameterSetName -eq 'minutes') {
+        if ($PSCmdlet.ParameterSetName -eq 'minutes') {
             Write-Verbose "Adding $minutes minutes to start time"
             $endTime = $startTime.AddMinutes($Minutes)
         }
@@ -77,11 +77,11 @@ Function Start-PSCountdown {
 
         #used when progress style is random
         if ($PSStyle.Progress.view -eq "Minimal") {
-            $progColors = $psstyle.Foreground.brightRed,$PSStyle.Foreground.BrightCyan,$PSStyle.Foreground.brightgreen,
+            $progColors = $PSStyle.Foreground.brightRed,$PSStyle.Foreground.BrightCyan,$PSStyle.Foreground.brightgreen,
             $PSStyle.Foreground.BrightMagenta
         }
         else {
-            $progcolors = "black", "darkgreen", "magenta", "blue", "darkgray","cyan","darkcyan"
+            $progColors = "black", "darkgreen", "magenta", "blue", "darkgray","cyan","darkcyan"
         }
 
     } #begin
@@ -111,10 +111,10 @@ Function Start-PSCountdown {
             if ($percentDoneChild -ge 100 -and $percentDone -le 98) {
                 if ($PSBoundParameters.ContainsKey('ProgressStyle') -AND $PSBoundParameters.Item('ProgressStyle') -eq 'random') {
                     if ($PSStyle.Progress.View -eq 'Minimal') {
-                        $PSStyle.Progress.Style = ($progcolors | Get-Random)
+                        $PSStyle.Progress.Style = ($progColors | Get-Random)
                     }
                     else {
-                        $host.privateData.progressBackgroundColor = ($progcolors | Get-Random)
+                        $host.privateData.progressBackgroundColor = ($progColors | Get-Random)
                     }
                 }
                 $totalSecondsChild = Get-Random -Minimum 4 -Maximum 30

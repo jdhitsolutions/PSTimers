@@ -1480,10 +1480,10 @@ c               12/12/2022 11:11:10 AM                        00:00:00          
       </command:example>
       <command:example>
         <maml:title>-------------------------- Example 3 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; $psstyle.progress.view = "Classic"
+        <dev:code>PS C:\&gt; $PSStyle.progress.view = "Classic"
 PS C:\&gt; $host.PrivateData.ProgressForegroundColor = "yellow"
 PS C:\&gt; Start-PSCountdown -minutes 1 -title "Bathroom break" -Message "Hurry Back" -progressStyle Random
-PS C:\&gt; $psstyle.progress.view = "Minimal"</dev:code>
+PS C:\&gt; $PSStyle.progress.view = "Minimal"</dev:code>
         <dev:remarks>
           <maml:para>In PowerShell 7 using the $PSStyle feature, if you want to revert back to the classic progress view, you can set the view style to Classic. When this is set, then the $host.PrivateData values are used. You might need to change the foreground color, especially when using a random or transparent style.</maml:para>
         </dev:remarks>
@@ -1516,7 +1516,7 @@ PS C:\&gt; $psstyle.progress.view = "Minimal"</dev:code>
     <maml:description>
       <maml:para>Use this command to display a WPF-based countdown timer, running in a background runspace.  The timer will be displayed in the center of the screen. You can click and drag the timer to reposition using the left mouse button. You might have to try a few times to "grab" the timer. You can close the clock with a right-click of the mouse, or run Stop-PSCountdownTimer in the same session where you started the timer.</maml:para>
       <maml:para>The timer has alert and warning settings. At the alert level of 50, the font color will change to yellow at and at 30 seconds, the warning level, it will turn to red. You can customize this behavior with parameters.</maml:para>
-      <maml:para>The countdown timer runs in a separate runspace launched from your PowerShell session. If you close the session, the countdown timer will also be closed. The timer uses a synchronized hashtable. You can modify settings in $PSCountdownClock and they will be reflected in the timer. Set $PSCountdownclock.Running to $False to cancel the timer.</maml:para>
+      <maml:para>The countdown timer runs in a separate runspace launched from your PowerShell session. If you close the session, the countdown timer will also be closed. The timer uses a synchronized hashtable. You can modify settings in $PSCountdownClock and they will be reflected in the timer. Set $PSCountdownClock.Running to $False to cancel the timer.</maml:para>
       <maml:para>This command requires a Windows platform.</maml:para>
     </maml:description>
     <command:syntax>
@@ -1926,6 +1926,10 @@ PS C:\&gt; $psCountDownClock.Color="darkgreen"</dev:code>
         <maml:linkText>Start-PSCountdown</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Start-PSTimer</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -2151,6 +2155,10 @@ PS C:\&gt; $psCountDownClock.Color="darkgreen"</dev:code>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Start-PSCountdown</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Start-PSCountdownTimer</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>

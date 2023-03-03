@@ -1,5 +1,4 @@
 Function Start-MyTimer {
-
     [cmdletbinding()]
     [OutputType("MyTimer")]
     [Alias("ton")]
@@ -16,14 +15,19 @@ Function Start-MyTimer {
     [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
     Write-Verbose "PSBoundParameters: `n$($pb.split("`n").Foreach({"$("`t"*2)$_"}) | Out-String) `n"
     foreach ($timer in $Name) {
-
-        Try {
-            Write-Verbose "Creating timer $timer"
-            New-Object -TypeName MyTimer -ArgumentList $timer, $Description -ErrorAction stop
+        #Test if a timer with the same name already exists
+        if (Get-Mytimer -Name $Name -WarningAction SilentlyContinue) {
+          Write-Warning "A timer with the name $Name already exists. Try again with a different name."
         }
-        Catch {
-            # Write-Warning "Failed to create timer $timer. $($_.exception.message)"
-            Throw $_
+        else {
+            Try {
+                Write-Verbose "Creating timer $timer"
+                New-Object -TypeName MyTimer -ArgumentList $timer, $Description -ErrorAction stop
+            }
+            Catch {
+                # Write-Warning "Failed to create timer $timer. $($_.exception.message)"
+                Throw $_
+            }
         }
 
     } #foreach

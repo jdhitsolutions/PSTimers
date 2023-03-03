@@ -13,6 +13,7 @@
 ### Changed
 
 - Modified `mytimer.format.ps1xml` to use auto sizing.
+- Revised `Start-MyTimer` to display a warning if a timer with the same name has already been created.
 - Updated help documentation.
 - Update `README.md
 

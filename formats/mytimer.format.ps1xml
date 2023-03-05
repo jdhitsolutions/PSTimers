@@ -4,13 +4,13 @@ Any changes made to this file may be overwritten in future module updates
 -->
 <Configuration>
     <ViewDefinitions>
-       <View>
-          <Name>default</Name>
+        <View>
+            <Name>default</Name>
             <ViewSelectedBy>
                 <TypeName>MyTimer</TypeName>
             </ViewSelectedBy>
-               <TableControl>
-               <AutoSize/>
+            <TableControl>
+                <AutoSize/>
                 <TableHeaders>
                     <TableColumnHeader>
                         <Label>Name</Label>
@@ -22,7 +22,7 @@ Any changes made to this file may be overwritten in future module updates
                         <Width>22</Width>
                         <Alignment>Left</Alignment>
                     </TableColumnHeader>
-                     <TableColumnHeader>
+                    <TableColumnHeader>
                         <Label>Stop</Label>
                         <Width>22</Width>
                         <Alignment>Left</Alignment>
@@ -33,7 +33,7 @@ Any changes made to this file may be overwritten in future module updates
                         <Alignment>Left</Alignment>
                     </TableColumnHeader>
                     <TableColumnHeader>
-                        <Label>Running</Label>
+                        <Label>Status</Label>
                         <Width>7</Width>
                         <Alignment>Right</Alignment>
                     </TableColumnHeader>
@@ -48,28 +48,50 @@ Any changes made to this file may be overwritten in future module updates
                         <Wrap/>
                         <TableColumnItems>
                             <TableColumnItem>
-                                <PropertyName>Name</PropertyName>
+                                <ScriptBlock>
+                                    if ($Host.Name -match "console|code") {
+                                        If ($_.status -eq 'Running') {
+                                            <!-- green -->
+                                            "$([char]27)[92m$($_.Name)$([char]27)[0m"
+                                        }
+                                        ElseIf ($_.status -eq 'Stopped') {
+                                            <!-- red-->
+                                            "$([char]27)[91m$($_.Name)$([char]27)[0m"
+                                        }
+                                        ElseIf ($_.status -eq 'Paused') {
+                                            <!-- yellw-->
+                                            "$([char]27)[93m$($_.Name)$([char]27)[0m"
+                                        }
+                                        else {
+                                            $_.Name
+                                        }
+                                    }
+                                    else {
+                                        $_.Name
+                                    }
+                                </ScriptBlock>
                             </TableColumnItem>
                             <TableColumnItem>
                                 <PropertyName>Start</PropertyName>
                             </TableColumnItem>
                             <TableColumnItem>
+                                <!--Stop value-->
                                 <ScriptBlock>
-                                if ($_.Running) {
-                                  $null
+                                if ($_.status -eq "Running" -OR $_.status -eq "Paused") {
+                                    $Null
                                 }
                                 else {
-                                 $_.end
+                                    $_.end
                                 }
                                 </ScriptBlock>
                             </TableColumnItem>
-                              <TableColumnItem>
-                                <PropertyName>Duration</PropertyName>
+                            <TableColumnItem>
+                                <ScriptBlock>"{0:dd\:hh\:mm\:ss}" -f $_.duration</ScriptBlock>
                             </TableColumnItem>
-                              <TableColumnItem>
-                                <PropertyName>Running</PropertyName>
+                            <TableColumnItem>
+                                <PropertyName>Status</PropertyName>
                             </TableColumnItem>
-                                <TableColumnItem>
+                            <TableColumnItem>
                                 <PropertyName>Description</PropertyName>
                             </TableColumnItem>
                         </TableColumnItems>
@@ -77,5 +99,5 @@ Any changes made to this file may be overwritten in future module updates
                 </TableRowEntries>
             </TableControl>
         </View>
-     </ViewDefinitions>
+    </ViewDefinitions>
 </Configuration>

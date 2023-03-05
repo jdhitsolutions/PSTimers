@@ -1,5 +1,33 @@
 # Changelog for PSTimers
 
+## v2.0.0
+
+### Changed
+
+- Merged [PR#12](https://github.com/jdhitsolutions/PSTimers/pull/12) from @joshua-russell to update `Set-MyTimer`. His change was refined further.
+- Revised how PSBoundParameters are displayed in Verbose output.
+- Updates to the `PSCountdownTasks.txt` file.
+- Added `-PassThru` parameter to `Stop-MyTimer` to return the timer object. The default now is to not write anything to the pipeline. **This is a breaking change**.
+- Moved the import-related constructor code from the `MyTimer` class to `Import-MyTimer`. **This is a breaking change**.
+- Revised `Remove-MyTimer` to remove the associated stopwatch object from `$MyWatchCollection`.
+- Modified `Export-MyTimer` to export multiple timers to the same file
+- Updated auto completers to wrap timer names with spaces in single quotes.
+- Modified `mytimer.format.ps1xml` to highlight `MyTask` names using ANSI depending on the task status.
+- Modified `mytimer.format.ps1xml` to format duration value without milliseconds.
+- Modified `Get-MyTimer` to support getting timers based on status. [Issue #14](https://github.com/jdhitsolutions/PSTimers/issues/14)
+- Help updates.
+- Updated `README.md`.
+- Moved module to version `2.0.0` due to the number of breaking changes and addition of many commands.
+
+### Added
+
+- Rewrote the `MyTimer` class to allow for pausing, resuming, and restarting. The class keeps an associated `[System.Diagnostics.StopWatch]` object in a separate hash table, `$MyWatchCollection`. **This is a potential breaking change**.
+- Added function `Suspend-MyTimer` with an alias of `Pause-MyTimer`, and functions `Resume-MyTimer`,`Reset-MyTimer`, and `Restart-MyTimer`. [Issue #13](https://github.com/jdhitsolutions/PSTimers/issues/13)
+
+### Fixed
+
+- Fixed bug in `Set-MyTimer` to update the relevant hash table entries.
+
 ## v1.1.0
 
 ### Added

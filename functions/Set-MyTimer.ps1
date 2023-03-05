@@ -1,11 +1,24 @@
 Function Set-MyTimer {
-
     [cmdletbinding(SupportsShouldProcess)]
     [OutputType("MyTimer")]
     Param(
-        [Parameter(Position = 0, Mandatory, ValueFromPipelineByPropertyName)]
+        [Parameter(
+            Position = 0,
+            Mandatory,
+            ValueFromPipelineByPropertyName
+        )]
         [ValidateNotNullOrEmpty()]
+        [SupportsWildcards()]
         [String]$Name,
+        [ValidateScript({
+            if (-Not $Global:MyWatchCollection.ContainsKey($_)) {
+                $True
+            }
+            else {
+                Throw "The proposed new name $_ already exists."
+                $False
+            }
+        })]
         [String]$NewName,
         [DateTime]$Start,
         [String]$Description,
@@ -18,7 +31,7 @@ Function Set-MyTimer {
 
     Process {
         Write-Verbose "[PROCESS] Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
-        $timers = ($global:MyTimerCollection).Values.where( {$_.name -like $name})
+        $timers = ($global:MyTimerCollection).Values.where({$_.name -like $name})
 
         if ($timers.count -ge 1) {
             foreach ($timer in $timers) {
@@ -27,19 +40,29 @@ Function Set-MyTimer {
                     if ($Description) {
                         $timer.description = $Description
                     }
-                    if ($NewName) {
-                        $timer.Name = $NewName
-                    }
                     if ($start) {
                         $timer.start = $Start
                     }
+                    #set the new name last
+                    if ($NewName) {
+                        $oldName = $timer.name
+                        $timer.Name = $NewName
+                        #Need to update hash tables with new name
+                        $Global:MyTimerCollection.Remove($OldName)
+                        $Global:MyTimerCollection.Add($NewName,$timer)
+                        #add the new name
+                        $Global:MyWatchCollection.Add($NewName,$Global:MyWatchCollection[$OldName])
+                        $Global:MyWatchCollection.Remove($OldName)
+                    }
                     if ($PassThru) {
+                        $timer.Refresh()
                         $timer
                     }
                 }
             } #foreach
         } #if $timers
         else {
+            # Modified from [PR#12](https://github.com/jdhitsolutions/PSTimers/pull/12)
             #Use an ANSI escape sequence to make the prompt stand out
             $Title ="$([char]27)[1;38;5;200m$($MyInvocation.MyCommand)$([char]27)[0m"
             $Message = "Can't find a matching timer object. Would you like to create a new one?"
@@ -56,21 +79,7 @@ Function Set-MyTimer {
                 }
                 Get-MyTimer -Name $Name
             }
-            <#
-            Write-Warning "Can't find a matching timer object. Would you like to create a new one?"
-            # Added from [PR#12](https://github.com/jdhitsolutions/PSTimers/pull/12)
-            Switch (Read-Host  "y / n") {
-                y {
-                    Write-Verbose "[PROCESS] Creating timer $Name"
-                    $new = Start-MyTimer -Name $Name -Description $Description
-                    if ($start) {
-                        Write-Verbose "[PROCESS] Setting timer $Name start to $Start"
-                        Set-MyTimer -Name $Name -Start $Start
-                    }
-                    Get-MyTimer -Name $Name
-                }
-            }
-            #>
+
         } #else timer not found
     } #process
 

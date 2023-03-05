@@ -19,7 +19,7 @@ Set-MyTimer [-Name] <String> [-NewName <String>] [-Start <DateTime>] [-Descripti
 
 ## DESCRIPTION
 
-Use this command to modify an existing timer.
+Use this command to modify an existing timer. If you attempt to set a timer that doesn't exist, you will be prompted to create it.
 
 ## EXAMPLES
 
@@ -59,7 +59,7 @@ Accept wildcard characters: False
 
 ### -Description
 
-Enter a new description for the timer object.
+Enter a new description for the timer object. If you want to clear the description use a value of " ".
 
 ```yaml
 Type: String
@@ -86,7 +86,7 @@ Required: True
 Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
+Accept wildcard characters: True
 ```
 
 ### -NewName
@@ -155,7 +155,7 @@ Accept wildcard characters: False
 
 ### CommonParameters
 
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 

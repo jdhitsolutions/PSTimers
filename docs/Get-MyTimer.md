@@ -13,8 +13,16 @@ Get the current status of a simple timer.
 
 ## SYNTAX
 
+### name (Default)
+
 ```yaml
 Get-MyTimer [[-Name] <String[]>] [<CommonParameters>]
+```
+
+### status
+
+```yaml
+Get-MyTimer [-Status <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -28,11 +36,12 @@ Use this command to get the current status of a timer created with Start-MyTimer
 ```powershell
 PS C:\> Get-MyTimer
 
-Name            Start                  Stop                   Duration         Running Description
-----            -----                  ----                   --------         ------- -----------
-foo             1/8/2023 10:03:05 AM   1/8/2023 10:03:46 AM   00:00:41.4660786   False something
-test            1/8/2023 10:03:13 AM   1/8/2023 10:03:59 AM   00:00:46.9185655   False
-test2           1/8/2023 10:03:13 AM                          00:01:07.5290466    True
+Name                Start                Stop                Duration     Status
+----                -----                ----                --------     ------
+ScriptWork 3/4/2023 7:37:36 PM                      00:00:00:10  Paused
+Betty               3/5/2023 9:57:34 AM  3/5/2023 9:57:54 AM 00:00:00:00   Reset
+Client1    3/5/2023 10:29:28 AM                     00:00:05:07 Running
+Backup     3/5/2023 10:30:15 AM                     00:00:04:20 Running
 ```
 
 Get the all timers
@@ -40,14 +49,28 @@ Get the all timers
 ### EXAMPLE 2
 
 ```powershell
-PS C:\> Get-MyTimer test2
+PS C:\> Get-MyTimer Client1
 
-Name            Start                  Stop                   Duration         Running Description
-----            -----                  ----                   --------         ------- -----------
-test2           1/8/2023 10:03:13 AM                          00:01:37.5283112    True
+Name             Start                Stop Duration     Status Description
+----             -----                ---- --------     ------ -----------
+Client1 3/5/2023 10:29:28 AM      00:00:01:43 Running work for Client1
+
 ```
 
 Get a single timer.
+
+### EXAMPLE 3
+
+```powershell
+PS C:\> Get-Mytimer -Status Running
+
+Name    Start                Stop Duration     Status Description
+----    -----                ---- --------     ------ -----------
+Client1 3/5/2023 10:29:28 AM      00:00:00:57 Running work for Client1
+Backup  3/5/2023 10:30:15 AM      00:00:00:10 Running
+```
+
+Get timers based on status.
 
 ## PARAMETERS
 
@@ -57,7 +80,7 @@ The name for your timer.
 
 ```yaml
 Type: String[]
-Parameter Sets: (All)
+Parameter Sets: name
 Aliases:
 
 Required: False
@@ -67,9 +90,25 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: True
 ```
 
+### -Status
+
+Filter timers based on status.
+
+```yaml
+Type: String
+Parameter Sets: status
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 

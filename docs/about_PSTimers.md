@@ -6,18 +6,18 @@
 
 This module contains a set of PowerShell functions to be used as timers and countdown tools.
 
-* [Export-MyTimer](Docs/Export-MyTimer.md)
-* [Get-HistoryRuntime](Docs/Get-HistoryRuntime.md)
-* [Get-MyTimer](Docs/Get-MyTimer.md)
-* [Import-MyTimer](Docs/Import-MyTimer.md)
-* [Remove-MyTimer](Docs/Remove-MyTimer.md)
-* [Set-MyTimer](Docs/Set-MyTimer.md)
-* [Start-MyTimer](Docs/Start-MyTimer.md)
-* [Start-PSCountdown](Docs/Start-PSCountdown.md)
-* [Start-PSCountdownTimer](Docs/Start-PSCountdownTimer.md)
-* [Stop-PSCountdownTimer](Docs/Stop-PSCountdownTimer.md)
-* [Start-PSTimer](Docs/Start-PSTimer.md)
-* [Stop-MyTimer](Docs/Stop-MyTimer.md)
+* [Export-MyTimer](Export-MyTimer.md)
+* [Get-HistoryRuntime](Get-HistoryRuntime.md)
+* [Get-MyTimer](Get-MyTimer.md)
+* [Import-MyTimer](Import-MyTimer.md)
+* [Remove-MyTimer](Remove-MyTimer.md)
+* [Set-MyTimer](Set-MyTimer.md)
+* [Start-MyTimer](Start-MyTimer.md)
+* [Start-PSCountdown](Start-PSCountdown.md)
+* [Start-PSCountdownTimer](Start-PSCountdownTimer.md)
+* [Stop-PSCountdownTimer](Stop-PSCountdownTimer.md)
+* [Start-PSTimer](Start-PSTimer.md)
+* [Stop-MyTimer](Stop-MyTimer.md)
 
 The commands should also work on PowerShell 7 cross-platform, although there may be a few artifacts on non-Windows systems. It is recommended that you run PowerShell 7.2 or later on non-Windows systems.
 
@@ -116,7 +116,7 @@ Set it to `Minimal` to restore.
 
 ## PSCountdownTimer
 
-An alternative to `Start-PSCountdown` is [`Start-PSCountdownTimer`](Docs/Start-PSCountdownTimer.md).
+An alternative to `Start-PSCountdown` is [`Start-PSCountdownTimer`](Start-PSCountdownTimer.md).
 
 ```powershell
 Start-PSCountdownTimer -seconds 600 -message "The PowerShell magic begins in " -FontSize 64 -Color SpringGreen -OnTop

@@ -21,6 +21,8 @@ Start-MyTimer [[-Name] <String[]>] [-Description <String>] [<CommonParameters>]
 
 This command starts a simple timer. You start it, which captures the current date and time, and stores the result in a global variable. You have the option of naming your timer which will allow you to have multiple timers running at the same time. Timer names must be unique. You can also add a brief description.
 
+Timers are managed through two hashtables created as global variables, $MyTimerCollection and $MyWatchCollection. Do not delete these variables. The MyTimer commands will update these hashtables as needed.
+
 ## EXAMPLES
 
 ### EXAMPLE 1

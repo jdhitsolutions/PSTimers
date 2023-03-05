@@ -26,6 +26,9 @@ Function Remove-MyTimer {
                     else {
                         Write-Warning "Can't find a timer with the name $timer"
                     }
+                    if ($global:MyWatchCollection.ContainsKey("$timer")) {
+                        $global:MyWatchCollection.remove("$timer")
+                    }
                 }
             }
             Catch {

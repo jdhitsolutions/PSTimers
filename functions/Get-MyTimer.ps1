@@ -1,10 +1,22 @@
 Function Get-MyTimer {
-    [cmdletbinding()]
+    [cmdletbinding(DefaultParameterSetName = "name")]
     [OutputType("MyTimer")]
     Param(
-        [Parameter(Position = 0, ValueFromPipelineByPropertyName)]
+        [Parameter(
+            Position = 0,
+            ValueFromPipelineByPropertyName,
+            ParameterSetName = "name"
+        )]
         [ValidateNotNullOrEmpty()]
-        [string[]]$Name
+        [SupportsWildcards()]
+        [string[]]$Name,
+
+        [Parameter(
+            ParameterSetName = "status",
+            HelpMessage = "Filter timers based on status"
+        )]
+        [ValidateSet("Running","Stopped","Paused","Reset")]
+        [string]$Status
     )
 
     Begin {
@@ -13,48 +25,46 @@ Function Get-MyTimer {
 
     Process {
         Write-Verbose "[PROCESS] Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
-        if ($Name) {
-            Write-Verbose "[PROCESS] Getting timer $Name"
-            $timers = foreach ($item in $Name) {
-                ($global:MyTimerCollection).Values.where( {$_.name -like $item})
+        If ($PSCmdlet.ParameterSetName -eq "Name") {
+            if ($Name) {
+                Write-Verbose "[PROCESS] Getting timer $Name"
+                $timers = foreach ($item in $Name) {
+                    ($global:MyTimerCollection).Values.where( {$_.name -like $item})
+                }
+            }
+            else {
+                #find all timers by default
+                Write-Verbose "[PROCESS] Getting all timers"
+                $timers = $global:MyTimerCollection.Values
+            }
+            if ($timers.count -eq 0 -AND $Name) {
+                $warn = "Can't find any matching timer objects with the name $Name."
+                Write-Warning $warn
+            }
+            elseif ($timers.count -eq 0) {
+                $warn = "No defined timers found. Use Start-MyTimer to create one."
+                Write-Warning $warn
             }
         }
-        else {
-            #find all running timers by default
-            Write-Verbose "[PROCESS] Getting all timers"
-            $timers = $global:MyTimerCollection.Values
+        Else {
+            Write-Verbose "[PROCESS] Getting all timers with a status of $Status"
+            $timers = ($global:MyTimerCollection.Values).Where({$_.status -eq $Status})
+            if ($timers.count -eq 0) {
+                $warn = "No timers found with a status of $Status"
+                Write-Warning $warn
+            }
         }
 
-        Write-Verbose "[PROCESS] Getting current timer status"
+        Write-Verbose "[PROCESS] Found $($timers.count) matching timer(s)"
+        Write-Verbose "[PROCESS] Getting timer status"
         if ($timers.count -ge 1) {
             foreach ($timer in ($timers | Sort-Object -Property Start)) {
                 if ($timer.running) {
-                    #set the duration to the current value
-                    $timer.duration = $timer.GetStatus()
-                    $timer
-                    #set duration back to 0
-                    $timer.duration = 0
+                    $timer.Refresh()
                 }
-                else {
-                    #update Duration value if timer is stopped and it hasn't been updated
-                    if ($timer.duration.seconds -eq 0) {
-                        write-Verbose "Correcting duration on $($timer.name)"
-                        $timer.Duration = $timer.end - $timer.start
-                    }
-                    $timer
-                }
-
+                $timer
             }#foreach
         } #if $timers
-        else {
-            if ($name) {
-                $warn = "Can't find any matching timer objects with the name $Name."
-            }
-            else {
-                $warn = "No defined timers found. Use Start-MyTimer to create one."
-            }
-            Write-Warning $warn
-        }
     } #process
 
     End {

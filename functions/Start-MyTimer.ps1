@@ -15,7 +15,7 @@ Function Start-MyTimer {
         foreach ($timer in $Name) {
         #Test if a timer with the same name already exists
         if (Get-MyTimer -Name $Name -WarningAction SilentlyContinue) {
-          Write-Warning "A timer with the name $Name already exists. Try again with a different name."
+            Write-Warning "A timer with the name $Name already exists. Try again with a different name."
         }
         else {
             Try {

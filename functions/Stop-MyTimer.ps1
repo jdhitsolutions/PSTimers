@@ -7,7 +7,9 @@ Function Stop-MyTimer {
     Param(
         [Parameter(Position = 0, Mandatory, ValueFromPipelineByPropertyName)]
         [ValidateNotNullOrEmpty()]
-        [String]$Name
+        [String]$Name,
+        [Parameter(HelpMessage = "Show the timer.")]
+        [Switch]$PassThru
     )
     Begin {
         Write-Verbose "[BEGIN  ] Starting: $($MyInvocation.MyCommand)"
@@ -23,8 +25,11 @@ Function Stop-MyTimer {
                 if ($timer.running) {
                     if ($PSCmdlet.ShouldProcess($timer.name)) {
                         $timer.stopTimer()
+                        if ($PassThru) {
+                            $timer
+                        }
 
-                        Get-MyTimer -name $timer.name | Select-Object -Property History
+                        # Get-MyTimer -name $timer.name | Select-Object -Property History
 
                     } #should process
                 }

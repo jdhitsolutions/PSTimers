@@ -31,7 +31,7 @@ This command will display countdown progress bar using Write-Progress. You can s
 
 Start-PSCountdown is inspired from code originally published at: https://github.com/Windos/powershell-depot/blob/master/livecoding.tv/StreamCountdown/StreamCountdown.psm1
 
-This command should work in Windows PowerShell and PowerShell Core, although not in VS Code. If you are running this on a non-Windows platform, you should be running at least PowerShell 7.2
+This command should work in Windows PowerShell and PowerShell Core, although not in VS Code. If you are running this on a non-Windows platform, you should be running at least PowerShell 7.2.
 
 ## EXAMPLES
 
@@ -136,7 +136,7 @@ Default - use the current value of $host.PrivateData.ProgressBarBackgroundColor
 
 Transparent - set the progress bar background color to the same as the console. This has no effect in PowerShell 7 when using PSStyle settings unless you switch the view to Classic.
 
-Random - randomly cycle through a list of console colors. This has no practical effect on Linux platforms when the $PSStyle.Progress.View is set to Classic.
+Random - randomly cycle through a list of console colors. This has no practical effect on Linux platforms when the $PSStyle.Progress.View is set to Classic, depending on the PowerShell version.
 
 The parameter has an alias of style. Note that the final effect may depend on a combination of your platform and console. Running this in a traditional console vs Windows Terminal may yield different results. Running on non-Windows may add another factor.
 

@@ -27,7 +27,7 @@ Get-HistoryRuntime [-History <HistoryInfo>] [-Detail] [<CommonParameters>]
 
 ## DESCRIPTION
 
-Use this command to see how long something took to run in PowerShell.
+Use this command to see how long something took to run in Windows PowerShell. Command history in PowerShell 7 includes the run time.
 
 ## EXAMPLES
 

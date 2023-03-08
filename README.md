@@ -39,7 +39,7 @@ PS C:\> ghr 295 -Detail
 
 >:skull: **NOTE**: The MyTimer class and related commands have been heavily revised and extended. There are several breaking changes from previous versions of this module. It is recommended that you clear existing timers before upgrading and using this version of the module.
 
-This module incorporates commands from a previous module to create simple timer objects.
+This module incorporates commands from a previous module that creates simple timer objects.
 
 * [Start-MyTimer](docs/Start-MyTimer.md)
 * [Get-MyTimer](docs/Get-MyTimer.md)

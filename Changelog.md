@@ -1,5 +1,13 @@
 # Changelog for PSTimers
 
+## v2.0.1
+
+### Changed
+
+- Added missing online help links for new functions.
+- Updated external help.
+  Updated `README.md`.
+
 ## v2.0.0
 
 ### Changed

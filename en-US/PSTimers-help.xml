@@ -974,6 +974,10 @@ Client1 3/5/2023 10:29:28 AM 3/5/2023 11:17:15 AM 00:00:00:00  Reset work for
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://bit.ly/3Jmr7RN</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
         <maml:linkText>Restart-MyTimer</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
@@ -1139,6 +1143,10 @@ Client1 3/5/2023 11:19:26 AM      00:00:00:00 Running work for Client1</dev:code
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://bit.ly/41ZdMaa</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
         <maml:linkText>Reset-MyTimer</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
@@ -1299,6 +1307,10 @@ Client1 3/5/2023 11:19:26 AM      00:00:00:00 Running work for Client1</dev:code
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://bit.ly/3YxaW9y</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Suspend-MyTimer</maml:linkText>
         <maml:uri></maml:uri>
@@ -3121,6 +3133,10 @@ Client1 3/5/2023 10:29:28 AM      00:00:42:31 Paused work for Client1</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://bit.ly/3ZwN1sl</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Resume-MyTimer</maml:linkText>
         <maml:uri></maml:uri>

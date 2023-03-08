@@ -1,7 +1,7 @@
 ---
 external help file: PSTimers-help.xml
 Module Name: PSTimers
-online version:
+online version: https://bit.ly/3YxaW9y
 schema: 2.0.0
 ---
 

@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Any changes made to this file may be overwritten in future module updates
+-->
+<Configuration>
+    <ViewDefinitions>
+        <View>
+            <Name>default</Name>
+            <ViewSelectedBy>
+                <TypeName>MyTimer</TypeName>
+            </ViewSelectedBy>
+            <TableControl>
+                <AutoSize/>
+                <TableHeaders>
+                    <TableColumnHeader>
+                        <Label>Name</Label>
+                        <Width>15</Width>
+                        <Alignment>Left</Alignment>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>Start</Label>
+                        <Width>22</Width>
+                        <Alignment>Left</Alignment>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>Stop</Label>
+                        <Width>22</Width>
+                        <Alignment>Left</Alignment>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>Duration</Label>
+                        <Width>16</Width>
+                        <Alignment>Left</Alignment>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>Status</Label>
+                        <Width>7</Width>
+                        <Alignment>Right</Alignment>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>Description</Label>
+                        <Width>25</Width>
+                        <Alignment>Left</Alignment>
+                    </TableColumnHeader>
+                </TableHeaders>
+                <TableRowEntries>
+                    <TableRowEntry>
+                        <Wrap/>
+                        <TableColumnItems>
+                            <TableColumnItem>
+                                <ScriptBlock>
+                                    if ($Host.Name -match "console|code") {
+                                        If ($_.status -eq 'Running') {
+                                            <!-- green -->
+                                            "$([char]27)[92m$($_.Name)$([char]27)[0m"
+                                        }
+                                        ElseIf ($_.status -eq 'Stopped') {
+                                            <!-- red-->
+                                            "$([char]27)[91m$($_.Name)$([char]27)[0m"
+                                        }
+                                        ElseIf ($_.status -eq 'Paused') {
+                                            <!-- yellw-->
+                                            "$([char]27)[93m$($_.Name)$([char]27)[0m"
+                                        }
+                                        else {
+                                            $_.Name
+                                        }
+                                    }
+                                    else {
+                                        $_.Name
+                                    }
+                                </ScriptBlock>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Start</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <!--Stop value-->
+                                <ScriptBlock>
+                                if ($_.status -eq "Running" -OR $_.status -eq "Paused") {
+                                    $Null
+                                }
+                                else {
+                                    $_.end
+                                }
+                                </ScriptBlock>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <ScriptBlock>"{0:dd\:hh\:mm\:ss}" -f $_.duration</ScriptBlock>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Status</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Description</PropertyName>
+                            </TableColumnItem>
+                        </TableColumnItems>
+                    </TableRowEntry>
+                </TableRowEntries>
+            </TableControl>
+        </View>
+    </ViewDefinitions>
+</Configuration>

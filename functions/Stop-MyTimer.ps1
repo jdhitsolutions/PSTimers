@@ -1,6 +1,5 @@
 Function Stop-MyTimer {
-
-    [cmdletbinding(SupportsShouldProcess)]
+    [CmdletBinding(SupportsShouldProcess)]
     [OutputType("MyTimer")]
     [Alias("toff")]
 
@@ -21,7 +20,7 @@ Function Stop-MyTimer {
         $timers = ($global:MyTimerCollection).Values.where( {$_.name -like $name})
         if ($timers) {
             Foreach ($timer in $timers) {
-                write-verbose "[PROCESS] Processing $( $timer | Out-string)"
+                Write-Verbose "[PROCESS] Processing $( $timer | Out-String)"
                 if ($timer.running) {
                     if ($PSCmdlet.ShouldProcess($timer.name)) {
                         $timer.stopTimer()

@@ -1,5 +1,5 @@
 Function Start-PSCountdown {
-    [cmdletbinding(DefaultParameterSetName = "minutes")]
+    [CmdletBinding(DefaultParameterSetName = "minutes")]
     [OutputType("None")]
     [Alias("spsc")]
 
@@ -23,7 +23,7 @@ Function Start-PSCountdown {
         [String]$ProgressStyle = "Default",
         [Parameter(HelpMessage = "The path to a text list of pseudo-tasks")]
         [ValidateNotNullOrEmpty()]
-        [String]$Path = "$PSScriptRoot\PSCountdownTasks.txt"
+        [String]$Path = "$PSScriptRoot\..\PSCountdownTasks.txt"
     )
     Begin {
         Write-Verbose "Starting $($MyInvocation.MyCommand)"

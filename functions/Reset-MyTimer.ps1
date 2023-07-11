@@ -1,5 +1,5 @@
 Function Reset-MyTimer {
-    [cmdletbinding(SupportsShouldProcess)]
+    [CmdletBinding(SupportsShouldProcess)]
     [OutputType('None','MyTimer')]
     Param(
         [Parameter(

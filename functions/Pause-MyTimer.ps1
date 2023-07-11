@@ -1,5 +1,5 @@
 Function Suspend-MyTimer {
-    [cmdletbinding(SupportsShouldProcess)]
+    [CmdletBinding(SupportsShouldProcess)]
     [OutputType('None','MyTimer')]
     [alias('Pause-MyTimer')]
     Param(
@@ -38,7 +38,6 @@ Function Suspend-MyTimer {
     } #process
 
     End {
-
         Write-Verbose "[$((Get-Date).TimeOfDay) END    ] Ending $($MyInvocation.MyCommand)"
     } #end
 

@@ -4,41 +4,32 @@
 SHORT DESCRIPTION
     This module contains a set of PowerShell functions to be used as timers and
     countdown tools.
-    *
-    Export-MyTimer
-    *
-    Get-HistoryRuntime
-    *
-    Get-MyTimer
-    *
-    Import-MyTimer
-    *
-    Remove-MyTimer
-    *
-    Set-MyTimer
-    *
-    Start-MyTimer
-    *
-    Start-PSCountdown
-    *
-    Start-PSCountdownTimer
-    *
-    Stop-PSCountdownTimer
-    *
-    Start-PSTimer
-    *
-    Stop-MyTimer
+
+    - Export-MyTimer
+    - Get-HistoryRuntime
+    - Get-MyTimer
+    - Import-MyTimer
+    - Remove-MyTimer
+    - Set-MyTimer
+    - Start-MyTimer
+    - Start-PSCountdown
+    - Start-PSCountdownTimer
+    - Stop-PSCountdownTimer
+    - Start-PSTimer
+    - Stop-MyTimer
+
     The commands should also work on PowerShell 7 cross-platform, although there
     may be a few artifacts on non-Windows systems. It is recommended that you
     run PowerShell 7.2 or later on non-Windows systems.
 
 LONG DESCRIPTION
+
     MYTIMER
     This module incorporates commands from a previous module to create simple
     timer objects. The MyTimer object is defined in a private PowerShell class.
 
     TypeName: MyTimer
-    
+
     Name        MemberType  Definition
     ----        ----------  ----------
     Equals      Method      bool Equals(System.Object obj)
@@ -58,7 +49,7 @@ LONG DESCRIPTION
     You can create a new timer from the prompt.
 
     PS C:\> Start-MyTimer revisions -Description "module updates"
-    
+
     Name            Start                  Stop         Duration         Running Description
     ----            -----                  ----         --------         ------- -----------
     revisions       3/2/2023 3:13:23 PM                 00:00:00            True module updates
@@ -71,7 +62,7 @@ LONG DESCRIPTION
     Use `Get-MyTimer` to view.
 
     PS C:\> Get-MyTimer
-    
+
     Name      Start               Stop Duration         Running Description
     ----      -----               ---- --------         ------- -----------
     MyTimer   3/2/2023 2:57:29 PM      00:19:53.2590571    True
@@ -81,7 +72,7 @@ LONG DESCRIPTION
     When you are finished, you can stop the timer.
 
     PS C:\> Stop-MyTimer revisions
-    
+
     Name        : revisions
     Start       : 3/2/2023 3:13:23 PM
     End         : 3/2/2023 3:18:15 PM
@@ -91,7 +82,7 @@ LONG DESCRIPTION
     The timer will exist for the duration of your PowerShell session.
 
     PS C:\> Get-MyTimer revisions
-    
+
     Name      Start               Stop                Duration         Running Description
     ----      -----               ----                --------         ------- -----------
     revisions 3/2/2023 3:13:23 PM 3/2/2023 3:18:15 PM 00:04:52.3328308   False module updates
@@ -123,7 +114,7 @@ PSCountdownTimer
     `$PSCountdownClock` synchronized hashtable.
 
     PS C:\> $PSCountdownClock
-    
+
     Name                           Value
     ----                           -----
     StartingPosition
@@ -143,7 +134,7 @@ PSCountdownTimer
     WarningColor                   Red
     Alert                          50
     Warning                        30
-    
+
     PS C:\> $PSCountdownClock.OnTop = $False
 
     At 50 seconds the color will change to yellow and then to red at 30 seconds.
@@ -163,17 +154,17 @@ PSCountdownTimer
             Color  = "SpringGreen"
         }
         Start-PSCountdownTimer @splat
-    
+
     Do {
         Start-Sleep -Seconds 1
     } While ($PSCountdownClock.Running)
     Clear-Host
     Write-Host "Are you ready for some PowerShell?" -ForegroundColor magenta -BackgroundColor gray
-    
+
     #play a startup song
     Add-Type -AssemblyName PresentationCore
     $filename = "c:\work\01-Start.mp3"
-    
+
     $global:MediaPlayer = New-Object System.Windows.Media.MediaPlayer
     $global:MediaPlayer.Open($filename)
     $global:MediaPlayer.Play()
@@ -186,5 +177,5 @@ PSCountdownTimer
 
 KEYWORDS
     - Timer
-- Timespan
+    - Timespan
 

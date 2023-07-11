@@ -1,5 +1,5 @@
 Function Get-MyTimer {
-    [cmdletbinding(DefaultParameterSetName = "name")]
+    [CmdletBinding(DefaultParameterSetName = "name")]
     [OutputType("MyTimer")]
     Param(
         [Parameter(
@@ -16,7 +16,7 @@ Function Get-MyTimer {
             HelpMessage = "Filter timers based on status"
         )]
         [ValidateSet("Running","Stopped","Paused","Reset")]
-        [string]$Status
+        [String]$Status
     )
 
     Begin {

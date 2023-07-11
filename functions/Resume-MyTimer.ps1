@@ -1,5 +1,5 @@
 Function Resume-MyTimer {
-    [cmdletbinding(SupportsShouldProcess)]
+    [CmdletBinding(SupportsShouldProcess)]
     [OutputType('None','MyTimer')]
     Param(
         [Parameter(
@@ -37,7 +37,6 @@ Function Resume-MyTimer {
     } #process
 
     End {
-
         Write-Verbose "[$((Get-Date).TimeOfDay) END    ] Ending $($MyInvocation.MyCommand)"
     } #end
 

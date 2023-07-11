@@ -1,5 +1,5 @@
 Function Set-MyTimer {
-    [cmdletbinding(SupportsShouldProcess)]
+    [CmdletBinding(SupportsShouldProcess)]
     [OutputType("MyTimer")]
     Param(
         [Parameter(

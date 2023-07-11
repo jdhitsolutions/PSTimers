@@ -1,6 +1,6 @@
 Function Start-PSTimer {
 
-    [cmdletbinding()]
+    [CmdletBinding()]
     [OutputType("None", "PSObject")]
     [Alias("spst")]
 
@@ -8,7 +8,7 @@ Function Start-PSTimer {
         [Parameter(Position = 0, HelpMessage = "Enter seconds to countdown from")]
         [Int]$Seconds = 10,
         [Parameter(Position = 1, HelpMessage = "Enter a scriptblock to execute at the end of the countdown")]
-        [alias("globalblock", "sb")]
+        [alias("GlobalBlock", "sb")]
         [scriptblock]$Scriptblock,
         [Switch]$ProgressBar,
         [String]$Title = "Countdown",
@@ -71,7 +71,7 @@ $Title
 $(([String]$Seconds).PadRight($pad))
 "@
 
-            write-host $msg -ForegroundColor $color
+            Write-Host $msg -ForegroundColor $color
 
             Start-Sleep -Seconds 1
         }
@@ -88,7 +88,7 @@ $(([String]$Seconds).PadRight($pad))
 
         if ($clear) {
             #if $Clear was used, center the message in the console
-            $Coordinate.X = $Coordinate.X - ([int]($message.Length) / 2)
+            $Coordinate.X = $Coordinate.X - ([Int]($message.Length) / 2)
         }
 
         $host.UI.RawUI.CursorPosition = $Coordinate

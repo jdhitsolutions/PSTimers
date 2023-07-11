@@ -1,5 +1,5 @@
 Function Import-MyTimer {
-    [cmdletbinding(SupportsShouldProcess)]
+    [CmdletBinding(SupportsShouldProcess)]
     [OutputType('MyTimer')]
     Param(
         [Parameter(
@@ -9,13 +9,13 @@ Function Import-MyTimer {
         )]
         [ValidateNotNullOrEmpty()]
         [ValidateScript( {
-                if (Test-Path $_) {
-                    $True
-                }
-                else {
-                    Throw "Cannot validate path $_"
-                }
-            })]
+            if (Test-Path $_) {
+                $True
+            }
+            else {
+                Throw "Cannot validate path $_"
+            }
+        })]
         [String]$Path
     )
 

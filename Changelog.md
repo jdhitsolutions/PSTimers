@@ -1,5 +1,16 @@
 # Changelog for PSTimers
 
+## v2.1.0
+
+### Change
+
+- General code cleanup
+
+### Fixed
+
+- Fixed default path reference in `Start-PSCountDown`.
+- Fixed about_pstimers help topic.
+
 ## v2.0.1
 
 ### Changed
@@ -156,4 +167,10 @@
 
 ## v0.1.0
 
-- initial files and functions
+- initial files and functions## [Unreleased]
+- General code cleanup
+- Fixed default path reference in `Start-PSCountDown`.
+- Fixed default path reference in `Start-PSCountDown`.
+
+### Fixed
+- Fixed about_pstimers help topic.

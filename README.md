@@ -98,7 +98,7 @@ revisions 3/5/2023 11:32:46 AM      00:00:00:00 Running module updates
 You can start as many timers as you need.
 
 ```powershell
-PS C:\> $a = Start-Mytimer mail -Description email
+PS C:\> $a = Start-MyTimer mail -Description email
 PS C:\> $b = Start-MyTimer
 ```
 

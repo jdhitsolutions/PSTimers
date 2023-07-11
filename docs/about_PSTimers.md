@@ -6,18 +6,18 @@
 
 This module contains a set of PowerShell functions to be used as timers and countdown tools.
 
-* [Export-MyTimer](Export-MyTimer.md)
-* [Get-HistoryRuntime](Get-HistoryRuntime.md)
-* [Get-MyTimer](Get-MyTimer.md)
-* [Import-MyTimer](Import-MyTimer.md)
-* [Remove-MyTimer](Remove-MyTimer.md)
-* [Set-MyTimer](Set-MyTimer.md)
-* [Start-MyTimer](Start-MyTimer.md)
-* [Start-PSCountdown](Start-PSCountdown.md)
-* [Start-PSCountdownTimer](Start-PSCountdownTimer.md)
-* [Stop-PSCountdownTimer](Stop-PSCountdownTimer.md)
-* [Start-PSTimer](Start-PSTimer.md)
-* [Stop-MyTimer](Stop-MyTimer.md)
+- [Export-MyTimer](Export-MyTimer.md)
+- [Get-HistoryRuntime](Get-HistoryRuntime.md)
+- [Get-MyTimer](Get-MyTimer.md)
+- [Import-MyTimer](Import-MyTimer.md)
+- [Remove-MyTimer](Remove-MyTimer.md)
+- [Set-MyTimer](Set-MyTimer.md)
+- [Start-MyTimer](Start-MyTimer.md)
+- [Start-PSCountdown](Start-PSCountdown.md)
+- [Start-PSCountdownTimer](Start-PSCountdownTimer.md)
+- [Stop-PSCountdownTimer](Stop-PSCountdownTimer.md)
+- [Start-PSTimer](Start-PSTimer.md)
+- [Stop-MyTimer](Stop-MyTimer.md)
 
 The commands should also work on PowerShell 7 cross-platform, although there may be a few artifacts on non-Windows systems. It is recommended that you run PowerShell 7.2 or later on non-Windows systems.
 
@@ -60,7 +60,7 @@ revisions       3/2/2023 3:13:23 PM                 00:00:00            True mod
 You can start as many timers as you need.
 
 ```powershell
-PS C:\> $a = Start-Mytimer a -Description email
+PS C:\> $a = Start-MyTimer a -Description email
 PS C:\> $b = Start-MyTimer
 ```
 

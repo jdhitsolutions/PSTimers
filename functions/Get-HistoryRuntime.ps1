@@ -1,5 +1,5 @@
 Function Get-HistoryRuntime {
-    [cmdletbinding(DefaultParameterSetName = "ID")]
+    [CmdletBinding(DefaultParameterSetName = "ID")]
     [OutputType([PSCustomObject])]
     [Alias("ghr")]
 
@@ -9,7 +9,7 @@ Function Get-HistoryRuntime {
             HelpMessage = "Enter a history item ID",
             ParameterSetName = "ID"
         )]
-        [int]$ID = (Get-History -count 1).ID,
+        [Int]$ID = (Get-History -count 1).ID,
         [Parameter(ValueFromPipeline, ParameterSetName = "History")]
         [Microsoft.PowerShell.Commands.HistoryInfo]$History,
         [Switch]$Detail
@@ -35,7 +35,7 @@ Function Get-HistoryRuntime {
 
             if ($Detail) {
                 Write-Verbose "[PROCESS] Adding history detail"
-                $prophash.Add("Status", $History.ExecutionStatus)
+                $propHash.Add("Status", $History.ExecutionStatus)
                 $propHash.Add("Command", $History.CommandLine)
             }
             #create an object

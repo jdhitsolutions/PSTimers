@@ -1,5 +1,5 @@
 Function Start-PSCountdownTimer {
-    [cmdletbinding()]
+    [CmdletBinding()]
     [OutputType("None")]
     Param(
 
@@ -12,7 +12,7 @@ Function Start-PSCountdownTimer {
         [Parameter(ValueFromPipelineByPropertyName)]
         [ValidateScript({ $_ -gt 8 })]
         [alias("size")]
-        [int]$FontSize = 48,
+        [Int]$FontSize = 48,
 
         [Parameter(HelpMessage = "Specify a font style.", ValueFromPipelineByPropertyName)]
         [ValidateSet("Normal", "Italic", "Oblique")]
@@ -42,7 +42,7 @@ Function Start-PSCountdownTimer {
 
         [Parameter(HelpMessage = "Specify the number of seconds remaining to switch to alert coloring")]
         [ValidateScript({$_ -ge 1})]
-        [int]$Alert = 50,
+        [Int]$Alert = 50,
 
         [Parameter(HelpMessage = "Specify alert coloring")]
         [ValidateNotNullOrEmpty()]
@@ -50,7 +50,7 @@ Function Start-PSCountdownTimer {
 
         [Parameter(HelpMessage = "Specify the number of seconds remaining to switch to warning coloring")]
         [ValidateScript({$_ -ge 1})]
-        [int]$Warning = 30,
+        [Int]$Warning = 30,
 
         [Parameter(HelpMessage = "Specify warning coloring")]
         [ValidateNotNullOrEmpty()]
@@ -58,11 +58,11 @@ Function Start-PSCountdownTimer {
     )
 
     Begin {
-        Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
+        Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
     } #begin
     Process {
-        Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
-        Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Validating"
+        Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
+        Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Validating"
         if ($IsLinux -OR $isMacOS) {
             Write-Warning "This command requires a Windows platform."
             return
@@ -104,7 +104,7 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
             Return
         }
 
-        Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Building a synchronized hashtable"
+        Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Building a synchronized hashtable"
         $global:PSCountdownClock = [hashtable]::Synchronized(@{
                 FontSize         = $FontSize
                 FontStyle        = $FontStyle
@@ -121,7 +121,7 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
                 AlertColor       = $AlertColor
                 WarningColor     = $WarningColor
             })
-        Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] $($global:PSCountdownClock | Out-String)"
+        Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] $($global:PSCountdownClock | Out-String)"
         #Run the clock in a runspace
         $rs = [RunspaceFactory]::CreateRunspace()
         $rs.ApartmentState = "STA"
@@ -132,7 +132,7 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
 
         $rs.SessionStateProxy.SetVariable("PSCountdownClock", $global:PSCountdownClock)
 
-        Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Defining the runspace command"
+        Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Defining the runspace command"
         $psCmd = [PowerShell]::Create().AddScript({
 
                 Add-Type -AssemblyName PresentationFramework -ErrorAction Stop
@@ -148,7 +148,7 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
 
                     #define a thread job to clean up the runspace
                     $cmd = {
-                        Param([int]$ID)
+                        Param([Int]$ID)
                         $r = Get-Runspace -Id $id
                         $r.close()
                         $r.dispose()
@@ -162,7 +162,7 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
                 }
 
                 $form = New-Object System.Windows.Window
-                [int]$script:i = $PSCountdownClock.seconds
+                [Int]$script:i = $PSCountdownClock.seconds
                 <#
                 some of the form settings are irrelevant because it is transparent
                 but leaving them in the event I need to turn off transparency
@@ -286,16 +286,16 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
             })
 
         $pscmd.runspace = $rs
-        Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Launching the runspace"
+        Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Launching the runspace"
         [void]$pscmd.BeginInvoke()
 
-        Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Creating the flag file $env:temp\pscountdown-flag.txt"
+        Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Creating the flag file $env:temp\pscountdown-flag.txt"
         "[{0}] PSClock started by {1} under PowerShell process id $pid" -f (Get-Date), $env:USERNAME |
         Out-File -FilePath $env:temp\pscountdown-flag.txt
 
     } #process
     End {
-        Write-Verbose "[$((Get-Date).TimeofDay) END    ] Ending $($MyInvocation.MyCommand)"
+        Write-Verbose "[$((Get-Date).TimeOfDay) END    ] Ending $($MyInvocation.MyCommand)"
     } #end
 
 } #close function

@@ -1,5 +1,5 @@
 Function Start-MyTimer {
-    [cmdletbinding()]
+    [CmdletBinding()]
     [OutputType("MyTimer")]
     [Alias("ton")]
 

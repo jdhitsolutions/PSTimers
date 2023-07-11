@@ -1,6 +1,5 @@
 Function Remove-MyTimer {
-
-    [cmdletbinding(SupportsShouldProcess)]
+    [CmdletBinding(SupportsShouldProcess)]
     [OutputType("None")]
     Param(
         [Parameter(

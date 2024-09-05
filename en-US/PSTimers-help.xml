@@ -158,7 +158,7 @@
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://bit.ly/3CGwc5e</maml:uri>
+        <maml:uri>https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Export-MyTimer.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-MyTimer</maml:linkText>
@@ -369,7 +369,7 @@ ID RunTime             Status Command
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://bit.ly/3CihM9M</maml:uri>
+        <maml:uri>https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Get-HistoryRuntime.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-History</maml:linkText>
@@ -514,7 +514,7 @@ Backup  3/5/2023 10:30:15 AM      00:00:00:10 Running</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://bit.ly/3ehUQ2D</maml:uri>
+        <maml:uri>https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Get-MyTimer.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Start-MyTimer</maml:linkText>
@@ -652,7 +652,7 @@ Backup  3/5/2023 10:30:15 AM      00:00:00:10 Running</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://bit.ly/3T0C3HO</maml:uri>
+        <maml:uri>https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Import-MyTimer.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Export-MyTimer</maml:linkText>
@@ -801,7 +801,7 @@ Backup  3/5/2023 10:30:15 AM      00:00:00:10 Running</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://bit.ly/3Vniyvd</maml:uri>
+        <maml:uri>https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Remove-MyTimer.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Stop-MyTimer</maml:linkText>
@@ -1131,7 +1131,7 @@ Client1 3/5/2023 10:29:28 AM 3/5/2023 11:17:15 AM 00:00:00:00  Reset work for
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Restart-mytimer Client1 -PassThru
+        <dev:code>PS C:\&gt; Restart-MyTimer Client1 -PassThru
 
 Name    Start                Stop Duration     Status Description
 ----    -----                ---- --------     ------ -----------
@@ -1162,7 +1162,7 @@ Client1 3/5/2023 11:19:26 AM      00:00:00:00 Running work for Client1</dev:code
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Use this command to resume a paused Mytimer object.</maml:para>
+      <maml:para>Use this command to resume a paused MyTimer object.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1300,7 +1300,7 @@ Client1 3/5/2023 11:19:26 AM      00:00:00:00 Running work for Client1</dev:code
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Resume-Mytimer Client1</dev:code>
+        <dev:code>PS C:\&gt; Resume-MyTimer Client1</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
@@ -1545,7 +1545,7 @@ Client1 3/5/2023 11:19:26 AM      00:00:00:00 Running work for Client1</dev:code
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://bit.ly/3fQRDYj</maml:uri>
+        <maml:uri>https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Set-MyTimer.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-MyTimer</maml:linkText>
@@ -1699,7 +1699,7 @@ c               12/12/2022 11:11:10 AM                        00:00:00          
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://bit.ly/3CjFNNF</maml:uri>
+        <maml:uri>https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Start-MyTimer.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Stop-MyTimer</maml:linkText>
@@ -2018,7 +2018,7 @@ c               12/12/2022 11:11:10 AM                        00:00:00          
       </command:example>
       <command:example>
         <maml:title>-------------------------- Example 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Start-PSCountdown -time 9:00AM -title "Welcome Back" -message "Review your class notes and have questions ready" -clearhost -progressStyle random</dev:code>
+        <dev:code>PS C:\&gt; Start-PSCountdown -time 9:00AM -title "Welcome Back" -message "Review your class notes and have questions ready" -ClearHost -progressStyle random</dev:code>
         <dev:remarks>
           <maml:para>Start a countdown timer to 9:00AM. The screen will be cleared and the progress bar color will cycle through a random set of colors.</maml:para>
         </dev:remarks>
@@ -2037,7 +2037,7 @@ PS C:\&gt; $PSStyle.progress.view = "Minimal"</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://bit.ly/3T2wiJx</maml:uri>
+        <maml:uri>https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Start-PSCountdown.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Start-PSTimer</maml:linkText>
@@ -2164,7 +2164,7 @@ PS C:\&gt; $PSStyle.progress.view = "Minimal"</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>OnTop</maml:name>
           <maml:description>
-            <maml:para>Do you want the clock to always be on top?</maml:para>
+            <maml:para>Do you want the clock to always be on top? You can modify this setting in the synchronized hashtable with $PSCountdownClock.OnTop. Set the value to $True or $False.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -2231,6 +2231,198 @@ PS C:\&gt; $PSStyle.progress.view = "Minimal"</dev:code>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>Red</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Action</maml:name>
+          <maml:description>
+            <maml:para>Define a ScriptBlock to execute when the clock expires</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">ScriptBlock</command:parameterValue>
+          <dev:type>
+            <maml:name>ScriptBlock</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Start-PSCountdownTimer</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Color</maml:name>
+          <maml:description>
+            <maml:para>Specify a font color like Green or an HTML code like '#FF1257EA'</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>White</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="family">
+          <maml:name>FontFamily</maml:name>
+          <maml:description>
+            <maml:para>Specify a font family.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>Segoi UI</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="size">
+          <maml:name>FontSize</maml:name>
+          <maml:description>
+            <maml:para>Specify a font size.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>48</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="style">
+          <maml:name>FontStyle</maml:name>
+          <maml:description>
+            <maml:para>Specify a font style.</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">Normal</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Italic</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Oblique</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>Normal</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="weight">
+          <maml:name>FontWeight</maml:name>
+          <maml:description>
+            <maml:para>Specify a font weight.</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">Normal</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Bold</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Light</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>Normal</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Message</maml:name>
+          <maml:description>
+            <maml:para>Specify a short message prefix like 'Starting in: '</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>OnTop</maml:name>
+          <maml:description>
+            <maml:para>Do you want the clock to always be on top? You can modify this setting in the synchronized hashtable with $PSCountdownClock.OnTop. Set the value to $True or $False.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Position</maml:name>
+          <maml:description>
+            <maml:para>Specify the clock position as an array of left and top values.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Alert</maml:name>
+          <maml:description>
+            <maml:para>Specify the number of seconds remaining to switch to alert coloring.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>50</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>AlertColor</maml:name>
+          <maml:description>
+            <maml:para>Specify alert coloring.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>Yellow</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Warning</maml:name>
+          <maml:description>
+            <maml:para>Specify the number of seconds remaining to switch to warning coloring.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>30</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>WarningColor</maml:name>
+          <maml:description>
+            <maml:para>Specify warning coloring.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>Red</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Action</maml:name>
+          <maml:description>
+            <maml:para>Define a ScriptBlock to execute when the clock expires</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">ScriptBlock</command:parameterValue>
+          <dev:type>
+            <maml:name>ScriptBlock</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Time</maml:name>
+          <maml:description>
+            <maml:para>Enter a DateTime value as the countdown target.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+          <dev:type>
+            <maml:name>DateTime</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
@@ -2310,7 +2502,7 @@ PS C:\&gt; $PSStyle.progress.view = "Minimal"</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>OnTop</maml:name>
         <maml:description>
-          <maml:para>Do you want the clock to always be on top?</maml:para>
+          <maml:para>Do you want the clock to always be on top? You can modify this setting in the synchronized hashtable with $PSCountdownClock.OnTop. Set the value to $True or $False.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -2391,6 +2583,30 @@ PS C:\&gt; $PSStyle.progress.view = "Minimal"</dev:code>
         </dev:type>
         <dev:defaultValue>Red</dev:defaultValue>
       </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Action</maml:name>
+        <maml:description>
+          <maml:para>Define a ScriptBlock to execute when the clock expires</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">ScriptBlock</command:parameterValue>
+        <dev:type>
+          <maml:name>ScriptBlock</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Time</maml:name>
+        <maml:description>
+          <maml:para>Enter a DateTime value as the countdown target.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+        <dev:type>
+          <maml:name>DateTime</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
@@ -2457,11 +2673,18 @@ PS C:\&gt; $PSCountdownClock.Color="darkgreen"</dev:code>
           <maml:para>The first command starts a 10 minute countdown with a message prefix. The display will always be on top of other windows. The second command uses the synchronized hashtable to change the font color.</maml:para>
         </dev:remarks>
       </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Start-PSCountdownTimer -seconds 600 -Action { New-BurntToastNotification -Text "Time is up!" }</dev:code>
+        <dev:remarks>
+          <maml:para>Start a 10 minute countdown. When the countdown expires, a toast notification will be displayed using the BurntToast module.</maml:para>
+        </dev:remarks>
+      </command:example>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://bit.ly/3T5ntz1</maml:uri>
+        <maml:uri>https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Start-PSCountdownTimer.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Start-PSCountdownTimer</maml:linkText>
@@ -2506,10 +2729,10 @@ PS C:\&gt; $PSCountdownClock.Color="darkgreen"</dev:code>
           </dev:type>
           <dev:defaultValue>10</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="globalblock, sb">
-          <maml:name>Scriptblock</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="GlobalBlock, sb">
+          <maml:name>ScriptBlock</maml:name>
           <maml:description>
-            <maml:para>A PowerShell scriptblock to execute at the end of the countdown.</maml:para>
+            <maml:para>A PowerShell ScriptBlock to execute at the end of the countdown.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">ScriptBlock</command:parameterValue>
           <dev:type>
@@ -2555,7 +2778,7 @@ PS C:\&gt; $PSCountdownClock.Color="darkgreen"</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Message</maml:name>
           <maml:description>
-            <maml:para>The message to be displayed at the end of the countdown before any scriptblock is executed.</maml:para>
+            <maml:para>The message to be displayed at the end of the countdown before any ScriptBlock is executed.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2579,10 +2802,10 @@ PS C:\&gt; $PSCountdownClock.Color="darkgreen"</dev:code>
         </dev:type>
         <dev:defaultValue>10</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="globalblock, sb">
-        <maml:name>Scriptblock</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="GlobalBlock, sb">
+        <maml:name>ScriptBlock</maml:name>
         <maml:description>
-          <maml:para>A PowerShell scriptblock to execute at the end of the countdown.</maml:para>
+          <maml:para>A PowerShell ScriptBlock to execute at the end of the countdown.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">ScriptBlock</command:parameterValue>
         <dev:type>
@@ -2630,7 +2853,7 @@ PS C:\&gt; $PSCountdownClock.Color="darkgreen"</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Message</maml:name>
         <maml:description>
-          <maml:para>The message to be displayed at the end of the countdown before any scriptblock is executed.</maml:para>
+          <maml:para>The message to be displayed at the end of the countdown before any ScriptBlock is executed.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2683,16 +2906,16 @@ PS C:\&gt; $PSCountdownClock.Color="darkgreen"</dev:code>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Start-PSTimer -Seconds 30 -ProgressBar -scriptblock {get-service -computername (get-content computers.txt)}</dev:code>
+        <dev:code>PS C:\&gt; Start-PSTimer -Seconds 30 -ProgressBar -ScriptBlock {get-service -computername (get-content computers.txt)}</dev:code>
         <dev:remarks>
-          <maml:para>This method will display a progress bar on screen. At the end of the countdown the scriptblock will execute.</maml:para>
+          <maml:para>This method will display a progress bar on screen. At the end of the countdown the ScriptBlock will execute.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://bit.ly/3T1tPiC</maml:uri>
+        <maml:uri>https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Start-PSTimer.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Write-Progress</maml:linkText>
@@ -2852,7 +3075,7 @@ Finished!
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://bit.ly/3fEjR8n</maml:uri>
+        <maml:uri>https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Stop-MyTimer.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Start-MyTimer</maml:linkText>
@@ -2959,14 +3182,14 @@ Finished!
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Stop-PSCountdownTimer</dev:code>
         <dev:remarks>
-          <maml:para>This command supports -Whatif.</maml:para>
+          <maml:para>This command supports -WhatIf.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://bit.ly/3CZJgmn</maml:uri>
+        <maml:uri>https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Stop-PSCountdownTimer.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Start-PSCountdownTimer</maml:linkText>

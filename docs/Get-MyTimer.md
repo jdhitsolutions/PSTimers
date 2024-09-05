@@ -1,7 +1,7 @@
 ---
 external help file: PSTimers-help.xml
 Module Name: PSTimers
-online version: https://bit.ly/3ehUQ2D
+online version: https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Get-MyTimer.md
 schema: 2.0.0
 ---
 

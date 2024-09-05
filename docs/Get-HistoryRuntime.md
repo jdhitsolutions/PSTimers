@@ -1,7 +1,7 @@
 ---
 external help file: PSTimers-help.xml
 Module Name: PSTimers
-online version: https://bit.ly/3CihM9M
+online version: https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Get-HistoryRuntime.md
 schema: 2.0.0
 ---
 

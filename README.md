@@ -41,17 +41,17 @@ PS C:\> ghr 295 -Detail
 
 This module incorporates commands from a previous module that creates simple timer objects.
 
-* [Start-MyTimer](docs/Start-MyTimer.md)
-* [Get-MyTimer](docs/Get-MyTimer.md)
-* [Stop-MyTimer](docs/Stop-MyTimer.md)
-* [Suspend-MyTimer](docs/Suspend-MyTimer.md)
-* [Resume-MyTimer](docs/Resume-MyTimer.md)
-* [Reset-MyTimer](docs/Reset-MyTimer.md)
-* [Set-MyTimer](docs/Set-MyTimer.md)
-* [Restart-MyTimer](docs/Restart-MyTimer.md)
-* [Remove-MyTimer](docs/Remove-MyTimer.md)
-* [Import-MyTimer](docs/Import-MyTimer.md)
-* [Export-MyTimer](docs/Export-MyTimer.md)
+- [Start-MyTimer](docs/Start-MyTimer.md)
+- [Get-MyTimer](docs/Get-MyTimer.md)
+- [Stop-MyTimer](docs/Stop-MyTimer.md)
+- [Suspend-MyTimer](docs/Suspend-MyTimer.md)
+- [Resume-MyTimer](docs/Resume-MyTimer.md)
+- [Reset-MyTimer](docs/Reset-MyTimer.md)
+- [Set-MyTimer](docs/Set-MyTimer.md)
+- [Restart-MyTimer](docs/Restart-MyTimer.md)
+- [Remove-MyTimer](docs/Remove-MyTimer.md)
+- [Import-MyTimer](docs/Import-MyTimer.md)
+- [Export-MyTimer](docs/Export-MyTimer.md)
 
 The `MyTimer` object is defined in a private PowerShell class.
 
@@ -171,7 +171,19 @@ Set it to `Minimal` to restore.
 
 Use `Ctrl+C` to terminate a countdown.
 
-## :alarm_clock: PSCountdownTimer
+## :computer: Start-PSTimer
+
+For a more traditional countdown timer, you can use [Start-PSTimer](docs/Start-PSTimer.md). This is an ideal command when you have a simple countdown, say, from 10. You can invoke a script block at the countdown completion.
+
+```powershell
+PS C:\> Start-PSTimer  -ScriptBlock {Get-Date} -Message "Let's Do This Thing!" -Title "Get-Ready"
+```
+
+## WPF-Based Timers
+
+If you are running a Windows-platform, you can use a WPF-based countdown timer.
+
+### :alarm_clock: PSCountdownTimer
 
 An alternative to `Start-PSCountdown` is [Start-PSCountdownTimer](docs/Start-PSCountdownTimer.md) and related [Stop-PSCountdownTimer](docs/Stop-PSCountdownTimer.md)
 
@@ -234,14 +246,6 @@ $global:MediaPlayer.Play()
 #the media player launches with no UI. Use the object's methods to control it.
 # MediaPlayer.stop()
 # $MediaPlayer.close()
-```
-
-## :computer: Start-PSTimer
-
-For a more traditional countdown timer, you can use [Start-PSTimer](docs/Start-PSTimer.md). This is an ideal command when you have a simple countdown, say, from 10. You can invoke a script block at the countdown completion.
-
-```powershell
-PS C:\> Start-PSTimer  -Scriptblock {Get-Date} -Message "Let's Do This Thing!" -Title "Get-Ready"
 ```
 
 ## :hammer: Related Tools

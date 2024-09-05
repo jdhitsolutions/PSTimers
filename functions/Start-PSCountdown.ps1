@@ -30,7 +30,6 @@ Function Start-PSCountdown {
         Write-Verbose "Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
 
         if ($PSBoundParameters.ContainsKey('progressStyle')) {
-
             if ($PSBoundParameters.Item('ProgressStyle') -ne 'default') {
                 if ($PSStyle) {
                     $saved = $PSStyle.Progress.style

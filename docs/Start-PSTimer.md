@@ -1,7 +1,7 @@
 ---
 external help file: PSTimers-help.xml
-Module Name: pstimers
-online version: https://bit.ly/3T1tPiC
+Module Name: PSTimers
+online version: https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Start-PSTimer.md
 schema: 2.0.0
 ---
 
@@ -14,7 +14,7 @@ Initiates a countdown before running a command.
 ## SYNTAX
 
 ```yaml
-Start-PSTimer [[-Seconds] <Int32>] [[-Scriptblock] <ScriptBlock>] [-ProgressBar] [-Title <String>] [-Clear] [-Message <String>] [<CommonParameters>]
+Start-PSTimer [[-Seconds] <Int32>] [[-ScriptBlock] <ScriptBlock>] [-ProgressBar] [-Title <String>] [-Clear] [-Message <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -38,10 +38,10 @@ This method will clear the screen and display descending seconds.
 ### EXAMPLE 2
 
 ```powershell
-PS C:\> Start-PSTimer -Seconds 30 -ProgressBar -scriptblock {get-service -computername (get-content computers.txt)}
+PS C:\> Start-PSTimer -Seconds 30 -ProgressBar -ScriptBlock {get-service -computername (get-content computers.txt)}
 ```
 
-This method will display a progress bar on screen. At the end of the countdown the scriptblock will execute.
+This method will display a progress bar on screen. At the end of the countdown the ScriptBlock will execute.
 
 ## PARAMETERS
 
@@ -61,14 +61,14 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Scriptblock
+### -ScriptBlock
 
-A PowerShell scriptblock to execute at the end of the countdown.
+A PowerShell ScriptBlock to execute at the end of the countdown.
 
 ```yaml
 Type: ScriptBlock
 Parameter Sets: (All)
-Aliases: globalblock, sb
+Aliases: GlobalBlock, sb
 
 Required: False
 Position: 2
@@ -127,7 +127,7 @@ Accept wildcard characters: False
 
 ### -Message
 
-The message to be displayed at the end of the countdown before any scriptblock is executed.
+The message to be displayed at the end of the countdown before any ScriptBlock is executed.
 
 ```yaml
 Type: String

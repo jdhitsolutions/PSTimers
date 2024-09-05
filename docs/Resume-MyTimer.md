@@ -19,14 +19,14 @@ Resume-MyTimer [[-Name] <String>] [-PassThru] [-WhatIf] [-Confirm] [<CommonParam
 
 ## DESCRIPTION
 
-Use this command to resume a paused Mytimer object.
+Use this command to resume a paused MyTimer object.
 
 ## EXAMPLES
 
 ### Example 1
 
 ```powershell
-PS C:\> Resume-Mytimer Client1
+PS C:\> Resume-MyTimer Client1
 ```
 
 ## PARAMETERS

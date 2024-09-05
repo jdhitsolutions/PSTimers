@@ -1,7 +1,7 @@
 ---
 external help file: PSTimers-help.xml
 Module Name: PSTimers
-online version: https://bit.ly/3CZJgmn
+online version: https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Stop-PSCountdownTimer.md
 schema: 2.0.0
 ---
 
@@ -29,7 +29,7 @@ When you start a PSCountdownTimer, you can control it from your command prompt w
 PS C:\> Stop-PSCountdownTimer
 ```
 
-This command supports -Whatif.
+This command supports -WhatIf.
 
 ## PARAMETERS
 

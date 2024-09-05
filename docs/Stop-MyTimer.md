@@ -1,7 +1,7 @@
 ---
 external help file: PSTimers-help.xml
-Module Name: pstimers
-online version: https://bit.ly/3fEjR8n
+Module Name: PSTimers
+online version: https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Stop-MyTimer.md
 schema: 2.0.0
 ---
 

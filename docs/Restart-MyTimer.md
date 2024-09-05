@@ -26,7 +26,7 @@ Use this command to restart a MyTimer object that has been reset.
 ### Example 1
 
 ```powershell
-PS C:\> Restart-mytimer Client1 -PassThru
+PS C:\> Restart-MyTimer Client1 -PassThru
 
 Name    Start                Stop Duration     Status Description
 ----    -----                ---- --------     ------ -----------

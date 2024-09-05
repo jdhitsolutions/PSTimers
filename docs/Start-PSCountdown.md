@@ -1,7 +1,7 @@
 ---
 external help file: PSTimers-help.xml
 Module Name: PSTimers
-online version: https://bit.ly/3T2wiJx
+online version: https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Start-PSCountdown.md
 schema: 2.0.0
 ---
 
@@ -46,7 +46,7 @@ Start a countdown display set to expire in 5 minutes. This will use the default 
 ### Example 2
 
 ```powershell
-PS C:\> Start-PSCountdown -time 9:00AM -title "Welcome Back" -message "Review your class notes and have questions ready" -clearhost -progressStyle random
+PS C:\> Start-PSCountdown -time 9:00AM -title "Welcome Back" -message "Review your class notes and have questions ready" -ClearHost -progressStyle random
 ```
 
 Start a countdown timer to 9:00AM. The screen will be cleared and the progress bar color will cycle through a random set of colors.

@@ -1,7 +1,7 @@
 ---
 external help file: PSTimers-help.xml
 Module Name: PSTimers
-online version: https://bit.ly/3T5ntz1
+online version: https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Start-PSCountdownTimer.md
 schema: 2.0.0
 ---
 
@@ -13,8 +13,20 @@ Start a WPF-based countdown timer.
 
 ## SYNTAX
 
-```yaml
-Start-PSCountdownTimer [[-Seconds] <Int32>] [-Message <String>] [-FontSize <Int32>] [-FontStyle <String>] [-FontWeight <String>] [-Color <String>] [-FontFamily <String>] [-OnTop] [-Position <Int32[]>] [-Alert <Int32>] [-AlertColor <String>] [-Warning <Int32>] [-WarningColor <String>] [<CommonParameters>]
+### seconds (Default)
+```
+Start-PSCountdownTimer [[-Seconds] <Int32>] [-Message <String>]
+[-FontSize <Int32>] [-FontStyle <String>] [-FontWeight <String>]
+[-Color <String>] [-FontFamily <String>] [-OnTop] [-Position <Int32[]>]
+[-Alert <Int32>] [-AlertColor <String>] [-Warning <Int32>]
+[-WarningColor <String>] [-Action <ScriptBlock>] [<CommonParameters>]
+```
+
+### time
+```
+Start-PSCountdownTimer -Time <DateTime> [-Message <String>] [-FontSize <Int32>] [-FontStyle <String>] [-FontWeight <String>] [-Color <String>]
+[-FontFamily <String>] [-OnTop] [-Position <Int32[]>] [-Alert <Int32>] [-AlertColor <String>] [-Warning <Int32>] [-WarningColor <String>]
+[-Action <ScriptBlock>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -45,6 +57,14 @@ PS C:\> $PSCountdownClock.Color="darkgreen"
 ```
 
 The first command starts a 10 minute countdown with a message prefix. The display will always be on top of other windows. The second command uses the synchronized hashtable to change the font color.
+
+### Example 3
+
+```powershell
+PS C:\> Start-PSCountdownTimer -seconds 600 -Action { New-BurntToastNotification -Text "Time is up!" }
+```
+
+Start a 10 minute countdown. When the countdown expires, a toast notification will be displayed using the BurntToast module.
 
 ## PARAMETERS
 
@@ -148,7 +168,7 @@ Accept wildcard characters: False
 
 ### -OnTop
 
-Do you want the clock to always be on top?
+Do you want the clock to always be on top? You can modify this setting in the synchronized hashtable with $PSCountdownClock.OnTop. Set the value to $True or $False.
 
 ```yaml
 Type: SwitchParameter
@@ -184,7 +204,7 @@ Enter the number of seconds to countdown from.
 
 ```yaml
 Type: Int32
-Parameter Sets: (All)
+Parameter Sets: seconds
 Aliases:
 
 Required: False
@@ -258,8 +278,37 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### CommonParameters
+### -Action
+Define a ScriptBlock to execute when the clock expires
 
+```yaml
+Type: ScriptBlock
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Time
+Enter a DateTime value as the countdown target.
+
+```yaml
+Type: DateTime
+Parameter Sets: time
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS

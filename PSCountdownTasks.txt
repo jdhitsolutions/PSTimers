@@ -1,10 +1,9 @@
 #This is a list of entries for Start-PSCountdown
-#enter each entry on its own line.
+#enter each entry on a separate line.
 #Comment out items with the # symbol.
-Mining some cryptocurrency
-Waiting for someone to press enter
+Waiting for someone to press Enter
 Warming up processors
-Downloading Twitter
+Downloading Facebook
 Learning Kubernetes
 Reading Ulysses by James Joyce
 Waiting for my Tesla to charge
@@ -13,15 +12,18 @@ Commencing infinite loop
 Injecting double negatives
 Studying for the latest Azure certification exam
 Deleting temp files
+Learning Python
 Updating my resume
 Waiting for the cable guy
+Watching for the next Marvel portal to open
 Breeding bits
 Learning git
 Capturing escaped bits
 Dreaming of electric sheep
-Calculating gravitational constant
-Adding Hidden Agendas
-Adjusting Bell Curves
+Calculating the gravitational constant
+Adding hidden agendas
+Adjusting bell curves
+Learning Python
 Aligning Covariance Matrices
 Attempting to Lock Back-Buffer
 Deleting Active Directory
@@ -29,6 +31,7 @@ Building Data Trees
 Calculating Inverse Probability Matrices
 Calculating Llama Expectoration Trajectory
 Compounding Inert Tessellations
+Building a better mousetrap
 Concatenating Sub-Contractors
 Containing Existential Buffer
 Deciding What Message to Display Next
@@ -36,24 +39,23 @@ Increasing Accuracy of RCI Simulators
 Perturbing Matrices
 Playing Dungeons & Dragons
 Initializing flux capacitors
-Brushing up on my Dothraki
 Preparing second breakfast
-Preparing the jump to lightspeed
+Preparing the jump to light-speed
 Initiating self-destruct sequence
 Mining cryptocurrency
 Aligning Heisenberg compensators
 Setting phasers to stun
 Deciding...blue pill or yellow?
-Bringing Skynet online
+Bringing SkyNet online
 Learning PowerShell
 Contacting the upside down
-Pre-famulating amulite base plates
+Pre-formulating amulite base plates
 On hold with Comcast customer service
 Calculating pi
 Doing the Time Warp
 Waiting for Godot
 Folding proteins
-Installing the newest AZ PowerShell modules
+Installing the newest Azure PowerShell modules
 Searching for infinity stones
 Restarting the ARC reactor
 Learning regular expressions
@@ -82,12 +84,14 @@ Searching for the Golden Fleece
 Destroying the last horcrux
 Operating novertrunnions
 Waiting for flying cars and personal jet packs
-Quitting Facebook
 Translating War and Peace into Japanese
 Backing up and clearing event logs
 Reducing sinusoidal repleneration
 Deleting Active Directory
 Setting up a Sharepoint farm. Don't ask.
+Making plans to attend the next PowerShell Summit
+Hunting the Jabberwocky
+Writing Pester tests for my module
 Installing a 3-node SQL Server failover cluster
 Buying a copy of the PowerShell Practice Primer
 Detecting local IP addresses and adding to botnet
@@ -95,7 +99,9 @@ Updating PowerShell modules
 Installing the latest version of PowerShell
 Upgrading to the latest version of VS Code
 Reticulating Splines
+Finishing my application to Star Fleet Academy
 Recalculating
+Searching for Grogu's family
 Inverting reactive current
 Synchronizing cardinal grammeters
 Preventing side fumbling

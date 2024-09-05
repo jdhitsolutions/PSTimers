@@ -37,7 +37,7 @@ PS C:\> ghr 295 -Detail
 
 ## :watch: MyTimer
 
->:skull: **NOTE**: The MyTimer class and related commands have been heavily revised and extended. There are several breaking changes from previous versions of this module. It is recommended that you clear existing timers before upgrading and using this version of the module.
+:skull: _The MyTimer class and related commands have been heavily revised and extended. There are several breaking changes from previous versions of this module. It is recommended that you clear existing timers before upgrading and using this version of the module._
 
 This module incorporates commands from a previous module that creates simple timer objects.
 
@@ -188,7 +188,14 @@ If you are running a Windows-platform, you can use a WPF-based countdown timer.
 An alternative to `Start-PSCountdown` is [Start-PSCountdownTimer](docs/Start-PSCountdownTimer.md) and related [Stop-PSCountdownTimer](docs/Stop-PSCountdownTimer.md)
 
 ```powershell
-Start-PSCountdownTimer -seconds 600 -message "The PowerShell magic begins in " -FontSize 64 -Color SpringGreen -OnTop
+$splat = @{
+    Seconds = 600
+    Message = "The PowerShell magic begins in "
+    FontSize= 64
+    Color ="SpringGreen"
+    OnTop = $True
+}
+Start-PSCountdownTimer @splat
 ```
 
 ![PSCountdownTimer](images/pscountdowntimer.png)
@@ -229,7 +236,14 @@ Because the timer runs in a separate runspace, the timer itself cannot initiate 
 
 ```powershell
 Clear-Host
-Start-PSCountdownTimer -seconds 60 -message "The PowerShell magic begins in " -FontSize 64 -Color SpringGreen
+$splat = @{
+    Seconds = 600
+    Message = "The PowerShell magic begins in "
+    FontSize= 64
+    Color ="SpringGreen"
+    OnTop = $True
+}
+Start-PSCountdownTimer @splat
 Do {
     Start-Sleep -Seconds 1
 } While ($PSCountdownClock.Running)

@@ -1,7 +1,7 @@
 ---
 external help file: PSTimers-help.xml
 Module Name: PSTimers
-online version: https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Start-MyTimer.md
+online version: https://jdhitsolutions.com/yourls/62a7a4
 schema: 2.0.0
 ---
 
@@ -25,7 +25,7 @@ Timers are managed through two hashtables created as global variables, $MyTimerC
 
 ## EXAMPLES
 
-### EXAMPLE 1
+### Example 1
 
 ```powershell
 PS C:\> Start-MyTimer
@@ -33,19 +33,19 @@ PS C:\> Start-MyTimer
 
 Start the timer with the default name of MyTimer.
 
-### EXAMPLE 2
+### Example 2
 
 ```powershell
 PS C:\> Start-MyTimer Timer2
 
 Name            Start                  Stop                   Duration         Running Description
 ----            -----                  ----                   --------         ------- -----------
-timer2          12/12/2022 11:09:25 AM                        00:00:00            True
+timer2          03/12/2025 11:09:25 AM                        00:00:00            True
 ```
 
 Create a second timer called Timer2.
 
-### EXAMPLE 3
+### Example 3
 
 ```powershell
 PS C:\> Start-MyTimer Z -Description "work stuff"
@@ -53,12 +53,12 @@ PS C:\> Start-MyTimer Z -Description "work stuff"
 
 Name            Start                  Stop                   Duration         Running Description
 ----            -----                  ----                   --------         ------- -----------
-Z               12/12/2022 11:10:16 AM                        00:00:00            True work stuff
+Z               03/12/2025 11:10:16 AM                        00:00:00            True work stuff
 ```
 
 Create a new timer with a description.
 
-### EXAMPLE 4
+### Example 4
 
 ```powershell
 PS C:\> Start-MyTimer alpha,bravo,charlie
@@ -66,9 +66,9 @@ PS C:\> Start-MyTimer alpha,bravo,charlie
 
 Name            Start                  Stop                   Duration         Running Description
 ----            -----                  ----                   --------         ------- -----------
-a               12/12/2022 11:11:10 AM                        00:00:00            True
-b               12/12/2022 11:11:10 AM                        00:00:00            True
-c               12/12/2022 11:11:10 AM                        00:00:00            True
+a               03/12/2025 11:11:10 AM                        00:00:00            True
+b               03/12/2025 11:11:10 AM                        00:00:00            True
+c               03/12/2025 11:11:10 AM                        00:00:00            True
 ```
 
 Create multiple timers at once.
@@ -123,7 +123,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
+Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter
 
 ## RELATED LINKS
 

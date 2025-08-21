@@ -15,8 +15,9 @@ Function Restart-MyTimer {
     )
 
     Begin {
-        Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
-        Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Running under PowerShell version $($PSVersionTable.PSVersion)"
+        _verbose  ($strings.starting -f $MyInvocation.MyCommand)
+        _verbose ($strings.Running -f $PSVersionTable.PSVersion)
+        _verbose ($strings.Detected -f $host.Name)
     } #begin
 
     Process {
@@ -27,11 +28,11 @@ Function Restart-MyTimer {
                 Get-MyTimer -Name $timer.name
             }
         } #WhatIf
-        Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Restarting timer $Name"
+        _verbose "[$((Get-Date).TimeOfDay) PROCESS] Restarting timer $Name"
     } #process
 
     End {
-        Write-Verbose "[$((Get-Date).TimeOfDay) END    ] Ending $($MyInvocation.MyCommand)"
+        _verbose  ($strings.Ending -f  $MyInvocation.MyCommand)
     } #end
 
 } #close Restart-MyTimer

@@ -136,19 +136,19 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
+        <maml:para>Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Export-MyTimer -path c:\work\MyTimers.xml</dev:code>
         <dev:remarks>
           <maml:para>Export all timers to the specified file.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Export-MyTimer T1 -path c:\work\T1.xml</dev:code>
         <dev:remarks>
           <maml:para>Export a single timer.</maml:para>
@@ -158,7 +158,7 @@
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Export-MyTimer.md</maml:uri>
+        <maml:uri>https://jdhitsolutions.com/yourls/f68c52</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-MyTimer</maml:linkText>
@@ -304,12 +304,12 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
+        <maml:para>Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-HistoryRuntime
 
 ID RunTime
@@ -320,7 +320,7 @@ ID RunTime
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-HistoryRuntime 25
 
 ID RunTime
@@ -331,7 +331,7 @@ ID RunTime
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-History -count 10 | Get-HistoryRuntime
 
 ID RunTime
@@ -351,7 +351,7 @@ ID RunTime
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 4 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-History -count 5 | Get-HistoryRuntime -detail
 
 ID RunTime             Status Command
@@ -369,7 +369,7 @@ ID RunTime             Status Command
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Get-HistoryRuntime.md</maml:uri>
+        <maml:uri>https://jdhitsolutions.com/yourls/e09388</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-History</maml:linkText>
@@ -469,43 +469,43 @@ ID RunTime             Status Command
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
+        <maml:para>Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-MyTimer
 
 Name                Start                Stop                Duration     Status
 ----                -----                ----                --------     ------
-ScriptWork 3/4/2023 7:37:36 PM                      00:00:00:10  Paused
-Betty               3/5/2023 9:57:34 AM  3/5/2023 9:57:54 AM 00:00:00:00   Reset
-Client1    3/5/2023 10:29:28 AM                     00:00:05:07 Running
-Backup     3/5/2023 10:30:15 AM                     00:00:04:20 Running</dev:code>
+ScriptWork 3/4/2025 7:37:36 PM                      00:00:00:10  Paused
+Betty               3/5/2025 9:57:34 AM  3/5/2025 9:57:54 AM 00:00:00:00   Reset
+Client1    3/5/2025 10:29:28 AM                     00:00:05:07 Running
+Backup     3/5/2025 10:30:15 AM                     00:00:04:20 Running</dev:code>
         <dev:remarks>
           <maml:para>Get the all timers</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-MyTimer Client1
 
 Name             Start                Stop Duration     Status Description
 ----             -----                ---- --------     ------ -----------
-Client1 3/5/2023 10:29:28 AM      00:00:01:43 Running work for Client1</dev:code>
+Client1 3/5/2025 10:29:28 AM      00:00:01:43 Running work for Client1</dev:code>
         <dev:remarks>
           <maml:para>Get a single timer.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-Mytimer -Status Running
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-MyTimer -Status Running
 
 Name    Start                Stop Duration     Status Description
 ----    -----                ---- --------     ------ -----------
-Client1 3/5/2023 10:29:28 AM      00:00:00:57 Running work for Client1
-Backup  3/5/2023 10:30:15 AM      00:00:00:10 Running</dev:code>
+Client1 3/5/2025 10:29:28 AM      00:00:00:57 Running work for Client1
+Backup  3/5/2025 10:30:15 AM      00:00:00:10 Running</dev:code>
         <dev:remarks>
           <maml:para>Get timers based on status.</maml:para>
         </dev:remarks>
@@ -514,7 +514,7 @@ Backup  3/5/2023 10:30:15 AM      00:00:00:10 Running</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Get-MyTimer.md</maml:uri>
+        <maml:uri>https://jdhitsolutions.com/yourls/ce9b5e</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Start-MyTimer</maml:linkText>
@@ -637,12 +637,12 @@ Backup  3/5/2023 10:30:15 AM      00:00:00:10 Running</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
+        <maml:para>Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Import-MyTimer -path c:\work\MyTimers.xml</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
@@ -652,7 +652,7 @@ Backup  3/5/2023 10:30:15 AM      00:00:00:10 Running</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Import-MyTimer.md</maml:uri>
+        <maml:uri>https://jdhitsolutions.com/yourls/db5344</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Export-MyTimer</maml:linkText>
@@ -779,7 +779,7 @@ Backup  3/5/2023 10:30:15 AM      00:00:00:10 Running</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
+        <maml:para>Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -792,7 +792,7 @@ Backup  3/5/2023 10:30:15 AM      00:00:00:10 Running</dev:code>
       </command:example>
       <command:example>
         <maml:title>-------------------------- Example 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-MyTimer  | where {-not $_.running} | Remove-MyTimer</dev:code>
+        <dev:code>PS C:\&gt; Get-MyTimer | where {-not $_.running} | Remove-MyTimer</dev:code>
         <dev:remarks>
           <maml:para>Remove all stopped timers.</maml:para>
         </dev:remarks>
@@ -801,7 +801,7 @@ Backup  3/5/2023 10:30:15 AM      00:00:00:10 Running</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Remove-MyTimer.md</maml:uri>
+        <maml:uri>https://jdhitsolutions.com/yourls/6d2e38</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Stop-MyTimer</maml:linkText>
@@ -955,7 +955,7 @@ Backup  3/5/2023 10:30:15 AM      00:00:00:10 Running</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
+        <maml:para>Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -965,7 +965,7 @@ Backup  3/5/2023 10:30:15 AM      00:00:00:10 Running</dev:code>
 
 Name    Start                Stop                 Duration    Status Description
 ----    -----                ----                 --------    ------ -----------
-Client1 3/5/2023 10:29:28 AM 3/5/2023 11:17:15 AM 00:00:00:00  Reset work for
+Client1 3/5/2025 10:29:28 AM 3/5/2025 11:17:15 AM 00:00:00:00  Reset work for
                                                                      Client1</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
@@ -975,7 +975,7 @@ Client1 3/5/2023 10:29:28 AM 3/5/2023 11:17:15 AM 00:00:00:00  Reset work for
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://bit.ly/3Jmr7RN</maml:uri>
+        <maml:uri>https://jdhitsolutions.com/yourls/c8ec02</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Restart-MyTimer</maml:linkText>
@@ -1125,7 +1125,7 @@ Client1 3/5/2023 10:29:28 AM 3/5/2023 11:17:15 AM 00:00:00:00  Reset work for
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
+        <maml:para>Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -1135,16 +1135,16 @@ Client1 3/5/2023 10:29:28 AM 3/5/2023 11:17:15 AM 00:00:00:00  Reset work for
 
 Name    Start                Stop Duration     Status Description
 ----    -----                ---- --------     ------ -----------
-Client1 3/5/2023 11:19:26 AM      00:00:00:00 Running work for Client1</dev:code>
+Client1 3/5/2025 11:19:26 AM      00:00:00:00 Running work for Client1</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://bit.ly/41ZdMaa</maml:uri>
+        <maml:uri>https://jdhitsolutions.com/yourls/3c8ff1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Reset-MyTimer</maml:linkText>
@@ -1294,7 +1294,7 @@ Client1 3/5/2023 11:19:26 AM      00:00:00:00 Running work for Client1</dev:code
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
+        <maml:para>Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -1309,7 +1309,7 @@ Client1 3/5/2023 11:19:26 AM      00:00:00:00 Running work for Client1</dev:code
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://bit.ly/3YxaW9y</maml:uri>
+        <maml:uri>https://jdhitsolutions.com/yourls/e65e69</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Suspend-MyTimer</maml:linkText>
@@ -1523,7 +1523,7 @@ Client1 3/5/2023 11:19:26 AM      00:00:00:00 Running work for Client1</dev:code
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
+        <maml:para>Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -1545,7 +1545,7 @@ Client1 3/5/2023 11:19:26 AM      00:00:00:00 Running work for Client1</dev:code
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Set-MyTimer.md</maml:uri>
+        <maml:uri>https://jdhitsolutions.com/yourls/b0617d</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-MyTimer</maml:linkText>
@@ -1647,50 +1647,50 @@ Client1 3/5/2023 11:19:26 AM      00:00:00:00 Running work for Client1</dev:code
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
+        <maml:para>Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Start-MyTimer</dev:code>
         <dev:remarks>
           <maml:para>Start the timer with the default name of MyTimer.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Start-MyTimer Timer2
 
 Name            Start                  Stop                   Duration         Running Description
 ----            -----                  ----                   --------         ------- -----------
-timer2          12/12/2022 11:09:25 AM                        00:00:00            True</dev:code>
+timer2          03/12/2025 11:09:25 AM                        00:00:00            True</dev:code>
         <dev:remarks>
           <maml:para>Create a second timer called Timer2.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Start-MyTimer Z -Description "work stuff"
 
 
 Name            Start                  Stop                   Duration         Running Description
 ----            -----                  ----                   --------         ------- -----------
-Z               12/12/2022 11:10:16 AM                        00:00:00            True work stuff</dev:code>
+Z               03/12/2025 11:10:16 AM                        00:00:00            True work stuff</dev:code>
         <dev:remarks>
           <maml:para>Create a new timer with a description.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 4 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Start-MyTimer alpha,bravo,charlie
 
 
 Name            Start                  Stop                   Duration         Running Description
 ----            -----                  ----                   --------         ------- -----------
-a               12/12/2022 11:11:10 AM                        00:00:00            True
-b               12/12/2022 11:11:10 AM                        00:00:00            True
-c               12/12/2022 11:11:10 AM                        00:00:00            True</dev:code>
+a               03/12/2025 11:11:10 AM                        00:00:00            True
+b               03/12/2025 11:11:10 AM                        00:00:00            True
+c               03/12/2025 11:11:10 AM                        00:00:00            True</dev:code>
         <dev:remarks>
           <maml:para>Create multiple timers at once.</maml:para>
         </dev:remarks>
@@ -1699,7 +1699,7 @@ c               12/12/2022 11:11:10 AM                        00:00:00          
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Start-MyTimer.md</maml:uri>
+        <maml:uri>https://jdhitsolutions.com/yourls/62a7a4</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Stop-MyTimer</maml:linkText>
@@ -1723,7 +1723,7 @@ c               12/12/2022 11:11:10 AM                        00:00:00          
     <maml:description>
       <maml:para>This command will display countdown progress bar using Write-Progress. You can set the timer for a specific time or number of minutes. The countdown includes humorous items to indicate time passing. These items are drawn from an included list but you can specify a path to custom items.</maml:para>
       <maml:para>Start-PSCountdown is inspired from code originally published at: https://github.com/Windos/powershell-depot/blob/master/livecoding.tv/StreamCountdown/StreamCountdown.psm1</maml:para>
-      <maml:para>This command should work in Windows PowerShell and PowerShell Core, although not in VS Code. If you are running this on a non-Windows platform, you should be running at least PowerShell 7.2.</maml:para>
+      <maml:para>This command should work in Windows PowerShell and PowerShell 7, but not in the PowerShell ISE. Support in VS Code is not guaranteed. If you are running this on a non-Windows platform, you should be running at least PowerShell 7.2.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -2005,7 +2005,7 @@ c               12/12/2022 11:11:10 AM                        00:00:00          
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
+        <maml:para>Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -2037,10 +2037,10 @@ PS C:\&gt; $PSStyle.progress.view = "Minimal"</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Start-PSCountdown.md</maml:uri>
+        <maml:uri>https://jdhitsolutions.com/yourls/0df0c8</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
-        <maml:linkText>Start-PSTimer</maml:linkText>
+        <maml:linkText>Start-PSCountdownTitle</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -2654,7 +2654,7 @@ PS C:\&gt; $PSStyle.progress.view = "Minimal"</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
+        <maml:para>Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -2684,7 +2684,7 @@ PS C:\&gt; $PSCountdownClock.Color="darkgreen"</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Start-PSCountdownTimer.md</maml:uri>
+        <maml:uri>https://jdhitsolutions.com/yourls/9f666f</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Start-PSCountdownTimer</maml:linkText>
@@ -2695,7 +2695,168 @@ PS C:\&gt; $PSCountdownClock.Color="darkgreen"</dev:code>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
-        <maml:linkText>Start-PSTimer</maml:linkText>
+        <maml:linkText>Start-PSCountdownTitle</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Start-PSCountdownTitle</command:name>
+      <command:verb>Start</command:verb>
+      <command:noun>PSCountdownTitle</command:noun>
+      <maml:description>
+        <maml:para>Start a countdown timer in the console title.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>This function sets the console title to a countdown timer. If you are using Windows Terminal, the countdown will appear in the tab title. You can also specify text to display while the countdown timer is running and text to display when the timer completes. By default the original title will be restored after 10 seconds unless you set a different value for Wait. Set the value to -1 to leave the title as is after the countdown completes.</maml:para>
+      <maml:para>Once you start a countdown timer there is no way to manage or stop it other than closing the console window.</maml:para>
+      <maml:para>This command will not run in the PowerShell ISE or VS Code.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Start-PSCountdownTitle</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none">
+          <maml:name>Seconds</maml:name>
+          <maml:description>
+            <maml:para>The number of seconds for the countdown.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+          <maml:name>CountdownText</maml:name>
+          <maml:description>
+            <maml:para>Specify the text to display before the countdown in 16 characters or less.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>PostCountdownText</maml:name>
+          <maml:description>
+            <maml:para>Specify the text to display after the countdown completes in 25 characters or less.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Wait</maml:name>
+          <maml:description>
+            <maml:para>Specify the number of seconds to wait before restoring the original title. Set to -1 to leave the title as is after the countdown completes.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>10</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none">
+        <maml:name>Seconds</maml:name>
+        <maml:description>
+          <maml:para>The number of seconds for the countdown.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+        <maml:name>CountdownText</maml:name>
+        <maml:description>
+          <maml:para>Specify the text to display before the countdown in 16 characters or less.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>PostCountdownText</maml:name>
+        <maml:description>
+          <maml:para>Specify the text to display after the countdown completes in 25 characters or less.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Wait</maml:name>
+        <maml:description>
+          <maml:para>Specify the number of seconds to wait before restoring the original title. Set to -1 to leave the title as is after the countdown completes.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>10</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Start-PSCountdownTitle -Seconds 90 -CountdownText "Waiting for job" -PostCountdownText "Job Complete" -Wait 30</dev:code>
+        <dev:remarks>
+          <maml:para>This example starts a countdown timer for 90 seconds with the text "Waiting for job" and "Job Complete" after the countdown. The original title will be restored after 30 seconds.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/7a66b9</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Start-PSCountdown</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Start-PSCountdownTitle</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Start-PSCountdownTimer</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -2710,7 +2871,7 @@ PS C:\&gt; $PSCountdownClock.Color="darkgreen"</dev:code>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>This is a variation on the Start-Countdown script from Josh Atwell (http://www.vtesseract.com/post/21414227113/start-countdown-function-a-visual-for-start-sleep). It can be used instead of Start-Sleep and provides a visual countdown progress during "sleep" times. At the end of the countdown, your command will execute. Press the ESC key any time during the countdown to abort.</maml:para>
+      <maml:para>This is a variation on the Start-Countdown script from Josh Atwell. It can be used instead of Start-Sleep and provides a visual countdown progress during "sleep" times. At the end of the countdown, your command will execute. Press the ESC key any time during the countdown to abort.</maml:para>
       <maml:para>USING START-COUNTDOWN IN THE POWERSHELL ISE</maml:para>
       <maml:para>Results will vary slightly in the PowerShell ISE. If you use this in the ISE, it is recommended to use -Clear.  You also cannot use the ESC key to abort the script if using the console. You'll need to press Ctrl+C. If using the progress bar, there is a Stop button in the ISE. If you abort in the ISE, you won't get the warning message.</maml:para>
     </maml:description>
@@ -2893,19 +3054,19 @@ PS C:\&gt; $PSCountdownClock.Color="darkgreen"</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
+        <maml:para>Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Start-PSTimer -Seconds 10 -clear</dev:code>
         <dev:remarks>
           <maml:para>This method will clear the screen and display descending seconds.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Start-PSTimer -Seconds 30 -ProgressBar -ScriptBlock {get-service -computername (get-content computers.txt)}</dev:code>
         <dev:remarks>
           <maml:para>This method will display a progress bar on screen. At the end of the countdown the ScriptBlock will execute.</maml:para>
@@ -2915,7 +3076,7 @@ PS C:\&gt; $PSCountdownClock.Color="darkgreen"</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Start-PSTimer.md</maml:uri>
+        <maml:uri>https://jdhitsolutions.com/yourls/6b13bb</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Write-Progress</maml:linkText>
@@ -3042,18 +3203,18 @@ PS C:\&gt; $PSCountdownClock.Color="darkgreen"</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
+        <maml:para>Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Stop-MyTimer Timer2
 
 
 Name        : timer2
-Start       : 12/12/2022 11:09:25 AM
-End         : 12/12/2022 11:17:34 AM
+Start       : 03/12/2025 11:09:25 AM
+End         : 03/12/2025 11:17:34 AM
 Duration    : 00:08:08.6042323
 Description :</dev:code>
         <dev:remarks>
@@ -3061,8 +3222,8 @@ Description :</dev:code>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; $report = import-csv s:\company.csv | foreach -begin { Start-MyTimer T10; Write-Host "Starting the process" -foreground cyan } -process { Get-CimInstance win32_logicaldisk -computer $_.computername} -end { Write-Host "Finished! $((Stop-MyTimer T10).duration.toString())" -foreground cyan}
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; $report = Import-Xsv s:\company.csv | Foreach-Object -begin { Start-MyTimer T10; Write-Host "Starting the process" -foreground cyan } -process { Get-CimInstance win32_logicaldisk -computer $_.computername} -end { Write-Host "Finished! $((Stop-MyTimer T10).duration.toString())" -foreground cyan}
 
 Starting the process
 Finished!
@@ -3075,7 +3236,7 @@ Finished!
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Stop-MyTimer.md</maml:uri>
+        <maml:uri>https://jdhitsolutions.com/yourls/b7f5ec</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Start-MyTimer</maml:linkText>
@@ -3180,7 +3341,7 @@ Finished!
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Stop-PSCountdownTimer</dev:code>
+        <dev:code>PS C:\&gt; Stop-PSCountdownTimer -WhatIf</dev:code>
         <dev:remarks>
           <maml:para>This command supports -WhatIf.</maml:para>
         </dev:remarks>
@@ -3189,7 +3350,7 @@ Finished!
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Stop-PSCountdownTimer.md</maml:uri>
+        <maml:uri>https://jdhitsolutions.com/yourls/f3273c</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Start-PSCountdownTimer</maml:linkText>
@@ -3339,7 +3500,7 @@ Finished!
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
+        <maml:para>Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -3349,7 +3510,7 @@ Finished!
 
 Name             Start                Stop Duration    Status Description
 ----             -----                ---- --------    ------ -----------
-Client1 3/5/2023 10:29:28 AM      00:00:42:31 Paused work for Client1</dev:code>
+Client1 3/5/2025 10:29:28 AM      00:00:42:31 Paused work for Client1</dev:code>
         <dev:remarks>
           <maml:para>he command does not write anything to the pipeline unless you use -Passthru.</maml:para>
         </dev:remarks>
@@ -3358,7 +3519,7 @@ Client1 3/5/2023 10:29:28 AM      00:00:42:31 Paused work for Client1</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://bit.ly/3ZwN1sl</maml:uri>
+        <maml:uri>https://jdhitsolutions.com/yourls/89096a</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Resume-MyTimer</maml:linkText>

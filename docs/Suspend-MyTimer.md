@@ -1,7 +1,7 @@
 ---
 external help file: PSTimers-help.xml
 Module Name: PSTimers
-online version: https://bit.ly/3ZwN1sl
+online version: https://jdhitsolutions.com/yourls/89096a
 schema: 2.0.0
 ---
 
@@ -30,7 +30,7 @@ PS C:\> Suspend-MyTimer Client1 -PassThru
 
 Name             Start                Stop Duration    Status Description
 ----             -----                ---- --------    ------ -----------
-Client1 3/5/2023 10:29:28 AM      00:00:42:31 Paused work for Client1
+Client1 3/5/2025 10:29:28 AM      00:00:42:31 Paused work for Client1
 ```
 
 he command does not write anything to the pipeline unless you use -Passthru.
@@ -118,7 +118,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
+Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter
 
 ## RELATED LINKS
 

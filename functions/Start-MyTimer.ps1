@@ -10,8 +10,10 @@ Function Start-MyTimer {
         [String]$Description
     )
 
-    Write-Verbose "Starting: $($MyInvocation.MyCommand)"
-    Write-Verbose "Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
+    _verbose ($strings.Starting -f $MyInvocation.MyCommand)
+    _verbose ($strings.Running -f $PSVersionTable.PSVersion)
+    _verbose ($strings.Detected -f $host.Name)
+    _verbose "Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
         foreach ($timer in $Name) {
         #Test if a timer with the same name already exists
         if (Get-MyTimer -Name $Name -WarningAction SilentlyContinue) {
@@ -19,7 +21,7 @@ Function Start-MyTimer {
         }
         else {
             Try {
-                Write-Verbose "Creating timer $timer"
+                _verbose "Creating timer $timer"
                 New-Object -TypeName MyTimer -ArgumentList $timer, $Description -ErrorAction stop
             }
             Catch {
@@ -30,6 +32,6 @@ Function Start-MyTimer {
 
     } #foreach
 
-    Write-Verbose "Ending: $($MyInvocation.MyCommand)"
+    _verbose ($strings.Ending -f $MyInvocation.MyCommand)
 
 }

@@ -11,24 +11,23 @@ Function Stop-MyTimer {
         [Switch]$PassThru
     )
     Begin {
-        Write-Verbose "[BEGIN  ] Starting: $($MyInvocation.MyCommand)"
+        _verbose ($strings.Starting -f $MyInvocation.MyCommand)
+        _verbose ($strings.Running -f $PSVersionTable.PSVersion)
+        _verbose ($strings.Detected -f $host.Name)
     }
     Process {
-
-        Write-Verbose "[PROCESS] Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
-        Write-Verbose "[PROCESS] Getting timer $name"
+        _verbose ($strings.GettingTimer -f $name)
         $timers = ($global:MyTimerCollection).Values.where( {$_.name -like $name})
         if ($timers) {
             Foreach ($timer in $timers) {
-                Write-Verbose "[PROCESS] Processing $( $timer | Out-String)"
+                _verbose ($strings.Processing -f $timer)
+
                 if ($timer.running) {
                     if ($PSCmdlet.ShouldProcess($timer.name)) {
                         $timer.stopTimer()
                         if ($PassThru) {
                             $timer
                         }
-
-                        # Get-MyTimer -name $timer.name | Select-Object -Property History
 
                     } #should process
                 }
@@ -38,10 +37,10 @@ Function Stop-MyTimer {
             }
         }
         else {
-            Write-Warning "Can't find a timer called $Name. You need to start the timer first."
+            Write-Warning $($strings.NoTimerFound -f $Name)
         }
     }
     End {
-        Write-Verbose "[END    ] Ending: $($MyInvocation.MyCommand)"
+        _verbose  ($strings.Ending -f $MyInvocation.MyCommand)
     }
 }

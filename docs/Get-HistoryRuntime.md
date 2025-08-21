@@ -1,7 +1,7 @@
 ---
 external help file: PSTimers-help.xml
 Module Name: PSTimers
-online version: https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Get-HistoryRuntime.md
+online version: https://jdhitsolutions.com/yourls/e09388
 schema: 2.0.0
 ---
 
@@ -31,7 +31,7 @@ Use this command to see how long something took to run in Windows PowerShell. Co
 
 ## EXAMPLES
 
-### EXAMPLE 1
+### Example 1
 
 ```powershell
 PS C:\> Get-HistoryRuntime
@@ -41,7 +41,7 @@ ID RunTime
 99 00:00:48.2156090
 ```
 
-### EXAMPLE 2
+### Example 2
 
 ```powershell
 PS C:\> Get-HistoryRuntime 25
@@ -51,7 +51,7 @@ ID RunTime
 25 00:00:00.3127817
 ```
 
-### EXAMPLE 3
+### Example 3
 
 ```powershell
 PS C:\> Get-History -count 10 | Get-HistoryRuntime
@@ -70,7 +70,7 @@ ID RunTime
 100 00:00:00.0280011
 ```
 
-### EXAMPLE 4
+### Example 4
 
 ```powershell
 PS C:\> Get-History -count 5 | Get-HistoryRuntime -detail
@@ -151,7 +151,7 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## NOTES
 
-Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
+Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter
 
 ## RELATED LINKS
 

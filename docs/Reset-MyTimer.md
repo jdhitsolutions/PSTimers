@@ -1,7 +1,7 @@
 ---
 external help file: PSTimers-help.xml
 Module Name: PSTimers
-online version: https://bit.ly/3Jmr7RN
+online version: https://jdhitsolutions.com/yourls/c8ec02
 schema: 2.0.0
 ---
 
@@ -30,7 +30,7 @@ PS C:\> Reset-MyTimer Client1 -PassThru
 
 Name    Start                Stop                 Duration    Status Description
 ----    -----                ----                 --------    ------ -----------
-Client1 3/5/2023 10:29:28 AM 3/5/2023 11:17:15 AM 00:00:00:00  Reset work for
+Client1 3/5/2025 10:29:28 AM 3/5/2025 11:17:15 AM 00:00:00:00  Reset work for
                                                                      Client1
 ```
 
@@ -117,7 +117,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
+Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter
 
 ## RELATED LINKS
 

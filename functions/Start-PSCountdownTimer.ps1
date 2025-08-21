@@ -78,15 +78,17 @@ Function Start-PSCountdownTimer {
     )
 
     Begin {
-        Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
+        _verbose  ($strings.starting -f $MyInvocation.MyCommand)
+        _verbose ($strings.Running -f $PSVersionTable.PSVersion)
+        _verbose ($strings.Detected -f $host.Name)
     } #begin
     Process {
-        Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Using parameter set $($psCmdlet.ParameterSetName)"
+        _verbose "[$((Get-Date).TimeOfDay) PROCESS] Using parameter set $($psCmdlet.ParameterSetName)"
         if ($psCmdlet.ParameterSetName -eq 'time') {
             $Seconds = ($Time - (Get-Date)).TotalSeconds
         }
-        Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
-        Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Validating"
+        _verbose "[$((Get-Date).TimeOfDay) PROCESS] Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
+        _verbose "[$((Get-Date).TimeOfDay) PROCESS] Validating"
         if ($IsLinux -OR $isMacOS) {
             Write-Warning "This command requires a Windows platform."
             return
@@ -128,7 +130,7 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
             Return
         }
 
-        Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Building a synchronized hashtable (`$PSCountDownClock)"
+        _verbose "[$((Get-Date).TimeOfDay) PROCESS] Building a synchronized hashtable (`$PSCountDownClock)"
         $global:PSCountdownClock = [hashtable]::Synchronized(@{
                 FontSize         = $FontSize
                 FontStyle        = $FontStyle
@@ -146,7 +148,7 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
                 WarningColor     = $WarningColor
                 Action           = $Action
             })
-        Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] $($global:PSCountdownClock | Out-String)"
+        _verbose "[$((Get-Date).TimeOfDay) PROCESS] $($global:PSCountdownClock | Out-String)"
         #Run the clock in a RunSpace
         $rs = [RunSpaceFactory]::CreateRunSpace()
         $rs.ApartmentState = "STA"
@@ -157,7 +159,7 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
 
         $rs.SessionStateProxy.SetVariable("PSCountdownClock", $global:PSCountdownClock)
 
-        Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Defining the RunSpace command"
+        _verbose "[$((Get-Date).TimeOfDay) PROCESS] Defining the RunSpace command"
         $psCmd = [PowerShell]::Create().AddScript({
 
                 Add-Type -AssemblyName PresentationFramework -ErrorAction Stop
@@ -316,16 +318,16 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
             })
 
         $psCmd.RunSpace = $rs
-        Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Launching the RunSpace"
+        _verbose "[$((Get-Date).TimeOfDay) PROCESS] Launching the RunSpace"
         [void]$psCmd.BeginInvoke()
 
-        Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Creating the flag file $env:temp\pscountdown-flag.txt"
+        _verbose "[$((Get-Date).TimeOfDay) PROCESS] Creating the flag file $env:temp\pscountdown-flag.txt"
         "[{0}] PSClock started by {1} under PowerShell process id $pid" -f (Get-Date), $env:USERNAME |
         Out-File -FilePath $env:temp\pscountdown-flag.txt
 
     } #process
     End {
-        Write-Verbose "[$((Get-Date).TimeOfDay) END    ] Ending $($MyInvocation.MyCommand)"
+        _verbose  ($strings.Ending -f  $MyInvocation.MyCommand)
     } #end
 
 } #close function

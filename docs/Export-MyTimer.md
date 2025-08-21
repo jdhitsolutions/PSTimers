@@ -1,7 +1,7 @@
 ---
 external help file: PSTimers-help.xml
 Module Name: PSTimers
-online version: https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Export-MyTimer.md
+online version: https://jdhitsolutions.com/yourls/f68c52
 schema: 2.0.0
 ---
 
@@ -25,7 +25,7 @@ The default behavior is to export all timer variables or you can select specific
 
 ## EXAMPLES
 
-### EXAMPLE 1
+### Example 1
 
 ```powershell
 PS C:\> Export-MyTimer -path c:\work\MyTimers.xml
@@ -33,7 +33,7 @@ PS C:\> Export-MyTimer -path c:\work\MyTimers.xml
 
 Export all timers to the specified file.
 
-### EXAMPLE 2
+### Example 2
 
 ```powershell
 PS C:\> Export-MyTimer T1 -path c:\work\T1.xml
@@ -117,7 +117,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
+Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter
 
 ## RELATED LINKS
 

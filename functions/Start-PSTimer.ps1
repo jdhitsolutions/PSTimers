@@ -15,6 +15,9 @@ Function Start-PSTimer {
         [String]$Message
     )
 
+    _verbose ($strings.Starting -f $MyInvocation.MyCommand)
+    _verbose ($strings.Running -f $PSVersionTable.PSVersion)
+    _verbose ($strings.Detected -f $host.Name)
     #save beginning value for total seconds
     $TotalSeconds = $Seconds
 
@@ -101,4 +104,6 @@ $(([String]$Seconds).PadRight($pad))
     else {
         Write-Warning "Countdown aborted"
     }
+
+    _verbose  ($strings.Ending -f $MyInvocation.MyCommand)
 }

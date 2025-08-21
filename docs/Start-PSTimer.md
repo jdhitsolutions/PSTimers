@@ -1,7 +1,7 @@
 ---
 external help file: PSTimers-help.xml
 Module Name: PSTimers
-online version: https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Start-PSTimer.md
+online version: https://jdhitsolutions.com/yourls/6b13bb
 schema: 2.0.0
 ---
 
@@ -19,7 +19,7 @@ Start-PSTimer [[-Seconds] <Int32>] [[-ScriptBlock] <ScriptBlock>] [-ProgressBar]
 
 ## DESCRIPTION
 
-This is a variation on the Start-Countdown script from Josh Atwell (http://www.vtesseract.com/post/21414227113/start-countdown-function-a-visual-for-start-sleep). It can be used instead of Start-Sleep and provides a visual countdown progress during "sleep" times. At the end of the countdown, your command will execute. Press the ESC key any time during the countdown to abort.
+This is a variation on the Start-Countdown script from Josh Atwell. It can be used instead of Start-Sleep and provides a visual countdown progress during "sleep" times. At the end of the countdown, your command will execute. Press the ESC key any time during the countdown to abort.
 
 USING START-COUNTDOWN IN THE POWERSHELL ISE
 
@@ -27,7 +27,7 @@ Results will vary slightly in the PowerShell ISE. If you use this in the ISE, it
 
 ## EXAMPLES
 
-### EXAMPLE 1
+### Example 1
 
 ```powershell
 PS C:\> Start-PSTimer -Seconds 10 -clear
@@ -35,7 +35,7 @@ PS C:\> Start-PSTimer -Seconds 10 -clear
 
 This method will clear the screen and display descending seconds.
 
-### EXAMPLE 2
+### Example 2
 
 ```powershell
 PS C:\> Start-PSTimer -Seconds 30 -ProgressBar -ScriptBlock {get-service -computername (get-content computers.txt)}
@@ -157,7 +157,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
+Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter
 
 ## RELATED LINKS
 

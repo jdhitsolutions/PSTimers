@@ -19,14 +19,15 @@ Function Import-MyTimer {
         [String]$Path
     )
 
-    Write-Verbose "Starting: $($MyInvocation.MyCommand)"
-    Write-Verbose "Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
+    _verbose ($strings.Starting -f $MyInvocation.MyCommand)
+    _verbose ($strings.Running -f $PSVersionTable.PSVersion)
+    _verbose ($strings.Detected -f $host.Name)
 
     $Imports = Import-Clixml -Path $Path
-    Write-Verbose "Importing $($Imports.count) timer(s)"
+    _verbose ($strings.ImportingCount -f $imports.count)
     foreach ($Import in $Imports) {
-        Write-Verbose "Importing $($Import.name)"
-        $import | Select-Object * | Out-String | Write-Verbose
+        _verbose ($strings.Importing -f $Import.name)
+        $import | Select-Object * | Out-String | _verbose
         $in = [MyTimer]::New()
         $in.Name = $Import.Name
         $in.Start = $Import.Start
@@ -37,12 +38,12 @@ Function Import-MyTimer {
         $in.ImportedDuration = $Import.Duration
         #previous exports might not have this property
         if ($Import.Status -ge 0) {
-            Write-Verbose "Setting status to $($import.status)"
+            _verbose "Setting status to $($import.status)"
             $in.Status = $Import.Status
         }
         if ($PSCmdlet.ShouldProcess($Import.name)) {
-            Write-Verbose 'Creating:'
-            $in | Select-Object -Property * | Out-String | Write-Verbose
+            _verbose $strings.Creating
+            $in | Select-Object -Property * | Out-String | _verbose
 
             Try {
                 [void](Get-Variable MyTimerCollection -Scope global -ErrorAction Stop)
@@ -69,5 +70,5 @@ Function Import-MyTimer {
         } #WhatIf
     }
 
-    Write-Verbose "Ending: $($MyInvocation.MyCommand)"
+    _verbose ($strings.Ending -f $MyInvocation.MyCommand)
 }

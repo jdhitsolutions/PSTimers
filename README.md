@@ -7,10 +7,32 @@ A set of PowerShell functions to be used as timers and countdown tools.
 This module is available from the PowerShell Gallery and should install in Windows PowerShell 5.1 and PowerShell 7.
 
 ```powershell
-Install-Module PSTimers
+Install-PSResource PSTimers
 ```
 
-The commands should also work on PowerShell 7 cross-platform except for those that utilize WPF. It is recommended that you run PowerShell 7.2 or later on non-Windows systems.
+> Installing the module will also install the `Microsoft.PowerShell.ThreadJob` module if it isn't already installed. If you attempt to install the module with `Install-Module` and you have the legacy `ThreadJob` module installed, you might get a warning message. If this happens, run `Install-Module PSTimers -AllowClobber`. This error doesn't seem to happen when using `Install-PSResource`.
+
+The commands should also work on PowerShell 7 cross-platform except for those that utilize WPF. It is recommended that you run PowerShell 7.2 or later on non-Windows systems. This module incorporates commands from a previous module that creates simple timer objects.
+
+| Name                     | Alias           | Synopsis                                                   |
+|--------------------------|-----------------|-----------------------------------------------------------|
+| [Export-MyTimer](docs/Export-MyTimer.md)   |                   | Export a timer object to an XML file.                     |
+| [Get-HistoryRuntime](docs/Get-HistoryRuntime.md) | *ghr*           | Get a history runtime object.                             |
+| [Get-MyTimer](docs/Get-MyTimer.md)         |                   | Get the current status of a simple timer.                 |
+| [Import-MyTimer](docs/Import-MyTimer.md)   |                   | Import a timer variable from an XML file.                 |
+| [Remove-MyTimer](docs/Remove-MyTimer.md)   |                   | Remove a MyTimer object.                                  |
+| [Reset-MyTimer](docs/Reset-MyTimer.md)     |                   | Reset a MyTimer object.                                   |
+| [Restart-MyTimer](docs/Restart-MyTimer.md) |                   | Restart a MyTimer object.                                 |
+| [Resume-MyTimer](docs/Resume-MyTimer.md)   |                   | Resume a paused MyTimer object.                          |
+| [Set-MyTimer](docs/Set-MyTimer.md)         |                   | Modify a MyTimer object.                                  |
+| [Start-MyTimer](docs/Start-MyTimer.md)     | *ton*             | Start a simple timer.                                     |
+| [Start-PSCountdown](docs/Start-PSCountdown.md) | *spsc*         | Start a graphical countdown display using Write-Progress. |
+| [Start-PSCountdownTimer](docs/Start-PSCountdownTimer.md) | | Start a WPF-based countdown timer.                       |
+| [Start-PSTimer](docs/Start-PSTimer.md)     | *spst*            | Initiates a countdown before running a command.           |
+| [Start-PSCountdownTitle](docs/Start-PSCountdownTitle.md) | *TitleCountdown*  | Start a countdown timer in the console title. |
+| [Stop-MyTimer](docs/Stop-MyTimer.md)       | *toff*            | Stop your simple timer.                                   |
+| [Stop-PSCountdownTimer](docs/Stop-PSCountdownTimer.md) | | Stop a Countdown Timer.                                  |
+| [Suspend-MyTimer](docs/Suspend-MyTimer.md) | *Pause-MyTimer*   | Pause a MyTimer object.                                   |
 
 ## :book: History Runtime
 
@@ -38,20 +60,6 @@ PS C:\> ghr 295 -Detail
 ## :watch: MyTimer
 
 :skull: _The MyTimer class and related commands have been heavily revised and extended. There are several breaking changes from previous versions of this module. It is recommended that you clear existing timers before upgrading and using this version of the module._
-
-This module incorporates commands from a previous module that creates simple timer objects.
-
-- [Start-MyTimer](docs/Start-MyTimer.md)
-- [Get-MyTimer](docs/Get-MyTimer.md)
-- [Stop-MyTimer](docs/Stop-MyTimer.md)
-- [Suspend-MyTimer](docs/Suspend-MyTimer.md)
-- [Resume-MyTimer](docs/Resume-MyTimer.md)
-- [Reset-MyTimer](docs/Reset-MyTimer.md)
-- [Set-MyTimer](docs/Set-MyTimer.md)
-- [Restart-MyTimer](docs/Restart-MyTimer.md)
-- [Remove-MyTimer](docs/Remove-MyTimer.md)
-- [Import-MyTimer](docs/Import-MyTimer.md)
-- [Export-MyTimer](docs/Export-MyTimer.md)
 
 The `MyTimer` object is defined in a private PowerShell class.
 
@@ -90,9 +98,9 @@ You can create a new timer from the prompt.
 ```powershell
 PS C:\> Start-MyTimer revisions -Description "module updates"
 
-Name               Start                Stop Duration     Status Description
-----               -----                ---- --------     ------ -----------
-revisions 3/5/2023 11:32:46 AM      00:00:00:00 Running module updates
+Name      Start                Stop Duration     Status Description
+----      -----                ---- --------     ------ -----------
+revisions 3/31/2025 5:27:48 PM      00:00:00:00 Running module updates
 ```
 
 You can start as many timers as you need.
@@ -107,23 +115,25 @@ Use `Get-MyTimer` to view.
 ```powershell
 PS C:\> Get-MyTimer
 
-Name               Start                Stop Duration     Status Description
-----               -----                ---- --------     ------ -----------
-revisions 3/5/2023 11:33:18 AM      00:00:00:42 Running module updates
-mail      3/5/2023 11:33:42 AM      00:00:00:19 Running email
-MyTimer   3/5/2023 11:33:54 AM      00:00:00:06 Running
+Name      Start                Stop Duration     Status Description
+----      -----                ---- --------     ------ -----------
+revisions 3/31/2025 5:27:48 PM      00:00:00:36 Running module updates
+mail      3/31/2025 5:28:04 PM      00:00:00:20 Running email
+MyTimer   3/31/2025 5:28:12 PM      00:00:00:12 Running
 ```
 
 When you are finished, you can stop the timer.
 
 ```powershell
-PS C:\> Stop-MyTimer mail -PassThru
+PS C:\> Stop-MyTimer mail -PassThru | Format-List
 
-Name          Start                Stop                 Duration     Status Desc
-                                                                            ript
-                                                                            ion
-----          -----                ----                 --------     ------ ----
-mail 3/5/2023 11:33:42 AM 3/5/2023 11:39:44 AM 00:00:06:02 Stopped email
+Name        : mail
+Start       : 3/31/2025 5:28:04 PM
+End         : 3/31/2025 5:29:08 PM
+Duration    : 00:01:03.8458479
+Running     : False
+Description : email
+Status      : Stopped
 ```
 
 The timer will exist for the duration of your PowerShell session.
@@ -131,17 +141,16 @@ The timer will exist for the duration of your PowerShell session.
 ```powershell
 PS C:\> Get-MyTimer -Status Stopped | Select History
 
-
 Name        : revisions
-Start       : 3/5/2023 11:33:18 AM
-End         : 3/5/2023 11:39:18 AM
-Duration    : 00:05:59.7291106
+Start       : 3/31/2025 5:27:48 PM
+End         : 3/31/2025 5:29:54 PM
+Duration    : 00:02:06.5184936
 Description : module updates
 
 Name        : mail
-Start       : 3/5/2023 11:33:42 AM
-End         : 3/5/2023 11:39:44 AM
-Duration    : 00:06:02.1412877
+Start       : 3/31/2025 5:28:04 PM
+End         : 3/31/2025 5:29:08 PM
+Duration    : 00:01:03.8458479
 Description : email
 ```
 
@@ -179,6 +188,20 @@ For a more traditional countdown timer, you can use [Start-PSTimer](docs/Start-P
 PS C:\> Start-PSTimer  -ScriptBlock {Get-Date} -Message "Let's Do This Thing!" -Title "Get-Ready"
 ```
 
+## Title Timer
+
+Another timer option is to display it in the console title bar. Although for most people, this will mean the profile tab in Windows Terminal. You can use [`Start-PSCountdownTitle`](docs/Start-PSCountdownTitle.md) to display a countdown timer in the console title bar. It will __not__ work in the PowerShell ISE or VS Code.
+
+Specify the timer in seconds. You can optionally specify a short message to display in the title bar and a short message to display after the countdown finishes.
+
+```powershell
+Start-PSCountdownTitle -Seconds 120 -CountdownText "Resuming in"
+```
+
+![PSCountdownTitle](images/pstimertitle.png)
+
+By default, the original tab title will be restored after 10 seconds. But you can configure this with the `-Wait` parameter. Set it to `-1` to leave the title as is after the countdown completes.
+
 ## WPF-Based Timers
 
 If you are running a Windows-platform, you can use a WPF-based countdown timer.
@@ -189,11 +212,11 @@ An alternative to `Start-PSCountdown` is [Start-PSCountdownTimer](docs/Start-PSC
 
 ```powershell
 $splat = @{
-    Seconds = 600
-    Message = "The PowerShell magic begins in "
-    FontSize= 64
-    Color ="SpringGreen"
-    OnTop = $True
+    Seconds  = 600
+    Message  = 'The PowerShell magic begins in '
+    FontSize = 64
+    Color    = 'SpringGreen'
+    OnTop    = $True
 }
 Start-PSCountdownTimer @splat
 ```
@@ -207,23 +230,24 @@ PS C:\> $PSCountdownClock
 
 Name                           Value
 ----                           -----
-StartingPosition
-Running                        True
-Seconds                        600
-Color                          SpringGreen
-FontWeight                     Normal
-FontFamily                     Segoi UI
-CurrentPosition                {1334, 532}
 OnTop                          True
-Runspace                       System.Management.Automation.Runspaces.LocalRunspace
+RunSpace                       System.Management.Automation.Runspaces.LocalRunspace
+StartingPosition
+Color                          SpringGreen
+WarningColor                   Red
+FontFamily                     Segoi UI
+Warning                        30
+Started                        3/31/2025 5:36:56 PM
+FontWeight                     Normal
+Action
+AlertColor                     Yellow
+Seconds                        600
+CurrentPosition                {1334, 532}
+FontSize                       64
 Message                        The PowerShell magic begins in
 FontStyle                      Normal
-Started                        10/14/2022 4:21:13 PM
-FontSize                       64
-AlertColor                     Yellow
-WarningColor                   Red
+Running                        True
 Alert                          50
-Warning                        30
 
 PS C:\> $PSCountdownClock.OnTop = $False
 ```
@@ -237,11 +261,11 @@ Because the timer runs in a separate runspace, the timer itself cannot initiate 
 ```powershell
 Clear-Host
 $splat = @{
-    Seconds = 600
-    Message = "The PowerShell magic begins in "
-    FontSize= 64
-    Color ="SpringGreen"
-    OnTop = $True
+    Seconds  = 600
+    Message  = 'The PowerShell magic begins in '
+    FontSize = 64
+    Color    = 'SpringGreen'
+    OnTop    = $True
 }
 Start-PSCountdownTimer @splat
 Do {

@@ -1,7 +1,7 @@
 ---
 external help file: PSTimers-help.xml
 Module Name: PSTimers
-online version: https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Get-MyTimer.md
+online version: https://jdhitsolutions.com/yourls/ce9b5e
 schema: 2.0.0
 ---
 
@@ -31,43 +31,43 @@ Use this command to get the current status of a timer created with Start-MyTimer
 
 ## EXAMPLES
 
-### EXAMPLE 1
+### Example 1
 
 ```powershell
 PS C:\> Get-MyTimer
 
 Name                Start                Stop                Duration     Status
 ----                -----                ----                --------     ------
-ScriptWork 3/4/2023 7:37:36 PM                      00:00:00:10  Paused
-Betty               3/5/2023 9:57:34 AM  3/5/2023 9:57:54 AM 00:00:00:00   Reset
-Client1    3/5/2023 10:29:28 AM                     00:00:05:07 Running
-Backup     3/5/2023 10:30:15 AM                     00:00:04:20 Running
+ScriptWork 3/4/2025 7:37:36 PM                      00:00:00:10  Paused
+Betty               3/5/2025 9:57:34 AM  3/5/2025 9:57:54 AM 00:00:00:00   Reset
+Client1    3/5/2025 10:29:28 AM                     00:00:05:07 Running
+Backup     3/5/2025 10:30:15 AM                     00:00:04:20 Running
 ```
 
 Get the all timers
 
-### EXAMPLE 2
+### Example 2
 
 ```powershell
 PS C:\> Get-MyTimer Client1
 
 Name             Start                Stop Duration     Status Description
 ----             -----                ---- --------     ------ -----------
-Client1 3/5/2023 10:29:28 AM      00:00:01:43 Running work for Client1
+Client1 3/5/2025 10:29:28 AM      00:00:01:43 Running work for Client1
 
 ```
 
 Get a single timer.
 
-### EXAMPLE 3
+### Example 3
 
 ```powershell
-PS C:\> Get-Mytimer -Status Running
+PS C:\> Get-MyTimer -Status Running
 
 Name    Start                Stop Duration     Status Description
 ----    -----                ---- --------     ------ -----------
-Client1 3/5/2023 10:29:28 AM      00:00:00:57 Running work for Client1
-Backup  3/5/2023 10:30:15 AM      00:00:00:10 Running
+Client1 3/5/2025 10:29:28 AM      00:00:00:57 Running work for Client1
+Backup  3/5/2025 10:30:15 AM      00:00:00:10 Running
 ```
 
 Get timers based on status.
@@ -120,7 +120,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
+Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter
 
 ## RELATED LINKS
 

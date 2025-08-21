@@ -1,7 +1,7 @@
 ---
 external help file: PSTimers-help.xml
 Module Name: PSTimers
-online version: https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Stop-MyTimer.md
+online version: https://jdhitsolutions.com/yourls/b7f5ec
 schema: 2.0.0
 ---
 
@@ -23,25 +23,25 @@ This command will stop any timer created with Start-MyTimer. When executed it wh
 
 ## EXAMPLES
 
-### EXAMPLE 1
+### Example 1
 
 ```powershell
 PS C:\> Stop-MyTimer Timer2
 
 
 Name        : timer2
-Start       : 12/12/2022 11:09:25 AM
-End         : 12/12/2022 11:17:34 AM
+Start       : 03/12/2025 11:09:25 AM
+End         : 03/12/2025 11:17:34 AM
 Duration    : 00:08:08.6042323
 Description :
 ```
 
 Stop a timer called Timer2.
 
-### EXAMPLE 2
+### Example 2
 
 ```powershell
-PS C:\> $report = import-csv s:\company.csv | foreach -begin { Start-MyTimer T10; Write-Host "Starting the process" -foreground cyan } -process { Get-CimInstance win32_logicaldisk -computer $_.computername} -end { Write-Host "Finished! $((Stop-MyTimer T10).duration.toString())" -foreground cyan}
+PS C:\> $report = Import-Xsv s:\company.csv | Foreach-Object -begin { Start-MyTimer T10; Write-Host "Starting the process" -foreground cyan } -process { Get-CimInstance win32_logicaldisk -computer $_.computername} -end { Write-Host "Finished! $((Stop-MyTimer T10).duration.toString())" -foreground cyan}
 
 Starting the process
 Finished!
@@ -114,7 +114,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
+Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter
 
 ## RELATED LINKS
 

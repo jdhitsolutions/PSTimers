@@ -1,7 +1,7 @@
 ---
 external help file: PSTimers-help.xml
 Module Name: PSTimers
-online version: https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Start-PSCountdownTimer.md
+online version: https://jdhitsolutions.com/yourls/9f666f
 schema: 2.0.0
 ---
 
@@ -14,19 +14,15 @@ Start a WPF-based countdown timer.
 ## SYNTAX
 
 ### seconds (Default)
-```
-Start-PSCountdownTimer [[-Seconds] <Int32>] [-Message <String>]
-[-FontSize <Int32>] [-FontStyle <String>] [-FontWeight <String>]
-[-Color <String>] [-FontFamily <String>] [-OnTop] [-Position <Int32[]>]
-[-Alert <Int32>] [-AlertColor <String>] [-Warning <Int32>]
-[-WarningColor <String>] [-Action <ScriptBlock>] [<CommonParameters>]
+
+```yaml
+Start-PSCountdownTimer [[-Seconds] <Int32>] [-Message <String>] [-FontSize <Int32>] [-FontStyle <String>] [-FontWeight <String>] [-Color <String>] [-FontFamily <String>] [-OnTop] [-Position <Int32[]>] [-Alert <Int32>] [-AlertColor <String>] [-Warning <Int32>] [-WarningColor <String>] [-Action <ScriptBlock>] [<CommonParameters>]
 ```
 
 ### time
-```
-Start-PSCountdownTimer -Time <DateTime> [-Message <String>] [-FontSize <Int32>] [-FontStyle <String>] [-FontWeight <String>] [-Color <String>]
-[-FontFamily <String>] [-OnTop] [-Position <Int32[]>] [-Alert <Int32>] [-AlertColor <String>] [-Warning <Int32>] [-WarningColor <String>]
-[-Action <ScriptBlock>] [<CommonParameters>]
+
+```yaml
+Start-PSCountdownTimer -Time <DateTime> [-Message <String>] [-FontSize <Int32>] [-FontStyle <String>] [-FontWeight <String>] [-Color <String>] [-FontFamily <String>] [-OnTop] [-Position <Int32[]>] [-Alert <Int32>] [-AlertColor <String>] [-Warning <Int32>] [-WarningColor <String>] [-Action <ScriptBlock>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -279,6 +275,7 @@ Accept wildcard characters: False
 ```
 
 ### -Action
+
 Define a ScriptBlock to execute when the clock expires
 
 ```yaml
@@ -294,6 +291,7 @@ Accept wildcard characters: False
 ```
 
 ### -Time
+
 Enter a DateTime value as the countdown target.
 
 ```yaml
@@ -309,6 +307,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
@@ -327,7 +326,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
+Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter
 
 ## RELATED LINKS
 
@@ -335,4 +334,4 @@ Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell
 
 [Start-PSCountdown](Start-PSCountdown.md)
 
-[Start-PSTimer](Start-PSTimer.md)
+[Start-PSCountdownTitle](Start-PSCountdownTitle.md)

@@ -26,8 +26,10 @@ Function Start-PSCountdown {
         [String]$Path = "$PSScriptRoot\..\PSCountdownTasks.txt"
     )
     Begin {
-        Write-Verbose "Starting $($MyInvocation.MyCommand)"
-        Write-Verbose "Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
+        _verbose "Starting $($MyInvocation.MyCommand)"
+        _verbose ($strings.Running -f $PSVersionTable.PSVersion)
+        _verbose ($strings.Detected -f $host.Name)
+        _verbose "Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
 
         if ($PSBoundParameters.ContainsKey('progressStyle')) {
             if ($PSBoundParameters.Item('ProgressStyle') -ne 'default') {
@@ -43,16 +45,16 @@ Function Start-PSCountdown {
                 $host.privateData.progressBackgroundColor = $host.UI.RawUI.BackgroundColor
             }
         }
-        Write-Verbose "Using parameter set $($PSCmdlet.ParameterSetName)"
+        _verbose "Using parameter set $($PSCmdlet.ParameterSetName)"
 
         if (Test-Path $Path) {
             #import entries from list without a # comment and trim each one
-            Write-Verbose "Loading task messages from $path"
+            _verbose "Loading task messages from $path"
             $loading = Get-Content -Path $Path |
             Where-Object { $_ -match "\w+" -AND $_ -notmatch '#' } | ForEach-Object { $_.Trim() }
         }
         else {
-            Write-Verbose "$Path not found. Using default values."
+            _verbose "$Path not found. Using default values."
             $loading = "Warming up the room", "Charging batteries", "Formatting C:"
         }
         if ($ClearHost) {
@@ -60,11 +62,11 @@ Function Start-PSCountdown {
         }
         $startTime = Get-Date
         if ($PSCmdlet.ParameterSetName -eq 'minutes') {
-            Write-Verbose "Adding $minutes minutes to start time"
+            _verbose "Adding $minutes minutes to start time"
             $endTime = $startTime.AddMinutes($Minutes)
         }
         else {
-            Write-Verbose "Using Time value"
+            _verbose "Using Time value"
             $endTime = $Time
         }
         $totalSeconds = (New-TimeSpan -Start $startTime -End $endTime).TotalSeconds
@@ -80,14 +82,14 @@ Function Start-PSCountdown {
             $PSStyle.Foreground.BrightMagenta
         }
         else {
-            $progColors = "black", "darkgreen", "magenta", "blue", "darkgray","cyan","darkcyan"
+            $progColors = "Black", "DarkGreen", "Magenta", "Blue", "DarkGray","Cyan","DarkCyan"
         }
 
     } #begin
     Process {
-        #this does not work in VS Code or the PowerShell ISE
-        if ($host.name -match 'Visual Studio Code|ISE') {
-            Write-Warning "This command will not work in the integrated PowerShell Console in VS Code or the PowerShell ISE."
+        #this does not work in the PowerShell ISE
+        if ($host.name -match '|ISE') {
+            Write-Warning "This command will not work in the PowerShell ISE."
             #bail out
             Return
         }
@@ -139,6 +141,7 @@ Function Start-PSCountdown {
                 $host.privateData.ProgressBackgroundColor = $saved
             }
         }
+        _verbose  ($strings.Ending -f $MyInvocation.MyCommand)
     } #end
 
 }

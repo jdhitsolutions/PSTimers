@@ -20,43 +20,42 @@ Function Get-MyTimer {
     )
 
     Begin {
-        Write-Verbose "[BEGIN  ] Starting: $($MyInvocation.MyCommand)"
+        _verbose ($strings.Starting -f $MyInvocation.MyCommand)
+        _verbose ($strings.Running -f $PSVersionTable.PSVersion)
+        _verbose ($strings.Detected -f $host.Name)
     } #begin
 
     Process {
-        Write-Verbose "[PROCESS] Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
+        _verbose ($strings.DetectedParamSet -f $PSCmdlet.ParameterSetName)
         If ($PSCmdlet.ParameterSetName -eq "Name") {
             if ($Name) {
-                Write-Verbose "[PROCESS] Getting timer $Name"
+                _verbose ($strings.GettingTimer -f $Name)
                 $timers = foreach ($item in $Name) {
                     ($global:MyTimerCollection).Values.where( {$_.name -like $item})
                 }
             }
             else {
                 #find all timers by default
-                Write-Verbose "[PROCESS] Getting all timers"
+                _verbose $strings.GettingAll
                 $timers = $global:MyTimerCollection.Values
             }
             if ($timers.count -eq 0 -AND $Name) {
-                $warn = "Can't find any matching timer objects with the name $Name."
-                Write-Warning $warn
+                Write-Warning ($strings.WarnNoNamedTimer -f $Name)
             }
             elseif ($timers.count -eq 0) {
-                $warn = "No defined timers found. Use Start-MyTimer to create one."
-                Write-Warning $warn
+                Write-Warning $warn.WarnNoTimersFound
             }
         }
         Else {
-            Write-Verbose "[PROCESS] Getting all timers with a status of $Status"
+            _verbose ($strings.GettingAllStatus -f $Status)
             $timers = ($global:MyTimerCollection.Values).Where({$_.status -eq $Status})
             if ($timers.count -eq 0) {
-                $warn = "No timers found with a status of $Status"
-                Write-Warning $warn
+                Write-Warning ($strings.WarnNoTimerStatus -f $status)
             }
         }
 
-        Write-Verbose "[PROCESS] Found $($timers.count) matching timer(s)"
-        Write-Verbose "[PROCESS] Getting timer status"
+        _verbose ($strings.FoundMatchingTimer -f $Timers.count)
+        _verbose $strings.GettingTimerStatus
         if ($timers.count -ge 1) {
             foreach ($timer in ($timers | Sort-Object -Property Start)) {
                 if ($timer.running) {
@@ -68,6 +67,6 @@ Function Get-MyTimer {
     } #process
 
     End {
-        Write-Verbose "[END    ] Ending: $($MyInvocation.MyCommand)"
+        _verbose  ($strings.Ending -f $MyInvocation.MyCommand)
     }
 }

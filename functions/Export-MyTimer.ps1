@@ -20,24 +20,25 @@ Function Export-MyTimer {
     )
 
     Begin {
-        Write-Verbose "Starting: $($MyInvocation.MyCommand)"
+        _verbose ($strings.Starting -f $MyInvocation.MyCommand)
+        _verbose ($strings.Running -f $PSVersionTable.PSVersion)
+        _verbose ($strings.Detected -f $host.Name)
         $found = [System.Collections.Generic.list[object]]::new()
     }
     Process {
-        Write-Verbose "Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
         if ($Name) {
-            Write-Verbose "Finding timer variable $Name"
+            _verbose ($strings.FindingVar -f $Name)
             $found.Add($global:MyTimerCollection["$name"])
         }
         else {
-            Write-Verbose 'Finding all timer variables'
+            _verbose $strings.FindingAllVar
             $found.AddRange([object[]]$global:MyTimerCollection.values)
         }
     } #process
     End {
         If ($found) {
             Try {
-                Write-Verbose "Exporting $($found.count) timer(s) to $Path"
+                _verbose ($strings.ExportingTimerCount -f $found.count,$Path)
                 $found | Export-Clixml -Path $path -ErrorAction Stop
             }
             Catch {
@@ -45,9 +46,8 @@ Function Export-MyTimer {
             }
         }
         else {
-            Write-Warning 'No matching timers found.'
+            Write-Warning $strings.WarnNoTimers
         }
-        Write-Verbose "Ending: $($MyInvocation.MyCommand)"
+        _verbose ($strings.Ending -f $MyInvocation.MyCommand)
     }
-
 }

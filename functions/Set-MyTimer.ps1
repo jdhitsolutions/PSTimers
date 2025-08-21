@@ -26,16 +26,18 @@ Function Set-MyTimer {
     )
 
     Begin {
-        Write-Verbose "[BEGIN  ] Starting: $($MyInvocation.MyCommand)"
+        _verbose ($strings.Starting -f $MyInvocation.MyCommand)
+        _verbose ($strings.Running -f $PSVersionTable.PSVersion)
+        _verbose ($strings.Detected -f $host.Name)
     } #begin
 
     Process {
-        Write-Verbose "[PROCESS] Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
+        _verbose "[PROCESS] Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
         $timers = ($global:MyTimerCollection).Values.where({$_.name -like $name})
 
         if ($timers.count -ge 1) {
             foreach ($timer in $timers) {
-                Write-Verbose "[PROCESS] Setting timer $($timer.name)"
+                _verbose "[PROCESS] Setting timer $($timer.name)"
                 if ($PSCmdlet.ShouldProcess($Name)) {
                     if ($Description) {
                         $timer.description = $Description
@@ -71,10 +73,10 @@ Function Set-MyTimer {
             $Options = [System.Management.Automation.Host.ChoiceDescription[]]($Y,$N)
             $Choice = $host.UI.PromptForChoice($Title,$Message,$Options,1)
             if ($Choice -eq 0) {
-                Write-Verbose "[PROCESS] Creating timer $Name"
+                _verbose "[PROCESS] Creating timer $Name"
                 $new = Start-MyTimer -Name $Name -Description $Description
                 if ($start) {
-                    Write-Verbose "[PROCESS] Setting timer $Name start to $Start"
+                    _verbose "[PROCESS] Setting timer $Name start to $Start"
                     Set-MyTimer -Name $Name -Start $Start
                 }
                 Get-MyTimer -Name $Name
@@ -84,6 +86,6 @@ Function Set-MyTimer {
     } #process
 
     End {
-        Write-Verbose "[END    ] Ending: $($MyInvocation.MyCommand)"
+        _verbose  ($strings.Ending -f $MyInvocation.MyCommand)
     }
 }

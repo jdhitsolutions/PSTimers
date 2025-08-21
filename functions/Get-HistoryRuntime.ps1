@@ -16,17 +16,19 @@ Function Get-HistoryRuntime {
     )
 
     Begin {
-        Write-Verbose "[BEGIN  ] Starting: $($MyInvocation.MyCommand)"
-        Write-Verbose "[BEGIN  ] Using parameter set $($PSCmdlet.parameterSetName)"
+        _verbose ($strings.Starting -f $MyInvocation.MyCommand)
+        _verbose ($strings.Running -f $PSVersionTable.PSVersion)
+        _verbose ($strings.Detected -f $host.Name)
     } #begin
 
     Process {
-        Write-Verbose "[PROCESS] Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
+        Write-Debug $strings.UsingParams
+        (New-Object PSObject -Property $PSBoundParameters | Out-String) | Write-Debug
         Try {
             If ($PSCmdlet.ParameterSetName -eq "ID") {
                 $History = Get-History -Id $ID -ErrorAction Stop
             }
-            Write-Verbose "[PROCESS] Calculating runtime for id $($history.ID)"
+            _verbose ($strings.Calculating -f $history.ID)
 
             $propHash = [Ordered]@{
                 ID      = $history.ID
@@ -34,7 +36,7 @@ Function Get-HistoryRuntime {
             }
 
             if ($Detail) {
-                Write-Verbose "[PROCESS] Adding history detail"
+                _verbose $strings.AddingDetail
                 $propHash.Add("Status", $History.ExecutionStatus)
                 $propHash.Add("Command", $History.CommandLine)
             }
@@ -43,13 +45,13 @@ Function Get-HistoryRuntime {
 
         } #Try
         Catch {
-            Write-Warning "Failed to find history with an ID of $ID"
+            Write-Warning ($strings.FailedFindHistory -f $ID)
         }
 
     } #process
 
     End {
-        Write-Verbose "[END    ] Ending: $($MyInvocation.MyCommand)"
+        _verbose ($strings.Ending -f $MyInvocation.MyCommand)
     } #end
 
 }

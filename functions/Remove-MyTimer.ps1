@@ -11,14 +11,16 @@ Function Remove-MyTimer {
         [string[]]$Name
     )
     Begin {
-        Write-Verbose "Starting: $($MyInvocation.MyCommand)"
+        _verbose ($strings.Starting -f $MyInvocation.MyCommand)
+        _verbose ($strings.Running -f $PSVersionTable.PSVersion)
+        _verbose ($strings.Detected -f $host.Name)
     }   #begin
     Process {
-        Write-Verbose "Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
+        _verbose "Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
         foreach ($timer in $Name) {
             Try {
                 if ($PSCmdlet.ShouldProcess($timer)) {
-                    Write-Verbose "Removing timer $timer"
+                    _verbose "Removing timer $timer"
                     if ($global:MyTimerCollection.ContainsKey("$timer")) {
                         $global:MyTimerCollection.remove("$timer")
                     }
@@ -36,6 +38,6 @@ Function Remove-MyTimer {
         } #foreach
     } #process
     End {
-        Write-Verbose "Ending: $($MyInvocation.MyCommand)"
+        _verbose ($strings.Ending -f $MyInvocation.MyCommand)
     } #end
 }

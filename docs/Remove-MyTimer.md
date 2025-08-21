@@ -1,7 +1,7 @@
 ---
 external help file: PSTimers-help.xml
 Module Name: PSTimers
-online version: https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Remove-MyTimer.md
+online version: https://jdhitsolutions.com/yourls/6d2e38
 schema: 2.0.0
 ---
 
@@ -34,7 +34,7 @@ Remove the alpha timer.
 ### Example 2
 
 ```powershell
-PS C:\> Get-MyTimer  | where {-not $_.running} | Remove-MyTimer
+PS C:\> Get-MyTimer | where {-not $_.running} | Remove-MyTimer
 ```
 
 Remove all stopped timers.
@@ -106,7 +106,7 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## NOTES
 
-Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
+Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter
 
 ## RELATED LINKS
 

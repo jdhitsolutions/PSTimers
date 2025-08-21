@@ -1,3 +1,11 @@
+if ((Get-Culture).Name -match '\w+') {
+    Import-LocalizedData -BindingVariable strings
+}
+else {
+    #force using En-US if no culture found, which might happen on non-Windows systems.
+    Import-LocalizedData -BindingVariable strings -FileName PSClock.psd1 -BaseDirectory $PSScriptRoot\en-us
+}
+
 #a class definition for the MyTimer commands
 
 enum MyTimerStatus {
@@ -89,7 +97,7 @@ Class MyTimer {
             [void](Get-Variable MyTimerCollection -Scope global -ErrorAction Stop)
         }
         Catch {
-            Write-Verbose 'Creating MyTimerCollection hashtable'
+            _verbose 'Creating MyTimerCollection hashtable'
             New-Variable -Scope global -Name MyTimerCollection -Value @{}
         }
 
@@ -97,7 +105,7 @@ Class MyTimer {
             [void](Get-Variable MyWatchCollection -Scope global -ErrorAction Stop)
         }
         Catch {
-            Write-Verbose 'Creating MyWatchCollection hashtable'
+            _verbose 'Creating MyWatchCollection hashtable'
             New-Variable -Scope global -Name MyWatchCollection -Value @{}
         }
 
@@ -106,14 +114,14 @@ Class MyTimer {
             Throw "A timer with the name $name already exists. Please remove it first or create a timer with a new name."
         }
         else {
-            Write-Verbose "Creating a MyTimer object by name: $name"
+            _verbose "Creating a MyTimer object by name: $name"
             $this.Name = $Name
             $this.Start = Get-Date
             $this.Running = $True
             $this.Description = $Description
             $this.Status = [MyTimerStatus]::Running
 
-            Write-Verbose "Adding new timer $($this.name)"
+            _verbose "Adding new timer $($this.name)"
             $global:MyTimerCollection.add($this.name, $this)
             $global:MyWatchCollection.add($this.name, [System.Diagnostics.StopWatch]::StartNew())
         }

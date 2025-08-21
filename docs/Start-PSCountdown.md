@@ -1,7 +1,7 @@
 ---
 external help file: PSTimers-help.xml
 Module Name: PSTimers
-online version: https://github.com/jdhitsolutions/PSTimers/blob/master/docs/Start-PSCountdown.md
+online version: https://jdhitsolutions.com/yourls/0df0c8
 schema: 2.0.0
 ---
 
@@ -31,7 +31,7 @@ This command will display countdown progress bar using Write-Progress. You can s
 
 Start-PSCountdown is inspired from code originally published at: https://github.com/Windos/powershell-depot/blob/master/livecoding.tv/StreamCountdown/StreamCountdown.psm1
 
-This command should work in Windows PowerShell and PowerShell Core, although not in VS Code. If you are running this on a non-Windows platform, you should be running at least PowerShell 7.2.
+This command should work in Windows PowerShell and PowerShell 7, but not in the PowerShell ISE. Support in VS Code is not guaranteed. If you are running this on a non-Windows platform, you should be running at least PowerShell 7.2.
 
 ## EXAMPLES
 
@@ -199,10 +199,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
+Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter
 
 ## RELATED LINKS
 
-[Start-PSTimer](Start-PSTimer.md)
+[Start-PSCountdownTitle](Start-PSCountdownTitle.md)
 
 [Start-PSCountdownTimer](Start-PSCountdownTimer.md)

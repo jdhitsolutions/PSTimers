@@ -1,8 +1,9 @@
 ---
+document type: cmdlet
 external help file: PSTimers-help.xml
+HelpUri: https://jdhitsolutions.com/yourls/6b13bb
 Module Name: PSTimers
-online version: https://jdhitsolutions.com/yourls/6b13bb
-schema: 2.0.0
+PlatyPS schema version: 2024-05-01
 ---
 
 # Start-PSTimer
@@ -13,9 +14,18 @@ Initiates a countdown before running a command.
 
 ## SYNTAX
 
+### Default (Default)
+
 ```yaml
-Start-PSTimer [[-Seconds] <Int32>] [[-ScriptBlock] <ScriptBlock>] [-ProgressBar] [-Title <String>] [-Clear] [-Message <String>] [<CommonParameters>]
+Start-PSTimer [[-Seconds] <Int32>] [[-ScriptBlock] <ScriptBlock>] [-ProgressBar] [-Title <String>]
+ [-Clear] [-Message <String>] [<CommonParameters>]
 ```
+
+## ALIASES
+
+This cmdlet has the following aliases:
+
+- `spst`
 
 ## DESCRIPTION
 
@@ -38,76 +48,12 @@ This method will clear the screen and display descending seconds.
 ### Example 2
 
 ```powershell
-PS C:\> Start-PSTimer -Seconds 30 -ProgressBar -ScriptBlock {get-service -computername (get-content computers.txt)}
+PS C:\> Start-PSTimer -Seconds 30 -ProgressBar -ScriptBlock {Get-Service -computername (Get-Content computers.txt)}
 ```
 
 This method will display a progress bar on screen. At the end of the countdown the ScriptBlock will execute.
 
 ## PARAMETERS
-
-### -Seconds
-
-The number of seconds to countdown.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: 10
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ScriptBlock
-
-A PowerShell ScriptBlock to execute at the end of the countdown.
-
-```yaml
-Type: ScriptBlock
-Parameter Sets: (All)
-Aliases: GlobalBlock, sb
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressBar
-
-Use a progress bar instead of the console.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Title
-
-The activity title, normally displayed at the top of the progress bar.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: Countdown
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Clear
 
@@ -115,14 +61,19 @@ Clear the screen. Other wise, the countdown will use the current location.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
+DefaultValue: False
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### -Message
@@ -131,19 +82,113 @@ The message to be displayed at the end of the countdown before any ScriptBlock i
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
+DefaultValue: None
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
 
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+### -ProgressBar
+
+Use a progress bar instead of the console.
+
+```yaml
+Type: SwitchParameter
+DefaultValue: False
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -ScriptBlock
+
+A PowerShell ScriptBlock to execute at the end of the countdown.
+
+```yaml
+Type: ScriptBlock
+DefaultValue: None
+SupportsWildcards: false
+Aliases:
+- GlobalBlock
+- sb
+ParameterSets:
+- Name: (All)
+  Position: 2
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -Seconds
+
+The number of seconds to countdown.
+
+```yaml
+Type: Int32
+DefaultValue: 10
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 1
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -Title
+
+The activity title, normally displayed at the top of the progress bar.
+
+```yaml
+Type: String
+DefaultValue: Countdown
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### CommonParameters
 
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutBuffer, -OutVariable, -PipelineVariable,
+-ProgressAction, -Verbose, -WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -161,8 +206,6 @@ Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter
 
 ## RELATED LINKS
 
-[Write-Progress]()
-
-[Start-PSCountdown](Start-PSCountdown.md)
-
-[Start-PSCountdownTimer](Start-PSCountdownTimer.md)
+- [Write-Progress]()
+- [Start-PSCountdown](Start-PSCountdown.md)
+- [Start-PSCountdownTimer](Start-PSCountdownTimer.md)

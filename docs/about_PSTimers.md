@@ -54,7 +54,7 @@ PS C:\> Start-MyTimer revisions -Description "module updates"
 
 Name            Start                  Stop         Duration         Running Description
 ----            -----                  ----         --------         ------- -----------
-revisions       3/2/2023 3:13:23 PM                 00:00:00            True module updates
+revisions       3/2/2026 3:13:23 PM                 00:00:00            True module updates
 ```
 
 You can start as many timers as you need.
@@ -71,9 +71,9 @@ PS C:\> Get-MyTimer
 
 Name      Start               Stop Duration         Running Description
 ----      -----               ---- --------         ------- -----------
-MyTimer   3/2/2023 2:57:29 PM      00:19:53.2590571    True
-revisions 3/2/2023 3:13:23 PM      00:03:58.9337823    True module updates
-a         3/2/2023 3:15:26 PM      00:01:55.9419730    True email
+MyTimer   3/2/2026 2:57:29 PM      00:19:53.2590571    True
+revisions 3/2/2026 3:13:23 PM      00:03:58.9337823    True module updates
+a         3/2/2026 3:15:26 PM      00:01:55.9419730    True email
 ```
 
 When you are finished, you can stop the timer.
@@ -82,8 +82,8 @@ When you are finished, you can stop the timer.
 PS C:\> Stop-MyTimer revisions
 
 Name        : revisions
-Start       : 3/2/2023 3:13:23 PM
-End         : 3/2/2023 3:18:15 PM
+Start       : 3/2/2026 3:13:23 PM
+End         : 3/2/2026 3:18:15 PM
 Duration    : 00:04:52.3328308
 Description : module updates
 ```
@@ -95,7 +95,7 @@ PS C:\> Get-MyTimer revisions
 
 Name      Start               Stop                Duration         Running Description
 ----      -----               ----                --------         ------- -----------
-revisions 3/2/2023 3:13:23 PM 3/2/2023 3:18:15 PM 00:04:52.3328308   False module updates
+revisions 3/2/2026 3:13:23 PM 3/2/2026 3:18:15 PM 00:04:52.3328308   False module updates
 ```
 
 Although there are provisions for exporting and importing timers.
@@ -140,7 +140,7 @@ OnTop                          True
 Runspace                       System.Management.Automation.Runspaces.LocalRunspace
 Message                        The PowerShell magic begins in
 FontStyle                      Normal
-Started                        10/14/2022 4:21:13 PM
+Started                        10/14/2025 4:21:13 PM
 FontSize                       64
 AlertColor                     Yellow
 WarningColor                   Red

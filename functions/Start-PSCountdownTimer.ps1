@@ -78,40 +78,41 @@ Function Start-PSCountdownTimer {
     )
 
     Begin {
-        _verbose  ($strings.starting -f $MyInvocation.MyCommand)
+        _verbose ($strings.Starting -f $MyInvocation.MyCommand)
         _verbose ($strings.Running -f $PSVersionTable.PSVersion)
         _verbose ($strings.Detected -f $host.Name)
     } #begin
     Process {
-        _verbose "[$((Get-Date).TimeOfDay) PROCESS] Using parameter set $($psCmdlet.ParameterSetName)"
+        _verbose "$($strings.UsingParameterSet -f $psCmdlet.ParameterSetName)"
         if ($psCmdlet.ParameterSetName -eq 'time') {
             $Seconds = ($Time - (Get-Date)).TotalSeconds
         }
-        _verbose "[$((Get-Date).TimeOfDay) PROCESS] Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
-        _verbose "[$((Get-Date).TimeOfDay) PROCESS] Validating"
+        _verbose "$($strings.UsingParams) `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
+
         if ($IsLinux -OR $isMacOS) {
-            Write-Warning "This command requires a Windows platform."
+            Write-Warning $strings.RequiresWindows
             return
         }
 
         if ($global:PSCountdownClock.Running) {
-            Write-Warning "You already have a clock running. You can only have one clock running at a time."
+            Write-Warning $strings.RunningCountdownClock
             $PSCountdownClock
             Return
         }
 
         if (Test-Path $env:temp\pscountdown-flag.txt) {
+            $c = Get-Content "$env:temp\pscountdown-flag.txt"
             $msg = @"
 
-A running countdown clock has been detected from another PowerShell session:
+$($strings.AnotherSessionClock)
 
-$(Get-Content $env:temp\pscountdown-flag.txt)
+$c
 
-If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
+$($strings.DeleteFlag -f $("$env:temp\pscountdown-flag.txt"))
 
 "@
             Write-Warning $msg
-            $r = Read-Host "Do you want to remove the flag file? Y/N"
+            $r = Read-Host $strings.RemoveFlag
             if ($r -eq 'Y') {
                 Remove-Item $env:temp\pscountdown-flag.txt
             }
@@ -126,11 +127,11 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
             [void](Get-Date -Format $DateFormat -ErrorAction Stop)
         }
         Catch {
-            Write-Warning "The DateFormat value $DateFormat is not a valid format string. Try something like F,G, or U which are case-sensitive."
+            Write-Warning ($strings.InvalidDateFormat -f $DateFormat)
             Return
         }
 
-        _verbose "[$((Get-Date).TimeOfDay) PROCESS] Building a synchronized hashtable (`$PSCountDownClock)"
+        _verbose "$($strings.BuildingSynchHash -f $PSCountDownClock)"
         $global:PSCountdownClock = [hashtable]::Synchronized(@{
                 FontSize         = $FontSize
                 FontStyle        = $FontStyle
@@ -148,7 +149,8 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
                 WarningColor     = $WarningColor
                 Action           = $Action
             })
-        _verbose "[$((Get-Date).TimeOfDay) PROCESS] $($global:PSCountdownClock | Out-String)"
+
+        _verbose "$($global:PSCountdownClock | Out-String)"
         #Run the clock in a RunSpace
         $rs = [RunSpaceFactory]::CreateRunSpace()
         $rs.ApartmentState = "STA"
@@ -159,9 +161,7 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
 
         $rs.SessionStateProxy.SetVariable("PSCountdownClock", $global:PSCountdownClock)
 
-        _verbose "[$((Get-Date).TimeOfDay) PROCESS] Defining the RunSpace command"
         $psCmd = [PowerShell]::Create().AddScript({
-
                 Add-Type -AssemblyName PresentationFramework -ErrorAction Stop
                 Add-Type -AssemblyName PresentationCore -ErrorAction Stop
                 Add-Type -AssemblyName WindowsBase -ErrorAction Stop
@@ -318,16 +318,16 @@ If this is incorrect, delete $env:temp\pscountdown-flag.txt and try again.
             })
 
         $psCmd.RunSpace = $rs
-        _verbose "[$((Get-Date).TimeOfDay) PROCESS] Launching the RunSpace"
+        _verbose "$($strings.Launching)"
         [void]$psCmd.BeginInvoke()
 
-        _verbose "[$((Get-Date).TimeOfDay) PROCESS] Creating the flag file $env:temp\pscountdown-flag.txt"
+        _verbose "$($strings.CreatingFlag -f $(Join-Path $env:temp -childPath pscountdown-flag.txt))"
         "[{0}] PSClock started by {1} under PowerShell process id $pid" -f (Get-Date), $env:USERNAME |
         Out-File -FilePath $env:temp\pscountdown-flag.txt
 
     } #process
     End {
-        _verbose  ($strings.Ending -f  $MyInvocation.MyCommand)
+        _verbose ($strings.Ending -f  $MyInvocation.MyCommand)
     } #end
 
 } #close function

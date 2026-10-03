@@ -3,7 +3,7 @@ Function Stop-PSCountdownTimer {
     [OutputType("none")]
     Param( )
     Begin {
-        _verbose  ($strings.starting -f $MyInvocation.MyCommand)
+        _verbose ($strings.Starting -f $MyInvocation.MyCommand)
         _verbose ($strings.Running -f $PSVersionTable.PSVersion)
         _verbose ($strings.Detected -f $host.Name)
     } #begin
@@ -26,7 +26,7 @@ Function Stop-PSCountdownTimer {
     } #process"
 
     End {
-        _verbose  ($strings.Ending -f  $MyInvocation.MyCommand)
+        _verbose ($strings.Ending -f  $MyInvocation.MyCommand)
     } #end
 
 } #close Stop-PSCountdownTimer

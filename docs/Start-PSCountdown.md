@@ -1,29 +1,39 @@
 ---
+document type: cmdlet
 external help file: PSTimers-help.xml
+HelpUri: https://jdhitsolutions.com/yourls/0df0c8
+Locale: en-US
 Module Name: PSTimers
-online version: https://jdhitsolutions.com/yourls/0df0c8
-schema: 2.0.0
+PlatyPS schema version: 2024-05-01
 ---
 
 # Start-PSCountdown
 
 ## SYNOPSIS
 
-Start a graphical countdown display using Write-Progress
+Start a graphical countdown display using Write-Progress.
 
 ## SYNTAX
 
 ### minutes (Default)
 
 ```yaml
-Start-PSCountdown [[-Minutes] <Int32>] [-Title <String>] [[-Message] <String>] [-ClearHost]  [-ProgressStyle <String>] [-Path <String>] [<CommonParameters>]
+Start-PSCountdown [[-Minutes] <Int32>] [[-Message] <String>] [-Title <String>] [-ClearHost]
+ [-ProgressStyle <String>] [-Path <String>] [<CommonParameters>]
 ```
 
 ### time
 
 ```yaml
-Start-PSCountdown [[-Time] <DateTime>] [-Title <String>] [[-Message] <String>] [-ClearHost] [-ProgressStyle <String>] [-Path <String>] [<CommonParameters>]
+Start-PSCountdown [[-Time] <DateTime>] [[-Message] <String>] [-Title <String>] [-ClearHost]
+ [-ProgressStyle <String>] [-Path <String>] [<CommonParameters>]
 ```
+
+## ALIASES
+
+This cmdlet has the following aliases:
+
+- `spsc`
 
 ## DESCRIPTION
 
@@ -33,6 +43,8 @@ Start-PSCountdown is inspired from code originally published at: https://github.
 
 This command should work in Windows PowerShell and PowerShell 7, but not in the PowerShell ISE. Support in VS Code is not guaranteed. If you are running this on a non-Windows platform, you should be running at least PowerShell 7.2.
 
+Use Ctrl+C to abort the countdown.
+
 ## EXAMPLES
 
 ### Example 1
@@ -41,7 +53,7 @@ This command should work in Windows PowerShell and PowerShell 7, but not in the 
 PS C:\> Start-PSCountdown -minutes 5
 ```
 
-Start a countdown display set to expire in 5 minutes. This will use the default values for Title and Message.
+Start a countdown display set to expire in 5 minutes. This will use the default values for Title and Message. Use Ctrl+C to abort the countdown.
 
 ### Example 2
 
@@ -70,14 +82,20 @@ Use this parameter to clear the screen prior to starting the countdown. The para
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cls
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+DefaultValue: None
+SupportsWildcards: false
+Aliases:
+- cls
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### -Message
@@ -86,14 +104,19 @@ Enter a primary message to display in the parent window.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+DefaultValue: None
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 1
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### -Minutes
@@ -102,14 +125,19 @@ Enter the number of minutes to countdown (1-60). The default is 5.
 
 ```yaml
 Type: Int32
-Parameter Sets: minutes
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+DefaultValue: None
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: minutes
+  Position: 0
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### -Path
@@ -118,14 +146,19 @@ The path to a text list of pseudo-tasks. By default the command will use the lis
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+DefaultValue: None
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### -ProgressStyle
@@ -142,15 +175,23 @@ The parameter has an alias of style. Note that the final effect may depend on a 
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases: style
-Accepted values: Default, Random, Transparent
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+DefaultValue: None
+SupportsWildcards: false
+Aliases:
+- style
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues:
+- Default
+- Random
+- Transparent
+HelpMessage: ''
 ```
 
 ### -Time
@@ -159,14 +200,19 @@ Enter a datetime value as the countdown target.
 
 ```yaml
 Type: DateTime
-Parameter Sets: time
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+DefaultValue: None
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: time
+  Position: 0
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### -Title
@@ -175,19 +221,27 @@ Enter the text for the progress bar title.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+DefaultValue: None
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### CommonParameters
 
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutBuffer, -OutVariable, -PipelineVariable,
+-ProgressAction, -Verbose, -WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -203,6 +257,6 @@ Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter
 
 ## RELATED LINKS
 
-[Start-PSCountdownTitle](Start-PSCountdownTitle.md)
-
-[Start-PSCountdownTimer](Start-PSCountdownTimer.md)
+- [Start-PSCountdownTitle](Start-PSCountdownTitle.md)
+- [Start-PSCountdownTimer](Start-PSCountdownTimer.md)
+- [Start-ConsoleCountdown](Start-ConsoleCountDown.md)

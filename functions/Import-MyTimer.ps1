@@ -26,7 +26,7 @@ Function Import-MyTimer {
     $Imports = Import-Clixml -Path $Path
     _verbose ($strings.ImportingCount -f $imports.count)
     foreach ($Import in $Imports) {
-        _verbose ($strings.Importing -f $Import.name)
+        _verbose ($strings.ImportingTimer -f $Import.name)
         $import | Select-Object * | Out-String | _verbose
         $in = [MyTimer]::New()
         $in.Name = $Import.Name
@@ -38,12 +38,12 @@ Function Import-MyTimer {
         $in.ImportedDuration = $Import.Duration
         #previous exports might not have this property
         if ($Import.Status -ge 0) {
-            _verbose "Setting status to $($import.status)"
+            _verbose ($strings.SettingStatus -f $import.status)
             $in.Status = $Import.Status
         }
         if ($PSCmdlet.ShouldProcess($Import.name)) {
-            _verbose $strings.Creating
-            $in | Select-Object -Property * | Out-String | _verbose
+            _verbose ($strings.ImportingTimer -f $import.Name)
+            _verbose ($in | Select-Object -Property * | Out-String)
 
             Try {
                 [void](Get-Variable MyTimerCollection -Scope global -ErrorAction Stop)

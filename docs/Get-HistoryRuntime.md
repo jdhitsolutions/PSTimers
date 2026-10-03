@@ -1,8 +1,10 @@
 ---
+document type: cmdlet
 external help file: PSTimers-help.xml
+HelpUri: https://jdhitsolutions.com/yourls/e09388
+Locale: en-US
 Module Name: PSTimers
-online version: https://jdhitsolutions.com/yourls/e09388
-schema: 2.0.0
+PlatyPS schema version: 2024-05-01
 ---
 
 # Get-HistoryRuntime
@@ -24,6 +26,12 @@ Get-HistoryRuntime [[-ID] <Int32>] [-Detail] [<CommonParameters>]
 ```yaml
 Get-HistoryRuntime [-History <HistoryInfo>] [-Detail] [<CommonParameters>]
 ```
+
+## ALIASES
+
+This cmdlet has the following aliases:
+
+- `ghr`
 
 ## DESCRIPTION
 
@@ -77,29 +85,34 @@ PS C:\> Get-History -count 5 | Get-HistoryRuntime -detail
 
 ID RunTime             Status Command
  -- -------             ------ -------
-105 00:01:10.9210044 Completed get-service -comp chi-dc01,chi-dc02,chi-core01...
-106 00:00:00.4872217 Completed get-service -comp chi-dc01,chi-dc02,chi-p50 | ...
-107 00:00:03.2367861 Completed get-ciminstance -comp chi-dc01,chi-p50,chi-dc0...
+105 00:01:10.9210044 Completed Get-Service -comp chi-dc01,chi-dc02,chi-core01...
+106 00:00:00.4872217 Completed Get-Service -comp chi-dc01,chi-dc02,chi-p50 | ...
+107 00:00:03.2367861 Completed Get-CimInstance -comp chi-dc01,chi-p50,chi-dc0...
 108 00:00:00.3980214 Completed ps
-109 00:00:00.1019850 Completed get-ciminstance -comp chi-dc01,chi-p50,chi-dc0...
+109 00:00:00.1019850 Completed Get-CimInstance -comp chi-dc01,chi-p50,chi-dc0...
 ```
 
 ## PARAMETERS
 
-### -ID
+### -Detail
 
-Enter a history item ID. The default is the last command executed.
+Include history detail in the result.
 
 ```yaml
-Type: Int32
-Parameter Sets: ID
-Aliases:
-
-Required: False
-Position: 1
-Default value: (Get-History -count 1).ID
-Accept pipeline input: False
-Accept wildcard characters: False
+Type: SwitchParameter
+DefaultValue: False
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### -History
@@ -108,36 +121,48 @@ Pass a history object to this command.
 
 ```yaml
 Type: HistoryInfo
-Parameter Sets: History
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
+DefaultValue: None
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: History
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: true
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
-### -Detail
+### -ID
 
-Include history detail in the result.
+Enter a history item ID. The default is the last command executed.
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
+Type: Int32
+DefaultValue: (Get-History -count 1).ID
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: ID
+  Position: 1
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### CommonParameters
 
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
-For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutBuffer, -OutVariable, -PipelineVariable,
+-ProgressAction, -Verbose, -WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -147,7 +172,7 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## OUTPUTS
 
-### [PSCustomObject}
+### PSCustomObject
 
 ## NOTES
 
@@ -155,4 +180,4 @@ Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter
 
 ## RELATED LINKS
 
-[Get-History]()
+- [Get-History]()

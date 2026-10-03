@@ -2,6 +2,25 @@
 
 ## [Unreleased]
 
+## [2.4.0] - 2026-10-03
+
+### Added
+
+- Added commands `Start-ConsoleCountdown` and `Stop-ConsoleCountdown` to manage a console-based countdown timer. This is a timer that __counts down__ to 0.
+- Added commands `Start-ConsoleTimer`, `Stop-ConsoleTimer`, and `Remove-ConsoleTimer` to manage a console based timer. This is a timer that starts at 0 and __counts up__.
+- Added an event subscription on module remove to clean up variables and related event subscriptions. This is a failsafe.
+
+### Changed
+
+- Cleaned up unused localized strings.
+- Updated `README`.
+- Migrated help documentation to the new Microsoft.PowerShell.Platyps model and schema.
+- Updated license
+
+### Fixed
+
+- Fixed typo bug in `Start-PSCountdown` [Issue #15](https://github.com/jdhitsolutions/PSTimers/issues/15).
+
 ## [2.3.0] - 2025-08-21
 
 ### Added
@@ -48,7 +67,8 @@
 - Updated external help.
   Updated `README.md`.
 
-[Unreleased]: https://github.com/jdhitsolutions/PSTimers/compare/v2.3.0..HEAD
+[Unreleased]: https://github.com/jdhitsolutions/PSTimers/compare/v2.4.0..HEAD
+[2.4.0]: https://github.com/jdhitsolutions/PSTimers/compare/v2.3.0..v2.4.0
 [2.3.0]: https://github.com/jdhitsolutions/PSTimers/compare/v2.2.0..v2.3.0
 [2.2.0]: https://github.com/jdhitsolutions/PSTimers/compare/v2.1.0..v2.2.0
 [2.1.0]: https://github.com/jdhitsolutions/pstimers/compare/v2.0.1..v2.1.0

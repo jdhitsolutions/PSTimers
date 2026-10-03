@@ -6,7 +6,7 @@ function _verbose {
     [CmdletBinding()]
     Param([string]$Message)
 
-    $m = "[$([char]27)[3m{0}$([char]27)[0m] {1}" -f (Get-Date).TimeOfDay, $Message
+    $m = "[{0}] $([char]27)[92;3m{1}$([char]27)[0m" -f (Get-Date).TimeOfDay, $Message
     Microsoft.PowerShell.Utility\Write-Verbose $m
 }
 

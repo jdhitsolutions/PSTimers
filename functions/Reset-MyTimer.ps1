@@ -15,7 +15,7 @@ Function Reset-MyTimer {
     )
 
     Begin {
-        _verbose  ($strings.starting -f $MyInvocation.MyCommand)
+        _verbose ($strings.Starting -f $MyInvocation.MyCommand)
         _verbose ($strings.Running -f $PSVersionTable.PSVersion)
         _verbose ($strings.Detected -f $host.Name)
     } #begin
@@ -28,11 +28,11 @@ Function Reset-MyTimer {
                 Get-MyTimer -Name $timer.name
             }
         } #WhatIf
-        _verbose "[$((Get-Date).TimeOfDay) PROCESS] Resetting timer $Name"
+        _verbose ($strings.ResettingTimer -f $Name)
     } #process
 
     End {
-        _verbose  ($strings.Ending -f  $MyInvocation.MyCommand)
+        _verbose ($strings.Ending -f  $MyInvocation.MyCommand)
     } #end
 
 } #close Reset-MyTimer

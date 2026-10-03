@@ -1,22 +1,32 @@
 ---
+document type: cmdlet
 external help file: PSTimers-help.xml
+HelpUri: https://jdhitsolutions.com/yourls/7a66b9
+Locale: en-US
 Module Name: PSTimers
-online version: https://jdhitsolutions.com/yourls/7a66b9
-schema: 2.0.0
+PlatyPS schema version: 2024-05-01
 ---
 
 # Start-PSCountdownTitle
 
 ## SYNOPSIS
 
-Start a countdown timer in the console title.
+Start a countdown timer in the console title bar.
 
 ## SYNTAX
+
+### Default (Default)
 
 ```yaml
 Start-PSCountdownTitle [-Seconds] <Int32> [[-CountdownText] <String>] [-PostCountdownText <String>]
  [-Wait <Int32>] [<CommonParameters>]
 ```
+
+## ALIASES
+
+This cmdlet has the following aliases:
+
+- `TitleCountdown`
 
 ## DESCRIPTION
 
@@ -38,36 +48,25 @@ This example starts a countdown timer for 90 seconds with the text "Waiting for 
 
 ## PARAMETERS
 
-### -Seconds
-
-The number of seconds for the countdown.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
-Default value: 0
-Accept pipeline input: True (ByPropertyName, ByValue)
-Accept wildcard characters: False
-```
-
 ### -CountdownText
 
 Specify the text to display before the countdown in 16 characters or less.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
+DefaultValue: None
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 1
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: true
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### -PostCountdownText
@@ -76,14 +75,40 @@ Specify the text to display after the countdown completes in 25 characters or le
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
+DefaultValue: None
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: true
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
 
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
+### -Seconds
+
+The number of seconds for the countdown.
+
+```yaml
+Type: Int32
+DefaultValue: 0
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 1
+  IsRequired: true
+  ValueFromPipeline: true
+  ValueFromPipelineByPropertyName: true
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### -Wait
@@ -93,19 +118,27 @@ Set to -1 to leave the title as is after the countdown completes.
 
 ```yaml
 Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: 10
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
+DefaultValue: 10
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: true
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### CommonParameters
 
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutBuffer, -OutVariable, -PipelineVariable,
+-ProgressAction, -Verbose, -WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -119,8 +152,6 @@ Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter
 
 ## RELATED LINKS
 
-[Start-PSCountdown](Start-PSCountdown.md)
-
-[Start-PSCountdownTitle](Start-PSCountdownTitle.md)
-
-[Start-PSCountdownTimer](Start-PSCountdownTimer.md)
+- [Start-PSCountdown](Start-PSCountdown.md)
+- [Start-PSCountdownTitle](Start-PSCountdownTitle.md)
+- [Start-PSCountdownTimer](Start-PSCountdownTimer.md)

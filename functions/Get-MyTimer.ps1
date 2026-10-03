@@ -43,7 +43,7 @@ Function Get-MyTimer {
                 Write-Warning ($strings.WarnNoNamedTimer -f $Name)
             }
             elseif ($timers.count -eq 0) {
-                Write-Warning $warn.WarnNoTimersFound
+                Write-Warning $strings.WarnNoTimersFound
             }
         }
         Else {
@@ -67,6 +67,6 @@ Function Get-MyTimer {
     } #process
 
     End {
-        _verbose  ($strings.Ending -f $MyInvocation.MyCommand)
+        _verbose ($strings.Ending -f $MyInvocation.MyCommand)
     }
 }

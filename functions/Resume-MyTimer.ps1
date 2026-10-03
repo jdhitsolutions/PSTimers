@@ -15,7 +15,7 @@ Function Resume-MyTimer {
     )
 
     Begin {
-        _verbose  ($strings.starting -f $MyInvocation.MyCommand)
+        _verbose ($strings.Starting -f $MyInvocation.MyCommand)
         _verbose ($strings.Running -f $PSVersionTable.PSVersion)
         _verbose ($strings.Detected -f $host.Name)
     } #begin
@@ -31,14 +31,14 @@ Function Resume-MyTimer {
             } #WhatIf
         }
         else {
-            Write-Warning "You can only resume a paused timer. The timer '$($timer.name)' has a status of $($timer.Status)."
+            Write-Warning ($strings.WarnResume -f $timer.name,$timer.Status)
         }
-        _verbose "[$((Get-Date).TimeOfDay) PROCESS] Pausing timer $Name"
+        _verbose ($strings.Pausing -f $Name)
 
     } #process
 
     End {
-        _verbose  ($strings.Ending -f  $MyInvocation.MyCommand)
+        _verbose ($strings.Ending -f  $MyInvocation.MyCommand)
     } #end
 
 } #close Resume-MyTimer

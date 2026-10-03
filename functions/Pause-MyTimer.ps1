@@ -5,18 +5,21 @@ Function Suspend-MyTimer {
     Param(
         [Parameter(
             Position = 0,
+            Mandatory,
             ValueFromPipelineByPropertyName,
             HelpMessage = 'Pause a MyTimer object.'
         )]
         [ValidateNotNullOrEmpty()]
         [ArgumentCompleter({$global:MyTimerCollection.values.where({$_.status -eq 'Running'}).Name.Foreach({ if ($_ -match "\s") {"'$_'"} else {$_}})})]
+        [Alias("Timer")]
         [String]$Name,
-        [Parameter(HelpMessage = 'Return the timer object after pausing it.')]
+
+        [Parameter(HelpMessage = 'Write the MyTimer object to the pipeline after pausing it.')]
         [Switch]$PassThru
     )
 
     Begin {
-        _verbose  ($strings.starting -f $MyInvocation.MyCommand)
+        _verbose ($strings.Starting -f $MyInvocation.MyCommand)
         _verbose ($strings.Running -f $PSVersionTable.PSVersion)
         _verbose ($strings.Detected -f $host.Name)
     } #begin
@@ -32,14 +35,13 @@ Function Suspend-MyTimer {
             } #WhatIf
         }
         else {
-            Write-Warning "You can only pause a running timer. The timer '$($timer.name)' has a status of $($timer.Status)."
+            Write-Warning ($strings.WarnPause -f $timer.name,$timer.Status)
         }
-        _verbose "[$((Get-Date).TimeOfDay) PROCESS] Pausing timer $Name"
-
+        _verbose "$($strings.Pausing -f $Name)"
     } #process
 
     End {
-        _verbose  ($strings.Ending -f  $MyInvocation.MyCommand)
+        _verbose ($strings.Ending -f  $MyInvocation.MyCommand)
     } #end
 
 } #close Suspend-MyTimer

@@ -21,7 +21,6 @@ Function Start-PSCountdownTitle {
         [ValidateLength(1, 16)]
         [string]$CountdownText,
 
-
         [Parameter(
             ValueFromPipelineByPropertyName,
             HelpMessage = 'Specify the text to display after the countdown completes in 25 characters or less.'
@@ -38,7 +37,7 @@ Function Start-PSCountdownTitle {
     )
 
     Begin {
-        _verbose  ($strings.starting -f $MyInvocation.MyCommand)
+        _verbose ($strings.Starting -f $MyInvocation.MyCommand)
         _verbose ($strings.Running -f $PSVersionTable.PSVersion)
         _verbose ($strings.Detected -f $host.name)
 
@@ -80,7 +79,7 @@ Function Start-PSCountdownTitle {
     } #process
 
     End {
-        _verbose  ($strings.Ending -f  $MyInvocation.MyCommand)
+        _verbose ($strings.Ending -f  $MyInvocation.MyCommand)
     } #end
 
 } #close Start-PSCountdownTitle

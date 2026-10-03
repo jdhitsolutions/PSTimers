@@ -20,7 +20,7 @@ Function Stop-MyTimer {
         $timers = ($global:MyTimerCollection).Values.where( {$_.name -like $name})
         if ($timers) {
             Foreach ($timer in $timers) {
-                _verbose ($strings.Processing -f $timer)
+                _verbose ($strings.ProcessingTimer -f $timer)
 
                 if ($timer.running) {
                     if ($PSCmdlet.ShouldProcess($timer.name)) {
@@ -28,11 +28,10 @@ Function Stop-MyTimer {
                         if ($PassThru) {
                             $timer
                         }
-
                     } #should process
                 }
                 else {
-                    Write-Warning "$($timer.name) is not running"
+                    Write-Warning ($strings.WarnTimerNotRunning -f $timer.name)
                 }
             }
         }
@@ -41,6 +40,6 @@ Function Stop-MyTimer {
         }
     }
     End {
-        _verbose  ($strings.Ending -f $MyInvocation.MyCommand)
+        _verbose ($strings.Ending -f $MyInvocation.MyCommand)
     }
 }

@@ -14,25 +14,57 @@ Install-PSResource PSTimers
 
 The commands should also work on PowerShell 7 cross-platform except for those that utilize WPF. It is recommended that you run PowerShell 7.2 or later on non-Windows systems. This module incorporates commands from a previous module that creates simple timer objects.
 
-| Name                     | Alias           | Synopsis                                                   |
-|--------------------------|-----------------|-----------------------------------------------------------|
-| [Export-MyTimer](docs/Export-MyTimer.md)   |                   | Export a timer object to an XML file.                     |
-| [Get-HistoryRuntime](docs/Get-HistoryRuntime.md) | *ghr*           | Get a history runtime object.                             |
-| [Get-MyTimer](docs/Get-MyTimer.md)         |                   | Get the current status of a simple timer.                 |
-| [Import-MyTimer](docs/Import-MyTimer.md)   |                   | Import a timer variable from an XML file.                 |
-| [Remove-MyTimer](docs/Remove-MyTimer.md)   |                   | Remove a MyTimer object.                                  |
-| [Reset-MyTimer](docs/Reset-MyTimer.md)     |                   | Reset a MyTimer object.                                   |
-| [Restart-MyTimer](docs/Restart-MyTimer.md) |                   | Restart a MyTimer object.                                 |
-| [Resume-MyTimer](docs/Resume-MyTimer.md)   |                   | Resume a paused MyTimer object.                          |
-| [Set-MyTimer](docs/Set-MyTimer.md)         |                   | Modify a MyTimer object.                                  |
-| [Start-MyTimer](docs/Start-MyTimer.md)     | *ton*             | Start a simple timer.                                     |
-| [Start-PSCountdown](docs/Start-PSCountdown.md) | *spsc*         | Start a graphical countdown display using Write-Progress. |
-| [Start-PSCountdownTimer](docs/Start-PSCountdownTimer.md) | | Start a WPF-based countdown timer.                       |
-| [Start-PSTimer](docs/Start-PSTimer.md)     | *spst*            | Initiates a countdown before running a command.           |
-| [Start-PSCountdownTitle](docs/Start-PSCountdownTitle.md) | *TitleCountdown*  | Start a countdown timer in the console title. |
-| [Stop-MyTimer](docs/Stop-MyTimer.md)       | *toff*            | Stop your simple timer.                                   |
-| [Stop-PSCountdownTimer](docs/Stop-PSCountdownTimer.md) | | Stop a Countdown Timer.                                  |
-| [Suspend-MyTimer](docs/Suspend-MyTimer.md) | *Pause-MyTimer*   | Pause a MyTimer object.                                   |
+| Name | Alias | Synopsis |
+| ---- | ---- | ---- |
+| [Get-HistoryRuntime](docs/Get-HistoryRuntime.md) | *ghr* | Get a history runtime object. |
+| [Start-MyTimer](docs/Start-MyTimer.md) | *ton* | Start a simple timer. |
+| [Get-MyTimer](docs/Get-MyTimer.md) | | Get the current status of a simple timer. |
+| [Import-MyTimer](docs/Import-MyTimer.md) | | Import a timer variable from an XML file. |
+| [Export-MyTimer](docs/Export-MyTimer.md) | | Export a timer object to an XML file. |
+| [Remove-MyTimer](docs/Remove-MyTimer.md) | | Remove a MyTimer object. |
+| [Reset-MyTimer](docs/Reset-MyTimer.md) | | Reset a MyTimer object. |
+| [Restart-MyTimer](docs/Restart-MyTimer.md) | | Restart a MyTimer object. |
+| [Resume-MyTimer](docs/Resume-MyTimer.md) | | Resume a paused MyTimer object. |
+| [Set-MyTimer](docs/Set-MyTimer.md) | | Modify a MyTimer object. |
+| [Stop-MyTimer](docs/Stop-MyTimer.md) | *toff* | Stop your simple timer. |
+| [Suspend-MyTimer](docs/Suspend-MyTimer.md) | *Pause-MyTimer* | Pause a MyTimer object. |
+| [Start-PSTimer](docs/Start-PSTimer.md) | *spst* | Initiates a countdown before running a command. |
+| [Start-ConsoleCountdown](docs/Start-ConsoleCountdown.md) | | Start a countdown timer in the console. |
+| [Stop-ConsoleCountdown](docs/Stop-ConsoleCountdown.md) | | Stop a console countdown. |
+| [Start-PSCountdownTimer](docs/Start-PSCountdownTimer.md) | | Start a WPF-based countdown timer. |
+| [Stop-PSCountdownTimer](docs/Stop-PSCountdownTimer.md) | | Stop a Countdown Timer. |
+| [Start-PSCountdown](docs/Start-PSCountdown.md) | *spsc* | Start a graphical countdown display using `Write-Progress`. |
+| [Start-PSCountdownTitle](docs/Start-PSCountdownTitle.md) | *TitleCountdown* | Start a countdown timer in the console title. |
+
+## New in v2.4.0 :stars:
+
+There are a few new items of note in v2.4.0 of this module. The help documentation has been migrated to the new format used in the `Microsoft.PowerShell.Platyps` module. You shouldn't notice much difference reading command help in the console. But you will notice changes in the Markdown source documents like [docs\Start-PSCountdown](docs/Start-PSCountdown.md)
+
+### :arrow_down_small: Console Countdown
+
+You can now display a styled countdown timer in the upper-right corner of your terminal window with [Start-ConsoleCountdown](docs/Start-ConsoleCountdown.md). You can customize the appearance using ANSI or `$PSStyle` sequences.
+
+```powershell
+Start-ConsoleCountdown -Seconds 600 -Border -BorderColor $PSStyle.Foreground.BrightMagenta -DisplayColor ($PSStyle.Foreground.BrightGreen+$PSStyle.Italic)
+```
+
+![Console countdown](images/console-countdown.png)
+
+You can use your terminal as you want while the countdown is running.
+
+When the timer reaches 0, it will remain on screen until you run `Clear-Host`. Or you can use [Stop-ConsoleCountdown](docs/Stop-ConsoleCountdown.md) to end the countdown. You'll still need to run `Clear-Host` or let the display scroll out of view.
+
+Optionally, you can specify a short message to be displayed when the countdown completes. The message will remain until you run `Stop-ConsoleCountdown`.
+
+### Console Timer :mantelpiece_clock:
+
+You can also display a simple timer in your console window. [`Start-ConsoleTimer`](docs/Start-ConsoleTimer.md) is very similar to `Start-ConsoleCountdown`. The difference is that the countdown __decreases__ in value and the timer __increases__ in value from zero.
+
+![Console timer](images/console-timer.png)
+
+The timer is open-ended meaning it will run until you stop it using [Stop-ConsoleTimer](docs/Stop-ConsoleTimer.md). The timer will remain on screen showing the value when it was stopped. You can run `Start-ConsoleTimer` and the timer will resume where it left off. Optionally, you can run `Start-ConsoleTimer -reset` to restart the timer from zero. Once a timer has started, you can't change any style settings.
+
+To clear the timer run `Remove-ConsoleTimer`. It is not necessary to stop it first.
 
 ## :book: History Runtime
 
@@ -54,12 +86,12 @@ PS C:\> ghr 295 -Detail
 
  ID RunTime             Status Command
  -- -------             ------ -------
-295 00:00:07.7998983 Completed get-winevent system -MaxEvents 1000
+295 00:00:07.7998983 Completed Get-WinEvent system -MaxEvents 1000
 ```
 
 ## :watch: MyTimer
 
-:skull: _The MyTimer class and related commands have been heavily revised and extended. There are several breaking changes from previous versions of this module. It is recommended that you clear existing timers before upgrading and using this version of the module._
+:skull: *The MyTimer class and related commands have been heavily revised and extended. There are several breaking changes from previous versions of this module. It is recommended that you clear existing timers before upgrading and using this version of the module.*
 
 The `MyTimer` object is defined in a private PowerShell class.
 
@@ -100,7 +132,7 @@ PS C:\> Start-MyTimer revisions -Description "module updates"
 
 Name      Start                Stop Duration     Status Description
 ----      -----                ---- --------     ------ -----------
-revisions 3/31/2025 5:27:48 PM      00:00:00:00 Running module updates
+revisions 3/31/2026 5:27:48 PM      00:00:00:00 Running module updates
 ```
 
 You can start as many timers as you need.
@@ -117,9 +149,9 @@ PS C:\> Get-MyTimer
 
 Name      Start                Stop Duration     Status Description
 ----      -----                ---- --------     ------ -----------
-revisions 3/31/2025 5:27:48 PM      00:00:00:36 Running module updates
-mail      3/31/2025 5:28:04 PM      00:00:00:20 Running email
-MyTimer   3/31/2025 5:28:12 PM      00:00:00:12 Running
+revisions 3/31/2026 5:27:48 PM      00:00:00:36 Running module updates
+mail      3/31/2026 5:28:04 PM      00:00:00:20 Running email
+MyTimer   3/31/2026 5:28:12 PM      00:00:00:12 Running
 ```
 
 When you are finished, you can stop the timer.
@@ -128,8 +160,8 @@ When you are finished, you can stop the timer.
 PS C:\> Stop-MyTimer mail -PassThru | Format-List
 
 Name        : mail
-Start       : 3/31/2025 5:28:04 PM
-End         : 3/31/2025 5:29:08 PM
+Start       : 3/31/2026 5:28:04 PM
+End         : 3/31/2026 5:29:08 PM
 Duration    : 00:01:03.8458479
 Running     : False
 Description : email
@@ -142,14 +174,14 @@ The timer will exist for the duration of your PowerShell session.
 PS C:\> Get-MyTimer -Status Stopped | Select History
 
 Name        : revisions
-Start       : 3/31/2025 5:27:48 PM
-End         : 3/31/2025 5:29:54 PM
+Start       : 3/31/2026 5:27:48 PM
+End         : 3/31/2026 5:29:54 PM
 Duration    : 00:02:06.5184936
 Description : module updates
 
 Name        : mail
-Start       : 3/31/2025 5:28:04 PM
-End         : 3/31/2025 5:29:08 PM
+Start       : 3/31/2026 5:28:04 PM
+End         : 3/31/2026 5:29:08 PM
 Duration    : 00:01:03.8458479
 Description : email
 ```
@@ -237,7 +269,7 @@ Color                          SpringGreen
 WarningColor                   Red
 FontFamily                     Segoi UI
 Warning                        30
-Started                        3/31/2025 5:36:56 PM
+Started                        3/31/2026 5:36:56 PM
 FontWeight                     Normal
 Action
 AlertColor                     Yellow
@@ -286,6 +318,6 @@ $global:MediaPlayer.Play()
 # $MediaPlayer.close()
 ```
 
-## :hammer: Related Tools
+## Related Tools :hammer:
 
 For a related project, take a look at the [PSClock](https://github.com/jdhitsolutions/PSClock) module. Or if you need a simple to-do manager, look at the [PSWorkItem](https://github.com/jdhitsolutions/PSWorkItem) module.

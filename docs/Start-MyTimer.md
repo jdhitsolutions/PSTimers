@@ -1,8 +1,10 @@
 ---
+document type: cmdlet
 external help file: PSTimers-help.xml
+HelpUri: https://jdhitsolutions.com/yourls/62a7a4
+Locale: en-US
 Module Name: PSTimers
-online version: https://jdhitsolutions.com/yourls/62a7a4
-schema: 2.0.0
+PlatyPS schema version: 2024-05-01
 ---
 
 # Start-MyTimer
@@ -13,9 +15,17 @@ Start a simple timer.
 
 ## SYNTAX
 
+### Default (Default)
+
 ```yaml
 Start-MyTimer [[-Name] <String[]>] [-Description <String>] [<CommonParameters>]
 ```
+
+## ALIASES
+
+This cmdlet has the following aliases:
+
+- `ton`
 
 ## DESCRIPTION
 
@@ -38,9 +48,9 @@ Start the timer with the default name of MyTimer.
 ```powershell
 PS C:\> Start-MyTimer Timer2
 
-Name            Start                  Stop                   Duration         Running Description
-----            -----                  ----                   --------         ------- -----------
-timer2          03/12/2025 11:09:25 AM                        00:00:00            True
+Name            Start                  Stop         Duration         Running Description
+----            -----                  ----         --------         ------- -----------
+timer2          03/12/2026 11:09:25 AM              00:00:00            True
 ```
 
 Create a second timer called Timer2.
@@ -51,9 +61,9 @@ Create a second timer called Timer2.
 PS C:\> Start-MyTimer Z -Description "work stuff"
 
 
-Name            Start                  Stop                   Duration         Running Description
-----            -----                  ----                   --------         ------- -----------
-Z               03/12/2025 11:10:16 AM                        00:00:00            True work stuff
+Name            Start                  Stop        Duration         Running Description
+----            -----                  ----        --------         ------- -----------
+Z               03/12/2026 11:10:16 AM             00:00:00            True work stuff
 ```
 
 Create a new timer with a description.
@@ -64,16 +74,37 @@ Create a new timer with a description.
 PS C:\> Start-MyTimer alpha,bravo,charlie
 
 
-Name            Start                  Stop                   Duration         Running Description
-----            -----                  ----                   --------         ------- -----------
-a               03/12/2025 11:11:10 AM                        00:00:00            True
-b               03/12/2025 11:11:10 AM                        00:00:00            True
-c               03/12/2025 11:11:10 AM                        00:00:00            True
+Name            Start                  Stop         Duration         Running Description
+----            -----                  ----         --------         ------- -----------
+a               03/12/2026 11:11:10 AM              00:00:00            True
+b               03/12/2026 11:11:10 AM              00:00:00            True
+c               03/12/2026 11:11:10 AM              00:00:00            True
 ```
 
 Create multiple timers at once.
 
 ## PARAMETERS
+
+### -Description
+
+Enter an optional description for this timer.
+
+```yaml
+Type: String
+DefaultValue: None
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
 
 ### -Name
 
@@ -83,35 +114,27 @@ See examples.
 
 ```yaml
 Type: String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: MyTimer
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Description
-
-Enter an optional description for this timer.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+DefaultValue: MyTimer
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 0
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### CommonParameters
 
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutBuffer, -OutVariable, -PipelineVariable,
+-ProgressAction, -Verbose, -WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -127,6 +150,5 @@ Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter
 
 ## RELATED LINKS
 
-[Stop-MyTimer](Stop-MyTimer.md)
-
-[Get-MyTimer](Get-MyTimer.md)
+- [Stop-MyTimer](Stop-MyTimer.md)
+- [Get-MyTimer](Get-MyTimer.md)

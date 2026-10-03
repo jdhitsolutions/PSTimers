@@ -3,10 +3,15 @@ if ((Get-Culture).Name -match '\w+') {
 }
 else {
     #force using En-US if no culture found, which might happen on non-Windows systems.
-    Import-LocalizedData -BindingVariable strings -FileName PSClock.psd1 -BaseDirectory $PSScriptRoot\en-us
+    Import-LocalizedData -BindingVariable strings -FileName PSTimers.psd1 -BaseDirectory $PSScriptRoot\en-us
 }
 
-#a class definition for the MyTimer commands
+$modVersion = (Test-ModuleManifest -Path $PSScriptRoot\PSTimers.psd1).Version
+
+#initialize an array to hold event subscribers
+$subs = [System.Collections.Generic.List[System.Management.Automation.PSEventSubscriber]]::New()
+
+#region a class definition for the MyTimer commands
 
 enum MyTimerStatus {
     Stopped
@@ -134,13 +139,32 @@ Class MyTimer {
     } #generic constructor
 } #close class definition
 
-#dot source file with function definitions
+#endregion
+
+#region initialize module
 Get-ChildItem $PSScriptRoot\Functions |
 ForEach-Object {
     . $_.FullName
 }
 
-#add AutoCompleter for MyTimer functions
+#register and OnModule remove event to clean up variables and event subscriptions
+$OnRemoveScript = {
+    #clean up variables as failsafe
+    Get-Variable -Name 'consoleTimerSettings','consoleCountdownSettings',
+    'PSCountdownClock','MyWatchCollection','MyTimerCollection' -ErrorAction SilentlyContinue |
+    Remove-Variable -ErrorAction SilentlyContinue -Scope Global
+
+    #remove event subscriptions
+    if ($subs.Count -gt 0) {
+        $subs | Unregister-Event -Force -ErrorAction SilentlyContinue
+    }
+}
+
+$ExecutionContext.SessionState.Module.OnRemove += $OnRemoveScript
+
+#endregion
+
+#region add AutoCompleters for MyTimer functions
 $cmds = 'Get-MyTimer', 'Set-MyTimer', 'Remove-MyTimer','Restart-MyTimer','Reset-MyTimer'
 Register-ArgumentCompleter -CommandName $cmds -ParameterName Name -ScriptBlock {
     param($commandName, $parameterName, $wordToComplete = '*', $commandAst, $fakeBoundParameter)
@@ -175,3 +199,5 @@ Register-ArgumentCompleter -CommandName Stop-MyTimer -ParameterName Name -Script
         [System.Management.Automation.CompletionResult]::new($k, $k, 'ParameterValue', $k)
     }
 }
+
+#endregion

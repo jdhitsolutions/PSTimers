@@ -102,8 +102,8 @@ $(([String]$Seconds).PadRight($pad))
         }
     }
     else {
-        Write-Warning "Countdown aborted"
+        Write-Warning $strings.CountdownAbort
     }
 
-    _verbose  ($strings.Ending -f $MyInvocation.MyCommand)
+    _verbose ($strings.Ending -f $MyInvocation.MyCommand)
 }

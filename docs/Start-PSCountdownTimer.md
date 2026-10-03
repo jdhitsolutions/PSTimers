@@ -1,8 +1,10 @@
 ---
+document type: cmdlet
 external help file: PSTimers-help.xml
+HelpUri: https://jdhitsolutions.com/yourls/9f666f
+Locale: en-US
 Module Name: PSTimers
-online version: https://jdhitsolutions.com/yourls/9f666f
-schema: 2.0.0
+PlatyPS schema version: 2024-05-01
 ---
 
 # Start-PSCountdownTimer
@@ -16,14 +18,26 @@ Start a WPF-based countdown timer.
 ### seconds (Default)
 
 ```yaml
-Start-PSCountdownTimer [[-Seconds] <Int32>] [-Message <String>] [-FontSize <Int32>] [-FontStyle <String>] [-FontWeight <String>] [-Color <String>] [-FontFamily <String>] [-OnTop] [-Position <Int32[]>] [-Alert <Int32>] [-AlertColor <String>] [-Warning <Int32>] [-WarningColor <String>] [-Action <ScriptBlock>] [<CommonParameters>]
+Start-PSCountdownTimer [[-Seconds] <Int32>] [-Message <String>] [-FontSize <Int32>]
+ [-FontStyle <String>] [-FontWeight <String>] [-Color <String>] [-FontFamily <String>] [-OnTop]
+ [-Position <Int32[]>] [-Alert <Int32>] [-AlertColor <String>] [-Warning <Int32>]
+ [-WarningColor <String>] [-Action <ScriptBlock>] [<CommonParameters>]
 ```
 
 ### time
 
 ```yaml
-Start-PSCountdownTimer -Time <DateTime> [-Message <String>] [-FontSize <Int32>] [-FontStyle <String>] [-FontWeight <String>] [-Color <String>] [-FontFamily <String>] [-OnTop] [-Position <Int32[]>] [-Alert <Int32>] [-AlertColor <String>] [-Warning <Int32>] [-WarningColor <String>] [-Action <ScriptBlock>] [<CommonParameters>]
+Start-PSCountdownTimer -Time <DateTime> [-Message <String>] [-FontSize <Int32>]
+ [-FontStyle <String>] [-FontWeight <String>] [-Color <String>] [-FontFamily <String>] [-OnTop]
+ [-Position <Int32[]>] [-Alert <Int32>] [-AlertColor <String>] [-Warning <Int32>]
+ [-WarningColor <String>] [-Action <ScriptBlock>] [<CommonParameters>]
 ```
+
+## ALIASES
+
+This cmdlet has the following aliases:
+
+- none
 
 ## DESCRIPTION
 
@@ -64,150 +78,25 @@ Start a 10 minute countdown. When the countdown expires, a toast notification wi
 
 ## PARAMETERS
 
-### -Color
+### -Action
 
-Specify a font color like Green or an HTML code like '#FF1257EA'
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: White
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -FontFamily
-
-Specify a font family.
+Define a ScriptBlock to execute when the clock expires
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases: family
-
-Required: False
-Position: Named
-Default value: Segoi UI
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -FontSize
-
-Specify a font size.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases: size
-
-Required: False
-Position: Named
-Default value: 48
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -FontStyle
-
-Specify a font style.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases: style
-Accepted values: Normal, Italic, Oblique
-
-Required: False
-Position: Named
-Default value: Normal
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -FontWeight
-
-Specify a font weight.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases: weight
-Accepted values: Normal, Bold, Light
-
-Required: False
-Position: Named
-Default value: Normal
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -Message
-
-Specify a short message prefix like 'Starting in: '
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -OnTop
-
-Do you want the clock to always be on top? You can modify this setting in the synchronized hashtable with $PSCountdownClock.OnTop. Set the value to $True or $False.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -Position
-
-Specify the clock position as an array of left and top values.
-
-```yaml
-Type: Int32[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -Seconds
-
-Enter the number of seconds to countdown from.
-
-```yaml
-Type: Int32
-Parameter Sets: seconds
-Aliases:
-
-Required: False
-Position: 60
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+Type: ScriptBlock
+DefaultValue: None
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### -Alert
@@ -216,14 +105,19 @@ Specify the number of seconds remaining to switch to alert coloring.
 
 ```yaml
 Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: 50
-Accept pipeline input: False
-Accept wildcard characters: False
+DefaultValue: 50
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### -AlertColor
@@ -232,62 +126,218 @@ Specify alert coloring.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: Yellow
-Accept pipeline input: False
-Accept wildcard characters: False
+DefaultValue: Yellow
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
-### -Warning
+### -Color
 
-Specify the number of seconds remaining to switch to warning coloring.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: 30
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -WarningColor
-
-Specify warning coloring.
+Specify a font color like Green or an HTML code like '#FF1257EA'
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: Red
-Accept pipeline input: False
-Accept wildcard characters: False
+DefaultValue: White
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: true
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
-### -Action
+### -FontFamily
 
-Define a ScriptBlock to execute when the clock expires
+Specify a font family.
 
 ```yaml
-Type: ScriptBlock
-Parameter Sets: (All)
+Type: String
+DefaultValue: Segoi UI
+SupportsWildcards: false
 Aliases:
+- family
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: true
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
 
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+### -FontSize
+
+Specify a font size.
+
+```yaml
+Type: Int32
+DefaultValue: 48
+SupportsWildcards: false
+Aliases:
+- size
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: true
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -FontStyle
+
+Specify a font style.
+
+```yaml
+Type: String
+DefaultValue: Normal
+SupportsWildcards: false
+Aliases:
+- style
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: true
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues:
+- Normal
+- Italic
+- Oblique
+HelpMessage: ''
+```
+
+### -FontWeight
+
+Specify a font weight.
+
+```yaml
+Type: String
+DefaultValue: Normal
+SupportsWildcards: false
+Aliases:
+- weight
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: true
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues:
+- Normal
+- Bold
+- Light
+HelpMessage: ''
+```
+
+### -Message
+
+Specify a short message prefix like 'Starting in: '
+
+```yaml
+Type: String
+DefaultValue: None
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -OnTop
+
+Do you want the clock to always be on top? You can modify this setting in the synchronized hashtable with $PSCountdownClock.OnTop. Set the value to $True or $False.
+
+```yaml
+Type: SwitchParameter
+DefaultValue: None
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: true
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -Position
+
+Specify the clock position as an array of left and top values.
+
+```yaml
+Type: Int32[]
+DefaultValue: None
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: true
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -Seconds
+
+Enter the number of seconds to countdown from.
+
+```yaml
+Type: Int32
+DefaultValue: None
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: seconds
+  Position: 60
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### -Time
@@ -296,19 +346,69 @@ Enter a DateTime value as the countdown target.
 
 ```yaml
 Type: DateTime
-Parameter Sets: time
-Aliases:
+DefaultValue: None
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: time
+  Position: Named
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
 
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+### -Warning
+
+Specify the number of seconds remaining to switch to warning coloring.
+
+```yaml
+Type: Int32
+DefaultValue: 30
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -WarningColor
+
+Specify warning coloring.
+
+```yaml
+Type: String
+DefaultValue: Red
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### CommonParameters
 
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutBuffer, -OutVariable, -PipelineVariable,
+-ProgressAction, -Verbose, -WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -330,8 +430,6 @@ Learn more about PowerShell: https://jdhitsolutions.com/yourls/newsletter
 
 ## RELATED LINKS
 
-[Start-PSCountdownTimer](Start-PSCountdownTimer.md)
-
-[Start-PSCountdown](Start-PSCountdown.md)
-
-[Start-PSCountdownTitle](Start-PSCountdownTitle.md)
+- [Start-PSCountdownTimer](Start-PSCountdownTimer.md)
+- [Start-PSCountdown](Start-PSCountdown.md)
+- [Start-PSCountdownTitle](Start-PSCountdownTitle.md)

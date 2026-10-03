@@ -16,16 +16,16 @@ Function Remove-MyTimer {
         _verbose ($strings.Detected -f $host.Name)
     }   #begin
     Process {
-        _verbose "Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
+        _verbose "$($strings.UsingParams) `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
         foreach ($timer in $Name) {
             Try {
                 if ($PSCmdlet.ShouldProcess($timer)) {
-                    _verbose "Removing timer $timer"
+                    _verbose ($status.RemovingTimer -f $timer)
                     if ($global:MyTimerCollection.ContainsKey("$timer")) {
                         $global:MyTimerCollection.remove("$timer")
                     }
                     else {
-                        Write-Warning "Can't find a timer with the name $timer"
+                        Write-Warning ($strings.WarnNoNamedTimer -f $timer)
                     }
                     if ($global:MyWatchCollection.ContainsKey("$timer")) {
                         $global:MyWatchCollection.remove("$timer")
@@ -33,7 +33,7 @@ Function Remove-MyTimer {
                 }
             }
             Catch {
-                Write-Warning "Failed to remove timer $timer. $($_.exception.message)"
+                Write-Warning ($strings.FailedRemoveTimer -f $timer,$_.exception.message)
             }
         } #foreach
     } #process

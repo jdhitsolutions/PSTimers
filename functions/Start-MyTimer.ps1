@@ -17,15 +17,15 @@ Function Start-MyTimer {
         foreach ($timer in $Name) {
         #Test if a timer with the same name already exists
         if (Get-MyTimer -Name $Name -WarningAction SilentlyContinue) {
-            Write-Warning "A timer with the name $Name already exists. Try again with a different name."
+            Write-Warning ($strings.ExistingTimer -f $Name)
         }
         else {
             Try {
-                _verbose "Creating timer $timer"
+                _verbose ($strings.CreatingTimer -f $timer)
                 New-Object -TypeName MyTimer -ArgumentList $timer, $Description -ErrorAction stop
             }
             Catch {
-                # Write-Warning "Failed to create timer $timer. $($_.exception.message)"
+                Write-Warning ($strings.FailedCreateTimer -f $timer,$_.exception.message)
                 Throw $_
             }
         }

@@ -29,7 +29,7 @@ Function Start-PSCountdown {
         _verbose "Starting $($MyInvocation.MyCommand)"
         _verbose ($strings.Running -f $PSVersionTable.PSVersion)
         _verbose ($strings.Detected -f $host.Name)
-        _verbose "Using PSBoundParameters: `n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
+        _verbose "$($strings.UsingParams)`n $(New-Object PSObject -Property $PSBoundParameters | Out-String)"
 
         if ($PSBoundParameters.ContainsKey('progressStyle')) {
             if ($PSBoundParameters.Item('ProgressStyle') -ne 'default') {
@@ -45,28 +45,28 @@ Function Start-PSCountdown {
                 $host.privateData.progressBackgroundColor = $host.UI.RawUI.BackgroundColor
             }
         }
-        _verbose "Using parameter set $($PSCmdlet.ParameterSetName)"
+        _verbose ($strings.UsingParameterSet -f $PSCmdlet.ParameterSetName)
 
         if (Test-Path $Path) {
             #import entries from list without a # comment and trim each one
-            _verbose "Loading task messages from $path"
+            _verbose ($strings.loading -f $path)
             $loading = Get-Content -Path $Path |
             Where-Object { $_ -match "\w+" -AND $_ -notmatch '#' } | ForEach-Object { $_.Trim() }
         }
         else {
-            _verbose "$Path not found. Using default values."
-            $loading = "Warming up the room", "Charging batteries", "Formatting C:"
+            _verbose ($strings.PathNotFound -f $Path)
+            $loading = $strings.DefaultLoading1,$strings.DefaultLoading2,$strings.DefaultLoading3,$strings.DefaultLoading4
         }
         if ($ClearHost) {
             Clear-Host
         }
         $startTime = Get-Date
         if ($PSCmdlet.ParameterSetName -eq 'minutes') {
-            _verbose "Adding $minutes minutes to start time"
+            _verbose ($strings.AddingMinutes -f $minutes)
             $endTime = $startTime.AddMinutes($Minutes)
         }
         else {
-            _verbose "Using Time value"
+            _verbose $strings.UsingTime
             $endTime = $Time
         }
         $totalSeconds = (New-TimeSpan -Start $startTime -End $endTime).TotalSeconds
@@ -88,8 +88,8 @@ Function Start-PSCountdown {
     } #begin
     Process {
         #this does not work in the PowerShell ISE
-        if ($host.name -match '|ISE') {
-            Write-Warning "This command will not work in the PowerShell ISE."
+        if ($host.name -match 'ISE') {
+            Write-Warning $strings.NoISE
             #bail out
             Return
         }
@@ -126,7 +126,6 @@ Function Start-PSCountdown {
                 }
                 $loadingMessage = $loading[(Get-Random -Minimum 0 -Maximum ($loading.Length - 1))]
             }
-
             Start-Sleep 0.2
         } Until ($now -ge $endTime)
     } #progress
@@ -141,7 +140,7 @@ Function Start-PSCountdown {
                 $host.privateData.ProgressBackgroundColor = $saved
             }
         }
-        _verbose  ($strings.Ending -f $MyInvocation.MyCommand)
+        _verbose ($strings.Ending -f $MyInvocation.MyCommand)
     } #end
 
 }
